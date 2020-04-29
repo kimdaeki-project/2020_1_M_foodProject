@@ -10,6 +10,8 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
 <H1>GOTAEMIN</H1>
+
 </body>
 </html>
