@@ -14,14 +14,24 @@ public class MemberService {
 		return memberDAO.memberLogin(memberVO);
 	}
 	
-	//로그아웃
-		
 	//회원가입
+	public int memberJoin(MemberVO memberVO) throws Exception{
+		return memberDAO.memberJoin(memberVO);
+	}
 		
 	//아이디 중복검사
+	public MemberVO memberIdCheck(MemberVO memberVO) throws Exception{
+		return memberDAO.memberIdCheck(memberVO);
+	}
 		
 	//회원탈회
+	public int memberDelete(MemberVO memberVO) throws Exception{
+		return memberDAO.memberDelete(memberVO);
+	}
 		
 	//회원정보수정
+	public int memberUpdate(MemberVO memberVO) throws Exception{
+		return memberDAO.memberUpdate(memberVO);
+	}
 	
 }
