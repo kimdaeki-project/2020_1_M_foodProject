@@ -4,5 +4,40 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!-- properties 읽어오기 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:DB/config/*.properties"></property>
+	</bean>
+	
+	<!-- db pool 가져오기 -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		<property name="username" value="${oracle.user}"/>
+		<property name="password" value="${oracle.pw}"/>
+		<property name="url" value="${oracle.url}"/>
+		<property name="driverClassName" value="${oracle.driver}"/>
+	</bean>
+	
+	<!-- SqlSessionFactoryBean -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="configLocation" value="classpath:DB/config/mybatisConfig.xml"></property>
+		<property name="mapperLocations" value="classpath:DB/mapper/*Mapper.xml"/>
+	</bean>
+	
+	<!-- sql Session -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- multipart resolver -->
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver" id="multipartResolver">
+		<!-- 인코딩 설정 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<!-- 파일 하나당 용량 제한 단위 byte 예시 10MB -->
+		<property name="maxUploadSizePerFile" value="10485760"></property>
+		<!-- 총 파일의 용량 제한 단위 byte 예시 100MB -->
+		<property name="maxUploadSize" value="104857600"></property>
+	</bean>
 		
 </beans>
