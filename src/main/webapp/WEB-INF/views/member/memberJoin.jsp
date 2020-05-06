@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="../resources/css/join.css">
+<link rel="stylesheet" href="../resources/css/member/join.css">
 </head>
 <body>
 	<div class="container">

@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상세보기</title>
-<link rel="stylesheet" href="../resources/css/item.css">
+<link rel="stylesheet" href="../resources/css/board/item.css">
 </head>
 <body>
     <div class="container">
@@ -48,10 +48,10 @@
                 </div>
                 <section>
                     <h3>사진 모아보기</h3>
-                    <img src="../img/food.jpg">
-                    <img src="../img/food.jpg">
-                    <img src="../img/food.jpg">
-                    <img src="../img/food.jpg">
+                    <img src="../resources/img/food.jpg">
+                    <img src="../resources/img/food.jpg">
+                    <img src="../resources/img/food.jpg">
+                    <img src="../resources/img/food.jpg">
                 </section>
                 <hr>
                 <section>
@@ -59,15 +59,15 @@
                     <ul class="review">
                         <li id="1" class="review_block">
                             <div>
-                                <dl>김*우 (yo********@naver.com)</dl>
+                                <dl>이*름 (이메일주소)</dl>
                                 <div class="review_info">💚💚💚💚💚 5
-                                    <p>항상 맛있게 잘 먹고 있습니다!</p>
+                                    <p>리뷰리뷰리뷰리뷰</p>
                                 </div>
                                 <p>2020.05.05</p>
                             </div>
                             <figure>
-                                <img src="../img/food.jpg">
-                                <img src="../img/food.jpg">
+                                <img src="../resources/img/food.jpg">
+                                <img src="../resources/img/food.jpg">
                             </figure>
                         </li>
                         <hr>

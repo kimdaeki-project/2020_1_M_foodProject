@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>주문하기</title>
-<link rel="stylesheet" href="../resources/css/order.css">
+<link rel="stylesheet" href="../resources/css/board/order.css">
 </head>
 <body>
 <div class="order">
@@ -27,13 +27,13 @@
             <p class="div_title">장바구니</p>
             <ul class="cart_list">
                 <li class="cart_lists">
-                    <img alt="" src="../img/food.jpg">
+                    <img alt="" src="../resources/img/food.jpg">
                 </li>
                 <li class="cart_lists">
-                    <img alt="" src="../img/food.jpg">
+                    <img alt="" src="../resources/img/food.jpg">
                 </li>
                 <li class="cart_lists">
-                    <img alt="" src="../img/food.jpg">
+                    <img alt="" src="../resources/img/food.jpg">
                 </li>
             </ul>
         </div>
