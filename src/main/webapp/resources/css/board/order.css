@@ -4,20 +4,20 @@ body{
     background-color: #f0f0f0;
 }
 
-.order{
+.boardOrder_order{
     box-sizing: border-box;
     width: 700px;
     margin: 0 auto;
     background-color: #ffffff;
 }
 
-.div_title{
+.boardOrder_div_title{
     margin: 0;
     font-size: 20px;
     font-weight: bold;
 }
 
-.box{
+.boardOrder_box{
     padding: 30px;
     display: block;
 }
@@ -68,7 +68,7 @@ body{
     float: right;
 }
 
-.all{
+.boardOrder_all{
     font-weight: bold;
 }
 

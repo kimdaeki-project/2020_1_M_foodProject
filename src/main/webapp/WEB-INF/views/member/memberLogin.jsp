@@ -8,28 +8,28 @@
 <link rel="stylesheet" href="../resources/css/member/login.css">
 </head>
 <body>
-<div class="container">
-		<article>
-			<header>
-				<img alt="logo" src="../img/logo.png">
+<div class="memberLogin_container">
+		<article class="memberLogin_article">
+			<header class="memberLogin_header">
+				<img alt="logo" src="../img/logo.png" class="memberLogin_img">
 				<p>프리미엄 샐러드 배송</p>
 			</header>
 			<form action="login">
 				<div>
-					<input type="text" placeholder="이메일을 입력해주세요"> <input
-						type="password" placeholder="비밀번호를 입력해주세요">
+					<input type="text" placeholder="이메일을 입력해주세요" class="memberLogin_input"> 
+					<input type="password" placeholder="비밀번호를 입력해주세요" class="memberLogin_input">
 				</div>
 				<p class="autologin">
 					<span>✔️</span> <span>자동로그인</span>
 				</p>
 				<nav>
-					<button class="login" type="submit">로그인</button>
-					<button class="kakao">카카오계정으로 로그인</button>
+					<button class="memberLogin_login memberLogin_button" type="submit">로그인</button>
+					<button class="memberLogin_kakao memberLogin_button">카카오계정으로 로그인</button>
 				</nav>
 			</form>
 			<nav class="joinandfind">
 				<div>
-					<a href="">아이디 찾기</a>
+					<a href="" class="memberLogin_a">아이디 찾기</a>
 				</div>
 				<div>
 					<a href="">비밀번호 찾기</a>

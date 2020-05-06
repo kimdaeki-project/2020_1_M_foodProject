@@ -1,9 +1,8 @@
-
-.container {
+.memberLogin_container {
 	width: 100%;
 }
 
-article {
+.memberLogin_article {
 	display: block;
 	padding: 50px;
 	max-width: 400px;
@@ -11,25 +10,25 @@ article {
 	margin: 0 auto;
 }
 
-img {
+.memberLogin_img {
 	width: 150px;
 	margin: 0 auto;
 	display: block;
 }
 
-header {
+.memberLogin_header {
 	padding: 0 0 40px;
 	text-align: center;
 }
 
-header p {
+.memberLogin_header p {
 	margin: 8px;
 	font-size: 14px;
 	line-height: 16px;
 	color: #6f7174;
 }
 
-input {
+.memberLogin_input {
 	box-sizing: border-box;
 	padding: 0 15px;
 	height: 38px;
@@ -41,7 +40,7 @@ input {
 	display: block;
 }
 
-input:focus{
+.memberLogin_input:focus{
 	outline-color: #27b06e;
 }
 
@@ -49,7 +48,7 @@ input:focus{
 	color: #27b06e;
 }
 
-button {
+.memberLogin_button {
 	display: block;
 	border: none;
 	height: 38px;
@@ -62,17 +61,17 @@ button {
 	width: 100%;
 }
 
-.login {
+.memberLogin_login {
 	color: #ffffff;
 	background-color: #27b06e;
 }
 
-.kakao {
+.memberLogin_kakao {
 	color: #222;
 	background-color: #f9df33;
 }
 
-a {
+.memberLogin_a {
 	padding: 5px 15px;
 	text-align: center;
 	font-size: 14px;

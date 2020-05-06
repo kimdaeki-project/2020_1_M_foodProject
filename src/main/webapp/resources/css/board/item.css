@@ -3,38 +3,38 @@ body{
     padding: 0;
 }
 
-article{
+.boardItem_article{
     padding: 0px 30px 72px 30px;
 }
 
-ul{
+.boardItem_review{
     list-style: none;
     padding: 0;
 }
 
-.menu_head{
+.boardItem_menu_head{
    margin: 0 80px; 
    padding: 26px 0;
    display: flex;
 }
 
-.menu_head img{
+.boardItem_menu_head img{
     width: 400px;
     height: 400px;
 }
 
-.menu_body{
+.boardItem_menu_body{
     padding-left: 108px;
     width: 600px;
 }
 
-hr{
+.boardItem_hr{
     margin: 15px 0;;
     border: solid #dedede; 
     border-width: 1px 0 0;
 }
 
-.menu_body button{
+.boardItem_menu_body button{
     font-size: 16px;
     cursor: pointer;
     color:#ffffff;
@@ -44,7 +44,7 @@ hr{
     background-color: #27b06e;
 }
 
-.menu_tab{
+.boardItem_menu_tab{
     display: flex;
     justify-content: center;
     position: sticky;
@@ -53,7 +53,7 @@ hr{
     background-color: #ffffff;
 }
 
-.menu_tab button{
+.boardItem_menu_tab button{
     margin: 0 -4px;
     color: #000000;
     cursor: pointer;
@@ -64,41 +64,41 @@ hr{
     border-bottom: 1px #dcdcdc solid;
 }
 
-.menu_tab button:focus{
+.boardItem_menu_tab button:focus{
     border-bottom: 2px #000000 solid;
 }
 
-.menudiv{
+.boardItem_menudiv{
     margin: 0 auto;
     width: 815px;
     height: 1000px;
 }
 
-.menu_review img{
+.boardItem_menu_review img{
     width: 200px;
     height: 200px;
 }
 
-.review figure{
+.boardItem_review figure{
     display: flex;
     justify-content: space-between;
     margin: 0 -8px 0 20px;
 }
 
-.menu_review figure img{
+.boardItem_menu_review figure img{
     width: 128px;
     height: 128px;
     padding: 0 8px;
 }
 
-.review_block{
+.boardItem_review_block{
     margin-top: 30px;
     width: 100%;
     display: flex;
     justify-content: space-around;
 }
 
-.review_info{
+.boardItem_review_info{
     width: 500px;
     margin: 0;
 }

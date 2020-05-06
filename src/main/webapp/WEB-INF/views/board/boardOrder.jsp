@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="../resources/css/board/order.css">
 </head>
 <body>
-<div class="order">
+<div class="boardOrder_order">
         <button class="orderbox">주문서</button>
-        <div class="method box">
-            <p class="div_title">결제방법 선택</p>
+        <div class="method boardOrder_box">
+            <p class="boardOrder_div_title">결제방법 선택</p>
             <div class="method_body">
                 <div class="method_body_radio">
                     <input type="radio" value="online" name="payment" id="online" checked="checked">
@@ -23,8 +23,8 @@
                 </div>
             </div>
         </div>
-        <div class="cart box">
-            <p class="div_title">장바구니</p>
+        <div class="cart boardOrder_box">
+            <p class="boardOrder_div_title">장바구니</p>
             <ul class="cart_list">
                 <li class="cart_lists">
                     <img alt="" src="../resources/img/food.jpg">
@@ -37,8 +37,8 @@
                 </li>
             </ul>
         </div>
-        <div class="bill box">
-            <p class="div_title">결제예상금액</p>
+        <div class="bill boardOrder_box">
+            <p class="boardOrder_div_title">결제예상금액</p>
             <div class="bill_body">
                 <div class="bill_body_box">
                     <div class="bill_body_title">상품 수 / 금액</div>
@@ -48,7 +48,7 @@
                     <div class="bill_body_title">할인금액</div>
                     <div class="bill_body_title right">0원</div>
                 </div>
-                <div class="bill_body_box all">
+                <div class="bill_body_box boardOrder_all">
                     <div class="bill_body_title">총 금액</div>
                     <div class="bill_body_title right">0원</div>
                 </div>

@@ -5,11 +5,12 @@
 	<title>Home</title>
 </head>
 <body>
+<c:import url="./templates/header.jsp"></c:import>
 <h1>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<h1>신우</h1>
+<c:import url="./templates/footer.jsp"></c:import>
 </body>
 </html>

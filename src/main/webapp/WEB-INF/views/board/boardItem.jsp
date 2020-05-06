@@ -9,19 +9,19 @@
 </head>
 <body>
     <div class="container">
-        <article>
-            <div class="menu_head">
+        <article class="boardItem_article">
+            <div class="boardItem_menu_head">
                 <img alt="" src="../img/food.jpg">
-                <div class="menu_body">
+                <div class="boardItem_menu_body">
                     <header>
                         <h2>상품명</h2>
                         <pre>상품설명</pre>
                     </header>
-                    <hr>
+                    <hr class="boardItem_hr">
                     <button>주문하기</button>
                 </div>
             </div>
-            <div class="menu_tab">
+            <div class="boardItem_menu_tab">
                 <nav>
                     <a href="#info">
                         <button>상품정보</button></a>
@@ -34,13 +34,13 @@
                 </nav>
             </div>
             <a name="info"></a>
-            <div class="menu_info menudiv"></div>
+            <div class="menu_info boardItem_menudiv"></div>
             <a name="buy"></a>
-            <div class="menu_buy menudiv"></div>
+            <div class="menu_buy boardItem_menudiv"></div>
             <a name="deliver"></a>
-            <div class="menu_deliber menudiv"></div>
+            <div class="menu_deliber boardItem_menudiv"></div>
             <a name="review"></a>
-            <div class="menu_review menudiv">
+            <div class="boardItem_menu_review boardItem_menudiv">
                 <div>
                     <strong>평점</strong>
                     <span>사용자 총 평점 100</span>
@@ -53,14 +53,14 @@
                     <img src="../resources/img/food.jpg">
                     <img src="../resources/img/food.jpg">
                 </section>
-                <hr>
+                <hr class="boardItem_hr">
                 <section>
                     <span>등록된 리뷰 10개</span>
-                    <ul class="review">
-                        <li id="1" class="review_block">
+                    <ul class="boardItem_review">
+                        <li id="1" class="boardItem_review_block">
                             <div>
                                 <dl>이*름 (이메일주소)</dl>
-                                <div class="review_info">💚💚💚💚💚 5
+                                <div class="boardItem_review_info">💚💚💚💚💚 5
                                     <p>리뷰리뷰리뷰리뷰</p>
                                 </div>
                                 <p>2020.05.05</p>
@@ -70,7 +70,7 @@
                                 <img src="../resources/img/food.jpg">
                             </figure>
                         </li>
-                        <hr>
+                        <hr class="boardItem_hr">
                         <li></li>
                     </ul>
                 </section>
