@@ -100,21 +100,6 @@ local.properties
 ## ignoring target file
 target/
 
-### Web ###
-*.asp
-*.cer
-*.csr
-*.css
-*.htm
-*.html
-*.js
-*.jsp
-*.php
-*.rss
-*.wasm
-*.wat
-*.xhtml
-
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -158,3 +143,9 @@ target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
 .settings/org.eclipse.wst.common.component
 .settings/org.eclipse.jdt.core.prefs
 .classpath
+.classpath
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.settings/org.eclipse.wst.common.component
+.settings/org.eclipse.jdt.core.prefs
+target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
+target/m2e-wtp/web-resources/META-INF/maven/com.food/project/pom.properties
