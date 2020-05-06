@@ -17,12 +17,19 @@ public class MemberVO {
 	private int isFoodTruck;
 	private double latitude;
 	private double longitude;
+	private Date birth;
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
 	
 	
 	
+	public Date getBirth() {
+		return birth;
+	}
+	public void setBirth(Date birth) {
+		this.birth = birth;
+	}
 	public String getNickName() {
 		return nickName;
 	}

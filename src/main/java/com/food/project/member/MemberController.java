@@ -109,6 +109,7 @@ public class MemberController {
 	@PostMapping("memberUpdate")
 	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
 		String id = ((MemberVO)session.getAttribute("memberVO")).getId();
 		memberVO.setId(id);
 		
