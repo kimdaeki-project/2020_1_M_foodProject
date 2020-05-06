@@ -21,8 +21,17 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<interceptors>
+		<interceptor>
+			<!-- URL Pattern -->
+			<mapping path="/*"/>
+			<!-- Interceptor class -->
+			<beans:bean class="com.food.project.interceptor.TestInterceptor">
+			</beans:bean>
+		</interceptor>
+		
+	</interceptors>
+	
 	<context:component-scan base-package="com.food.project" />
-	
-	
 	
 </beans:beans>

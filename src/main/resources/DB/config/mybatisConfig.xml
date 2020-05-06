@@ -7,5 +7,6 @@
 	<typeAliases>
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="java.util.List" alias="List"/>
+		<typeAlias type="com.food.project.member.MemberVO" alias="MemberVO"/>
 	</typeAliases>
 </configuration>
