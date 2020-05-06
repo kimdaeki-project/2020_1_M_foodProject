@@ -100,7 +100,6 @@ local.properties
 ## ignoring target file
 target/
 
-
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -128,18 +127,12 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/web,windows,eclipse,java-web
-target/m2e-wtp/web-resources/META-INF/maven/com.food/project/pom.properties
 
-.classpath
 *.properties
-.classpath
 .settings/org.eclipse.jdt.core.prefs
 .settings/org.eclipse.wst.common.component
 .settings/org.eclipse.wst.common.project.facet.core.xml
 .settings/org.eclipse.wst.validation.prefs
 target/m2e-wtp/web-resources/META-INF/maven/com.food/project/pom.properties
-target/m2e-wtp/web-resources/META-INF/maven/com.food/project/pom.properties
-.settings/org.eclipse.wst.common.project.facet.core.xml
-.settings/org.eclipse.wst.common.component
-.settings/org.eclipse.jdt.core.prefs
 .classpath
+

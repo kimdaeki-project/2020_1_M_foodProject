@@ -1,0 +1,104 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+article{
+    padding: 0px 30px 72px 30px;
+}
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+
+.menu_head{
+   margin: 0 80px; 
+   padding: 26px 0;
+   display: flex;
+}
+
+.menu_head img{
+    width: 400px;
+    height: 400px;
+}
+
+.menu_body{
+    padding-left: 108px;
+    width: 600px;
+}
+
+hr{
+    margin: 15px 0;;
+    border: solid #dedede; 
+    border-width: 1px 0 0;
+}
+
+.menu_body button{
+    font-size: 16px;
+    cursor: pointer;
+    color:#ffffff;
+    width: 258px;
+    height: 53px;
+    border: none;
+    background-color: #27b06e;
+}
+
+.menu_tab{
+    display: flex;
+    justify-content: center;
+    position: sticky;
+    padding-top: 30px;
+    top: 0;
+    background-color: #ffffff;
+}
+
+.menu_tab button{
+    margin: 0 -4px;
+    color: #000000;
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    border: none;
+    background-color: transparent;
+    border-bottom: 1px #dcdcdc solid;
+}
+
+.menu_tab button:focus{
+    border-bottom: 2px #000000 solid;
+}
+
+.menudiv{
+    margin: 0 auto;
+    width: 815px;
+    height: 1000px;
+}
+
+.menu_review img{
+    width: 200px;
+    height: 200px;
+}
+
+.review figure{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 -8px 0 20px;
+}
+
+.menu_review figure img{
+    width: 128px;
+    height: 128px;
+    padding: 0 8px;
+}
+
+.review_block{
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.review_info{
+    width: 500px;
+    margin: 0;
+}

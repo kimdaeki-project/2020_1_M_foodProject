@@ -1,0 +1,87 @@
+
+.container {
+	width: 100%;
+}
+
+article {
+	display: block;
+	padding: 50px;
+	max-width: 400px;
+	min-height: 550px;
+	margin: 0 auto;
+}
+
+img {
+	width: 150px;
+	margin: 0 auto;
+	display: block;
+}
+
+header {
+	padding: 0 0 40px;
+	text-align: center;
+}
+
+header p {
+	margin: 8px;
+	font-size: 14px;
+	line-height: 16px;
+	color: #6f7174;
+}
+
+input {
+	box-sizing: border-box;
+	padding: 0 15px;
+	height: 38px;
+	width: 100%;
+	margin-bottom: 15px;
+	border: 1px solid #e7e7e7;
+	font-size: 15px;
+	color: #3d3d3d;
+	display: block;
+}
+
+input:focus{
+	outline-color: #27b06e;
+}
+
+.autologin span:hover {
+	color: #27b06e;
+}
+
+button {
+	display: block;
+	border: none;
+	height: 38px;
+	width: 100%;
+	cursor: pointer;
+	text-align: center;
+	font-size: 1rem;
+	outline: none;
+	margin-top: 8px;
+	width: 100%;
+}
+
+.login {
+	color: #ffffff;
+	background-color: #27b06e;
+}
+
+.kakao {
+	color: #222;
+	background-color: #f9df33;
+}
+
+a {
+	padding: 5px 15px;
+	text-align: center;
+	font-size: 14px;
+	color: #6f7174;
+	text-decoration: none;
+}
+
+.joinandfind {
+	display: flex;
+	justify-content: center;
+	margin-top: 15px;
+}
