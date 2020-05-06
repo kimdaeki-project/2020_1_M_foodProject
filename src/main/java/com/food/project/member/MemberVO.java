@@ -4,13 +4,16 @@ import java.sql.Date;
 
 public class MemberVO {
 
-	private long id;
-	private String userId;
+	private long num;
+	private String id;
 	private String email;
 	private String password;
 	private String name;
 	private String oauth;
 	private String phone;
+	private String nickName;
+	private int age;
+	private int gender;
 	private int isFoodTruck;
 	private double latitude;
 	private double longitude;
@@ -18,17 +21,38 @@ public class MemberVO {
 	private Date updateAt;
 	private Date deleteAt;
 	
-	public long getId() {
+	
+	
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public int getGender() {
+		return gender;
+	}
+	public void setGender(int gender) {
+		this.gender = gender;
+	}
+
+	public long getNum() {
+		return num;
+	}
+	public void setNum(long num) {
+		this.num = num;
+	}
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 	public String getEmail() {
 		return email;
