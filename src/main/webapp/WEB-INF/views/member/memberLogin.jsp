@@ -1,14 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" href="../resources/css/member/login.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/templates/header.css">
+
 </head>
 <body>
+<c:import url="../templates/header.jsp"></c:import>
+
 <div class="container">
+	
 		<article>
 			<header>
 				<img alt="logo" src="../img/logo.png">
@@ -40,5 +46,6 @@
 			</nav>
 		</article>
 	</div>
+	
 </body>
 </html>

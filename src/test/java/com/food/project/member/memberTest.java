@@ -13,12 +13,13 @@ public class memberTest extends AbstractTestCase {
 	private MemberDAO memberDAO;
 
 	@Test
-	public void memberSelectTest() throws Exception{
-
+	public void memberLogin() throws Exception{
 		MemberVO memberVO = new MemberVO();
+		memberVO.setId("testId");
+		memberVO.setPassword("testPW");
+		
 		memberVO = memberDAO.memberLogin(memberVO);
-		System.out.println(memberVO.getId());
-		System.out.println(memberVO.getEmail());
+
 		assertNotNull(memberVO);
 	}
 }

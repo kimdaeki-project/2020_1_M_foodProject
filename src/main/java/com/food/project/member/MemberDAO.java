@@ -11,15 +11,20 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.food.project.member.MemberDAO.";
 	
-	// memberJoin (Insert)
-	public int memberJoin(MemberVO memberVO) throws Exception {
+	
+	//로그인
+	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"memberLogin", memberVO);
+	}
 
+	//회원가입
+	public int memberJoin(MemberVO memberVO) throws Exception {
 		return sqlSession.insert(NAMESPACE+"memberJoin", memberVO);
 	}
 	
-	// memberLogin (Select One)
-	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
-
-		return sqlSession.selectOne(NAMESPACE+"memberLogin", memberVO);
-	}
+	//아이디 중복검사
+		
+	//회원탈회
+		
+	//회원정보수정
 }
