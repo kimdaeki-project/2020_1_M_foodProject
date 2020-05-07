@@ -3,11 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Root Context: defines shared resources visiblSystem.out.println("login Controller : " + userInfo);e to all other web components -->
 	
 	<!-- properties 읽어오기 -->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
-		<property name="locations" value="classpath:DB/config/*.properties"></property>
+		<property name="locations" value="classpath:properties/*.properties"/>
 	</bean>
 	
 	<!-- db pool 가져오기 -->
