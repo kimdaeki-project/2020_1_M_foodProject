@@ -25,9 +25,7 @@ public class FileSaver {
 		
 		// 파일 이름 교체
 		String fileName = null;
-		System.out.println("before");
-		fileName = this.makeNameByTime(file.getOriginalFilename());
-		System.out.println("fileName : " + fileName);
+		fileName = this.makeNameByUUID(file.getOriginalFilename());
 	
 		// 파일 HDD에 저장 (FileCopyUtils 사용)
 		f = new File(f, fileName);
