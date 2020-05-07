@@ -134,5 +134,4 @@ $RECYCLE.BIN/
 .settings/org.eclipse.wst.common.project.facet.core.xml
 .settings/org.eclipse.wst.validation.prefs
 target/m2e-wtp/web-resources/META-INF/maven/com.food/project/pom.properties
-.classpath
-
+target/m2e-wtp/web-resources/META-INF/maven/com.food/project/pom.xml
