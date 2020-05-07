@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.food.project.market.MarcketDAO">
+	
+	<select id="marketList" parameterType="MarketVO" resultType="MarketVO">
+		select * from market where userNum=#{userNum}
+	</select>
+	
+	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
+		select * from market where num = #{num}
+	</select>
+	
+	<insert id="marketInsert" parameterType="MarketVO">
+		insert into market values(market_seq.nextval,#{userNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,null);
+	</insert>
+	
+	<update id="marketDelete" parameterType="MarketVO">
+		update market set deleteAt = sysdate where userNum=#{userNum} 
+	</update>
+	
+	<update id="marketUpdate" parameterType="MarketVO">
+		update market set openTime=#{openTime},closeTime=#{closeTime},isOpen=#{isOpen},canOrder=#{canOrder},marketIntro=#{marketIntro},thumbImg=#{thumbImg} where userName=#{userName}
+	</update>
+
+
+</mapper>

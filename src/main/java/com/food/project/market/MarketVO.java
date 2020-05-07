@@ -7,15 +7,37 @@ public class MarketVO {
 	private long userNum;
 	private String crn;
 	private String marketName;
-	private Date openTime;
-	private Date closeTime;
-	private int isOpen;
-	private int canOrder;
+	private String openTime;
+	private String closeTime;
+	private int isOpen;  //default : 1
+	private int canOrder; //default : 1
 	private String marketIntro;
 	private String thumbImg;
+	private Date createAt;
+	private Date updateAt;
+	private Date deleteAt;
 	
 	
 	
+	
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	public Date getUpdateAt() {
+		return updateAt;
+	}
+	public void setUpdateAt(Date updateAt) {
+		this.updateAt = updateAt;
+	}
+	public Date getDeleteAt() {
+		return deleteAt;
+	}
+	public void setDeleteAt(Date deleteAt) {
+		this.deleteAt = deleteAt;
+	}
 	public long getNum() {
 		return num;
 	}
@@ -40,16 +62,17 @@ public class MarketVO {
 	public void setMarketName(String marketName) {
 		this.marketName = marketName;
 	}
-	public Date getOpenTime() {
+	
+	public String getOpenTime() {
 		return openTime;
 	}
-	public void setOpenTime(Date openTime) {
+	public void setOpenTime(String openTime) {
 		this.openTime = openTime;
 	}
-	public Date getCloseTime() {
+	public String getCloseTime() {
 		return closeTime;
 	}
-	public void setCloseTime(Date closeTime) {
+	public void setCloseTime(String closeTime) {
 		this.closeTime = closeTime;
 	}
 	public int getIsOpen() {

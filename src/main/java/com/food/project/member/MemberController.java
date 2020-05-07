@@ -38,6 +38,7 @@ public class MemberController {
 		memberVO = memberService.memberLogin(memberVO);
 		if(memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
+			mv.setViewName("redirect:../");
 			System.out.println("로그인 성공");
 		}else {
 			mv.setViewName("./memberLogin");
@@ -62,6 +63,7 @@ public class MemberController {
 	@PostMapping("memberJoin")
 	public ModelAndView memberJoin(MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("memberJoin post");
 		
 		int result = memberService.memberJoin(memberVO);
 		
@@ -82,10 +84,12 @@ public class MemberController {
 		memberVO = memberService.memberIdCheck(memberVO);
 		if(memberVO != null) {
 			System.out.println("이미 있는 아이디");
-			mv.setViewName("./memberLogin");
+			mv.addObject("result", 0);
 		}else {
 			System.out.println("사용 가능 아이디");
+			mv.addObject("result", 1);
 		}
+		mv.setViewName("member/memberLogin");
 		
 		return mv;
 	}
@@ -93,12 +97,16 @@ public class MemberController {
 	
 	//회원탈퇴(GET)
 	@GetMapping("memberDelete")
-	public void memberDelete(MemberVO memberVO) throws Exception{
+	public ModelAndView memberDelete(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
 		
 		int result = memberService.memberDelete(memberVO);
 		if(result > 0) {
 			System.out.println("회원탈퇴성공");
+			mv.setViewName("redirect:/");
 		}
+		
+		return mv;
 	}
 	
 	//회원정보수정(GET/POST)
