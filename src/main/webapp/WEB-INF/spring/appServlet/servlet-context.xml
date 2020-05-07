@@ -9,6 +9,11 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
+	<!-- properties 읽어오기 -->
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" id="propertyPlaceholderConfigurer">
+		<beans:property name="locations" value="classpath:properties/*.properties"/>
+	</beans:bean>
+	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
