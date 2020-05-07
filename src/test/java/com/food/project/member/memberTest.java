@@ -1,5 +1,6 @@
 package com.food.project.member;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class memberTest extends AbstractTestCase {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	@Test
+//	@Test
 	public void memberLogin() throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("testId");
@@ -22,4 +23,75 @@ public class memberTest extends AbstractTestCase {
 
 		assertNotNull(memberVO);
 	}
+	
+//	@Test
+	public void memberJoin() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("admin2");
+		memberVO.setPassword("1234");
+		memberVO.setName("admin");
+		memberVO.setEmail("admin@naver.com");
+		memberVO.setPhone("01012345678");
+		memberVO.setNickName("alias");
+		
+		int result = memberDAO.memberJoin(memberVO);
+		assertEquals(1, result);
+	}
+	
+//	@Test
+	public void memberDelete() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("admin2");
+		
+		int result = memberDAO.memberDelete(memberVO);
+		assertEquals(1, result);
+	}
+	
+//	@Test
+	public void memberIdCheck() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("admin2");
+		
+		memberVO = memberDAO.memberIdCheck(memberVO);
+		assertNotNull(memberVO);
+	}
+	
+	@Test
+	public void memberUpdate() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setId("admin2");
+		memberVO.setPassword("8888");
+		memberVO.setName("tm");
+		memberVO.setPhone("01088884444");
+		memberVO.setNickName("tame");
+		
+		int result = memberDAO.memberUpdate(memberVO);
+		assertEquals(1, result);
+	}
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -23,8 +23,26 @@ public class MemberDAO {
 	}
 	
 	//아이디 중복검사
+	public MemberVO memberIdCheck(MemberVO memberVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"memberIdCheck", memberVO);
+	}
 		
 	//회원탈회
-		
+	public int memberDelete(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"memberDelete", memberVO);
+	}
+	
 	//회원정보수정
+	public int memberUpdate(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"memberUpdate", memberVO);
+	}
 }
+
+
+
+
+
+
+
+
+
