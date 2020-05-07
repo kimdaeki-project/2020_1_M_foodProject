@@ -19,10 +19,10 @@
 
 				<p>프리미엄 샐러드 배송</p>
 			</header>
-			<form action="login">
+			<form action="./memberLogin" method="post">
 				<div>
-					<input type="text" placeholder="이메일을 입력해주세요" class="memberLogin_input"> 
-					<input type="password" placeholder="비밀번호를 입력해주세요" class="memberLogin_input">
+					<input name="id" type="text" placeholder="이메일을 입력해주세요" class="memberLogin_input"> 
+					<input name="password" type="password" placeholder="비밀번호를 입력해주세요" class="memberLogin_input">
 				</div>
 				<p class="autologin">
 					<span>✔️</span> <span>자동로그인</span>

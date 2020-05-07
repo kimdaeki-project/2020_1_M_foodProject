@@ -26,16 +26,19 @@ public class memberTest extends AbstractTestCase {
 	
 //	@Test
 	public void memberJoin() throws Exception{
-		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin2");
-		memberVO.setPassword("1234");
-		memberVO.setName("admin");
-		memberVO.setEmail("admin@naver.com");
-		memberVO.setPhone("01012345678");
-		memberVO.setNickName("alias");
+		for(int i=3;i<5;i++) {
+			MemberVO memberVO = new MemberVO();
+			memberVO.setId("admin"+i);
+			memberVO.setPassword("1234");
+			memberVO.setName("admin");
+			memberVO.setEmail("admin@naver.com");
+			memberVO.setPhone("01012345678");
+			memberVO.setNickName("alias");
+			
+			int result = memberDAO.memberJoin(memberVO);
+			assertEquals(1, result);
+		}
 		
-		int result = memberDAO.memberJoin(memberVO);
-		assertEquals(1, result);
 	}
 	
 //	@Test
@@ -56,7 +59,7 @@ public class memberTest extends AbstractTestCase {
 		assertNotNull(memberVO);
 	}
 	
-	@Test
+//	@Test
 	public void memberUpdate() throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setId("admin2");
