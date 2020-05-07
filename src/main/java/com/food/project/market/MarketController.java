@@ -55,8 +55,8 @@ public class MarketController {
 	}
 	
 	@PostMapping("marketUpdate")
-	public void marketUpdate(MarketVO marketVO) throws Exception{
-		int result = marketService.marketUpdate(marketVO);
+	public void marketUpdate(MarketVO marketVO,HttpSession session) throws Exception{
+		int result = marketService.marketUpdate(marketVO,session);
 	}
 	
 }

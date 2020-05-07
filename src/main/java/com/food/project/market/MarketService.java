@@ -3,16 +3,22 @@ package com.food.project.market;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.food.project.util.FileSaver;
 
 @Service
 public class MarketService {
 
 	@Autowired
 	private MarketDAO marketDAO;
+	@Autowired
+	private FileSaver fileSaver;
+	
 	
 	//조회 - selectList
 	public List<MarketVO> marketList(MarketVO marketVO) throws Exception{
@@ -29,11 +35,25 @@ public class MarketService {
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
 		
-		//파일(이미지) 등록
-		//1.DB등록
-		//2.HDD등록
+		//marketCount값 증가
+		long num = marketDAO. marketCount();
+		marketVO.setNum(num);
 		
-		return marketDAO.marketInsert(marketVO);
+		//marketDB저장
+		int result = marketDAO.marketInsert(marketVO);
+		
+		//파일(이미지) 등록
+		for (MultipartFile file : files) {
+			//1.HDD등록
+			String fileName = fileSaver.saveByUtils(file, path);
+			
+			//2.DB등록
+			
+		}
+		
+		
+		
+		return result;
 	}
 	
 	//삭제
@@ -46,7 +66,9 @@ public class MarketService {
 	}
 	
 	//수정
-	public int marketUpdate(MarketVO marketVO) throws Exception{
+	public int marketUpdate(MarketVO marketVO,HttpSession session) throws Exception{
+		//저장될 실제 경로 설정
+		String path = session.getServletContext().getRealPath("/resources/upload/market");
 		//1.회원정보 수정
 		int result = marketDAO.marketUpdate(marketVO);
 		

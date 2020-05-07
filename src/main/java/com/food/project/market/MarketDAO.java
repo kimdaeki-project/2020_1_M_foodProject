@@ -23,6 +23,11 @@ public class MarketDAO {
 		return sqlSession.selectOne(NAMESPACE+"marketSelect", marketVO);
 	}
 	
+	//market_seq값 증가
+	public long marketCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"marketCount");
+	}
+	
 	//등록 
 	public int marketInsert(MarketVO marketVO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"marketInsert", marketVO);
@@ -37,6 +42,8 @@ public class MarketDAO {
 	public int marketUpdate(MarketVO marketVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"marketUpdate",marketVO);
 	}
+	
+	
 	
 
 }

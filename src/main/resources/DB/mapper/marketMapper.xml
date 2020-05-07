@@ -14,8 +14,12 @@
 		select * from market where num = #{num}
 	</select>
 	
+	<select id="marketCount" resultType="Long">
+		select market_seq.nextval from dual
+	</select>
+	
 	<insert id="marketInsert" parameterType="MarketVO">
-		insert into market values(market_seq.nextval,#{userNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,null)
+		insert into market values(#{num},#{userNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,null)
 	</insert>
 	
 	<update id="marketDelete" parameterType="MarketVO">
