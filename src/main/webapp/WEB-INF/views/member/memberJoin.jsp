@@ -19,24 +19,33 @@
 				<fieldset class="memberJoin_fieldset">
 					<div>
 						<p>이름</p>
-						<input type="text" placeholder="이름을 입력해주세요!" class="memberJoin_input">
+						<input type="text" placeholder="이름을 입력해주세요!" class="memberJoin_input" name="name">
+					</div>
+					<div>
+						<p>아이디</p>
+						<input type="text" placeholder="아이디를 입력해주세요!" class="memberJoin_input" name="id">
 					</div>
 					<div>
 						<p>이메일</p>
-						<input type="text" placeholder="현재 사용하는 이메일을 입력해주세요!" class="memberJoin_input">
+						<input type="text" placeholder="현재 사용하는 이메일을 입력해주세요!" class="memberJoin_input" name="email">
 					</div>
 					<div>
 						<p>비밀번호</p>
-						<input type="password" placeholder="비밀번호는 6자이상으로!" class="memberJoin_input"> <input
-							type="password" placeholder="비밀번호 확인" class="memberJoin_input">
+						<input type="password" placeholder="비밀번호는 6자이상으로!" class="memberJoin_input" name="pw"> 
+						<input type="password" placeholder="비밀번호 확인" class="memberJoin_input" name="">
 					</div>
 					<div>
 						<p>휴대폰 번호</p>
-						<input type="text" placeholder="01012345678" class="memberJoin_input">
+						<input type="text" placeholder="01012345678" class="memberJoin_input" name="phone">
 					</div>
 					<div>
-						<p>나이</p>
-						<input type="text" placeholder="20" class="memberJoin_input">
+						<p>생일</p>
+						<input type="text" placeholder="2000.01.01" class="memberJoin_input" name="age">
+					</div>
+					<div>
+						<p>성별</p>
+						<input type="radio" class="memberJoin_input" name="gender">남자
+						<input type="radio" class="memberJoin_input" name="gender">여자
 					</div>
 				</fieldset>
 			</div>

@@ -1,13 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
-<link rel="stylesheet" href="../../../resources/css/member/memberPage.css">
-<link rel="stylesheet" href="./memberPage.css">
+<link rel="stylesheet" href="../../resources/css/member/memberPage.css">
 </head>
 <body>
-	<div class="mp_div">
+<div class="mp_div">
 		<div class="mp_myRecord">
 			<div class="mp_myPic">
 				<img alt="" src="">

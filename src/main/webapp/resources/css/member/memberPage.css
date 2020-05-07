@@ -1,1 +1,90 @@
 @charset "UTF-8";
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.mp_div{
+	padding: 30px;
+}
+
+.mp_myRecord{
+	margin: 0 20%;
+	padding: 16px;
+	border: 3px solid #f4f5f6;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.mp_myRecord span{
+	font-size: 13px;
+	color: #6f7174;	
+}
+
+.mp_myPic{
+	width: 52px;
+	height: 52px;
+	padding: 10px;
+}
+
+.mp_myProfile{
+	width: 648px;
+	padding: 16px 0;
+}
+
+.mp_myRecords{
+	width: 160px;
+	padding: 10px 0;
+	text-align: center;
+	border-left: 1px solid #e9ebef;
+}
+
+.mp_myRecords em{
+	margin-top: 6px;
+	font-size: 28px;
+	font-weight: 400;
+	font-style: normal;
+	color: #27b06e;
+}
+
+.mp_myContainer{
+	display: flex;
+	margin: 30px 20%;
+}
+
+.mp_myContainer h2{
+	margin: 0px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.mp_myContainer ul{
+	margin: 12px 0 0 0;
+	padding: 0;
+	width: 184px;
+	font-size: 14px;
+    list-style: none;
+	border-top: 1px solid #e9ebef;
+}
+
+.mp_myContainer li a{
+	text-decoration: none;
+    color: #6f7174;
+	display: block;
+	padding: 16px 0;
+	border-bottom: 1px solid #e9ebef;
+}
+
+.mp_myContainer2{
+	width: 100%;
+}
+
+.mp_article{
+	margin-left: 70px;
+}
+
+.mp_box{
+	margin-top: 20px;
+	width: 100%;
+}
