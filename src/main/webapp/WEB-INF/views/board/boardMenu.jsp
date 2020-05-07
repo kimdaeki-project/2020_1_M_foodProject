@@ -15,13 +15,13 @@
                     <div class="boardMenu_menu_index">
                         <ul class="boardMenu_row">
                             <li class="boardMenu_col">
-                                <div class="boardMenu_div">
+                                <div>
                                     <a href="#">
                                         <img alt="" src="../resources/img/food.jpg" class="boardMenu_food_img">
                                         <div class="boardMenu_item">
                                             <strong>[정기배송] 그린 샐러드</strong><br>
                                             <span>매주 월,수,금 1~3시</span><br><br>
-                                            <em>8000원</em>
+                                            <em>8000원</em> <!-- 가격 -->
                                         </div>
                                     </a>
                                 </div>
@@ -38,7 +38,7 @@
                                     </a>
                                 </div>
                             </li>
-                            <li class="col">
+                            <li class="boardMenu_col">
                                 <div>
                                     <a href="#">
                                         <img alt="" src="../resources/img/food.jpg" class="boardMenu_food_img">

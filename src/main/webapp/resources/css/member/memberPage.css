@@ -88,3 +88,40 @@ body {
 	margin-top: 20px;
 	width: 100%;
 }
+
+.mp_infoMod_box{
+	padding: 5px;
+}
+
+.mp_infoMod_box input{
+	margin-left: 5px;
+}
+
+.mp_infoMod_box button{
+	display: block;
+	border: none;
+	height: 38px;
+	width: 100%;
+	cursor: pointer;
+	text-align: center;
+	font-size: 1rem;
+	outline: none;
+	margin-top: 8px;
+	width: 50%;
+	color: #ffffff;
+	background-color: #27b06e;
+	margin: 32px 0 0 0;
+}
+
+.mp_infoMod_input{
+	box-sizing: border-box;
+	padding: 0 15px;
+	height: 38px;
+	width: 50%;
+	margin-bottom: 15px;
+	border: 1px solid #e7e7e7;
+	font-size: 15px;
+	color: #3d3d3d;
+	display: block;
+}
+

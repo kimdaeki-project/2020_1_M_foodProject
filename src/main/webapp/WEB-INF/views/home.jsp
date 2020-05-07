@@ -5,12 +5,12 @@
 	<title>Home</title>
 </head>
 <body>
-<c:import url="./templates/header.jsp"></c:import>
+<%@ include file="./templates/header.jsp"%>
 <h1>
 	Hello world!  
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<c:import url="./templates/footer.jsp"></c:import>
+<%@ include file="./templates/footer.jsp"%>
 </body>
 </html>
