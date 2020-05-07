@@ -136,6 +136,14 @@ public class MemberController {
 	}
 	
 	
+	
+	//마이페이지
+	@GetMapping("memberPage")
+	public void memberPage() throws Exception{
+		
+	}
+	
+	
 }
 
 
