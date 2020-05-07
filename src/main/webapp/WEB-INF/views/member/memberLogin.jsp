@@ -29,9 +29,13 @@
 				</p>
 				<nav>
 					<button class="memberLogin_login memberLogin_button" type="submit">로그인</button>
-					<button class="memberLogin_kakao memberLogin_button">카카오계정으로 로그인</button>
 				</nav>
 			</form>
+			
+			<a href="https://kauth.kakao.com/oauth/authorize?client_id=97f1860e20781cd962ba73e33913c194&redirect_uri=http://localhost:8080/project/auth/kakao&response_type=code">
+            <img src="${pageContext.request.contextPath}/resources/img/auth/kakao_login_btn.png">
+        	</a>
+			
 			<nav class="joinandfind">
 				<div>
 					<a href="" class="memberLogin_a">아이디 찾기</a>
