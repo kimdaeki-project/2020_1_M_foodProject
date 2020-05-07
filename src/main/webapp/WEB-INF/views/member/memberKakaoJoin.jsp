@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <title>카카오 가입 완료하기</title>
 <link rel="stylesheet" href="../resources/css/member/memberKakaoJoin.css">
@@ -10,7 +12,7 @@
 <body>
 <div class="mkjcontainer">
 		<article class="mkj_article">
-		<form action="login">
+		<form action="../member/memberJoin" method="post">
 			<header class="mkj_header">
 				<p>푸드트럭</p>
 			</header>
@@ -18,11 +20,11 @@
 				<fieldset class="mkj_fieldset">
 					<div>
 						<p>이름</p>
-						<input type="text" placeholder="이름을 입력해주세요!" class="mkj_input" name="name" value="${name}">
+						<input type="text" placeholder="이름을 입력해주세요!" class="mkj_input" name="name">
 					</div>
 					<div>
 						<p>아이디</p>
-						<input type="text" placeholder="아이디를 입력해주세요!" class="mkj_input" name="id" value="${id}">
+						<input type="text" placeholder="아이디를 입력해주세요!" class="mkj_input" name="id">
 					</div>
 					<div>
 						<p>이메일</p>
@@ -30,16 +32,18 @@
 					</div>
 					<div>
 						<p>닉네임</p>
-						<input type="text" placeholder="닉네임을 입력해주세요!" class="mkj_input" name="nickname" value="${nickname}">
+						<input type="text" placeholder="닉네임을 입력해주세요!" class="mkj_input" name="nickName" value="${nickname}">
 					</div>
 					<div>
-						<p>생일</p>
-						<input type="date" placeholder="2000.01.01" class="mkj_input" name="birthday" value="${birthday}">
+						<p>출생년월일</p>
+						<input type="date" placeholder="2020.01.01" class="mkj_input" name="birth">
 					</div>
 					<div>
 						<p>성별</p>
-						<input type="radio" class="mkj_radio" name="gender">남자
-						<input type="radio" class="mkj_radio" name="gender">여자
+						<input type="hidden" id="genderData" value="${gender}">
+						<input type="radio" class="mkj_radio" id="genderMale" name="gender" value="1">남자
+						<input type="radio" class="mkj_radio" id="genderFemale" name="gender" value="0">여자
+						
 					</div>
 				</fieldset>
 			</div>
@@ -66,5 +70,15 @@
 			</form>
 		</article>
 	</div>
+	<script type="text/javascript">
+	var gender = $('#genderData').val();
+	console.log(gender);
+	if(gender === 'male') {
+		$('#genderMale').attr("checked", "checked");
+		console.log("done");
+	} else if(gender === 'female') {
+		$('#genderFemale').attr("checked", "checked");
+	}
+	</script>
 </body>
 </html>

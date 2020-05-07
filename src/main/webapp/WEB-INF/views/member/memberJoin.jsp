@@ -44,8 +44,8 @@
 						</div>
 						<div>
 							<p>성별</p>
-							<input type="radio" class="memberJoin_input" name="gender">남자
-							<input type="radio" class="memberJoin_input" name="gender">여자
+							<input type="radio" class="memberJoin_input" name="gender" value="1">남자
+							<input type="radio" class="memberJoin_input" name="gender" value="0">여자
 						</div>
 					</fieldset>
 				</div>

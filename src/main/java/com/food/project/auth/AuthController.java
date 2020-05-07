@@ -34,19 +34,17 @@ public class AuthController {
 		
 		String nickname = (String)userInfo.get("nickname");
 		String email = (String)userInfo.get("email");
-		String birthday = (String)userInfo.get("birthday");
 		String gender = (String)userInfo.get("gender");
 		
-		mv.addObject("nickName", nickname);
+		mv.addObject("nickname", nickname);
 		if(userInfo.get("email") != null) {
 			mv.addObject("email", email);
-		}
-		if(userInfo.get("birthday") != null) {
-			mv.addObject("birth", birthday);
 		}
 		if(userInfo.get("gender") != null) {
 			mv.addObject("gender", gender);
 		}
+		
+		mv.setViewName("/member/memberKakaoJoin");
 		
 		return mv;
 	}
