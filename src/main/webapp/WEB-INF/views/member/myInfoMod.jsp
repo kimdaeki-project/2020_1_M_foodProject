@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="mp_box mp_box_all">
-		<form>
+		<form action="">
 			<div class="mp_infoMod_box">
 				<p>이름</p>
 				<input type="text" name="name" class="mp_infoMod_input">

@@ -10,7 +10,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
 	  $(function() {
-		//tab operation
+		//탭 메뉴
 		$('#default').click(function() {
 			$.get("./orderAndPay",function(result){
 				$('.mp_box').empty();
@@ -25,6 +25,12 @@
 		});
 		$('#myInfoMod').click(function() {
 			$.get("./myInfoMod",function(result){
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		$('#sellerApply').click(function() {
+			$.get("./sellerApply",function(result){
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
@@ -57,6 +63,7 @@
 					<li class="mp_tabmenu" id="default"><a href="#">주문/결제 내역</a></li>
 					<li class="mp_tabmenu" id="myReview"><a href="#">나의 후기</a></li>
 					<li class="mp_tabmenu" id="myInfoMod"><a href="#">회원 정보 수정</a></li>
+					<li class="mp_tabmenu" id="sellerApply"><a href="#">판매자 신청</a></li>
 					<li class="mp_tabmenu"><a href="#">탈퇴하기</a></li>
 					<li class="mp_tabmenu"><a href="#">로그아웃</a></li>
 				</ul>

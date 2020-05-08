@@ -145,17 +145,20 @@ public class MemberController {
 	  
 	}
 	  
-	//마이페이지
+	//회원 리뷰관리 페이지
 	@GetMapping("myReview") public void myReview() throws Exception{
-		System.out.println("왔나요1"); 
 	}
 	
+	//회원 주문내역 페이지
 	@GetMapping("orderAndPay") public void orderAndPay() throws Exception{
-		System.out.println("왔나요2"); 
 	}
 	
+	//회원 정보수정 페이지
 	@GetMapping("myInfoMod") public void myInfoMod() throws Exception{
-		System.out.println("왔나요3"); 
+	}
+	
+	//판매자 신청 페이지
+	@GetMapping("sellerApply") public void sellerApply() throws Exception{
 	}
 	 
 }
