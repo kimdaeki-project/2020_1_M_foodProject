@@ -67,7 +67,18 @@
 			function showPosition(position) {
 				$("#latitude").val(position.coords.latitude+"");
 				$("#longitude").val(position.coords.longitude+"");
+				
+				var latitude = position.coords.latitude;
+				var longitude = position.coords.longitude;
+				
+				latitude = Math.floor(latitude*1000000)/1000000
+				longitude = Math.floor(longitude*1000000)/1000000
+				
+				console.log(latitude);
+				console.log(longitude);
 			}
+			
+			
 			
 	
 

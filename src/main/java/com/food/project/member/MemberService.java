@@ -34,4 +34,9 @@ public class MemberService {
 		return memberDAO.memberUpdate(memberVO);
 	}
 	
+	//위치 정보 갱신
+	public int memberLocation(MemberVO memberVO) throws Exception{
+		return memberDAO.memberLocation(memberVO);
+	}
+	
 }

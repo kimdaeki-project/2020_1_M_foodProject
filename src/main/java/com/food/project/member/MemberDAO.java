@@ -36,6 +36,11 @@ public class MemberDAO {
 	public int memberUpdate(MemberVO memberVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"memberUpdate", memberVO);
 	}
+	
+	//위치 갱신
+	public int memberLocation(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"memberLocation", memberVO);
+	}
 }
 
 

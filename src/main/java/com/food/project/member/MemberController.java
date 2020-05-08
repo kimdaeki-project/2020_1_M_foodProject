@@ -38,16 +38,21 @@ public class MemberController {
 		}
 		response.addCookie(cookie);
 
-		System.out.println("latitude: "+memberVO.getLatitude());
-		System.out.println("longittude: "+memberVO.getLongitude());
-		
+		double latitude = memberVO.getLatitude();
+		double longitude = memberVO.getLongitude();
 		
 		
 		memberVO = memberService.memberLogin(memberVO);
 		if (memberVO != null) {
+			
+			memberVO.setLatitude(latitude);
+			memberVO.setLongitude(longitude);
+			memberService.memberLocation(memberVO);
+			
+			System.out.println("로그인 성공");
 			session.setAttribute("memberVO", memberVO);
 			mv.setViewName("redirect:../");
-			System.out.println("로그인 성공");
+			
 		} else {
 			mv.setViewName("member/memberLogin");
 		}

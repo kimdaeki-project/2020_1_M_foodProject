@@ -27,7 +27,7 @@
 		update member set password=#{password},name=#{name},phone=#{phone},nickname=#{nickName},updateAt=sysdate where id=#{id}
 	</update>
 	
-	<update id="memberlocation"></update>
-	
-	
+	<update id="memberLocation" parameterType="MemberVO">
+		update member set latitude=#{latitude},longitude=#{longitude} where id=#{id}
+	</update>	
 </mapper>
