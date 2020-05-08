@@ -57,4 +57,5 @@ body{
     border: none;
     padding: 18px 20px;
     background-color: transparent;
+    cursor: pointer;
 }

@@ -49,7 +49,7 @@
 					<a href="" class="memberLogin_a">비밀번호 찾기</a>
 				</div>
 				<div>
-					<a href="" class="memberLogin_a">회원가입</a>
+					<a href="${pageContext.request.contextPath}/member/memberJoin" class="memberLogin_a">회원가입</a>
 				</div>
 			</nav>
 		</article>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../resources/css/board/item.css">
 </head>
 <body>
+<%@ include file="../templates/header.jsp"%>
     <div class="container">
         <article class="boardItem_article">
             <div class="boardItem_menu_head">
@@ -77,5 +78,6 @@
             </div>
         </article>
     </div>
+<%@ include file="../templates/footer.jsp"%>
 </body>
 </html>
