@@ -53,9 +53,9 @@ body{
 }
 
 .header_login button{
+    cursor: pointer;
     font-size: 16px;
     border: none;
     padding: 18px 20px;
     background-color: transparent;
-    cursor: pointer;
 }

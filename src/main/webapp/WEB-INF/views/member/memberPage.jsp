@@ -8,7 +8,9 @@
 <link rel="stylesheet" href="../resources/css/member/memberPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-
+<script type="text/javascript">
+	 
+</script>
 </head>
 <body>
 <%@ include file="../templates/header.jsp"%>
@@ -18,7 +20,7 @@
 				<img alt="" src="">
 			</div>
 			<div class="mp_myProfile">
-				<strong>이름</strong><br> <span>이메일</span>
+				<strong>${memberVO.name}</strong><br> <span>${memberVO.email}</span>
 			</div>
 			<div class="mp_myRecords">
 				<span>수령 예정</span><br> <em>0</em>
@@ -34,9 +36,16 @@
 					<li class="mp_tabmenu" id="default"><a href="#">주문/결제 내역</a></li>
 					<li class="mp_tabmenu" id="myReview"><a href="#">나의 후기</a></li>
 					<li class="mp_tabmenu" id="myInfoMod"><a href="#">회원 정보 수정</a></li>
-					<li class="mp_tabmenu" id="sellerApply"><a href="#">판매자 신청</a></li>
-					<li class="mp_tabmenu"><a id="member_delete">탈퇴하기</a></li>
-					<li class="mp_tabmenu"><a href="./memberLogout">로그아웃</a></li>
+					
+					<c:if test="${memberVO.isFoodTruck eq '0'}">
+						<li class="mp_tabmenu" id="marketJoin"><a href="#">판매자 신청</a></li>
+					</c:if>
+					<c:if test="${memberVO.isFoodTruck eq '1'}">
+						<li class="mp_tabmenu" id="marketPage"><a href="#">마켓 정보 수정</a></li>
+					</c:if>
+					
+					<li class="mp_tabmenu"><a href="${pageContext.request.contextPath}/member/memberDelete">탈퇴하기</a></li>
+					<li class="mp_tabmenu"><a href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
 				</ul>
 			</aside>
 			<div class="mp_myContainer2">

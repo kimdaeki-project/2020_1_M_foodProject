@@ -34,3 +34,8 @@ body{
 .boardMenu_item{
     margin-top: 5px;
 }
+
+.food_img{
+	height: 100px;
+	width: 100px;
+}

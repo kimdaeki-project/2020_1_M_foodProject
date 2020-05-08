@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상세보기</title>
-<link rel="stylesheet" href="../resources/css/board/item.css">
+<link rel="stylesheet" href="../resources/css/market/marketSelect.css">
 </head>
 <body>
 <%@ include file="../templates/header.jsp"%>
@@ -16,10 +16,11 @@
                 <div class="boardItem_menu_body">
                     <header>
                         <h2>상품명</h2>
-                        <pre>상품설명</pre>
+                        <p>상품설명</p>
                     </header>
                     <hr class="boardItem_hr">
-                    <button>주문하기</button>
+                    <button onclick="location.href='./'">장바구니</button>
+                    <button onclick="location.href='./board/boardOrder'">주문하기</button>
                 </div>
             </div>
             <div class="boardItem_menu_tab">

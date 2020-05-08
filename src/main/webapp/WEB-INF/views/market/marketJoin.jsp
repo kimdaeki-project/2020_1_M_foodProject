@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="mp_box mp_box_all">
-		<form action="">
+		<form action="./marketJoin" method="post">
 			<div class="mp_infoMod_box">
 				<p>상점명</p>
 				<input type="text" name="marketName" class="mp_infoMod_input">

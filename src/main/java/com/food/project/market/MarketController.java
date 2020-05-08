@@ -24,14 +24,14 @@ public class MarketController {
 	public void marketList(MarketVO marketVO) throws Exception{
 		List<MarketVO> list = marketService.marketList(marketVO);
 	}
-	
+
 	//조회 - select One(GET)
 	@GetMapping("marketSelect")
 	public void marketSelect(MarketVO marketVO) throws Exception{
 		
 		marketVO = marketService.marketSelect(marketVO);
 	}
-	
+
 	//등록(GET/POST)
 	@GetMapping("marketInsert")
 	public void marketInsert() throws Exception{
@@ -59,6 +59,13 @@ public class MarketController {
 		int result = marketService.marketUpdate(marketVO,files,session);
 	}
 	
+	@GetMapping("marketList") public void marketList() throws Exception{
+	     
+	   }
+	
+	@GetMapping("marketSelect") public void marketSelect() throws Exception{
+	     
+	   }
 }
 
 

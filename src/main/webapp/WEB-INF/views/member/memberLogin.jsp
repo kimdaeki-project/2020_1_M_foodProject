@@ -7,8 +7,6 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <link rel="stylesheet" href="../resources/css/member/login.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/templates/header.css">
 </head>
 <body>
 	<%@ include file="../templates/header.jsp"%>
