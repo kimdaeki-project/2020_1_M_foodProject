@@ -55,12 +55,18 @@ public class MarketService {
 			//2.DB등록
 			FileInfoVO fileInfoVO = new FileInfoVO();
 			fileInfoVO.setFileName(fileName);
+			System.out.println("fileName:"+fileName);
+			
 			fileInfoVO.setOriName(file.getOriginalFilename());
+			System.out.println("oriName: "+file.getOriginalFilename());
 			fileInfoVO.setKind(1); //market
 			fileInfoVO.setMarketNum(num);
+			System.out.println("num: "+num);
 			//reviewNum, foodNum은 입력안해서 null값 부여
 			
 			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
+			System.out.println("result: "+result);
+			
 			
 			if(result<1) {
 				throw new Exception();

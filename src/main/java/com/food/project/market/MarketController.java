@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.food.project.member.MemberVO;
 
 @Controller
 @RequestMapping("/market/**")
@@ -33,19 +36,41 @@ public class MarketController {
 	}
 
 	//등록(GET/POST)
-	@GetMapping("marketInsert")
+	@GetMapping("marketJoin")
 	public void marketInsert() throws Exception{
 		
 	}
-	@PostMapping("marketInsert")
-	public void marketInsert(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
+	@PostMapping("marketJoin")
+	public ModelAndView marketInsert(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+		System.out.println(memberVO.getNum());
+		marketVO.setUserNum(memberVO.getNum());
+		
 		int result = marketService.marketInsert(marketVO,files,session);
+		mv.addObject("msg", "판매자 등록에 실패하였습니다.");
+		if(result > 0) {
+			mv.addObject("msg", "판매자 등록에 성공하였습니다.");
+		}
+		mv.addObject("path", "../member/memberPage");
+		mv.setViewName("common/result");
+
+		return mv;
+		
 	}
 	
 	//삭제(GET)
 	@GetMapping("marketDelete")
-	public void marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
+	public String marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
+		System.out.println("marketDelete");
 		int result = marketService.marketDelete(marketVO,session);
+		if(result > 0) {
+			
+		}
+		
+		return "redirect:../member/memberPage";
+		
 	}
 	
 	//수정(GET/POST)

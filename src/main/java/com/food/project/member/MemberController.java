@@ -38,6 +38,11 @@ public class MemberController {
 		}
 		response.addCookie(cookie);
 
+		System.out.println("latitude: "+memberVO.getLatitude());
+		System.out.println("longittude: "+memberVO.getLongitude());
+		
+		
+		
 		memberVO = memberService.memberLogin(memberVO);
 		if (memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
