@@ -11,11 +11,11 @@
 	</insert>
 	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
-		SELECT * FROM member where id=#{id} and password=#{password}
+		SELECT * FROM member where id=#{id} and password=#{password} and deleteAt is not null
 	</select>
 	
 	<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
-		select * from member where id=#{id}
+		select * from member where id=#{id} and deleteAt is not null
 	</select>
 	
 	

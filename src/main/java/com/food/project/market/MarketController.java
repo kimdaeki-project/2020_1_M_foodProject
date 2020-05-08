@@ -21,17 +21,20 @@ public class MarketController {
 	@Autowired
 	private MarketService marketService;
 	
-	//조회 - select List(GET)
+	//조회 - select List(GET)  : 한 유저가 보유한 다수의 푸드트럭에 대한 정보 조회
 	@GetMapping("marketList")
 	public void marketList(MarketVO marketVO) throws Exception{
 		List<MarketVO> list = marketService.marketList(marketVO);
+		
+		//DB조회 후 출력 경로 설정 필요
 	}
 
-	//조회 - select One(GET)
+	//조회 - select One(GET) : 하나의 푸드트럭에 대한 정보 조회
 	@GetMapping("marketSelect")
 	public void marketSelect(MarketVO marketVO) throws Exception{
-		
 		marketVO = marketService.marketSelect(marketVO);
+		
+		//DB조회 후 출력 경로 설정 필요
 	}
 
 	//등록(GET/POST)
@@ -59,6 +62,7 @@ public class MarketController {
 		
 	}
 	
+	
 	//삭제(GET)
 	@GetMapping("marketDelete")
 	public String marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
@@ -67,20 +71,24 @@ public class MarketController {
 		if(result > 0) {
 			
 		}
-		
 		return "redirect:../member/memberPage";
-		
 	}
+	
+	
 	
 	//수정(GET/POST)
 	@GetMapping("marketUpdate")
 	public void marketUpdate() throws Exception{
 		
 	}
-	
 	@PostMapping("marketUpdate")
 	public void marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
 		int result = marketService.marketUpdate(marketVO,files,session);
+		if(result > 0) {
+			
+		}		
+
+		//DB조회 후 출력 경로 설정 필요
 	}
 	
 }
