@@ -9,10 +9,9 @@
 <link rel="stylesheet" href="../resources/css/member/login.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/templates/header.css">
-
 </head>
 <body>
-
+	<%@ include file="../templates/header.jsp"%>
 	<div class="memberLogin_container">
 		<article class="memberLogin_article">
 			<header class="memberLogin_header">
@@ -38,7 +37,8 @@
 			<a
 				href="https://kauth.kakao.com/oauth/authorize?client_id=97f1860e20781cd962ba73e33913c194&redirect_uri=http://localhost:8080/project/auth/kakao&response_type=code"
 				style="text-decoration: none;">
-				<button class="memberLogin_kakao memberLogin_button" type="submit">카카오 로그인</button>
+				<button class="memberLogin_kakao memberLogin_button" type="submit">카카오
+					로그인</button>
 			</a>
 
 			<nav class="joinandfind">
@@ -54,6 +54,6 @@
 			</nav>
 		</article>
 	</div>
-
+	<%@ include file="../templates/footer.jsp"%>
 </body>
 </html>
