@@ -12,7 +12,7 @@
  <header class="header_header">
         <nav class="header_header_nav">
             <div class="header_header_logo">
-                <a href="#"> <img src="../img/main_logo.png">
+                <a href="${pageContext.request.contextPath}/"> <img src="../img/main_logo.png">
                 </a>
             </div>
 
