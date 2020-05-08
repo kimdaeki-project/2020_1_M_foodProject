@@ -6,8 +6,8 @@
 <mapper namespace="com.food.project.member.MemberDAO">
 	
 	<insert id="memberJoin" parameterType="MemberVO">
-		INSERT INTO member VALUES(member_seq.nextval,#{id},#{email},#{password},#{name},null,
-		null,null,'local',#{phone},0,null,null,null,sysdate,sysdate,null)
+		INSERT INTO member VALUES(member_seq.nextval,#{id},#{email},#{password},#{name},#{age},
+		#{gender},#{nickName},'local',#{phone},0,null,null,null,sysdate,sysdate,null)
 	</insert>
 	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
@@ -24,7 +24,7 @@
 	</update>
 	
 	<update id="memberUpdate" parameterType="MemberVO">
-		update member set password=#{password},name=#{name},phone=#{phone},nickname=#{nickName} where id=#{id}
+		update member set password=#{password},name=#{name},phone=#{phone},nickname=#{nickName},updateAt=sysdate where id=#{id}
 	</update>
 	
 	

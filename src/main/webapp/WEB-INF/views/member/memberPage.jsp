@@ -8,36 +8,7 @@
 <link rel="stylesheet" href="../resources/css/member/memberPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript">
-	  $(function() {
-		//탭 메뉴
-		$('#default').click(function() {
-			$.get("./orderAndPay",function(result){
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		$('#myReview').click(function() {
-			$.get("./myReview",function(result){
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		$('#myInfoMod').click(function() {
-			$.get("./myInfoMod",function(result){
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		$('#sellerApply').click(function() {
-			$.get("./sellerApply",function(result){
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		$('#default').click();
-	});
-</script>
+
 </head>
 <body>
 <%@ include file="../templates/header.jsp"%>
@@ -64,8 +35,8 @@
 					<li class="mp_tabmenu" id="myReview"><a href="#">나의 후기</a></li>
 					<li class="mp_tabmenu" id="myInfoMod"><a href="#">회원 정보 수정</a></li>
 					<li class="mp_tabmenu" id="sellerApply"><a href="#">판매자 신청</a></li>
-					<li class="mp_tabmenu"><a href="#">탈퇴하기</a></li>
-					<li class="mp_tabmenu"><a href="#">로그아웃</a></li>
+					<li class="mp_tabmenu"><a id="member_delete">탈퇴하기</a></li>
+					<li class="mp_tabmenu"><a href="./memberLogout">로그아웃</a></li>
 				</ul>
 			</aside>
 			<div class="mp_myContainer2">
@@ -76,5 +47,46 @@
 		</div>
 	</div>
 <%@ include file="../templates/footer.jsp"%>
+
+<script type="text/javascript">
+
+		$("#member_delete").click(function() {
+			var check = confirm("탈퇴하시겠습니까?");
+			
+			if(check){
+				location.href="./memberDelete?id=${memberVO.id}"
+			}
+		});
+
+		//탭 메뉴
+		$('#default').click(function() {
+			$.get("./orderAndPay",function(result){
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		$('#myReview').click(function() {
+			$.get("./myReview",function(result){
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		$('#myInfoMod').click(function() {
+			$.get("./memberUpdate",function(result){
+				
+				console.log(result);
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		$('#sellerApply').click(function() {
+			$.get("./sellerApply",function(result){
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		$('#default').click();
+</script>
+
 </body>
 </html>

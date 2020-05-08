@@ -23,6 +23,10 @@
 							<input type="text" placeholder="이름을 입력해주세요!" class="memberJoin_input" name="name">
 						</div>
 						<div>
+							<p>닉네임</p>
+							<input type="text" placeholder="닉네임을 입력해주세요!" class="memberJoin_input" name="nickName">
+						</div>
+						<div>
 							<p>아이디</p>
 							<input type="text" placeholder="아이디를 입력해주세요!" class="memberJoin_input" name="id">
 						</div>

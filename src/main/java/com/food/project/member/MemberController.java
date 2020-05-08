@@ -45,7 +45,7 @@ public class MemberController {
 			mv.setViewName("redirect:../");
 			System.out.println("로그인 성공");
 		} else {
-			mv.setViewName("./memberLogin");
+			mv.setViewName("member/memberLogin");
 		}
 		return mv;
 	}
@@ -62,7 +62,7 @@ public class MemberController {
 	// 회원가입(GET/POST)
 	@GetMapping("memberJoin")
 	public void memberJoin() throws Exception {
-
+		
 	}
 
 	@PostMapping("memberJoin")
@@ -114,8 +114,8 @@ public class MemberController {
 
 	// 회원정보수정(GET/POST)
 	@GetMapping("memberUpdate")
-	public void memberUpdate() {
-
+	public Modeland memberUpdate() {
+		System.out.println("ajax");
 	}
 
 	@PostMapping("memberUpdate")
@@ -153,9 +153,6 @@ public class MemberController {
 	@GetMapping("orderAndPay") public void orderAndPay() throws Exception{
 	}
 	
-	//회원 정보수정 페이지
-	@GetMapping("myInfoMod") public void myInfoMod() throws Exception{
-	}
 	
 	//판매자 신청 페이지
 	@GetMapping("sellerApply") public void sellerApply() throws Exception{
