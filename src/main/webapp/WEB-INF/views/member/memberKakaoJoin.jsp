@@ -31,19 +31,26 @@
 						<input type="email" placeholder="현재 사용하는 이메일을 입력해주세요!" class="mkj_input" name="email" value="${email}">
 					</div>
 					<div>
+						<p>비밀번호</p>
+						<input type="password" placeholder="비밀번호를 입력해주세요!" class="mkj_input" name="password">
+					</div>
+					<div>
 						<p>닉네임</p>
 						<input type="text" placeholder="닉네임을 입력해주세요!" class="mkj_input" name="nickName" value="${nickname}">
 					</div>
 					<div>
 						<p>출생년월일</p>
-						<input type="date" placeholder="2020.01.01" class="mkj_input" name="birth">
+						<input type="date" class="mkj_input" name="birth">
 					</div>
+					<div>
+						<p>휴대폰 번호</p>
+						<input type="text" placeholder="01012345678" class="mkj_input" name="phone">
+						</div>
 					<div>
 						<p>성별</p>
 						<input type="hidden" id="genderData" value="${gender}">
 						<input type="radio" class="mkj_radio" id="genderMale" name="gender" value="1">남자
 						<input type="radio" class="mkj_radio" id="genderFemale" name="gender" value="0">여자
-						
 					</div>
 				</fieldset>
 			</div>
