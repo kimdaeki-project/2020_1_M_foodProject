@@ -49,7 +49,7 @@ a{
 }
 
 .autologin span:hover {
-	color: #27b06e;
+	cursor: pointer;
 }
 
 .memberLogin_button {
