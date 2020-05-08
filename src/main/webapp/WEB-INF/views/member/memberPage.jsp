@@ -13,16 +13,19 @@
 		//tab operation
 		$('#default').click(function() {
 			$.get("./orderAndPay",function(result){
+				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
 		$('#myReview').click(function() {
 			$.get("./myReview",function(result){
+				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
 		$('#myInfoMod').click(function() {
 			$.get("./myInfoMod",function(result){
+				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
@@ -60,15 +63,6 @@
 			</aside>
 			<div class="mp_myContainer2">
 				<article class="mp_article">
-					<div class="mp_orderAndPay">
-						<h2>주문/결제 내역</h2>
-					</div>
-					<div class="mp_myReview">
-						<h2>나의 후기</h2>
-					</div>
-					<div class="mp_infoMod">
-						<h2>회원정보수정</h2>
-					</div>
 					<div class="mp_box"></div>
 				</article>
 			</div>
