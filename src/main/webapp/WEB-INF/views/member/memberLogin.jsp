@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link rel="stylesheet" href="../resources/css/member/login.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/templates/header.css">
@@ -20,6 +21,8 @@
 				<p>프리미엄 샐러드 배송</p>
 			</header>
 			<form action="./memberLogin" method="post">
+				<input id="latitude" type="hidden" name="latitude" value="">
+				<input id="longitude" type="hidden" name="longitude" value="">
 				<div>
 					<input name="id" type="text" placeholder="이메일을 입력해주세요"
 						class="memberLogin_input"> <input name="password"
@@ -30,7 +33,7 @@
 					<span>✔️</span> <span>자동로그인</span>
 				</p>
 				<nav>
-					<button class="memberLogin_login memberLogin_button" type="submit">로그인</button>
+					<input id="btn-login" class="memberLogin_login memberLogin_button" type="submit" value="로그인">
 				</nav>
 			</form>
 
@@ -55,5 +58,31 @@
 		</article>
 	</div>
 	<%@ include file="../templates/footer.jsp"%>
+
+<script type="text/javascript">
+			if (navigator.geolocation) {
+			    navigator.geolocation.getCurrentPosition(showPosition);
+			 } else { 
+			  	alert("허용안해서 주소 못불러옴")
+			  }
+			
+			function showPosition(position) {
+				$("#latitude").val(position.coords.latitude+"");
+				$("#longitude").val(position.coords.longitude+"");
+			}
+			
+	
+
+		
+		
+</script>
+
 </body>
 </html>
+
+
+
+
+
+
+

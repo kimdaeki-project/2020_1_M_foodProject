@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -39,6 +37,11 @@ public class MemberController {
 		}
 		response.addCookie(cookie);
 
+		System.out.println("latitude: "+memberVO.getLatitude());
+		System.out.println("longittude: "+memberVO.getLongitude());
+		
+		
+		
 		memberVO = memberService.memberLogin(memberVO);
 		if (memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
