@@ -6,10 +6,6 @@
 </head>
 <body>
 <%@ include file="./templates/header.jsp"%>
-<h1>
-	Hello world!  
-</h1>
-
 <P>  The time on the server is ${serverTime}. </P>
 <%@ include file="./templates/footer.jsp"%>
 </body>
