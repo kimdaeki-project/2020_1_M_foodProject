@@ -36,6 +36,12 @@
 				$('.mp_box').append(result);
 			});
 		});
+		$('#marketPage').click(function() {
+			$.get("./market/marketPage",function(result){
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
 		$('#default').click();
 	});
 </script>
@@ -48,7 +54,7 @@
 				<img alt="" src="">
 			</div>
 			<div class="mp_myProfile">
-				<strong>이름</strong><br> <span>이메일</span>
+				<strong>${memberVO.name}</strong><br> <span>${memberVO.email}</span>
 			</div>
 			<div class="mp_myRecords">
 				<span>수령 예정</span><br> <em>0</em>
@@ -64,9 +70,16 @@
 					<li class="mp_tabmenu" id="default"><a href="#">주문/결제 내역</a></li>
 					<li class="mp_tabmenu" id="myReview"><a href="#">나의 후기</a></li>
 					<li class="mp_tabmenu" id="myInfoMod"><a href="#">회원 정보 수정</a></li>
-					<li class="mp_tabmenu" id="sellerApply"><a href="#">판매자 신청</a></li>
-					<li class="mp_tabmenu"><a href="#">탈퇴하기</a></li>
-					<li class="mp_tabmenu"><a href="#">로그아웃</a></li>
+					
+					<c:if test="${memberVO.isFoodTruck eq '0'}">
+						<li class="mp_tabmenu" id="marketJoin"><a href="#">판매자 신청</a></li>
+					</c:if>
+					<c:if test="${memberVO.isFoodTruck eq '1'}">
+						<li class="mp_tabmenu" id="marketPage"><a href="#">마켓 정보 수정</a></li>
+					</c:if>
+					
+					<li class="mp_tabmenu"><a href="${pageContext.request.contextPath}/member/memberDelete">탈퇴하기</a></li>
+					<li class="mp_tabmenu"><a href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
 				</ul>
 			</aside>
 			<div class="mp_myContainer2">

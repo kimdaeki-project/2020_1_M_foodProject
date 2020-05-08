@@ -32,8 +32,8 @@
 						</div>
 						<div>
 							<p>비밀번호</p>
-							<input type="password" placeholder="비밀번호는 6자이상으로!" class="memberJoin_input" name="password"> 
-							<input type="password" placeholder="비밀번호 확인" class="memberJoin_input">
+							<input type="password" placeholder="비밀번호는 6자이상으로!" class="memberJoin_input" name="password" id="password"> 
+							<input type="password" placeholder="비밀번호 확인" class="memberJoin_input" id="password_check">
 						</div>
 						<div>
 							<p>휴대폰 번호</p>
@@ -80,30 +80,17 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		//전체선택, 해제
 		$("#chk_all").click(function() {
 			if ($("#chk_all").is(':checked')) {
 				$(".check_btn").prop("checked", true);
 			}else {
 				$(".check_btn").prop("checked", false);
 			}
-		})
+		});
 		
-		$(".check_btn").click(function() {
-			if ($("#chk_1").is(':checked')) {
-				console.log('dd');
-			} else{
-				$("#chk_all").prop("checked", false);
-			}
-		})
 		
-		$(".check_btn").click(function() {
-			if ($("#chk_2").is(':checked')) {
-				console.log('dd');
-			} else{
-				$("#chk_all").prop("checked", false);
-			}
-		})
-	});
+	})
 </script>
 </body>
 </html>

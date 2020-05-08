@@ -4,6 +4,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -22,7 +23,7 @@ public class MemberController {
    // 로그인(GET/POST)
    @GetMapping("memberLogin")
    public void memberLogin(@CookieValue(value = "cId", required = false) String cId) throws Exception {
-
+	   	
    }
 
    @PostMapping("memberLogin")
@@ -150,7 +151,6 @@ public class MemberController {
    //회원 주문내역 페이지
    @GetMapping("orderAndPay") public void orderAndPay() throws Exception{
    }
-   
    
    //판매자 신청 페이지
    @GetMapping("sellerApply") public void sellerApply() throws Exception{
