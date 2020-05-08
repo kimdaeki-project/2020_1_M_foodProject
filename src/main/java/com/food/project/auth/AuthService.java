@@ -120,13 +120,9 @@ public class AuthService {
 
 		String nickname = properties.getAsJsonObject().get("nickname").getAsString();
 		String email = null;
-		String birthday = null;
 		String gender = null;
 		if(kakao_account.getAsJsonObject().has("email")) {
 			email = kakao_account.getAsJsonObject().get("email").getAsString();
-		}
-		if(kakao_account.getAsJsonObject().has("birthday")) {
-			birthday = kakao_account.getAsJsonObject().get("birthday").getAsString();
 		}
 		if(kakao_account.getAsJsonObject().has("gender")) {
 			gender = kakao_account.getAsJsonObject().get("gender").getAsString();
@@ -134,7 +130,6 @@ public class AuthService {
 		
 		userInfo.put("nickname", nickname);
 		userInfo.put("email", email);
-		userInfo.put("birthday", birthday);
 		userInfo.put("gender", gender);
 	    
 	    return userInfo;
