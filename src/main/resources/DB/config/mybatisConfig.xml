@@ -12,5 +12,6 @@
 		
 		<typeAlias type="com.food.project.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.food.project.market.MarketVO" alias="MarketVO"/>
+		<typeAlias type="com.food.project.fileInfo.FileInfoVO" alias="FileInfoVO"/>
 	</typeAliases>
 </configuration>

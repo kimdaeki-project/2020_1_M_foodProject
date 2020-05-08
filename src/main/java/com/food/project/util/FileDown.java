@@ -1,16 +1,11 @@
 package com.food.project.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 //import com.song.Spring_legacy2.board.file.BoardFileVO;
@@ -19,11 +14,10 @@ import org.springframework.web.servlet.view.AbstractView;
 public class FileDown extends AbstractView{
 	
 	@Override
-	protected void renderMergedOutputModel(
-			Map<String, Object> model, 
-			HttpServletRequest request, 
-			HttpServletResponse response
-			) throws Exception {
+	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		
+
 		
 //		BoardFileVO boardFileVO = (BoardFileVO)model.get("file");
 //		

@@ -1,0 +1,59 @@
+package com.food.project.fileInfo;
+
+public class FileInfoVO {
+	private long imgNum;
+	private String fileName;
+	private String oriName;
+	private int kind;
+	private long marketNum;
+	private long reviewNum;
+	private long foodNum;
+	
+	
+	
+	public long getImgNum() {
+		return imgNum;
+	}
+	public void setImgNum(long imgNum) {
+		this.imgNum = imgNum;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getOriName() {
+		return oriName;
+	}
+	public void setOriName(String oriName) {
+		this.oriName = oriName;
+	}
+	public int getKind() {
+		return kind;
+	}
+	public void setKind(int kind) {
+		this.kind = kind;
+	}
+	public long getMarketNum() {
+		return marketNum;
+	}
+	public void setMarketNum(long marketNum) {
+		this.marketNum = marketNum;
+	}
+	public long getReviewNum() {
+		return reviewNum;
+	}
+	public void setReviewNum(long reviewNum) {
+		this.reviewNum = reviewNum;
+	}
+	public long getFoodNum() {
+		return foodNum;
+	}
+	public void setFoodNum(long foodNum) {
+		this.foodNum = foodNum;
+	}
+	
+	
+	
+}
