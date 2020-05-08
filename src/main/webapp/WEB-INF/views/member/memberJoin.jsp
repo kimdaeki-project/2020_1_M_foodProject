@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../resources/css/member/join.css">
 </head>
 <body>
+<%@ include file="../templates/header.jsp"%>
 	<div class="memberJoin_container">
 		<article class="memberJoin_article">
 			<form action="./memberJoin" method="post">
@@ -63,5 +64,6 @@
 			</form>
 		</article>
 	</div>
+<%@ include file="../templates/footer.jsp"%>
 </body>
 </html>
