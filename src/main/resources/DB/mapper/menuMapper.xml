@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.food.project.menu.MenuDAO">
+
+	<insert id="menuAdd" parameterType="MenuVO">
+		INSERT INTO menu VALUES(
+		    menu_seq.nextval, #{marketNum}, #{name}, #{price}, #{detail}, null, null
+		)
+	</insert>
+	
+	<select id="menuList" resultType="MenuVO">
+		SELECT * FROM menu WHERE deleteAt IS NULL
+	</select>
+	
+	<select id="menuSelect" parameterType="MenuVO" resultType="MenuVO">
+		SELECT * FROM menu WHERE num=#{num} AND deleteAt IS NULL
+	</select>
+	
+	<update id="menuUpdate" parameterType="MenuVO">
+		UPDATE menu SET name=#{name}, price=#{price}, detail=#{detail}, thumbImg=#{thumbImg} WHERE num=#{num} AND deleteAt IS NULL
+	</update>
+	
+	<delete id="menuDelete" parameterType="MenuVO">
+		UPDATE menu SET deleteAt=sysdate WHERE num=#{num} AND deleteAt IS NULL
+	</delete>
+</mapper>
