@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.food.project.fileInfo.FileDAO">
+	
+	<select id="fileInfoList" parameterType="FileInfoVO" resultType="FileInfoVO">
+		select * from fileInfo where kind=#{kind} and
+		<choose>
+			<when test="kind == '2'">
+				reviewNum=#{reviewNum}	
+			</when>
+			<when test="kind == '3'">
+				foodNum=#{foodNum}
+			</when>
+			<otherwise>
+				marketNum=#{marketNum}	
+			</otherwise>
+		</choose>
+	</select>
+	
+	
+	<insert id="fileInfoInsert" parameterType="FileInfoVO">
+		insert into fileinfo values(fileInfo_seq.nextval,#{fileName},#{oriName},#{kind},
+		#{marketNum},#{reviewNum},#{foodNum})
+	</insert>
+	
+	
+	<delete id="fileInfoDelete" parameterType="FileInfoVO">
+		delete from fileInfo where kind=#{kind} and
+		<choose>
+			<when test="kind == '2'">
+				reviewNum=#{reviewNum}	
+			</when>
+			<when test="kind == '3'">
+				foodNum=#{foodNum}
+			</when>
+			<otherwise>
+				marketNum=#{marketNum}	
+			</otherwise>
+		</choose>
+	</delete>
+	
+
+</mapper>

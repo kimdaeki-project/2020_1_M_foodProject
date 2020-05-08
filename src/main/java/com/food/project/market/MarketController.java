@@ -44,8 +44,8 @@ public class MarketController {
 	
 	//삭제(GET)
 	@GetMapping("marketDelete")
-	public void marketDelete(MarketVO marketVO) throws Exception{
-		int result = marketService.marketDelete(marketVO);
+	public void marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
+		int result = marketService.marketDelete(marketVO,session);
 	}
 	
 	//수정(GET/POST)
@@ -55,8 +55,8 @@ public class MarketController {
 	}
 	
 	@PostMapping("marketUpdate")
-	public void marketUpdate(MarketVO marketVO,HttpSession session) throws Exception{
-		int result = marketService.marketUpdate(marketVO,session);
+	public void marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
+		int result = marketService.marketUpdate(marketVO,files,session);
 	}
 	
 }
