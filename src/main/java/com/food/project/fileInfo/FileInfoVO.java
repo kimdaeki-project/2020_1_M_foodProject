@@ -9,8 +9,6 @@ public class FileInfoVO {
 	private long reviewNum;
 	private long menuNum;
 	
-	
-	
 	public long getImgNum() {
 		return imgNum;
 	}
@@ -53,7 +51,4 @@ public class FileInfoVO {
 	public void setMenuNum(long menuNum) {
 		this.menuNum = menuNum;
 	}
-	
-	
-	
 }
