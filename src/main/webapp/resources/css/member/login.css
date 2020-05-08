@@ -48,6 +48,10 @@ a{
 	outline-color: #27b06e;
 }
 
+.autologin{
+	margin-bottom: 7px;
+}
+
 .autologin span:hover {
 	cursor: pointer;
 }

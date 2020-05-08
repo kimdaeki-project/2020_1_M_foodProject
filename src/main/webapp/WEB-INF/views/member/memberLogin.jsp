@@ -27,9 +27,9 @@
 						type="password" placeholder="비밀번호를 입력해주세요"
 						class="memberLogin_input">
 				</div>
-				<p class="autologin">
-					<span>✔️</span> <span>자동로그인</span>
-				</p>
+				<label class="autologin">
+					<input type="checkbox">자동로그인
+				</label>
 				<nav>
 					<input id="btn-login" class="memberLogin_login memberLogin_button" type="submit" value="로그인">
 				</nav>

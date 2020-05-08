@@ -27,7 +27,5 @@
 		update member set password=#{password},name=#{name},phone=#{phone},nickname=#{nickName},updateAt=sysdate where id=#{id}
 	</update>
 	
-	<update id="memberlocation"></update>
-	
 	
 </mapper>
