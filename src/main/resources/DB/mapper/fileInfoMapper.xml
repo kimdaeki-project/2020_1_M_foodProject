@@ -13,7 +13,7 @@
 				reviewNum=#{reviewNum}	
 			</when>
 			<when test="kind == '3'">
-				foodNum=#{foodNum}
+				menuNum=#{menuNum}
 			</when>
 			<otherwise>
 				marketNum=#{marketNum}	
@@ -24,7 +24,7 @@
 	
 	<insert id="fileInfoInsert" parameterType="FileInfoVO">
 		insert into fileinfo values(fileInfo_seq.nextval,#{fileName},#{oriName},#{kind},
-		#{marketNum},#{reviewNum},#{foodNum})
+		#{marketNum},#{reviewNum},#{menuNum})
 	</insert>
 	
 	
@@ -35,7 +35,7 @@
 				reviewNum=#{reviewNum}	
 			</when>
 			<when test="kind == '3'">
-				foodNum=#{foodNum}
+				menuNum=#{menuNum}
 			</when>
 			<otherwise>
 				marketNum=#{marketNum}	

@@ -31,6 +31,12 @@ public class MenuDAO {
 		return sqlSession.selectOne(NAMESPACE+"menuSelect", menuVO);
 	}
 	
+	// 메뉴 seq 값 가져오기
+	public Long menuCount() throws Exception {
+
+		return sqlSession.selectOne(NAMESPACE + "menuCount");
+	}
+	
 	// 메뉴 수정
 	public int menuUpdate(MenuVO menuVO) throws Exception {
 	

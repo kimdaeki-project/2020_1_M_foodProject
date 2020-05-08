@@ -7,7 +7,7 @@
 
 	<insert id="menuAdd" parameterType="MenuVO">
 		INSERT INTO menu VALUES(
-		    menu_seq.nextval, #{marketNum}, #{name}, #{price}, #{detail}, null, null
+		    #{num}, #{marketNum}, #{name}, #{price}, #{detail}, null, null
 		)
 	</insert>
 	
@@ -19,8 +19,12 @@
 		SELECT * FROM menu WHERE num=#{num} AND deleteAt IS NULL
 	</select>
 	
+	<select id="menuCount" resultType="Long">
+		select menu_seq.nextval from dual
+	</select>
+	
 	<update id="menuUpdate" parameterType="MenuVO">
-		UPDATE menu SET name=#{name}, price=#{price}, detail=#{detail}, thumbImg=#{thumbImg} WHERE num=#{num} AND deleteAt IS NULL
+		UPDATE menu SET name=#{name}, price=#{price}, detail=#{detail}, thumbImg=#{thumbImg, jdbcType=VARCHAR} WHERE num=#{num} AND deleteAt IS NULL
 	</update>
 	
 	<delete id="menuDelete" parameterType="MenuVO">

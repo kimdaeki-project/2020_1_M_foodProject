@@ -83,14 +83,6 @@ public class MarketController {
 	public void marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
 		int result = marketService.marketUpdate(marketVO,files,session);
 	}
-	
-	@GetMapping("marketList") public void marketList() throws Exception{
-	     
-	   }
-	
-	@GetMapping("marketSelect") public void marketSelect() throws Exception{
-	     
-	   }
 }
 
 

@@ -2,6 +2,8 @@ package com.food.project.menu;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,7 @@ public class MenuController {
 	
 	// transaction 필요
 	@PostMapping("menuAdd") 
-	public ModelAndView menuAdd(MultipartFile[] files, MenuVO menuVO) throws Exception {
+	public ModelAndView menuAdd(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -32,7 +34,7 @@ public class MenuController {
 		
 		// 메뉴 insert
 		menuVO.setMarketNum(11);// test value
-		int result = menuService.menuAdd(menuVO);
+		int result = menuService.menuAdd(menuVO, files, session);
 		String msg = "메뉴 추가 실패";
 		String url = "./menuAdd";
 		if(result > 0) {
@@ -86,22 +88,12 @@ public class MenuController {
 	}
 	
 	@PostMapping("menuUpdate")
-	public ModelAndView menuUpdate(MultipartFile[] files, MenuVO menuVO) throws Exception {
+	public ModelAndView menuUpdate(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println(menuVO.getNum());
-		System.out.println(menuVO.getName());
-		System.out.println(menuVO.getPrice());
-		System.out.println(menuVO.getDetail());
-		if(menuVO.getThumbImg() != null)
-			System.out.println(menuVO.getThumbImg());
-		else
-			System.out.println("null");
-		System.out.println(menuVO.getDeleteAt());
-		
 		// 대표 이미지 변경
-		int result = menuService.menuUpdate(menuVO);
+		int result = menuService.menuUpdate(menuVO, files, session);
 		String msg = "메뉴 수정 실패";
 		String url = "./menuSelect?num="+menuVO.getNum();
 		if(result > 0) {
@@ -117,11 +109,11 @@ public class MenuController {
 	}
 	
 	@GetMapping("menuDelete")
-	public ModelAndView menuDelete(MenuVO menuVO) throws Exception {
+	public ModelAndView menuDelete(MenuVO menuVO, HttpSession session) throws Exception {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		int result = menuService.menuDelete(menuVO);
+		int result = menuService.menuDelete(menuVO, session);
 		String msg = "메뉴 삭제 실패";
 		String url = "./menuSelect?num="+menuVO.getNum();
 		if(result > 0) {

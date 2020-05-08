@@ -7,7 +7,7 @@ public class FileInfoVO {
 	private int kind;
 	private long marketNum;
 	private long reviewNum;
-	private long foodNum;
+	private long menuNum;
 	
 	
 	
@@ -47,11 +47,11 @@ public class FileInfoVO {
 	public void setReviewNum(long reviewNum) {
 		this.reviewNum = reviewNum;
 	}
-	public long getFoodNum() {
-		return foodNum;
+	public long getMenuNum() {
+		return menuNum;
 	}
-	public void setFoodNum(long foodNum) {
-		this.foodNum = foodNum;
+	public void setMenuNum(long menuNum) {
+		this.menuNum = menuNum;
 	}
 	
 	

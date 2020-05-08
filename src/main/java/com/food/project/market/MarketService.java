@@ -85,7 +85,7 @@ public class MarketService {
 		//기존 계정에 관련된 파일들을 읽어옴
 		FileInfoVO fileInfoVO = new FileInfoVO();
 		fileInfoVO.setKind(1);
-		fileInfoVO.setFoodNum(marketVO.getNum());
+		fileInfoVO.setMarketNum(marketVO.getNum());
 		List<FileInfoVO> list = fileInfoDAO.fileInfoList(fileInfoVO);
 		
 		int result = 0;
