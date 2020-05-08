@@ -29,8 +29,9 @@
 				$('.mp_box').append(result);
 			});
 		});
-		$('#sellerApply').click(function() {
-			$.get("./sellerApply",function(result){
+		//sellerApply를 marketJoin으로
+		$('#marketJoin').click(function() {
+			$.get("./market/marketJoin",function(result){
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});

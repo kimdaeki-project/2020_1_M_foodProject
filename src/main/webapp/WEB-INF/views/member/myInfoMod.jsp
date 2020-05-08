@@ -30,11 +30,6 @@
 				<input type="text" name="phone" class="mp_infoMod_input">
 			</div>
 			<div class="mp_infoMod_box">
-				<p>성별</p>
-				<input type="radio" name="gender" value="male">남자 <input
-					type="radio" name="gender" value="female">여자
-			</div>
-			<div class="mp_infoMod_box">
 				<button type="submit">저장하기</button>
 			</div>
 		</form>
