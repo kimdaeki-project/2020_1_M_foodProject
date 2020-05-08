@@ -114,7 +114,7 @@ public class MemberController {
 
 	// 회원정보수정(GET/POST)
 	@GetMapping("memberUpdate")
-	public Modeland memberUpdate() {
+	public void memberUpdate() {
 		System.out.println("ajax");
 	}
 
