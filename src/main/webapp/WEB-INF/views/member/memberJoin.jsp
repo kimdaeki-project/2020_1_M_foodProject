@@ -54,9 +54,20 @@
 				</div>
 				<hr class="memberJoin_hr">
 				<div>
-					<label class="memberJoin_label"> <strong>✔️ 이용약관 전체동의</strong></label> 
-					<label class="memberJoin_label"> ✔️ <span>(필수)이용약관에 동의합니다.</span> <span class="memberJoin_more">자세히</span></label> 
-					<label class="memberJoin_label">✔️ <span>(필수)개인정보처리방침에 동의합니다.</span><span class="more"> 자세히</span></label>
+					<label class="memberJoin_label"> 
+						<input type="checkbox" id="chk_all" name="chk" class="check_btn">
+						<strong>이용약관 전체동의</strong>
+					</label> 
+					<label class="memberJoin_label"> 
+						<input type="checkbox" id="chk_1" name="chk" class="check_btn">
+						<span>(필수)이용약관에 동의합니다.</span> 
+						<span class="memberJoin_more">자세히</span>
+					</label> 
+					<label class="memberJoin_label">
+						<input type="checkbox" id="chk_2" name="chk" class="check_btn">
+						<span>(필수)개인정보처리방침에 동의합니다.</span>
+						<span class="memberJoin_more"> 자세히</span>
+					</label>
 				</div>
 				<nav>
 					<button type="submit" class="memberjoin_button">가입하기</button>
@@ -65,5 +76,36 @@
 		</article>
 	</div>
 <%@ include file="../templates/footer.jsp"%>
+
+
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#chk_all").click(function() {
+			if ($("#chk_all").is(':checked')) {
+				$(".check_btn").prop("checked", true);
+			}else {
+				$(".check_btn").prop("checked", false);
+			}
+		})
+		
+		$(".check_btn").click(function() {
+			if ($("#chk_1").is(':checked')) {
+				console.log('dd');
+			} else{
+				$("#chk_all").prop("checked", false);
+			}
+		})
+		
+		$(".check_btn").click(function() {
+			if ($("#chk_2").is(':checked')) {
+				console.log('dd');
+			} else{
+				$("#chk_all").prop("checked", false);
+			}
+		})
+	});
+</script>
 </body>
 </html>
