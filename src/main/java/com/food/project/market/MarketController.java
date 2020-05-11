@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.MvcNamespaceHandler;
 
 import com.food.project.member.MemberVO;
 
@@ -40,6 +39,9 @@ public class MarketController {
 		
 		ModelAndView mv = new ModelAndView();
 		marketVO = marketService.marketSelect(marketVO);
+		
+		
+		
 		
 		mv.addObject("marketVO", marketVO);
 		mv.setViewName("market/marketSelect");

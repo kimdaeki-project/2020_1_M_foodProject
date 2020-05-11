@@ -143,21 +143,26 @@ public class MemberController {
 		return mv;
 	}
 
-	
 	//마이페이지
 	@GetMapping("memberPage") public void memberPage() throws Exception{
 	  
 	}
-	  
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//회원 리뷰관리 페이지
 	@GetMapping("myReview") public void myReview() throws Exception{
 	}
-	
 	//회원 주문내역 페이지
 	@GetMapping("orderAndPay") public void orderAndPay() throws Exception{
-	}
-	
-	
+	}	
 	//판매자 신청 페이지
 	@GetMapping("sellerApply") public void sellerApply() throws Exception{
 	}
