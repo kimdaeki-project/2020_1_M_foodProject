@@ -49,7 +49,7 @@ public class MenuService {
 			fileInfoVO.setOriName(file.getOriginalFilename());
 			System.out.println("oriName: " + file.getOriginalFilename());
 			fileInfoVO.setKind(3); // menu
-			fileInfoVO.setMenuNum(num);
+			fileInfoVO.setRefNum(num);
 			System.out.println("num: " + num);
 			// reviewNum, marketNum은 입력안해서 null값 부여
 
@@ -94,7 +94,7 @@ public class MenuService {
 			fileInfoVO.setFileName(fileName);
 			fileInfoVO.setOriName(file.getOriginalFilename());
 			fileInfoVO.setKind(3); //menu
-			fileInfoVO.setMenuNum(menuVO.getNum());
+			fileInfoVO.setRefNum(menuVO.getNum());
 			//reviewNum, marketNum은 입력안해서 null값 부여
 					
 			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
@@ -117,7 +117,7 @@ public class MenuService {
 		// 기존 계정에 관련된 파일들을 읽어옴
 		FileInfoVO fileInfoVO = new FileInfoVO();
 		fileInfoVO.setKind(3);
-		fileInfoVO.setMenuNum(menuVO.getNum());
+		fileInfoVO.setRefNum(menuVO.getNum());
 		List<FileInfoVO> list = fileInfoDAO.fileInfoList(fileInfoVO);
 
 		int result = 0;
