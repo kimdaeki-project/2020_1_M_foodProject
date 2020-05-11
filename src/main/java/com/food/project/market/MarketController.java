@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.MvcNamespaceHandler;
 
 import com.food.project.member.MemberVO;
 
@@ -24,15 +25,25 @@ public class MarketController {
 	
 	//조회 - select List(GET)
 	@GetMapping("marketList")
-	public void marketList(MarketVO marketVO) throws Exception{
-		List<MarketVO> list = marketService.marketList(marketVO);
+	public ModelAndView marketList() throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		List<MarketVO> list = marketService.marketList();
+		mv.addObject("marketList", list);
+		mv.setViewName("market/marketList");
+		return mv;
 	}
 
 	//조회 - select One(GET)
 	@GetMapping("marketSelect")
-	public void marketSelect(MarketVO marketVO) throws Exception{
+	public ModelAndView marketSelect(MarketVO marketVO) throws Exception{
 		
+		ModelAndView mv = new ModelAndView();
 		marketVO = marketService.marketSelect(marketVO);
+		
+		mv.addObject("marketVO", marketVO);
+		mv.setViewName("market/marketSelect");
+		return mv;
 	}
 
 	//등록(GET/POST)

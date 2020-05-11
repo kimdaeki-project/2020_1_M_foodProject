@@ -30,7 +30,7 @@ public class MarketDAOTest extends AbstractTestCase{
 		MarketVO marketVO = new MarketVO();
 		marketVO.setUserNum(8);
 		
-		List<MarketVO> list = marketDAO.marketList(marketVO);
+		List<MarketVO> list = marketDAO.marketList();
 		assertNotNull(list);
 		
 	}

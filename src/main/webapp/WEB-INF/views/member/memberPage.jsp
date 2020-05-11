@@ -14,44 +14,44 @@
 </head>
 <body>
 <%@ include file="../templates/header.jsp"%>
-	<div class="mp_div">
-		<div class="mp_myRecord">
-			<div class="mp_myPic">
-				<img alt="" src="">
+	<div style="margin: 103px 0 50px 0; padding: 0px 10% ">
+		<div class="mp_myInfoBox">
+			<div class="mp_pic">
+				<img src="../../../ico-leaf.svg">
 			</div>
-			<div class="mp_myProfile">
-				<strong>${memberVO.name}</strong><br> <span>${memberVO.email}</span>
+			<div class="mp_me">
+				<strong>${memberVO.name}</strong>
+				<span>${memberVO.email}</span>
 			</div>
-			<div class="mp_myRecords">
-				<span>수령 예정</span><br> <em>0</em>
+			<div class="mp_num">
+				<span>수령예정</span>
+				<em>0</em>
 			</div>
-			<div class="mp_myRecords">
-				<span>총 주문 횟수</span><br> <em>0</em>
+			<div class="mp_num">
+				<span>총 주문회수</span>
+				<em>0</em>
 			</div>
 		</div>
-		<div class="mp_myContainer">
-			<aside class="mp_aside">
-				<h2>마이페이지</h2>
+		<div class="mp_myInfoNav">
+			<aside>
+				<h2>마이 페이지</h2>
 				<ul>
-					<li class="mp_tabmenu" id="default"><a href="#">주문/결제 내역</a></li>
-					<li class="mp_tabmenu" id="myReview"><a href="#">나의 후기</a></li>
-					<li class="mp_tabmenu" id="myInfoMod"><a href="#">회원 정보 수정</a></li>
+					<li id="default"><a href="#">주문/결제 내역</a></li>
+					<li id="myReview"><a href="#">나의 후기</a></li>
+					<li id="memberUpdate"><a href="#">회원정보 수정</a></li>
 					
 					<c:if test="${memberVO.isFoodTruck eq '0'}">
-						<li class="mp_tabmenu" id="marketJoin"><a href="#">판매자 신청</a></li>
+						<li id="marketJoin"><a href="#">판매자 신청</a></li>
 					</c:if>
 					<c:if test="${memberVO.isFoodTruck eq '1'}">
-						<li class="mp_tabmenu" id="marketPage"><a href="#">마켓 정보 수정</a></li>
+						<li id="marketPage"><a href="#">마켓 정보 수정</a></li>
 					</c:if>
 					
-					<li class="mp_tabmenu"><a href="${pageContext.request.contextPath}/member/memberDelete">탈퇴하기</a></li>
-					<li class="mp_tabmenu"><a href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
+					<li id="member_delete"><a href="${pageContext.request.contextPath}/member/memberDelete">탈퇴하기</a></li>
+					<li id="li5"><a href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
 				</ul>
 			</aside>
-			<div class="mp_myContainer2">
-				<article class="mp_article">
-					<div class="mp_box"></div>
-				</article>
+			<div class="mp_box" style="width: 100%">
 			</div>
 		</div>
 	</div>
@@ -80,7 +80,7 @@
 				$('.mp_box').append(result);
 			});
 		});
-		$('#myInfoMod').click(function() {
+		$('#memberUpdate').click(function() {
 			$.get("./memberUpdate",function(result){
 				
 				console.log(result);
@@ -88,7 +88,7 @@
 				$('.mp_box').append(result);
 			});
 		});
-		$('#sellerApply').click(function() {
+		$('#marketJoin').click(function() {
 			$.get("../market/marketJoin",function(result){
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
