@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.member.MemberVO;
+import com.food.project.menu.MenuService;
+import com.food.project.menu.MenuVO;
 
 @Controller
 @RequestMapping("/market/**")
@@ -21,6 +23,8 @@ public class MarketController {
 	
 	@Autowired
 	private MarketService marketService;
+	@Autowired
+	private MenuService menuService;
 	
 	//조회 - select List(GET)
 	@GetMapping("marketList")
@@ -40,9 +44,12 @@ public class MarketController {
 		ModelAndView mv = new ModelAndView();
 		marketVO = marketService.marketSelect(marketVO);
 		
+		MenuVO menuVO = new MenuVO();
+		menuVO.setMarketNum(marketVO.getNum());
 		
-		
-		
+		List<MenuVO> list = menuService.menuList(menuVO);
+
+		mv.addObject("menuList", list);
 		mv.addObject("marketVO", marketVO);
 		mv.setViewName("market/marketSelect");
 		return mv;
