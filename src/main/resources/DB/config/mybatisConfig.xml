@@ -11,6 +11,8 @@
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="java.lang.Integer" alias="Integer"/>
 		
+		<typeAlias type="com.food.project.util.Pager" alias="Pager"/>
+		
 		<typeAlias type="com.food.project.member.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.food.project.market.MarketVO" alias="MarketVO"/>
 		<typeAlias type="com.food.project.fileInfo.FileInfoVO" alias="FileInfoVO"/>
@@ -19,6 +21,6 @@
 		<typeAlias type="com.food.project.ordered.OrderedVO" alias="OrderedVO"/>
 		<typeAlias type="com.food.project.orderOption.OrderOptionVO" alias="OrderOptionVO"/>
 		<typeAlias type="com.food.project.menuOption.MenuOptionVO" alias="MenuOptionVO"/>
-
+		<typeAlias type="com.food.project.review.ReviewVO" alias="ReviewVO"/>
 	</typeAliases>
 </configuration>
