@@ -57,8 +57,8 @@ public class MenuController {
 		// 메뉴 List 가져오기
 		List<MenuVO> list = menuService.menuList(menuVO);
 		
-		mv.addObject("list", list);
-		mv.setViewName("menu/menuList");
+		mv.addObject("menuList", list);
+		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
 	
