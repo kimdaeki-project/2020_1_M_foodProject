@@ -48,19 +48,19 @@ public class menuTest extends AbstractTestCase {
 //		}
 //	}
 	
-	public List<MenuVO> menuListTest() throws Exception {
-	
-		MenuVO menuVO = new MenuVO();
-		menuVO.setMarketNum(11);
-		return menuDAO.menuList(menuVO);
-	}
-	
-	@Test
-	public void menuOptionList() throws Exception {
-		
-		List<MenuVO> list = this.menuListTest();
-		assertNotEquals(0, list.size());
-	}
+//	public List<MenuVO> menuListTest() throws Exception {
+//	
+//		MenuVO menuVO = new MenuVO();
+//		menuVO.setMarketNum(11);
+//		return menuDAO.menuList(menuVO);
+//	}
+//	
+//	@Test
+//	public void menuOptionList() throws Exception {
+//		
+//		List<MenuVO> list = this.menuListTest();
+//		assertNotEquals(0, list.size());
+//	}
 	
 //	@Test
 //	public void menuSelectTest() throws Exception {
