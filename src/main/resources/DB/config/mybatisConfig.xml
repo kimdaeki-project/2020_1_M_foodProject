@@ -22,5 +22,7 @@
 		<typeAlias type="com.food.project.orderOption.OrderOptionVO" alias="OrderOptionVO"/>
 		<typeAlias type="com.food.project.menuOption.MenuOptionVO" alias="MenuOptionVO"/>
 		<typeAlias type="com.food.project.review.ReviewVO" alias="ReviewVO"/>
+		<typeAlias type="com.food.project.notice.NoticeVO" alias="NoticeVO"/>
+		
 	</typeAliases>
 </configuration>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.food.project.notice.NoticeDAO">
+
+	<insert id="noticeInsert" parameterType="NoticeVO">
+		INSERT INTO notice VALUES(
+		    #{boardNum}, #{memberNum}, #{imageNum}, RAWTOHEX(#{contents}), sysdate, sysdate, #{title}, 0
+		)
+	</insert>
+	
+	<select id="noticeList" resultType="NoticeVO">
+		SELECT 
+			boardNum, memberNum, imageNum, UTL_RAW.CAST_TO_VARCHAR2(contents) as contents, regdate, moddate, title, views 
+		FROM notice ORDER BY boardNum DESC
+	</select>
+	
+	<select id="noticeSelect" parameterType="NoticeVO" resultType="NoticeVO">
+		SELECT 
+			boardNum, memberNum, imageNum, UTL_RAW.CAST_TO_VARCHAR2(contents) as contents, regdate, moddate, title, views 
+		FROM notice WHERE boardNum=#{boardNum} ORDER BY boardNum DESC
+	</select>
+	
+	<select id="noticeCount" resultType="Long">
+		select board_seq.nextval from dual
+	</select>
+	
+	<update id="noticeUpdate" parameterType="NoticeVO">
+		UPDATE notice SET imageNum=#{imageNum}, contents=RAWTOHEX(#{contents}), modDate=sysdate, title=#{title} WHERE boardNum=#{boardNum}
+	</update>
+	
+	<update id="noticeViewUpdate" parameterType="NoticeVO">
+		UPDATE notice SET views + (SELECT views FROM notice WHERE boardNum=#{boardNum})
+		WHERE boardNum=#{boardNum}
+	</update>
+	
+	<delete id="noticeDelete" parameterType="NoticeVO">
+		DELETE FROM notice WHERE boardNum=#{boardNum} 
+	</delete>
+</mapper>
