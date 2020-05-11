@@ -22,7 +22,7 @@
                                     <a href="${pageContext.request.contextPath}/market/marketSelect">
                                         <img alt="" src="${pageContext.request.contextPath}/resources/img/food.jpg" class="food_img">
                                         <div class="item">
-                                            <strong>[정기배송] 그린 샐러드</strong><br>
+                                            <strong>${marketVO.marketName}</strong><br>
                                             <span>매주 월,수,금 1~3시</span><br><br>
                                             <em>8000원</em>
                                         </div>

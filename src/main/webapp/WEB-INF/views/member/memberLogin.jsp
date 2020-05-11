@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../resources/css/member/login.css">
+<link rel="stylesheet" href="../resources/css/member/memberLogin.css">
 </head>
 <body>
 	<%@ include file="../templates/header.jsp"%>
-	<div class="memberLogin_container">
+	<div class="memberLogin_container" style="margin-top: 103px">
 		<article class="memberLogin_article">
 			<header class="memberLogin_header">
 				<img alt="logo" src="../img/logo.png" class="memberLogin_img">
