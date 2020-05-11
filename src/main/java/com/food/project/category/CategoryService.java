@@ -13,7 +13,8 @@ public class CategoryService {
 	
 	// 카테고리 추가
 	public int categoryInsert(CategoryVO categoryVO) {
-
+		
+		categoryVO.setNum(categoryDAO.categoryCount());
 		return categoryDAO.categoryInsert(categoryVO);
 	}
 

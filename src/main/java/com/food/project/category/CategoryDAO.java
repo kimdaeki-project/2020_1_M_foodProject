@@ -31,6 +31,11 @@ public class CategoryDAO {
 		return sqlSession.selectOne(NAMESPACE+"categorySelect", categoryVO);
 	}
 	
+	// 카테고리 카운트 읽어오기
+	public long categoryCount() {
+		return sqlSession.selectOne(NAMESPACE+"categoryCount");
+	}
+	
 	// 카테고리 수정
 	public int categoryUpdate(CategoryVO categoryVO) {
 		

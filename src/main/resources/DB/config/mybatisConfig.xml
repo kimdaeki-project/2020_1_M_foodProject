@@ -15,5 +15,6 @@
 		<typeAlias type="com.food.project.fileInfo.FileInfoVO" alias="FileInfoVO"/>
 		<typeAlias type="com.food.project.menu.MenuVO" alias="MenuVO"/>
 		<typeAlias type="com.food.project.category.CategoryVO" alias="CategoryVO"/>
+		<typeAlias type="com.food.project.menuOption.MenuOptionVO" alias="MenuOptionVO"/>
 	</typeAliases>
 </configuration>
