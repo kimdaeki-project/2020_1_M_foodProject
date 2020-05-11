@@ -26,8 +26,8 @@ public class MarketService {
 	
 	
 	//조회 - selectList
-	public List<MarketVO> marketList(MarketVO marketVO) throws Exception{
-		return marketDAO.marketList(marketVO);
+	public List<MarketVO> marketList() throws Exception{
+		return marketDAO.marketList();
 	}
 	
 	//조회 - select One

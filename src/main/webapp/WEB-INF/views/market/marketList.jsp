@@ -1,3 +1,7 @@
+<%@page import="com.food.project.market.MarketVO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.food.project.market.MarketDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -8,7 +12,6 @@
 <link rel="stylesheet"
 	href="../resources/css/market/marketList.css">
 </head>
-<body>
 <%@ include file="../templates/header.jsp"%>
     <body>
     <div class="container">
@@ -17,18 +20,19 @@
                 <section>
                     <div class="menu_index">
                         <ul class="row">
-                            <li class="col">
+                        <c:forEach items="${marketList}" var="vo">
+                            <li class="col marketData">
                                 <div>
-                                    <a href="${pageContext.request.contextPath}/market/marketSelect">
+                                    <a href="${pageContext.request.contextPath}/market/marketSelect?num=${vo.num}">
                                         <img alt="" src="${pageContext.request.contextPath}/resources/img/food.jpg" class="food_img">
                                         <div class="item">
-                                            <strong>${marketVO.marketName}</strong><br>
-                                            <span>매주 월,수,금 1~3시</span><br><br>
-                                            <em>8000원</em>
+                                            <strong>${vo.marketName}</strong><br>
+                                            <span>${vo.marketIntro}</span><br><br>
                                         </div>
                                     </a>
                                 </div>
                             </li>
+                          </c:forEach>
                         </ul>
                     </div>
                 </section>
@@ -37,5 +41,6 @@
     </div>
 </body>
 <%@ include file="../templates/footer.jsp"%>
-</body>
+
+
 </html>

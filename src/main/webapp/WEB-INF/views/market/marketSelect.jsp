@@ -9,14 +9,14 @@
 </head>
 <body>
 <%@ include file="../templates/header.jsp"%>
-    <div class="container">
+    <div class="container" style="margin-top: 103px;">
         <article class="boardItem_article">
             <div class="boardItem_menu_head">
                 <img alt="" src="../img/food.jpg">
                 <div class="boardItem_menu_body">
                     <header>
-                        <h2>상품명</h2>
-                        <p>상품설명</p>
+                        <h2>${marketVO.marketName}</h2>
+                        <p>${marketVO.marketIntro}</p>
                     </header>
                     <hr class="boardItem_hr">
                     <button onclick="location.href='./'">장바구니</button>
