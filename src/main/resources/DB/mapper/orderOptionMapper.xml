@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.food.project.orderOption.OrderOptionDAO">
+	<select id="orderOptionList" parameterType="OrderOptionVO" resultType="OrderOptionVO">
+		select * from orderOption where orderNum=#{orderNum}
+	</select>
+	
+	<insert id="orderOptionInsert" parameterType="OrderOptionVO">
+		insert into orderOption values(#{orderNum},#{optionNum})
+	</insert>
+	
+</mapper>
