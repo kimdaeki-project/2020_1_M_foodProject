@@ -6,9 +6,18 @@
 <mapper namespace="com.food.project.review.ReviewDAO">
 
 	<select id="baordList" parameterType="Pager" resultType="ReviewVO">
-		select * from review
+		select * from
+		(select Q.*,rownum R from
+		(select * from review
+		order by ref desc, step asc) Q)
+		where R between #{startRow} and #{lastRow}
 	</select>
 	
-	
+	<insert id="boardInsert" parameterType="ReviewVO">
+		<selectKey keyProperty="boardNum" order="BEFORE" resultType="Long">
+			select board_seq.nextVal from dual
+		</selectKey>
+		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{imageNum},#{contents},sysdate,0,0,0);
+	</insert>
 	
 </mapper>

@@ -20,7 +20,7 @@ public class ReviewDAO implements BoardDAO{
 	//조회 - 전체 리스트
 	@Override
 	public List<BoardVO> boarList(Pager pager) throws Exception {
-		return sqlSession.selectList(NAMESPACE+"boardList",pager);
+		return sqlSession.selectList(NAMESPACE+"baordList",pager);
 	}
 
 	//리뷰 등록
