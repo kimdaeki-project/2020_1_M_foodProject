@@ -4,7 +4,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -38,18 +37,18 @@ public class MemberController {
 		}
 		response.addCookie(cookie);
 
-		System.out.println("latitude: "+memberVO.getLatitude());
-		System.out.println("longittude: "+memberVO.getLongitude());
-		
-		
+//		System.out.println("latitude: "+memberVO.getLatitude());
+//		System.out.println("longittude: "+memberVO.getLongitude());
 		
 		memberVO = memberService.memberLogin(memberVO);
+		
 		if (memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
 			mv.setViewName("redirect:../");
 			System.out.println("로그인 성공");
-		} else {
+		}else{
 			mv.setViewName("member/memberLogin");
+			System.out.println("로그인 실패");
 		}
 		return mv;
 	}
@@ -104,11 +103,12 @@ public class MemberController {
 
 	// 회원탈퇴(GET)
 	@GetMapping("memberDelete")
-	public ModelAndView memberDelete(MemberVO memberVO) throws Exception {
+	public ModelAndView memberDelete(MemberVO memberVO,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		int result = memberService.memberDelete(memberVO);
 		if (result > 0) {
+			session.invalidate();
 			System.out.println("회원탈퇴성공");
 			mv.setViewName("redirect:/");
 		}
@@ -119,20 +119,15 @@ public class MemberController {
 	// 회원정보수정(GET/POST)
 	@GetMapping("memberUpdate")
 	public void memberUpdate() {
-		System.out.println("ajax");
 	}
 
 	@PostMapping("memberUpdate")
 	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-
-		String id = ((MemberVO) session.getAttribute("memberVO")).getId();
-		memberVO.setId(id);
-
 		int result = memberService.memberUpdate(memberVO);
-
+		
 		if (result > 0) {
-			session.setAttribute("member", memberVO);
+			session.setAttribute("memberVO", memberVO);
 			mv.setViewName("redirect:./memberPage");
 		} else {
 			mv.addObject("result", "업데이트 실패");

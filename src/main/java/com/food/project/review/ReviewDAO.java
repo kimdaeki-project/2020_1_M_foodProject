@@ -17,6 +17,16 @@ public class ReviewDAO implements BoardDAO{
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.food.project.review.ReviewDAO.";
 	
+	//replyUpdate
+	public int boardReplyUpdate(BoardVO boardVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"boardReplyUpdate", boardVO);
+	}
+	
+	//replay
+	public int boardReply(BoardVO boardVO) throws Exception{
+		return sqlSession.insert(NAMESPACE+"boardReply", boardVO);
+	}
+	
 	//조회 - 전체 리스트
 	@Override
 	public List<BoardVO> boarList(Pager pager) throws Exception {

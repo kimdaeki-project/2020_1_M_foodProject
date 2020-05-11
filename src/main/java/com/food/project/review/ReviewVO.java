@@ -5,7 +5,6 @@ import com.food.project.board.BoardVO;
 public class ReviewVO extends BoardVO{
 
 	private int rating;
-	private long memberNum;
 	private long marketNum;
 	private long ref;
 	private long step;
@@ -19,14 +18,6 @@ public class ReviewVO extends BoardVO{
 
 	public void setRating(int rating) {
 		this.rating = rating;
-	}
-
-	public long getMemberNum() {
-		return memberNum;
-	}
-
-	public void setMemberNum(long memberNum) {
-		this.memberNum = memberNum;
 	}
 
 	public long getMarketNum() {

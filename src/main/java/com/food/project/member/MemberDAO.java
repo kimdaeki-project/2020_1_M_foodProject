@@ -12,6 +12,11 @@ public class MemberDAO {
 	private final String NAMESPACE = "com.food.project.member.MemberDAO.";
 	
 	
+	//isFoodTruck 업데이트
+	public int isFoodTruck(MemberVO memberVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"isFoodTruck", memberVO);
+	}
+	
 	//로그인
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"memberLogin", memberVO);

@@ -17,7 +17,27 @@
 		<selectKey keyProperty="boardNum" order="BEFORE" resultType="Long">
 			select board_seq.nextVal from dual
 		</selectKey>
-		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{imageNum},#{contents},sysdate,0,0,0);
+		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{imageNum},#{contents},sysdate,
+		#{boardNum},0,0)
+	</insert>
+	
+	
+	<update id="boardReplyUpdate" parameterType="ReviewVO">
+		update review set
+		step = step+1
+		where ref=(select ref from review where boardNum=#{boardNum})
+		and step > (select step from review where boardNum=#{boardNum})
+		
+	</update>
+	
+	
+	
+	<insert id="boardReply" parameterType="ReviewVO">
+		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},#{imageNum},#{contents},sysdate,
+		(select ref from review where boardNum=#{boardNum}),
+		(select step from review where boardNum=#{boardNum})+1,
+		(select depth from review where boardNum=#{boardNum})+1
+		)
 	</insert>
 	
 </mapper>

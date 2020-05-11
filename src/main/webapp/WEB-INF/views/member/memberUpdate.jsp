@@ -150,7 +150,7 @@ input[type="file" i]{
 
 	<div class="mp_box mp_box_all" style="margin-left: 50px">
 		<form action="./memberUpdate" method="post">
-			
+			<input type="text" name="id" value="${memberVO.id}">
 			<h2>회원정보 수정</h2>
 			<div class="mp_infoMod_box" style="margin-top: 12px">
 				<p>닉네임</p>

@@ -23,13 +23,11 @@
                 <li><a href="#">이벤트</a></li>
             </ul>
         </nav>
-        <c:if test="${empty memberVO}">
-            <button type="button" class="h_login"
-                onclick="location.href='${pageContext.request.contextPath}/member/memberLogin'">로그인</button>
+        <c:if test="${empty sessionScope.memberVO}">
+            <button type="button" class="h_login" onclick="location.href='${pageContext.request.contextPath}/member/memberLogin'">로그인</button>
         </c:if>
-        <c:if test="${not empty memberVO}">
-            <button type="button" class="h_name"
-                onclick="location.href='${pageContext.request.contextPath}/member/memberPage'">${memberVO.name}</button>
+        <c:if test="${not empty sessionScope.memberVO}">
+            <button type="button" class="h_name" onclick="location.href='${pageContext.request.contextPath}/member/memberPage'">${memberVO.name}</button>
             <a><i class="fas fa-shopping-cart"></i></a>
         </c:if>
     </div>
