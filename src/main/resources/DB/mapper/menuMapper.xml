@@ -12,7 +12,7 @@
 	</insert>
 	
 	<select id="menuList" resultType="MenuVO">
-		SELECT * FROM menu WHERE deleteAt IS NULL
+		SELECT * FROM menu WHERE marketNum=#{marketNum} AND deleteAt IS NULL
 	</select>
 	
 	<select id="menuSelect" parameterType="MenuVO" resultType="MenuVO">

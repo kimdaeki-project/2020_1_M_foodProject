@@ -1,7 +1,10 @@
 package com.food.project.menu;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +31,35 @@ public class menuTest extends AbstractTestCase {
 //		assertEquals(1, result);
 //	}
 	
-	@Test
-	public void menuAddTest() throws Exception {
+//	@Test
+//	public void menuAddTest() throws Exception {
+//	
+//		for(int i=0; i<10; i++) {
+//		
+//			MenuVO menuVO = new MenuVO();
+//			
+//			menuVO.setNum(18+i);
+//			menuVO.setMarketNum(11);
+//			menuVO.setName("핫도그");
+//			menuVO.setPrice(3000);
+//			menuVO.setDetail("치즈듬뿍");
+//			
+//			int result = menuDAO.menuAdd(menuVO);
+//		}
+//	}
 	
-		for(int i=0; i<10; i++) {
+	public List<MenuVO> menuListTest() throws Exception {
+	
+		MenuVO menuVO = new MenuVO();
+		menuVO.setMarketNum(11);
+		return menuDAO.menuList(menuVO);
+	}
+	
+	@Test
+	public void menuOptionList() throws Exception {
 		
-			MenuVO menuVO = new MenuVO();
-			
-			menuVO.setNum(18+i);
-			menuVO.setMarketNum(11);
-			menuVO.setName("핫도그");
-			menuVO.setPrice(3000);
-			menuVO.setDetail("치즈듬뿍");
-			
-			int result = menuDAO.menuAdd(menuVO);
-		}
+		List<MenuVO> list = this.menuListTest();
+		assertNotEquals(0, list.size());
 	}
 	
 //	@Test

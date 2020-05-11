@@ -65,9 +65,9 @@ public class MenuService {
 	}
 
 	// 메뉴 리스트 읽어오기
-	public List<MenuVO> menuList() throws Exception {
+	public List<MenuVO> menuList(MenuVO menuVO) throws Exception {
 
-		return menuDAO.menuList();
+		return menuDAO.menuList(menuVO);
 	}
 
 	// 메뉴 단일 읽어오기

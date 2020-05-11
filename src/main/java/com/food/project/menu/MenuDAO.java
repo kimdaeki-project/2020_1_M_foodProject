@@ -20,9 +20,10 @@ public class MenuDAO {
 	}
 	
 	// 메뉴 리스트 읽어오기
-	public List<MenuVO> menuList() throws Exception {
+	public List<MenuVO> menuList(MenuVO menuVO) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE+"menuList");
+		System.out.println("asdasdas");
+		return sqlSession.selectList(NAMESPACE+"menuList", menuVO);
 	}
 	
 	// 메뉴 단일 읽어오기
