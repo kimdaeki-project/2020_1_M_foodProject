@@ -1,12 +1,10 @@
-a{
-	text-decoration: none;
-}
+@charset "UTF-8";
 
-.memberLogin_container {
+.memberJoin_container {
 	width: 100%;
 }
 
-.memberLogin_article {
+.memberJoin_article {
 	display: block;
 	padding: 50px;
 	max-width: 400px;
@@ -14,25 +12,25 @@ a{
 	margin: 0 auto;
 }
 
-.memberLogin_img {
+.memberJoin_img {
 	width: 150px;
 	margin: 0 auto;
 	display: block;
 }
 
-.memberLogin_header {
+.memberJoin_header {
 	padding: 0 0 40px;
 	text-align: center;
 }
 
-.memberLogin_header p {
+.memberJoin_header p {
 	margin: 8px;
 	font-size: 14px;
 	line-height: 16px;
 	color: #6f7174;
 }
 
-.memberLogin_input {
+.memberJoin_input {
 	box-sizing: border-box;
 	padding: 0 15px;
 	height: 38px;
@@ -44,15 +42,31 @@ a{
 	display: block;
 }
 
-.memberLogin_input:focus{
+.memberJoin_input:focus {
 	outline-color: #27b06e;
 }
 
-.autologin span:hover {
-	cursor: pointer;
+.memberJoin_hr {
+	margin: 30px 0;
+	border: none;
+	height: 1px;
+	background-color: #e9e9e9;
 }
 
-.memberLogin_button {
+.memberJoin_fieldset {
+	padding: 0;
+	margin: 0;
+	border: none;
+}
+
+.memberJoin_fieldset p {
+	color: #000000;
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 12px;
+}
+
+.memberjoin_button {
 	display: block;
 	border: none;
 	height: 38px;
@@ -63,28 +77,21 @@ a{
 	outline: none;
 	margin-top: 8px;
 	width: 100%;
-}
-
-.memberLogin_login {
 	color: #ffffff;
 	background-color: #27b06e;
+	margin: 32px 0 0 0;
 }
 
-.memberLogin_kakao {
-	color: #222;
-	background-color: #f9df33;
+.memberJoin_label {
+	display: block;
+	height: 30px;
 }
 
-.memberLogin_a {
-	padding: 5px 15px;
-	text-align: center;
-	font-size: 14px;
-	color: #6f7174;
-	text-decoration: none;
+.memberJoin_more {
+	color: #27b06e;
+	cursor: pointer;
 }
 
-.joinandfind {
-	display: flex;
-	justify-content: center;
-	margin-top: 15px;
+.error{
+	color: #008080;
 }

@@ -6,8 +6,8 @@
   
 <mapper namespace="com.food.project.market.MarcketDAO">
 	
-	<select id="marketList" parameterType="MarketVO" resultType="MarketVO">
-		select * from market where userNum=#{userNum}
+	<select id="marketList" resultType="MarketVO">
+		select * from market
 	</select>
 	
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">

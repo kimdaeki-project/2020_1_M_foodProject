@@ -7,11 +7,11 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="../resources/css/member/login.css">
+<link rel="stylesheet" href="../resources/css/member/memberLogin.css">
 </head>
 <body>
 	<%@ include file="../templates/header.jsp"%>
-	<div class="memberLogin_container">
+	<div class="memberLogin_container" style="margin-top: 103px">
 		<article class="memberLogin_article">
 			<header class="memberLogin_header">
 				<img alt="logo" src="../img/logo.png" class="memberLogin_img">
@@ -27,9 +27,9 @@
 						type="password" placeholder="비밀번호를 입력해주세요"
 						class="memberLogin_input">
 				</div>
-				<p class="autologin">
-					<span>✔️</span> <span>자동로그인</span>
-				</p>
+				<label class="autologin">
+					<input type="checkbox">자동로그인
+				</label>
 				<nav>
 					<input id="btn-login" class="memberLogin_login memberLogin_button" type="submit" value="로그인">
 				</nav>

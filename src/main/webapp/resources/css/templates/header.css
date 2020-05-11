@@ -1,61 +1,107 @@
-@charset "UTF-8";
-
 body{
+    padding: 0;
     margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    height: 51px;
+    justify-content: start;
+    align-self: center;
+    background-color: #ffffff;
+    border-bottom: 1px solid gainsboro;
+}
+
+.header_a{
+    position: relative;
+    left: 0;
+    top: 0px; 
+    height: 51px;
+}
+
+.header_a img{
+    padding-left: 10px;
+    height: 51px;
+}
+
+.h_nav_ul{
+    font-size: 15px;
+    display: flex;
     padding: 0;
-}
-.header_menu_a{
-    color: black;
-    text-decoration: none;
-}
-
-.header_header{
-    width: 100%;
-    height: 55px;
-    border-bottom: gainsboro 1px solid;
-}
-
-.header_header_nav{
-    padding: 0 10px;
-}
-
-.header_header_logo{
-    float: left;
-    width: 172px;
-    height: 54px;
-}
-
-.header_header_logo img{
-    width: 100%;
-    height: 100%;
-}
-
-.header_header_menu{
-    margin: 18px 0;
-    float: left;
-    padding: 0;
-}
-
-.header_header_menu ul{
-    float: left;
-    text-align: center;
-}
-
-.header_header_menu li{
-    font-size: 16px;
-    padding: 0 10px;
     list-style: none;
-    float: left;
+    color: #6f7174;
 }
 
-.header_login{
-    float: right;
+.h_nav_ul a{
+    text-decoration: none;
+    color: #6f7174;
+    padding: 10px 10px;
 }
 
-.header_login button{
+.h_login{
+    outline: transparent;
+    box-shadow: none;
     cursor: pointer;
-    font-size: 16px;
+    position: absolute;
     border: none;
-    padding: 18px 20px;
+    height: 51px;
+    right: 10px;
+    padding: 0 20px;
+    font-size: 15px;
+    color: #27b06e;
+    font-family: 'Noto Sans KR', sans-serif;
     background-color: transparent;
+}
+
+.h_name{
+    outline: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    position: absolute;
+    border: none;
+    height: 51px;
+    padding: 0 20px;
+    font-size: 15px;
+    right: 50px;
+    color: #27b06e;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: transparent;
+}
+
+.fa-shopping-cart{
+    outline: transparent;
+    box-shadow: none;
+    cursor: pointer;
+    position: absolute;
+    border: none;
+    height: 51px;
+    padding: 0 20px;
+    font-size: 15px;
+    top: 19px;
+    right: 10px;
+    color: #27b06e;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: transparent;
+}
+
+@media screen and (max-width: 750px){
+    .header{
+       flex-direction: column;
+    }
+
+    .h_nav{
+        padding-left: 8px;
+        background-color: #f9f9f9;
+        border-top: 1px solid #e9e9e9;
+        border-bottom: 1px solid #e9e9e9;
+    }
+
+    .h_name, .h_login{
+        top: 0px;
+    }
 }

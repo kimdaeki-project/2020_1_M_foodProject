@@ -14,8 +14,8 @@ public class MarketDAO {
 	private final String NAMESPACE = "com.food.project.market.MarcketDAO.";
 
 	//조회 - select List (하나의 판매자에 대한 여러 푸드트럭의 정보 - userNum으로 조회)
-	public List<MarketVO> marketList(MarketVO marketVO) throws Exception{
-		return sqlSession.selectList(NAMESPACE+"marketList",marketVO);
+	public List<MarketVO> marketList() throws Exception{
+		return sqlSession.selectList(NAMESPACE+"marketList");
 	}
 	
 	//조회 - select One (하나의 푸드트럭에 대한 정보 - num으로 조회)
