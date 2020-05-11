@@ -44,7 +44,7 @@
 						<li id="marketJoin"><a href="${pageContext.request.contextPath}/market/marketJoin">판매자 신청</a></li>
 					</c:if>
 					<c:if test="${memberVO.isFoodTruck eq '1'}">
-						<li id="marketPage"><a href="#">마켓 정보 수정</a></li>
+						<li id="marketPage"><a href="${pageContext.request.contextPath}/market/marketPage">마켓 정보 수정</a></li>
 					</c:if>
 					
 					<li id="member_delete"><a href="${pageContext.request.contextPath}/member/memberDelete">탈퇴하기</a></li>
