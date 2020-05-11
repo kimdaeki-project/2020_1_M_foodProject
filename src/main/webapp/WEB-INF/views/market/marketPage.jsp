@@ -27,7 +27,7 @@
 				<input type="file" name="THUMBIMG" class="mp_infoMod_input">
 			</div>
 			<div class="mp_infoMod_box">
-				<button type="submit">신청하기</button>
+				<button type="submit">수정하기</button>
 			</div>
 		</form>
 	</div>
