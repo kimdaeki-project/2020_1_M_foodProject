@@ -41,7 +41,7 @@
 					<li id="memberUpdate"><a href="#">회원정보 수정</a></li>
 					
 					<c:if test="${memberVO.isFoodTruck eq '0'}">
-						<li id="marketJoin"><a href="#">판매자 신청</a></li>
+						<li id="marketJoin"><a href="${pageContext.request.contextPath}/market/marketJoin">판매자 신청</a></li>
 					</c:if>
 					<c:if test="${memberVO.isFoodTruck eq '1'}">
 						<li id="marketPage"><a href="#">마켓 정보 수정</a></li>

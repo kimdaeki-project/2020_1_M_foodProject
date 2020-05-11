@@ -168,9 +168,9 @@ input[type="file" i]{
 			<div class="mp_infoMod_box">
                 <p>운영시간</p>
                 <div>오픈:</div>
-                <input type="time" name="openTime" id="openTime" class="mp_infoMod_input">
+                <input type="text" name="openTime" id="openTime" class="mp_infoMod_input">
                 <div style="margin-top: 5px;">마감:</div>
-				<input type="time" name="closeTime" id="closeTime" class="mp_infoMod_input">
+				<input type="text" name="closeTime" id="closeTime" class="mp_infoMod_input">
 			</div>
 			<div class="mp_infoMod_box">
 				<p>트럭 설명</p>
