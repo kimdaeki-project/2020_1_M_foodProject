@@ -19,18 +19,17 @@ public class FileInfoDAOTest extends AbstractTestCase{
 	public void fileInfoDelete() throws Exception{
 		FileInfoVO fileInfoVO = new FileInfoVO();
 		fileInfoVO.setKind(1);
-		fileInfoVO.setMarketNum(13);
+		fileInfoVO.setRefNum(13);
 		
 		int result = fileInfoDAO.fileInfoDelete(fileInfoVO);
 		assertEquals(1, result);
-		
 	}
 	
 //	@Test
 	public void fileInfoList() throws Exception{
 		FileInfoVO fileInfoVO = new FileInfoVO();
 		fileInfoVO.setKind(2);
-		fileInfoVO.setMarketNum(11);
+		fileInfoVO.setRefNum(11);
 		
 		List<FileInfoVO> list = fileInfoDAO.fileInfoList(fileInfoVO);
 		for (FileInfoVO fileInfoVO2 : list) {
@@ -46,7 +45,7 @@ public class FileInfoDAOTest extends AbstractTestCase{
 		fileInfoVO.setFileName("upadte");
 		fileInfoVO.setOriName("up");
 		fileInfoVO.setKind(1); //market
-		fileInfoVO.setMarketNum(12);
+		fileInfoVO.setRefNum(12);
 		//reviewNum, foodNum은 입력안해서 null값 부여
 		
 		int result = fileInfoDAO.fileInfoInsert(fileInfoVO);
@@ -60,7 +59,7 @@ public class FileInfoDAOTest extends AbstractTestCase{
 			fileInfoVO.setFileName("fil2");
 			fileInfoVO.setOriName("ori");
 			fileInfoVO.setKind(1); //market
-			fileInfoVO.setMarketNum(13);
+			fileInfoVO.setRefNum(13);
 			
 			int result = fileInfoDAO.fileInfoInsert(fileInfoVO);
 			assertEquals(1, result);
