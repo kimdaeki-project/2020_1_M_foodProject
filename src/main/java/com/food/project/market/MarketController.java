@@ -29,8 +29,10 @@ public class MarketController {
 		
 		ModelAndView mv = new ModelAndView();
 		List<MarketVO> list = marketService.marketList();
+		
 		mv.addObject("marketList", list);
 		mv.setViewName("market/marketList");
+		
 		return mv;
 	}
 

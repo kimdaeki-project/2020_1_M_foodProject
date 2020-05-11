@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,13 @@
                     <button onclick="location.href='./board/boardOrder'">주문하기</button>
                 </div>
             </div>
+                <div>
+                	<span>메뉴</span>
+                	<c:forEach items="${menuList}" var="vo">
+                		<p>이름: ${vo.name}</p>
+                		<p>설명: ${vo.detail}</p>
+                	</c:forEach>
+                </div>
             <div class="boardItem_menu_tab">
                 <nav>
                     <a href="#info">
@@ -81,4 +89,5 @@
     </div>
 <%@ include file="../templates/footer.jsp"%>
 </body>
+
 </html>

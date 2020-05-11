@@ -1,7 +1,3 @@
-<%@page import="com.food.project.market.MarketVO"%>
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="com.food.project.market.MarketDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,6 +37,7 @@
     </div>
 </body>
 <%@ include file="../templates/footer.jsp"%>
+
 
 
 </html>
