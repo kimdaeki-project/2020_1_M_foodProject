@@ -14,5 +14,6 @@
 		<typeAlias type="com.food.project.market.MarketVO" alias="MarketVO"/>
 		<typeAlias type="com.food.project.fileInfo.FileInfoVO" alias="FileInfoVO"/>
 		<typeAlias type="com.food.project.menu.MenuVO" alias="MenuVO"/>
+		<typeAlias type="com.food.project.category.CategoryVO" alias="CategoryVO"/>
 	</typeAliases>
 </configuration>

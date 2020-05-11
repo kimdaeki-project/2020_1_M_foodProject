@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.food.project.category.CategoryDAO">
+
+	<insert id="categoryInsert" parameterType="CategoryVO">
+		INSERT INTO category VALUES( 
+			#{num}, #{menuNum}, #{name} 
+		)
+	</insert>
+	
+	<select id="categoryList" parameterType="CategoryVO" resultType="CategoryVO">
+		SELECT * FROM category WHERE menuNum = #{menuNum}
+	</select>
+	
+	<select id="categorySelect" parameterType="CategoryVO" resultType="CategoryVO">
+		SELECT * FROM category WHERE num=#{num}
+	</select>
+	
+	<select id="categoryCount" resultType="Long">
+		SELECT category_seq.nextval FROM dual
+	</select>
+	
+	<update id="categoryUpdate" parameterType="CategoryVO">
+		UPDATE category SET name=#{name} WHERE num=#{num}
+	</update>
+	
+	<delete id="categoryDelete" parameterType="CategoryVO">
+		DELETE FROM category WHERE num = #{num}
+	</delete>
+</mapper>
