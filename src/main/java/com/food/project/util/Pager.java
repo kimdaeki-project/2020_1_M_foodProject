@@ -24,6 +24,14 @@ public class Pager {
 		this.lastRow = this.getCurPage() * this.getPerPage();
 	}
 	
+	public void setStartRow(long startRow) {
+		this.startRow = startRow;
+	}
+
+	public void setLastRow(long lastRow) {
+		this.lastRow = lastRow;
+	}
+
 	public void makePage(long totalCount) {
 		
 		// totalCount : 전체 글의 갯수
