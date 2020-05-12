@@ -4,106 +4,136 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="../resources/css/menu/menuAdd.css">
 <title>Menu Add</title>
 </head>
 <body style="margin-top: 61px;">
-	<%@ include file="../templates/header.jsp"%>
-	<form action="./menuAdd" method="post" enctype="multipart/form-data" name="menuAdd">
-		<h1>menuAdd</h1>
-		<div>
-			<label for="title">메뉴명 : </label> 
-			<input type="text" id="title" name="name">
+	<form action="./menuAdd" method="post" enctype="multipart/form-data"
+		name="menuAdd">
+		<h2>메뉴 추가</h2>
+		<div class="menuAdd_box">
+			<label for="title">메뉴명 : </label> <input type="text" id="title"
+				name="name">
 		</div>
-		<div>
-			<label for="title">가격 : 
-			</label> <input type="text" id="price" name="price">
+		<div class="menuAdd_box">
+			<label for="price">가격 : </label> <input type="text" id="price"
+				name="price">
 		</div>
-		<div>
-			<label for="title">상세 : </label> 
-			<input type="text" id="detail" name="detail">
+		<div class="menuAdd_box">
+			<label for="detail">상세 :</label> <input type="text" id="detail"
+				name="detail">
 		</div>
-		<div>
-			<h3>카테고리 추가</h3>
+		<div class="menuAdd_box">
 			카테고리명:<input type="text" id="input">
 			<button id="addCategory" type="button">카테고리 생성</button>
-			<div id="box1"></div>
-			<div id="box2"></div>
+			<div id="category_box"></div>
 		</div>
-		<div>
-			<label for="title">메뉴 이미지: </label> <input type="file" id="thumbImg"
-				name="files">
+		<div class="menuAdd_box">
+			<label for="thumbImg">메뉴 이미지: </label> <input type="file"
+				id="thumbImg" name="files">
 		</div>
-		<div>
-			<label for="title">메뉴 이미지: </label> <input type="file" id="thumbImg"
-				name="files">
+		<div class="menuAdd_box">
+			<label for="thumbImg">메뉴 이미지: </label> <input type="file"
+				id="thumbImg" name="files">
 		</div>
-		<div>
+		<div class="menuAdd_box">
 			<button type="button" id="submit">확인</button>
 		</div>
 	</form>
-
 </body>
-<%@ include file="../templates/footer.jsp"%>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
+
 	//카테고리, 옵션 html 추가
-	$("#addCategory")
-			.click(
-					function() {
-
-						var test = $("#input").val();
-						var addCategory = '<div><span class="category">'+ test + '</span>'
-						+'<button id="addOption" type="button">옵션추가</button></div>';
-						var addOption = '옵션명: <input type="text">가격: <input type="text"><br>';
-
-						//카테고리 생성 버튼이 눌리면 카테고리 이름 추가
-						$("#box1").append(addCategory);
-						
-						//옵션추가 버튼이 눌리면 옵션 추가
-						$("#addOption").click(function() {
-							$("#box1").append(addOption);
-						});
-					})
-					
-	$("#submit").click(function() {
-		//categoryDB에 삽입
+	var num=0;
+	var caIndex = [];
+	var opIndex = [];
+	
+	$(function() {
+		$("#addCategory").click(function() {
+			caIndex.push(num);
+			var test = $("#input").val();
+			var c_name = '<div class="cb" title="'+num+'">'+test+'<input type="button" class="addO" value="옵션 추가"></div>';
+			num++;
+			$("#category_box").append(c_name);
+			opIndex.push(0);
+		});
 			
-			var array = [];
-			var array2 = [];
+		//옵션추가 버튼을 누르면 각 카테고리에 옵션추가
+		$("#category_box").on('click', '.addO', function () {
+			var index = $(this).parent().prop("title");
 			
-			$(".category").each(function(i) {
-				array.push($(this).text());
-			})
+			var c_name = '<div class="opDiv"><input type="text" id="opName'+index+opIndex[index]+'"><input type="text" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
+			$(this).parent().append(c_name);
+			opIndex[index]++;		
+		});		
 			
-			$(".category").each(function(i) {
-				array2.push($(this).text());
-			})
+		//옵션삭제 버튼을 누르면 옵션삭제
+		$("#category_box").on('click', '.delO', function () {
+			$(this).parent().remove();
+		});		
 			
-			var objParams = {
-				"array"	: array
-			};
-
-			console.log(array);
-			
-			 $.ajax({
-				url: "./menuAdd",
-				type: "post",
-				data: objParams,
-				traditional: true,
-				success: function() {
-					console.log('성공');
-				} ,
-				error: function() {
-					console.log('실패');
-				}
-			});
 	});
-					
-	
-	
+		
+	$("#submit").click(function() {
+		
+		var categorys = [];
+		$('.cb').each(function(){
+			caNum = $(this).prop("title");
+			//console.log("caNum : "+caNum);
+			
+			ep = opIndex[caNum];
+			//console.log("ep : "+ep);
+			
+			var options = [];
+			
+			for(i=0; i<ep; i++) {
+				var opName = $("#opName"+caNum+i).val();
+				//console.log(opName);
+				var opPrice = $("#opPrice"+caNum+i).val();
+				//console.log(opPrice);
+				
+				var option = {
+						"opName": opName,
+						"opPrice": opPrice
+				}
+				
+				options.push(option);
+			}
+			
+			
+			var categoryName = $(this).text();
+			category = {
+					"categoryName": categoryName,
+					"options" : options
+			}
+			
+			categorys.push(category);
+		});
+		
+		console.log(categorys);
+		
+		//ajax 전송
+		var objParams = {
+			"categorys" : categorys
+		};
+
+		$.ajax({
+			url : "./menuAdd",
+			type : "post",
+			data : objParams,
+			traditional : true,
+			success : function() {
+				console.log('성공');
+			},
+			error : function() {
+				console.log('실패');
+			}
+		});
+	});
 </script>
 </html>
