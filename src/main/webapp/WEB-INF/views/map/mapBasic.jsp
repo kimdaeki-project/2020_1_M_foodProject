@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<!-- kakao Map API -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=LIBRARY"></script>
 </head>
 <body>
 	<div id="map" style="width:500px;height:400px;"></div>
@@ -19,6 +18,5 @@
 
 		var map = new kakao.maps.Map(container, options);
 	</script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1&libraries=LIBRARY"></script>
 </body>
 </html>
