@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- kakao Map API -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
 <!-- address API -->
 <script language="javascript">
 // opener관련 오류가 발생하는 경우 아래 주석을 해지하고, 사용자의 도메인정보를 입력합니다. ("팝업API 호출 소스"도 동일하게 적용시켜야 합니다.)
@@ -96,7 +96,6 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 	</form>
 	
 	<button id="ready">ready</button>
-	<button id="view">view</button>
 	<div id="map" style="width:500px;height:400px;"></div>
 	
 	<script>
@@ -104,41 +103,88 @@ function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAdd
 		var latitude;
 		var longitude;
 		
-		var readyBtn = document.getElementById('ready');
-		readyBtn.addEventListener('click', function() {
-						
+		function getGeo() {
+
+			// 좌표 받아오기
 			var geocoder = new kakao.maps.services.Geocoder();
-			
+
 			var callback = function(result, status) {
-			    if (status === kakao.maps.services.Status.OK) {
-			        console.log(result[0].x);
-			        console.log(result[0].y);
-			        latitude = Math.floor((result[0].x)*1000000)/1000000;
-			        longitude = Math.floor((result[0].y)*1000000)/1000000;
-			        console.log(latitude);
-			        console.log(longitude);
-			    }
-			};
-		
-			var roadFullAddr = document.getElementById('roadAddrPart1');
-			console.log(roadAddrPart1.value);
-			geocoder.addressSearch(roadAddrPart1.value, callback);
-		});
-		
-		var viewBtn = document.getElementById('view');
-		viewBtn.addEventListener('click', function() {
-			
-			// 지도 띄우기
-			var container = document.getElementById('map');
-			console.log("-=-=-=-=-=-=-=-=-=-=-=-=");
-			console.log(latitude);
-			console.log(longitude);
-			var options = {
-				center: new kakao.maps.LatLng(longitude, latitude),
-				level: 3
+				if (status === kakao.maps.services.Status.OK) {
+					console.log(result[0].x);
+					console.log(result[0].y);
+					latitude = Math.floor((result[0].x) * 1000000) / 1000000;
+					longitude = Math.floor((result[0].y) * 1000000) / 1000000;
+					console.log(latitude);
+					console.log(longitude);
+				}
 			};
 
-			var map = new kakao.maps.Map(container, options);
+			var roadFullAddr = document.getElementById('roadAddrPart1');
+			console.log(roadAddrPart1.value);
+			geocoder.addressSearch(roadAddrPart1.value, callback); 
+		}
+		
+		function getMap() {
+			
+			setTimeout(function() {
+				
+				//================================
+				// 지도 띄우기
+				//================================
+				var container = document.getElementById('map');
+				console.log("-=-=-=-=-=-=-=-=-=-=-=-=");
+				console.log(latitude);
+				console.log(longitude);
+				var options = {
+					center : new kakao.maps.LatLng(longitude, latitude), // 지도 중심좌표 설정
+					level : 3
+				};
+
+				var map = new kakao.maps.Map(container, options);
+				
+				//=================================
+				// 마커 띄우기 
+				//=================================
+				var marker = new kakao.maps.Marker({
+
+					position : map.getCenter()
+				// 지도 중심좌표에 마커를 생성합니다  
+				});
+				marker.setMap(map); // 지도에 마커를 표시합니다
+
+				//=================================
+				// 마커 이벤트
+				//=================================
+				// 마커에 커서가 오버됐을 때 마커 위에 표시할 인포윈도우를 생성합니다
+				var iwContent = '<div style="padding:5px;">Hello World!</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+
+				// 인포윈도우를 생성합니다
+				var infowindow = new kakao.maps.InfoWindow({
+					content : iwContent
+				});
+
+				// 마커에 마우스오버 이벤트를 등록합니다
+				kakao.maps.event.addListener(marker, 'mouseover', function() {
+					// 마커에 마우스오버 이벤트가 발생하면 인포윈도우를 마커위에 표시합니다
+					infowindow.open(map, marker);
+				});
+
+				// 마커에 마우스아웃 이벤트를 등록합니다
+				kakao.maps.event.addListener(marker, 'mouseout', function() {
+					// 마커에 마우스아웃 이벤트가 발생하면 인포윈도우를 제거합니다
+					infowindow.close();
+				});
+				
+			},1000);
+		}
+
+		
+		
+		var readyBtn = document.getElementById('ready');
+		readyBtn.addEventListener('click', function() {
+
+			getGeo();
+			getMap();
 		});
 	</script>
 </body>
