@@ -31,7 +31,7 @@
 					<input type="checkbox">자동로그인
 				</label>
 				<nav>
-					<input id="btn-login" class="memberLogin_login memberLogin_button" type="submit" value="로그인">
+					<input id="btn-login" class="memberLogin_login memberLogin_button" type="button" value="로그인">
 				</nav>
 			</form>
 
@@ -67,6 +67,9 @@
 			function showPosition(position) {
 				$("#latitude").val(position.coords.latitude+"");
 				$("#longitude").val(position.coords.longitude+"");
+				
+				console.log(position.coords.latitude);
+				console.log(position.coords.longitude);
 			}
 			
 	
