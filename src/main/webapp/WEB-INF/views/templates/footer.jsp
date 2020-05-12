@@ -9,7 +9,7 @@
 </head>
 <body>
     <footer class="footer">
-        <img alt="side_logo" src="img-logo-2.png">
+        <img alt="side_logo" src="${pageContext.request.contextPath}/resources/img/img-logo-2.png">
         <ul>
             <li><a href="#">이용약관</a></li>
             <li><a href="#">개인정보처리방침</a></li>
