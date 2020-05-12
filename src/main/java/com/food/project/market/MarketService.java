@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.food.project.fileInfo.FileInfoDAO;
 import com.food.project.fileInfo.FileInfoVO;
+import com.food.project.member.MemberDAO;
+import com.food.project.member.MemberVO;
 import com.food.project.util.FileSaver;
 
 @Service
@@ -23,6 +25,8 @@ public class MarketService {
 	private FileSaver fileSaver;
 	@Autowired
 	private FileInfoDAO fileInfoDAO;
+	@Autowired
+	private MemberDAO memberDAO;
 	
 	
 	//조회 - selectList
@@ -55,23 +59,25 @@ public class MarketService {
 			//2.DB등록
 			FileInfoVO fileInfoVO = new FileInfoVO();
 			fileInfoVO.setFileName(fileName);
-			System.out.println("fileName:"+fileName);
 			
 			fileInfoVO.setOriName(file.getOriginalFilename());
-			System.out.println("oriName: "+file.getOriginalFilename());
 			fileInfoVO.setKind(1); //market
 			fileInfoVO.setRefNum(num);
-			System.out.println("num: "+num);
 			//reviewNum, foodNum은 입력안해서 null값 부여
 			
 			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
-			System.out.println("result: "+result);
-			
 			
 			if(result<1) {
 				throw new Exception();
 			}
 		}
+		
+		//isFoodTruck 값 변경
+		MemberVO memberVO = new MemberVO();
+		memberVO.setIsFoodTruck(1);
+		memberVO.setNum(marketVO.getUserNum());
+		
+		result = memberDAO.isFoodTruck(memberVO);
 		
 		return result;
 	}

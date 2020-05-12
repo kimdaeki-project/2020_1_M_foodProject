@@ -1,5 +1,6 @@
 package com.food.project.review;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class ReviewDAOTest extends AbstractTestCase{
 	@Autowired
 	private ReviewDAO reviewDAO; 
 	
-	@Test
+//	@Test
 	public void reviewList() throws Exception{
 		Pager pager = new Pager();
 		pager.setStartRow(1);
@@ -25,8 +26,44 @@ public class ReviewDAOTest extends AbstractTestCase{
 		List<BoardVO> list = reviewDAO.boarList(pager);
 		
 		assertNotNull(list);
-		
+	}
 	
+	
+//	@Test
+	public void reviewInsert() throws Exception{
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setMemberNum(8);
+		reviewVO.setMarketNum(8);
+		reviewVO.setImageNum(10);
+		reviewVO.setContents("contents");
+		
+		int result = reviewDAO.boardInsert(reviewVO);
+		assertEquals(1, result);
+	}
+	
+	@Test
+	public void reviewReplyUpdate() throws Exception{
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setBoardNum(9);
+		
+		int result = reviewDAO.boardReplyUpdate(reviewVO);
+		assertEquals(1, result);
+	}
+	
+	@Test
+	public void reviewReply() throws Exception{
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setBoardNum(16);
+		reviewVO.setMemberNum(8);
+		reviewVO.setMarketNum(8);
+		reviewVO.setImageNum(30);
+		reviewVO.setContents("contents22");
+		
+		int result = reviewDAO.boardReply(reviewVO);
+		assertEquals(1, result);
 	}
 
 }

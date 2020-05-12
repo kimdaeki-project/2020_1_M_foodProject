@@ -7,7 +7,7 @@ import com.food.project.util.Pager;
 public interface BoardService {
 	
 	//조회 -전체조회
-	public List<BoardVO> boarList(Pager pager) throws Exception;
+	public List<BoardVO> boardList(Pager pager) throws Exception;
 	
 	//등록
 	public int boardInsert(BoardVO boardVO) throws Exception;

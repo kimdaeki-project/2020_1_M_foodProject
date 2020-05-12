@@ -47,7 +47,7 @@
 						<li id="marketPage"><a href="#">마켓 정보 수정</a></li>
 					</c:if>
 					
-					<li id="member_delete"><a href="${pageContext.request.contextPath}/member/memberDelete">탈퇴하기</a></li>
+					<li id="member_delete"><a>탈퇴하기</a></li>
 					<li id="li5"><a href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
 				</ul>
 			</aside>

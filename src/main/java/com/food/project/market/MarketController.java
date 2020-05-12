@@ -25,6 +25,8 @@ public class MarketController {
 	private MarketService marketService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	
 	
 	//조회 - select List(GET)
 	@GetMapping("marketList")
@@ -67,13 +69,14 @@ public class MarketController {
 		ModelAndView mv = new ModelAndView();
 		
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
-		System.out.println(memberVO.getNum());
 		marketVO.setUserNum(memberVO.getNum());
 		
 		int result = marketService.marketInsert(marketVO,files,session);
-		mv.addObject("msg", "판매자 등록에 실패하였습니다.");
+		
 		if(result > 0) {
 			mv.addObject("msg", "판매자 등록에 성공하였습니다.");
+		}else {
+			mv.addObject("msg", "판매자 등록에 실패하였습니다.");
 		}
 		mv.addObject("path", "../member/memberPage");
 		mv.setViewName("common/result");
@@ -96,14 +99,21 @@ public class MarketController {
 	}
 	
 	//수정(GET/POST)
-	@GetMapping("marketUpdate")
-	public void marketUpdate() throws Exception{
-		
+	@GetMapping("marketPage")
+	public String marketUpdate() throws Exception{
+		return "marketPage";
 	}
 	
-	@PostMapping("marketUpdate")
-	public void marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
+	@PostMapping("marketPage")
+	public ModelAndView marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
 		int result = marketService.marketUpdate(marketVO,files,session);
+		
+		mv.addObject("result", result);
+		mv.setViewName("member/memberPage");
+		
+		return mv;
 	}
 
 }

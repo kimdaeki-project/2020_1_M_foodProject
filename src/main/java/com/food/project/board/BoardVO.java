@@ -39,5 +39,5 @@ public class BoardVO {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
-	
+
 }
