@@ -5,6 +5,10 @@
   
 <mapper namespace="com.food.project.review.ReviewDAO">
 
+	<select id="boardCount" parameterType="Pager" resultType="Long">
+		select count(BoardNum) from review
+	</select>
+
 	<select id="baordList" parameterType="Pager" resultType="ReviewVO">
 		select * from
 		(select Q.*,rownum R from
@@ -30,8 +34,6 @@
 		
 	</update>
 	
-	
-	
 	<insert id="boardReply" parameterType="ReviewVO">
 		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},#{imageNum},#{contents},sysdate,
 		(select ref from review where boardNum=#{boardNum}),
@@ -40,4 +42,22 @@
 		)
 	</insert>
 	
+	<delete id="boardDelete" parameterType="ReviewVO">
+		delete from review where boardNum=#{boardNum}
+	</delete>
+	
+	<update id="boardUpdate" parameterType="ReviewVO">
+		update review set contents=#{contents},regDate=sysdate where boardNum=#{boardNum}
+	</update>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+

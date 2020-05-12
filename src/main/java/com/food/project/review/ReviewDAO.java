@@ -17,6 +17,11 @@ public class ReviewDAO implements BoardDAO{
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.food.project.review.ReviewDAO.";
 	
+	//board개수 파악
+	public long boardCount(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"boardCount",pager);
+	}
+	
 	//replyUpdate
 	public int boardReplyUpdate(BoardVO boardVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"boardReplyUpdate", boardVO);
