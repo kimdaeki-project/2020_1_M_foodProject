@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
-		select * from market where num = #{num}
+		select * from market where userNum = #{userNum}
 	</select>
 	
 	<select id="marketCount" resultType="Long">
@@ -27,8 +27,12 @@
 	</update>
 	
 	<update id="marketUpdate" parameterType="MarketVO">
-		update market set openTime=#{openTime},closeTime=#{closeTime},isOpen=#{isOpen},canOrder=#{canOrder},marketIntro=#{marketIntro},thumbImg=#{thumbImg} where userName=#{userName}
+		update market set openTime=#{openTime},closeTime=#{closeTime},marketName=#{marketName},marketIntro=#{marketIntro},thumbImg=#{thumbImg} where num=#{num}
 	</update>
-
+	
+	<update id="isOpen" parameterType="MarketVO">
+		update market set isOpen=#{isOpen} where UserNum=#{userNum}
+	</update>
+	
 
 </mapper>

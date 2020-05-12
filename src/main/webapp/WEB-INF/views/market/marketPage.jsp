@@ -5,10 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>마켓 정보 수정 페이지</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 </head>
 <body>
 	 <div class="mp_box mp_box_all">
-		<form action="" id="mp_update">
+		<form action="./marketPage" id="mp_update" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="num" value="${marketVO.num}">
 			<div class="mp_infoMod_box">
 				<p>상점명</p>
 				<input type="text" name="marketName" class="mp_infoMod_input" value="${marketVO.marketName}">
@@ -16,9 +19,9 @@
 			<div class="mp_infoMod_box">
 				<p>운영시간</p>
                 <div>오픈:</div>
-				<input type="time" name="openTime" id="openTime" class="mp_infoMod_input" value="${marketVO.openTime}">
+				<input type="text" name="openTime" id="openTime" class="mp_infoMod_input" value="${marketVO.openTime}">
                 <div style="margin-top: 5px;">마감:</div>
-                <input type="time" name="closeTime" id="closeTime" class="mp_infoMod_input" value="${marketVO.closeTime}">
+                <input type="text" name="closeTime" id="closeTime" class="mp_infoMod_input" value="${marketVO.closeTime}">
 			</div>
 			<div class="mp_infoMod_box">
 				<p>트럭 설명</p>
@@ -26,7 +29,7 @@
 			</div>
 			<div class="mp_infoMod_box">
 				<p>트럭 메인 이미지 첨부</p>
-				<input type="file" name="THUMBIMG" id="THUMBIMG" class="mp_infoMod_input" value="${marketVO.THUMBIMG}">
+				<input type="file" name="files" id="thumbImg" class="mp_infoMod_input" value="${marketVO.thumbImg}">
 			</div>
 			<div class="mp_infoMod_box">
 				<button type="submit">수정하기</button>
@@ -36,7 +39,7 @@
     </div>
     
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="jquery.validate.js"></script>
+<!--     <script type="text/javascript" src="jquery.validate.js"></script> -->
     <script type="text/javascript">
         
         //validate 유효성 검사

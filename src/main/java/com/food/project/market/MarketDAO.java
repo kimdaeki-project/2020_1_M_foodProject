@@ -43,7 +43,10 @@ public class MarketDAO {
 		return sqlSession.update(NAMESPACE+"marketUpdate",marketVO);
 	}
 	
-	
+	//isOpen
+	public int isOpen(MarketVO marketVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"isOpen", marketVO);
+	}
 	
 
 }

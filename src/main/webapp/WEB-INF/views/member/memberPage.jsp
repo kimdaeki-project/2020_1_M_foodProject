@@ -8,9 +8,21 @@
 <link rel="stylesheet" href="../resources/css/member/memberPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript">
-	 
-</script>
+<style type="text/css">
+
+div.toggleWrap { position: relative; width: 300px; margin: 0 auto; padding: 0 10px; background: #1F3766; }
+div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color: #fff; }
+input { display: none; }
+.toggleWrap > div { position: absolute; top: 0; bottom: 0; right: 10px; width: 34px; height: 20px; margin-top: 5px; } 
+label { display: block; width: 36px; height: 20px; box-sizing: border-box; border-radius: 36px; border: 1px solid #e5e5e5; background: #fff; transition: all 0.3s ease; } 
+label > span { position: absolute; top: 3px; left: 3px; display: block; width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25), 0 3px 3px 0 rgba(0, 0, 0, 0.15); transition: all 0.3s cubic-bezier(0.275, -0.45, 0.725, 1.45); background: #fff; }
+input:active + div label, input:checked + div label { border: 10px solid #abe2fb; box-shadow: 0 0 5px #abe2fb; } 
+input:active + div label > span, input:checked + div label > span { left: 18px; }
+
+
+
+</style>
+
 </head>
 <body>
 <%@ include file="../templates/header.jsp"%>
@@ -32,6 +44,17 @@
 				<em>0</em>
 			</div>
 		</div>
+		<div class="toggleWrap" style="float: right;"> 
+			<span>영업 시작 버튼</span> 
+			<input type="checkbox" id="toggle_alarm" name="" value="0" /> 
+			<div> 
+				<label for="toggle_alarm"> 
+					<span /> 
+				</label> 
+			</div> 
+		</div>
+
+		
 		<div class="mp_myInfoNav">
 			<aside>
 				<h2>마이 페이지</h2>
@@ -44,7 +67,9 @@
 						<li id="marketJoin"><a href="${pageContext.request.contextPath}/market/marketJoin">판매자 신청</a></li>
 					</c:if>
 					<c:if test="${memberVO.isFoodTruck eq '1'}">
-						<li id="marketPage"><a href="#">마켓 정보 수정</a></li>
+						<li id="marketPage"><a href="../market/marketPage?num=${memberVO.num}">마켓 정보 수정</a></li>
+						<li><a href="../market/marketIsOpen?num=${memberVO.num}&isOpen=1">마켓 오픈</a></li>
+						
 					</c:if>
 					
 					<li id="member_delete"><a>탈퇴하기</a></li>
@@ -58,6 +83,40 @@
 <%@ include file="../templates/footer.jsp"%>
 
 <script type="text/javascript">
+
+		
+		$("#toggle_alarm").click(function() {
+			
+			var check = $("#toggle_alarm").val();
+			if(check == 1){
+				check = $("#toggle_alarm").val(0);
+			}else{
+				//영업시작
+				check = $("#toggle_alarm").val(1);
+			}
+			
+			$.get("../market/marketIsOpen?num=${memberVO.num}&isOpen="+$("#toggle_alarm").val(),function(result){
+				console.log(result);
+			})
+
+		});
+		
+		if (navigator.geolocation) {
+		    navigator.geolocation.getCurrentPosition(showPosition);
+		}else { 
+		  	alert("허용안해서 주소 못불러옴")
+		}
+		
+		function showPosition(position) {
+			$("#latitude").val(position.coords.latitude+"");
+			$("#longitude").val(position.coords.longitude+"");
+			
+			consoloe.log(position.coords.latitude);
+			consoloe.log(position.coords.longitude);
+		}
+		
+		
+		
 
 		$("#member_delete").click(function() {
 			var check = confirm("탈퇴하시겠습니까?");

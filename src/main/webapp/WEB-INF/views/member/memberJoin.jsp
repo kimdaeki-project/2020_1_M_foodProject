@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" href="../resources/css/member/memberJoin.css">
 </head>
 <body>
@@ -49,8 +51,12 @@
                         </div>
                         <div>
                             <p>생일</p>
-                            <input type="date" placeholder="2000.01.01" class="memberJoin_input" name="birth"
-                                id="birth">
+                            <input type="date" placeholder="2000.01.01" class="memberJoin_input" name="birth" id="birth">
+                        </div>
+                        <div>
+                            <p>주소</p>
+                            <input type="text"  class="memberJoin_input" name="address" id="address" readonly="readonly">
+                            <input type="button" value="검색" id="btn-address" onclick="goPopup();">
                         </div>
                         <div style="width: 400px;">
                             <p style="margin-bottom: 10px;">성별</p>
@@ -63,6 +69,10 @@
                                 <span>여자</span>
                             </label>
                         </div>
+                        
+                        
+                        
+                        
                     </fieldset>
                 </div>
                 <hr class="memberJoin_hr">
@@ -83,16 +93,99 @@
                     </label>
                 </div>
                 <nav>
-                    <input type="submit" class="memberjoin_button" value="가입하기" onclick="checkNull()">
+                    <input type="submit" class="memberjoin_button" value="가입하기" onclick="checkNull()" >
                 </nav>
             </form>
         </article>
     </div>
+    
+    
+    <form name="form" id="form" method="post" style="visibility: hidden;">
+		<div id="list"></div>
+		<div id="callBackDiv">
+			<table>
+				<tr><td></td><td><input type="hidden"  style="width:500px;" id="roadFullAddr"  name="roadFullAddr" /></td></tr>
+				<tr><td> </td><td><input type="hidden"  style="width:500px;" id="roadAddrPart1"  name="roadAddrPart1" /></td></tr>
+				<tr><td> </td><td><input type="hidden"  style="width:500px;" id="addrDetail"  name="addrDetail" /></td></tr>
+				<tr><td></td><td><input type="hidden"  style="width:500px;" id="roadAddrPart2"  name="roadAddrPart2" /></td></tr>
+				<tr><td> </td><td><input type="hidden"  style="width:500px;" id="engAddr"  name="engAddr" /></td></tr>
+				<tr><td>지번                 </td><td><input type="hidden"  style="width:500px;" id="jibunAddr"  name="jibunAddr" /></td></tr>
+				<tr><td>우편번호             </td><td><input type="hidden"  style="width:500px;" id="zipNo"  name="zipNo" /></td></tr>
+				<tr><td>행정구역코드        </td><td><input type="hidden"  style="width:500px;" id="admCd"  name="admCd" /></td></tr>
+				<tr><td>도로명코드          </td><td><input type="hidden"  style="width:500px;" id="rnMgtSn"  name="rnMgtSn" /></td></tr>
+				<tr><td>건물관리번호        </td><td><input type="hidden"  style="width:500px;" id="bdMgtSn"  name="bdMgtSn" /></td></tr>
+				<tr><td>상세번물명        	</td><td><input type="hidden"  style="width:500px;" id="detBdNmList"  name="detBdNmList" /></td></tr>
+				<tr><td>건물명        		</td><td><input type="hidden"  style="width:500px;" id="bdNm"  name="bdNm" /></td></tr>
+				<tr><td>공동주택여부       </td><td><input type="hidden"  style="width:500px;" id="bdKdcd"  name="bdKdcd" /></td></tr>
+				<tr><td>시도명        		</td><td><input type="hidden"  style="width:500px;" id="siNm"  name="siNm" /></td></tr>
+				<tr><td>시군구명        	</td><td><input type="hidden"  style="width:500px;" id="sggNm"  name="sggNm" /></td></tr>
+				<tr><td>읍면동명        	</td><td><input type="hidden"  style="width:500px;" id="emdNm"  name="emdNm" /></td></tr>
+				<tr><td>법정리명        	</td><td><input type="hidden"  style="width:500px;" id="liNm"  name="liNm" /></td></tr>
+				<tr><td>도로명        		</td><td><input type="hidden"  style="width:500px;" id="rn"  name="rn" /></td></tr>
+				<tr><td>지하여부        	</td><td><input type="hidden"  style="width:500px;" id="udrtYn"  name="udrtYn" /></td></tr>
+				<tr><td>건물본번        	</td><td><input type="hidden"  style="width:500px;" id="buldMnnm"  name="buldMnnm" /></td></tr>
+				<tr><td>건물부번        	</td><td><input type="hidden"  style="width:500px;" id="buldSlno"  name="buldSlno" /></td></tr>
+				<tr><td>산여부        		</td><td><input type="hidden"  style="width:500px;" id="mtYn"  name="mtYn" /></td></tr>
+				<tr><td>지번본번(번지)     </td><td><input type="hidden"  style="width:500px;" id="lnbrMnnm"  name="lnbrMnnm" /></td></tr>
+				<tr><td>지번부번(호)       </td><td><input type="hidden"  style="width:500px;" id="lnbrSlno"  name="lnbrSlno" /></td></tr>
+				<tr><td>읍면동일련번호       </td><td><input type="hidden"  style="width:500px;" id="emdNo"  name="emdNo" /></td></tr>
+			</table>
+		</div>
+	</form>
+    
+    
+    
+    
 </body>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript">
+	
+	
+	
+	
+	
+	function goPopup(){
+		var pop = window.open("../map/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
+	}
+
+	function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+		document.form.roadFullAddr.value = roadFullAddr;
+		document.form.roadAddrPart1.value = roadAddrPart1;
+		$("#address").val(roadAddrPart1);
+		
+		document.form.roadAddrPart2.value = roadAddrPart2;
+		document.form.addrDetail.value = addrDetail;
+		document.form.engAddr.value = engAddr;
+		document.form.jibunAddr.value = jibunAddr;
+		document.form.zipNo.value = zipNo;
+		document.form.admCd.value = admCd;
+		document.form.rnMgtSn.value = rnMgtSn;
+		document.form.bdMgtSn.value = bdMgtSn;
+		document.form.detBdNmList.value = detBdNmList;
+		document.form.bdNm.value = bdNm;
+		document.form.bdKdcd.value = bdKdcd;
+		document.form.siNm.value = siNm;
+		document.form.sggNm.value = sggNm;
+		document.form.emdNm.value = emdNm;
+		document.form.liNm.value = liNm;
+		document.form.rn.value = rn;
+		document.form.udrtYn.value = udrtYn;
+		document.form.buldMnnm.value = buldMnnm;
+		document.form.buldSlno.value = buldSlno;
+		document.form.mtYn.value = mtYn;
+		document.form.lnbrMnnm.value = lnbrMnnm;
+		document.form.lnbrSlno.value = lnbrSlno;
+		document.form.emdNo.value = emdNo;
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 	
     //validate 유효성 검사
     $("#joinForm").validate({

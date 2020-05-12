@@ -9,11 +9,12 @@ public class MemberVO {
 	private String email;
 	private String password;
 	private String name;
-	private String oauth;
-	private String phone;
-	private String nickName;
 	private int age;
 	private int gender;
+	private String nickName;
+	private String oauth;
+	private String phone;
+	private String address;
 	private int isFoodTruck;
 	private double latitude;
 	private double longitude;
@@ -23,7 +24,13 @@ public class MemberVO {
 	private Date deleteAt;
 	
 	
-	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public Date getBirth() {
 		return birth;
 	}
