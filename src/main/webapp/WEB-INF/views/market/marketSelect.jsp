@@ -16,12 +16,23 @@
 			<div class="ml_truckInfo">
 				<h2>${marketVO.marketName}</h2>
 				<p>${marketVO.marketIntro}</p>
+				<nav></nav>
+				<button>장바구니</button>
+				<button>주문하기</button>
 			</div>
 		</div>
-		<c:forEach items="${menuList}" var="vo">
-			<p>이름: ${vo.name}</p>
-			<p>설명: ${vo.detail}</p>
-		</c:forEach>
+		<h3>메뉴 리스트</h3>
+		<div class="ml_menuList">
+			<ul>
+				<c:forEach items="${menuList}" var="vo">
+					<a href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
+						<li><img
+							src="${pageContext.request.contextPath}/resources/img/food.jpg">
+							<strong>${vo.name}</strong> <em>${vo.detail}</em>
+					</a>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
 	<%@ include file="../templates/footer.jsp"%>
 </body>

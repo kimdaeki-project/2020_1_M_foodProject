@@ -1,33 +1,111 @@
-body{
-    padding: 0;
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
-.container{
-    padding: 0 30px;
-    margin: 0 auto;
-    margin-top: 100px;
+.container {
+	padding: 0 30px;
+	margin: 0 auto;
+	margin-top: 100px;
 }
 
-.ml_truck{
-    margin: 0 auto;
-    display: flex;
-    background-origin: border-box;
-    max-width: 1140px;
+.container h3 {
+	max-width: 1140px;
+	margin: 0 auto;
+	margin-top: 30px;
 }
 
-.ml_box1{
-    display: flex;
-    height: 500px;
+.ml_truck, .ml_menuList {
+	margin: 0 auto;
+	display: flex;
+	background-origin: border-box;
+	max-width: 1140px;
+	box-sizing: border-box;
 }
 
-.ml_truck img{
-    width: 400px;
-    height: 400px;
+.ml_truck img {
+	width: 400px;
+	height: 400px;
 }
 
-.ml_truckInfo{
-    padding-left: 108px;
-    width: 630px;
+.ml_truckInfo {
+	padding-left: 108px;
+	width: 630px;
+}
+
+.ml_truckInfo h2 {
+	font-size: 24px;
+	line-height: 28px;
+}
+
+.ml_truckInfo p {
+	margin: 7px 0 0;
+	font-size: 14px;
+	line-height: 20px;
+	color: #6f7174;
+	font-weight: 300;
+}
+
+.ml_truckInfo nav{
+display: flex;
+flex-wrap: wrap;
+margin-top: 16px;
+padding-top: 16px;
+border-top: 1px solid #e7e7e7;
+}
+
+.ml_truckInfo button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	width: 260px;
+	height: 53px;
+	color: #fff;
+	background: #27b06e;
+	border: transparent;
+	outline: transparent;
+	margin: 5px 0;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.ml_menuList ul {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	max-width: 1140px;
+	flex-wrap: wrap;
+	margin-bottom: 30px;
+}
+
+.ml_menuList li {
+	padding: 10px;
+	width: 264px;
+}
+
+.ml_menuList img {
+	width: 264px;
+	height: 264px;
+}
+
+.ml_menuList strong {
+	color: black; font-size : 15px;
+	display: block;
+	font-size: 15px;
+}
+
+.ml_menuList em {
+	font-size: 15px;
+	margin-top: 10px;
+	display: block;
+	font-style: normal;
+	color: #27b06e;
+}
+
+.ml_menuList a {
+	text-decoration: none;
 }
