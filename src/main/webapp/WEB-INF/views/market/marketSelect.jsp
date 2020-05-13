@@ -33,6 +33,32 @@
 				</c:forEach>
 			</ul>
 		</div>
+		<div class="ml_box4">
+            <a href="#ml_truckInfo">트럭정보</a>
+            <a href="#ml_buyInfo">구매정보</a>
+            <a href="#ml_review">리뷰</a>
+        </div>
+        <div name="ml_truckInfo">트럭정보div</div>
+        <div name="ml_buyInfo">구매정보div</div>
+        <div name="ml_review">
+            <div><a id="ml_truckInfo"></a>평점div</div>
+            <div><a id="ml_buyInfo"></a>후기사진모아보기div</div>
+            <div>
+                <a id="ml_review"></a>
+                <ul>
+                	<c:forEach items="${reviewList}" var="rv">
+                <span>왜 안떠ㅡㅡ</span>
+                		<a>
+                			<li>
+                				<strong></strong>
+                				<em></em>
+                				<span>리뷰: ${rv.rating}</span>
+                			</li>
+                		</a>
+                	</c:forEach>
+                </ul>
+            </div>
+        </div>
 	</div>
 	<%@ include file="../templates/footer.jsp"%>
 </body>

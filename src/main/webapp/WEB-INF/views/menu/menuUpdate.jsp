@@ -5,10 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menuUpdate.css">
 </head>
 <body>
-
-	<form action="./menuUpdate" method="post">
+	<form action="./menuUpdate" method="post" class="mu_box">
 		<h2>menuUpdate</h2>
     	<input type="hidden" id="num" name="num" value="${vo.num}">
 		<div>
