@@ -44,12 +44,13 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 				<em>0</em>
 			</div>
 		</div>
+		
+		<!-- 토글 버튼 -->
 		<div class="toggleWrap" style="float: right;"> 
 			<span>영업 시작 버튼</span> 
 			<input type="checkbox" id="toggle_alarm" name="" value="0" /> 
 			<div> 
 				<label for="toggle_alarm"> 
-					<span /> 
 				</label> 
 			</div> 
 		</div>
@@ -81,11 +82,8 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 <%@ include file="../templates/footer.jsp"%>
 
 <script type="text/javascript">
-		
-		
-		
-		
-		
+	
+		//토글 버튼
 		$("#toggle_alarm").click(function() {
 			var latitude,longitude;
 			
@@ -108,7 +106,7 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 
 					});
 				}else { 
-				  	alert("허용안해서 주소 못불러옴")
+				  	console.log("허용안해서 주소 못불러옴");
 				}
 
 			}else{
@@ -123,7 +121,7 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 		});
 		
 		
-
+		//탈퇴하기
 		$("#member_delete").click(function() {
 			var check = confirm("탈퇴하시겠습니까?");
 			

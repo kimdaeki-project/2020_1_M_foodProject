@@ -234,19 +234,25 @@
         //아이디 중복검사
         $("#id").blur(function() {
             var id = $("#id").val();
+            console.log(id);
             $.ajax({
                 url:'./memberIdCheck',
                 type:'get',
                 data:{ id:id },
                 success: function(data) {
-                    if (data==0) {
+                    console.log('전달성공');
+                    if (data===0) {
                         //사용중인 아이디라고 화면에 뜨게하기
                         $("#mj_showIdChk").text("중복되는 아이디입니다.");
 						$("#mj_showIdChk").css("color", "red");
-                    } else if(data==1) {
+                    } else if(data===1) {
                         //사용 가능한 아이디라고 화면에 뜨게하기
                         $("#mj_showIdChk").text("사용가능한 아이디입니다.");
 						$("#mj_showIdChk").css("color", "#27b06e");
+                    } else{
+                        $("#mj_showIdChk").text("아이디 중복체크");
+						$("#mj_showIdChk").css("color", "#27b06e");
+                    	
                     }
                 },
                 error: function() {
