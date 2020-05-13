@@ -31,6 +31,10 @@ public class HomeController {
 		
 		// 마켓 정보들 가져오기(~시 검색) 
 		List<MarketVO> marketList = getMarketList();	
+		for (MarketVO marketVO : marketList) {
+			if(marketVO.getThumbImg() == null)
+				marketVO.setThumbImg("");
+		}
 		
 		// 내 위치 보내기
 		mv.addObject("address", address);
@@ -72,12 +76,25 @@ public class HomeController {
 		
 		List<GeoVO> list = new ArrayList<GeoVO>();
 		
-		for(int i=0; i<10; i++) {
+		for(int i=1; i<=12; i++) {
 			
-			double rand = (i+1)/1000000;
+			double latitude = 126919530;
+			double longitude = 37556546;
 			
-			double latitude = 126.91953 + rand;
-			double longitude = 37.556546 + rand;
+			int n = 1;
+			int m = 1;
+			
+			if(i%2 == 0)
+				n *= -1;
+			
+			if(i%3 == 0)
+				m *= -1;
+			
+			latitude += i*300*n;
+			longitude += i*300*m;
+			
+			latitude /= 1000000.0;
+			longitude /= 1000000.0;
 			
 			GeoVO geoVO = getGeoVO(latitude, longitude);
 			
