@@ -133,18 +133,12 @@
 		</div>
 	</form>
     
-    
-    
-    
 </body>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript">
 	
-	
-	
-	
-	
+	//우편번호 조회
 	function goPopup(){
 		var pop = window.open("../map/jusoPopup","pop","width=570,height=420, scrollbars=yes, resizable=yes"); 
 	}
@@ -177,14 +171,7 @@
 		document.form.lnbrMnnm.value = lnbrMnnm;
 		document.form.lnbrSlno.value = lnbrSlno;
 		document.form.emdNo.value = emdNo;
-		
-		
 	}
-	
-	
-	
-	
-	
 	
 	
     //validate 유효성 검사
@@ -246,16 +233,17 @@
         
         //아이디 중복검사
         $("#id").blur(function() {
-            var user_id = $("#id").val();
+            var id = $("#id").val();
             $.ajax({
-                url:'${pageContext.request.contextPath}/member/memberIdCheck?id='+id,
+                url:'./memberIdCheck',
                 type:'get',
+                data:{ id:id },
                 success: function(data) {
                     if (data==0) {
                         //사용중인 아이디라고 화면에 뜨게하기
                         $("#mj_showIdChk").text("중복되는 아이디입니다.");
 						$("#mj_showIdChk").css("color", "red");
-                    } else {
+                    } else if(data==1) {
                         //사용 가능한 아이디라고 화면에 뜨게하기
                         $("#mj_showIdChk").text("사용가능한 아이디입니다.");
 						$("#mj_showIdChk").css("color", "#27b06e");
