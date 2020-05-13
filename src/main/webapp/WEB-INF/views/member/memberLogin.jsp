@@ -28,19 +28,12 @@
 						class="memberLogin_input">
 				</div>
 				<label class="autologin">
-					<input type="checkbox">자동로그인
+					<input type="checkbox">아이디 기억하기
 				</label>
 				<nav>
 					<input id="btn-login" class="memberLogin_login memberLogin_button" type="submit" value="로그인">
 				</nav>
 			</form>
-
-			<a
-				href="https://kauth.kakao.com/oauth/authorize?client_id=97f1860e20781cd962ba73e33913c194&redirect_uri=http://localhost:8080/project/auth/kakao&response_type=code"
-				style="text-decoration: none;">
-				<button class="memberLogin_kakao memberLogin_button" type="submit">카카오
-					로그인</button>
-			</a>
 
 			<nav class="joinandfind">
 				<div>
@@ -51,6 +44,11 @@
 				</div>
 				<div>
 					<a href="${pageContext.request.contextPath}/member/memberJoin" class="memberLogin_a">회원가입</a>
+				</div>
+				<div>
+					<a
+				href="https://kauth.kakao.com/oauth/authorize?client_id=97f1860e20781cd962ba73e33913c194&redirect_uri=http://localhost:8080/project/auth/kakao&response_type=code"
+				 class="memberLogin_a">카카오 회원가입</a>
 				</div>
 			</nav>
 		</article>

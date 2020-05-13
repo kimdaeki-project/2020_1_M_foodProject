@@ -13,7 +13,7 @@
 <body>
 	<div class="header">
         <a href="${pageContext.request.contextPath}" class="header_a">
-            <img src="${pageContext.request.contextPath}/resources/css/img/main-logo.png" >
+            <img src="${pageContext.request.contextPath}/resources/img/main-logo.png" >
         </a>
         <nav class="h_nav">
             <ul class="h_nav_ul">
