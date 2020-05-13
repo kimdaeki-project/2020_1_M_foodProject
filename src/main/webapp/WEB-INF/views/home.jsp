@@ -42,9 +42,16 @@
 <%@ include file="./templates/footer.jsp"%>
 
 	<script>
+		// script 전역변수
 		var latitude;
 		var longitude;
 		var map;
+		
+		var marketList = [];
+		var geoList = [];
+		var positions = [];
+		var markers = [];
+		var overlays = [];
 		
 		function getUserGeo() {
 
@@ -58,7 +65,6 @@
 				}
 			};
 
-			console.log(`${address}`);
 			geocoder.addressSearch(`${address}`, callback);
 		}
 
@@ -114,11 +120,8 @@
 			});
 		}
 		
-		// 환장해요
+		// 마켓의 마커 가져오기
 		function getMarketMarker() {
-
-			var marketList = [];
-			var geoList = [];
 			
 			<c:forEach items="${marketList}" var="vo">
 				
@@ -149,11 +152,12 @@
 			console.log(marketList);
 			console.log(geoList);
 			
+			//=====================================
 			// kakao dev 여러개 마커 표시하기
-			var positions = [];
+			//=====================================
 			
 			for(var i=0; i<10; i++) {
-				
+	
 				var position = {
 					title: marketList[i].marketName,
 					latlng: new kakao.maps.LatLng(geoList[i].longitude, geoList[i].latitude)
@@ -161,8 +165,6 @@
 				
 				positions.push(position);	
 			}
-			
-			console.log(positions);
 			
 			// 마커 이미지의 이미지 주소입니다
 			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
@@ -182,6 +184,57 @@
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			        image : markerImage // 마커 이미지 
 			    });
+			    
+			    markers.push(marker);
+			}
+		}
+		
+		// 여기서부터다리
+		function makeOverlay() {
+			
+			//================================================
+			// 닫기가 가능한 커스텀 오버레이 작성 공간
+			//================================================
+			for(var i=0; i<10; i++) {
+			 
+				var content = '<div class="wrap">' + 
+				            '    <div class="info">' + 
+				            '        <div class="title">' + 
+				            '            카카오 스페이스닷원' + 
+				            '            <div class="close" onclick="closeOverlay()" title="닫기">닫기</div>' + 
+				            '        </div>' + 
+				            '        <div class="body">' + 
+				            '            <div class="img">' +
+				            '                <img src="https://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+				            '           </div>' + 
+				            '            <div class="desc">' + 
+				            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
+				            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+				            //'                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+				            '            </div>' + 
+				            '        </div>' + 
+				            '    </div>' +    
+				            '</div>';
+       
+				// 마커 위에 커스텀오버레이를 표시합니다
+				// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
+				var overlay = new kakao.maps.CustomOverlay({
+						content: content,
+						map: map,
+						position: markers[i].getPosition()
+				});
+				            
+				// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
+				kakao.maps.event.addListener(markers[i], 'click', function() {
+					
+					console.log(i);	
+					//overlay.setMap(map);
+				});
+				
+				// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+				function closeOverlay() {
+					overlay.setMap(null);     
+				}
 			}
 		}
 		
