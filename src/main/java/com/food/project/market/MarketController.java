@@ -28,8 +28,8 @@ public class MarketController {
 	private MenuService menuService;
 
 	
-	//isOpen
-	@PostMapping("marketIsOpen")
+	//마켓종료
+	@GetMapping("marketIsOpen")
 	@ResponseBody
 	public int marketIsOpen(MarketVO marketVO,MemberVO memberVO) throws Exception{
 		System.out.println("iiii");
@@ -40,10 +40,30 @@ public class MarketController {
 		
 		int result = marketService.isOpen(marketVO,memberVO);
 		if(result > 0) {
+			System.out.println("영업종료");
+		}else {
+		}
+		
+		return result;
+	}
+	
+	//마켓 오픈 
+	@PostMapping("marketIsOpen")
+	@ResponseBody
+	public int marketIsOpen2(MarketVO marketVO,MemberVO memberVO) throws Exception{
+		System.out.println("la"+memberVO.getLatitude());
+		System.out.println("lo"+memberVO.getLongitude());
+		//member의 num으로 해당 marketSelect
+		marketVO.setUserNum(memberVO.getNum());
+		
+		System.out.println("isOpen : "+marketVO.getIsOpen());
+		
+		int result = marketService.isOpen(marketVO,memberVO);
+		if(result > 0) {
 			System.out.println("영업시작");
 		}else {
-			System.out.println("영업종료");
 		}
+		
 		
 		return result;
 	}

@@ -83,38 +83,50 @@ input:active + div label > span, input:checked + div label > span { left: 18px; 
 <%@ include file="../templates/footer.jsp"%>
 
 <script type="text/javascript">
-
+		
+		var latitude,longitude;
+		
+		
+		
 		
 		$("#toggle_alarm").click(function() {
-			
 			var check = $("#toggle_alarm").val();
-			if(check == 1){
-				check = $("#toggle_alarm").val(0);
-			}else{
+			if(check == 0){
 				//영업시작
-				check = $("#toggle_alarm").val(1);
+				$("#toggle_alarm").val(1);
+				
+				if (navigator.geolocation) {
+				    navigator.geolocation.getCurrentPosition(function(position) {
+				    	latitude = position.coords.latitude;
+				    	longitude = position.coords.longitude;
+				    	
+				    	latitude = Math.floor(latitude*1000000)/1000000;
+				    	longitude = Math.floor(longitude*1000000)/1000000;
+				    	
+						$.post("../market/marketIsOpen",{num:'${memberVO.num}',isOpen:$("#toggle_alarm").val(),latitude:latitude,longitude:longitude},function(result){
+							console.log("p result:"+result);
+						})
+
+					});
+				}else { 
+				  	alert("허용안해서 주소 못불러옴")
+				}
+
+				
+				
+			}else{
+				//영업종료
+				$("#toggle_alarm").val(0);
+				$.get("../market/marketIsOpen?num=${memberVO.num}&isOpen="+$("#toggle_alarm").val(),function(result){
+					console.log("result:"+result);
+				})
+
 			}
 			
-			$.get("../market/marketIsOpen?num=${memberVO.num}&isOpen="+$("#toggle_alarm").val(),function(result){
-				console.log(result);
-			})
+			
+
 
 		});
-		
-		if (navigator.geolocation) {
-		    navigator.geolocation.getCurrentPosition(showPosition);
-		}else { 
-		  	alert("허용안해서 주소 못불러옴")
-		}
-		
-		function showPosition(position) {
-			$("#latitude").val(position.coords.latitude+"");
-			$("#longitude").val(position.coords.longitude+"");
-			
-			consoloe.log(position.coords.latitude);
-			consoloe.log(position.coords.longitude);
-		}
-		
 		
 		
 

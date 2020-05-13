@@ -13,6 +13,20 @@ public class memberTest extends AbstractTestCase {
 	@Autowired
 	private MemberDAO memberDAO;
 
+	@Test
+	public void locationUpadateTest() throws Exception{
+		MemberVO memberVO = new MemberVO();
+		memberVO.setNum(29);
+		memberVO.setLatitude(37.552127);
+		memberVO.setLongitude(126.920294);
+		
+		int result = memberDAO.locationUpdate(memberVO);
+
+		assertEquals(1, result);
+		
+	}
+	
+	
 //	@Test
 	public void memberLogin() throws Exception{
 		MemberVO memberVO = new MemberVO();
