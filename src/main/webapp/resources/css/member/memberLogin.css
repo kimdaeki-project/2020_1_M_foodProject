@@ -1,4 +1,4 @@
-a{
+a {
 	text-decoration: none;
 }
 
@@ -44,11 +44,11 @@ a{
 	display: block;
 }
 
-.memberLogin_input:focus{
+.memberLogin_input:focus {
 	outline-color: #27b06e;
 }
 
-.autologin{
+.autologin {
 	margin-bottom: 7px;
 }
 
@@ -91,4 +91,24 @@ a{
 	display: flex;
 	justify-content: center;
 	margin-top: 15px;
+}
+
+.ml_kakao {
+	margin-top: 35px;
+	text-align: center;
+	vertical-align:middle;
+	display: grid;
+	width: 100%;
+	height: 38px;
+	cursor: pointer;
+	border: 1px solid transparent;
+	background: #f9df33;
+	font-weight: 500;
+	box-sizing: border-box;
+	outline: none;
+}
+
+.ml_kakao a{
+	color: #222;
+	margin-top: 6px; 
 }
