@@ -139,7 +139,6 @@ public class MarketController {
 		if(result > 0) {
 			
 		}
-		
 		return "redirect:../member/memberPage";
 		
 	}
@@ -149,11 +148,9 @@ public class MarketController {
 	public ModelAndView marketUpdate(MemberVO memberVO,MarketVO marketVO,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("marketPAge");
+		System.out.println("marketPage num: "+marketVO.getNum());
 		
 		marketVO.setUserNum(memberVO.getNum());
-		
-		System.out.println("marketPAge: "+marketVO.getUserNum());
 		
 		marketVO = marketService.marketSelect(marketVO);
 		
@@ -170,13 +167,9 @@ public class MarketController {
 	}
 	
 	@PostMapping("marketPage")
-	public ModelAndView marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
+	public ModelAndView marketUpdate(MarketVO marketVO,MultipartFile files,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		System.out.println("마켓 수정");
-	
-		for (MultipartFile file : files) {
-			System.out.println("file : "+file);
-		}
 		
 		int result = marketService.marketUpdate(marketVO,files,session);
 		

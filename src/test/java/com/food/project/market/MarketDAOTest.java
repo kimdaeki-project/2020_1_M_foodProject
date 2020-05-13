@@ -25,12 +25,22 @@ public class MarketDAOTest extends AbstractTestCase{
 		assertNotNull(marketVO);
 	}
 	
-//	@Test
+	@Test
 	public void marketList() throws Exception { 
-		MarketVO marketVO = new MarketVO();
-		marketVO.setUserNum(8);
-		
 		List<MarketVO> list = marketDAO.marketList();
+		
+		
+		if(list == null) {
+			System.out.println("비어있음");
+		}else {
+			System.out.println("값 들어있음");
+			for (MarketVO vo : list) {
+				System.out.println(vo.getMarketName());
+			}
+		}
+		
+		
+		
 		assertNotNull(list);
 		
 	}

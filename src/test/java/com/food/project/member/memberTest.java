@@ -2,6 +2,7 @@ package com.food.project.member;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ public class memberTest extends AbstractTestCase {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	@Test
+//	@Test
 	public void locationUpadateTest() throws Exception{
 		MemberVO memberVO = new MemberVO();
 		memberVO.setNum(29);
@@ -67,7 +68,7 @@ public class memberTest extends AbstractTestCase {
 //	@Test
 	public void memberIdCheck() throws Exception{
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin2");
+		memberVO.setId("admin");
 		
 		memberVO = memberDAO.memberIdCheck(memberVO);
 		assertNotNull(memberVO);

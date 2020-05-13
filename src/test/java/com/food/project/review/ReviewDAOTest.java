@@ -24,6 +24,7 @@ public class ReviewDAOTest extends AbstractTestCase{
 		pager.setLastRow(3);
 		
 		List<BoardVO> list = reviewDAO.boarList(pager);
+
 		
 		assertNotNull(list);
 	}

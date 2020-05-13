@@ -10,8 +10,6 @@ public class ReviewVO extends BoardVO{
 	private long step;
 	private long depth;
 	
-	
-
 	public int getRating() {
 		return rating;
 	}

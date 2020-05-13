@@ -16,7 +16,7 @@
 			<ul>
 				<c:forEach items="${marketList}" var="vo">
 					<li><a
-						href="${pageContext.request.contextPath}/market/marketSelect?num=${vo.num}">
+						href="${pageContext.request.contextPath}/market/marketSelect?userNum=${vo.userNum}">
 							<img alt=""
 							src="${pageContext.request.contextPath}/resources/img/food.jpg">
 							<strong>${vo.marketName}</strong>

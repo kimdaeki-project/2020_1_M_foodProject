@@ -5,13 +5,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.food.project.market.MarcketDAO">
+
+	<resultMap type="MarketVO" id="ListResult">
+		<id column="num" property="num"/> 
+		<id column="userNum" property="userNum"/>
+		<result column="crn" property="crn"/>
+		<result column="marketName" property="marketName"/>
+		<result column="openTime" property="openTime"/>
+		<result column="closeTime" property="closeTime"/>
+		<result column="isOpen" property="isOpen"/>
+		<result column="canOrder" property="canOrder"/>
+		<result column="marketIntro" property="marketIntro"/>
+		<result column="thumbImg" property="thumbImg"/>
+		<result column="createAt" property="createAt"/>
+		<result column="updateAt" property="updateAt"/>
+		<result column="deleteAt" property="deleteAt"/>
+		
+		<association property="reviewVO" javaType="ReviewVO">
+			<result column="rating" property="rating"/>
+		</association>
+	</resultMap>
+
 	
-	<select id="marketList" resultType="MarketVO">
-		select * from market
+	<select id="marketList" resultMap="ListResult">
+		SELECT m.*, r.rating 
+FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
+ON (m.num = r.marketNum);
 	</select>
 	
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
-		select * from market where num = #{num}
+		select * from market where userNum = #{userNum}
 	</select>
 	
 	<select id="marketCount" resultType="Long">
@@ -19,7 +42,7 @@
 	</select>
 	
 	<insert id="marketInsert" parameterType="MarketVO">
-		insert into market values(#{num},#{userNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,null)
+		insert into market values(#{num},#{userNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,#{thumbImg})
 	</insert>
 	
 	<update id="marketDelete" parameterType="MarketVO">

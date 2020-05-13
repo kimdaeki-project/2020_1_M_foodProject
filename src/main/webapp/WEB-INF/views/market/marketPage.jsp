@@ -1,16 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>마켓 정보 수정 페이지</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-</head>
-<body>
+
 	 <div class="mp_box mp_box_all">
-		<form action="./marketPage" id="mp_update" method="post" enctype="multipart/form-data">
+		<form action="../market/marketPage" id="mp_update" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="num" value="${marketVO.num}">
 			<div class="mp_infoMod_box">
 				<p>상점명</p>
@@ -101,5 +93,3 @@
             
         });
     </script>
-</body>
-</html>

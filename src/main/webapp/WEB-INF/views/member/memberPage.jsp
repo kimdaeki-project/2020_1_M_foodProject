@@ -12,12 +12,12 @@
 
 div.toggleWrap { position: relative; width: 300px; margin: 0 auto; padding: 0 10px; background: #1F3766; }
 div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color: #fff; }
-input { display: none; }
+.toggleWrap input { display: none; }
 .toggleWrap > div { position: absolute; top: 0; bottom: 0; right: 10px; width: 34px; height: 20px; margin-top: 5px; } 
-label { display: block; width: 36px; height: 20px; box-sizing: border-box; border-radius: 36px; border: 1px solid #e5e5e5; background: #fff; transition: all 0.3s ease; } 
-label > span { position: absolute; top: 3px; left: 3px; display: block; width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25), 0 3px 3px 0 rgba(0, 0, 0, 0.15); transition: all 0.3s cubic-bezier(0.275, -0.45, 0.725, 1.45); background: #fff; }
-input:active + div label, input:checked + div label { border: 10px solid #abe2fb; box-shadow: 0 0 5px #abe2fb; } 
-input:active + div label > span, input:checked + div label > span { left: 18px; }
+.toggleWrap label { display: block; width: 36px; height: 20px; box-sizing: border-box; border-radius: 36px; border: 1px solid #e5e5e5; background: #fff; transition: all 0.3s ease; } 
+.toggleWrap label > span { position: absolute; top: 3px; left: 3px; display: block; width: 14px; height: 14px; border-radius: 50%; box-sizing: border-box; box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.25), 0 3px 3px 0 rgba(0, 0, 0, 0.15); transition: all 0.3s cubic-bezier(0.275, -0.45, 0.725, 1.45); background: #fff; }
+.toggleWrap input:active + div label,.toggleWrap input:checked + div label { border: 10px solid #abe2fb; box-shadow: 0 0 5px #abe2fb; } 
+.toggleWrap input:active + div label > span,.toggleWrap input:checked + div label > span { left: 18px; }
 
 
 
@@ -67,9 +67,7 @@ input:active + div label > span, input:checked + div label > span { left: 18px; 
 						<li id="marketJoin"><a href="${pageContext.request.contextPath}/market/marketJoin">판매자 신청</a></li>
 					</c:if>
 					<c:if test="${memberVO.isFoodTruck eq '1'}">
-
-						<li id="marketPage"><a href="../market/marketPage?num=${memberVO.num}">마켓 정보 수정</a></li>
-
+						<li id="marketPage"><a>마켓 정보 수정</a></li>
 					</c:if>
 					
 					<li id="member_delete"><a>탈퇴하기</a></li>
@@ -84,12 +82,13 @@ input:active + div label > span, input:checked + div label > span { left: 18px; 
 
 <script type="text/javascript">
 		
-		var latitude,longitude;
 		
 		
 		
 		
 		$("#toggle_alarm").click(function() {
+			var latitude,longitude;
+			
 			var check = $("#toggle_alarm").val();
 			if(check == 0){
 				//영업시작
@@ -112,8 +111,6 @@ input:active + div label > span, input:checked + div label > span { left: 18px; 
 				  	alert("허용안해서 주소 못불러옴")
 				}
 
-				
-				
 			}else{
 				//영업종료
 				$("#toggle_alarm").val(0);
@@ -123,9 +120,6 @@ input:active + div label > span, input:checked + div label > span { left: 18px; 
 
 			}
 			
-			
-
-
 		});
 		
 		
@@ -165,6 +159,13 @@ input:active + div label > span, input:checked + div label > span { left: 18px; 
 				$('.mp_box').append(result);
 			});
 		});
+		$('#marketPage').click(function() {
+			$.get("../market/marketPage?num=${memberVO.num}",function(result){
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
 		$('#default').click();
 </script>
 

@@ -12,12 +12,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.food.project.market.MarketService;
+import com.food.project.market.MarketVO;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private MarketService marketService;
+	
 
 	// 로그인(GET/POST)
 	@GetMapping("memberLogin")
@@ -41,9 +47,14 @@ public class MemberController {
 //		System.out.println("longittude: "+memberVO.getLongitude());
 		
 		memberVO = memberService.memberLogin(memberVO);
+		MarketVO marketVO = new MarketVO();
+		marketVO.setNum(memberVO.getNum());
+		marketVO = marketService.marketSelect(marketVO);
 		
 		if (memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
+			session.setAttribute("marketVO", marketVO);
+			
 			mv.setViewName("redirect:../");
 			System.out.println("로그인 성공");
 		}else{

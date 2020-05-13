@@ -15,7 +15,7 @@
 	</select>
 	
 	<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
-		select * from member where id=#{id} and deleteAt is not null
+		select * from member where id=#{id} and deleteAt is null
 	</select>
 	
 	

@@ -2,6 +2,8 @@ package com.food.project.market;
 
 import java.sql.Date;
 
+import com.food.project.review.ReviewVO;
+
 public class MarketVO {
 	private long num;
 	private long userNum;
@@ -16,6 +18,17 @@ public class MarketVO {
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
+	
+	private ReviewVO reviewVO;
+	
+	
+	public ReviewVO getReviewVO() {
+		return reviewVO;
+	}
+	public void setReviewVO(ReviewVO reviewVO) {
+		this.reviewVO = reviewVO;
+	}
+	
 	
 	
 	public Date getCreateAt() {
