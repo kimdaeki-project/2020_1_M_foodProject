@@ -55,7 +55,7 @@
                         </div>
                         <div>
                             <p>주소</p>
-                            <input type="text"  class="memberJoin_input" name="address" id="address" readonly="readonly" onclick="goPopup();">
+                            <input type="text"  class="memberJoin_input" name="address" id="address" onclick="goPopup();">
                         </div>
                         <div style="width: 400px;">
                             <p style="margin-bottom: 10px;">성별</p>
@@ -88,7 +88,7 @@
                     </label>
                 </div>
                 <nav>
-                    <input type="submit" class="memberjoin_button" value="가입하기" onclick="checkNull()" >
+                    <input type="submit" class="memberjoin_button" value="가입하기" readonly="readonly" onclick="checkNull()" >
                 </nav>
             </form>
         </article>
@@ -236,6 +236,7 @@
                 type:'get',
                 data:{ id:id },
                 success: function(data) {
+                	if (data===0){
                         //사용중인 아이디라고 화면에 뜨게하기
                         $("#mj_showIdChk").text("중복되는 아이디입니다.");
 						$("#mj_showIdChk").css("color", "red");
@@ -243,10 +244,6 @@
                         //사용 가능한 아이디라고 화면에 뜨게하기
                         $("#mj_showIdChk").text("사용가능한 아이디입니다.");
 						$("#mj_showIdChk").css("color", "#27b06e");
-                    } else{
-                        $("#mj_showIdChk").text("아이디 중복체크");
-						$("#mj_showIdChk").css("color", "#27b06e");
-                    	
                     }
                 },
                 error: function() {
