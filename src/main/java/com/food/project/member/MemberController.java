@@ -13,17 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.food.project.market.MarketService;
-import com.food.project.market.MarketVO;
-
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	@Autowired
-	private MarketService marketService;
 	
 
 	// 로그인(GET/POST)
@@ -48,17 +43,13 @@ public class MemberController {
 //		System.out.println("longittude: "+memberVO.getLongitude());
 		
 		memberVO = memberService.memberLogin(memberVO);
-		MarketVO marketVO = new MarketVO();
-		marketVO.setNum(memberVO.getNum());
-		marketVO = marketService.marketSelect(marketVO);
 		
 		if (memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
-			session.setAttribute("marketVO", marketVO);
 			
 			mv.setViewName("redirect:../");
 			System.out.println("로그인 성공");
-		}else{
+		}else if(memberVO == null){
 			mv.setViewName("member/memberLogin");
 			System.out.println("로그인 실패");
 		}
@@ -134,6 +125,8 @@ public class MemberController {
 	@PostMapping("memberUpdate")
 	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("emberid: "+memberVO.getId());
+		
 		int result = memberService.memberUpdate(memberVO);
 		
 		if (result > 0) {
@@ -152,14 +145,6 @@ public class MemberController {
 	@GetMapping("memberPage") public void memberPage() throws Exception{
 	  
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//회원 리뷰관리 페이지
