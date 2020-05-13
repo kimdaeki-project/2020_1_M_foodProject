@@ -47,17 +47,13 @@ public class MemberController {
 //		System.out.println("longittude: "+memberVO.getLongitude());
 		
 		memberVO = memberService.memberLogin(memberVO);
-		MarketVO marketVO = new MarketVO();
-		marketVO.setNum(memberVO.getNum());
-		marketVO = marketService.marketSelect(marketVO);
 		
 		if (memberVO != null) {
 			session.setAttribute("memberVO", memberVO);
-			session.setAttribute("marketVO", marketVO);
 			
 			mv.setViewName("redirect:../");
 			System.out.println("로그인 성공");
-		}else{
+		}else if(memberVO == null){
 			mv.setViewName("member/memberLogin");
 			System.out.println("로그인 실패");
 		}
@@ -157,14 +153,6 @@ public class MemberController {
 	@GetMapping("memberPage") public void memberPage() throws Exception{
 	  
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//회원 리뷰관리 페이지
