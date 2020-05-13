@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -25,6 +26,19 @@
 	<button id="ready">ready</button>
 	<div id="map" style="width:1200px;height:600px;"></div>
 </div>
+
+<div>
+	<c:forEach items="${marketList}" var="vo">
+		<h3>${vo.marketName}</h3>
+		<h3>${vo.marketIntro}</h3>
+		<h3>${vo.openTime}</h3>
+		<h3>${vo.closeTime}</h3>
+		<h3>${vo.isOpen}</h3>
+		<h3>${vo.canOrder}</h3>
+		<h3>${vo.thumbImg}</h3>
+	</c:forEach>
+</div>
+
 <%@ include file="./templates/footer.jsp"%>
 
 	<script>
@@ -100,11 +114,75 @@
 			});
 		}
 		
-		// 마켓 정보 어케 읽음? 환장해요
+		// 환장해요
 		function getMarketMarker() {
+
+			var marketList = [];
+			var geoList = [];
 			
-			var marketList = `${marketList}`;
-			console.log(marketList[0]);
+			<c:forEach items="${marketList}" var="vo">
+				
+				var market = {
+						marketName: `${vo.marketName}`,
+						marketIntro: `${vo.marketIntro}`,
+						openTime: `${vo.openTime}`,
+						closeTime: `${vo.closeTime}`,
+						isOpen: ${vo.isOpen},
+						canOrder: ${vo.canOrder},
+						thumbImg: `${vo.thumbImg}`
+				};
+				
+				marketList.push(market);
+			</c:forEach>
+			
+			<c:forEach items="${geoList}" var="vo">
+			
+				var geo = {
+						latitude: ${vo.latitude},
+						longitude: ${vo.longitude}
+				};
+			
+				geoList.push(geo);
+				
+			</c:forEach>
+				
+			console.log(marketList);
+			console.log(geoList);
+			
+			// kakao dev 여러개 마커 표시하기
+			var positions = [];
+			
+			for(var i=0; i<10; i++) {
+				
+				var position = {
+					title: marketList[i].marketName,
+					latlng: new kakao.maps.LatLng(geoList[i].longitude, geoList[i].latitude)
+				}
+				
+				positions.push(position);	
+			}
+			
+			console.log(positions);
+			
+			// 마커 이미지의 이미지 주소입니다
+			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+			    
+			for (var i = 0; i < positions.length; i ++) {
+			    
+			    // 마커 이미지의 이미지 크기 입니다
+			    var imageSize = new kakao.maps.Size(24, 35); 
+			    
+			    // 마커 이미지를 생성합니다    
+			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+			    
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: positions[i].latlng, // 마커를 표시할 위치
+			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+			        image : markerImage // 마커 이미지 
+			    });
+			}
 		}
 		
 		function showMap() {
