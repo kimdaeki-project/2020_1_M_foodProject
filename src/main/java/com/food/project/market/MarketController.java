@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
 import com.food.project.menu.MenuService;
 import com.food.project.menu.MenuVO;
@@ -26,6 +27,8 @@ public class MarketController {
 	private MarketService marketService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private MemberService memberService;
 
 	
 	//마켓종료
@@ -51,8 +54,8 @@ public class MarketController {
 	@PostMapping("marketIsOpen")
 	@ResponseBody
 	public int marketIsOpen2(MarketVO marketVO,MemberVO memberVO) throws Exception{
-		System.out.println("la"+memberVO.getLatitude());
-		System.out.println("lo"+memberVO.getLongitude());
+//		System.out.println("la"+memberVO.getLatitude());
+//		System.out.println("lo"+memberVO.getLongitude());
 		//member의 num으로 해당 marketSelect
 		marketVO.setUserNum(memberVO.getNum());
 		
@@ -86,13 +89,13 @@ public class MarketController {
 	@GetMapping("marketSelect")
 	public ModelAndView marketSelect(MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("nu:"+marketVO.getNum());
-		
 		marketVO = marketService.marketSelect(marketVO);
-			
-		System.out.println(marketVO.getMarketIntro());
-		System.out.println(marketVO.getMarketName());
 		
+		//usernum으로 해당 트럭의 주소값 조회
+		MemberVO memberVO = new MemberVO();
+		memberVO.setNum(marketVO.getUserNum());
+		
+		memberVO = memberService.memberSelect(memberVO);
 		
 		MenuVO menuVO = new MenuVO();
 		menuVO.setMarketNum(marketVO.getNum());
@@ -101,6 +104,7 @@ public class MarketController {
 
 		mv.addObject("menuList", list);
 		mv.addObject("marketVO", marketVO);
+		mv.addObject("memberVO", memberVO);
 		mv.setViewName("market/marketSelect");
 		return mv;
 	}

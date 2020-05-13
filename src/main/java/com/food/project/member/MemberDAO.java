@@ -21,6 +21,11 @@ public class MemberDAO {
 		return sqlSession.update(NAMESPACE+"isFoodTruck", memberVO);
 	}
 	
+	//멤버값 조회
+	public MemberVO memberSelect(MemberVO memberVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"memberSelect", memberVO);
+	}
+	
 	//로그인
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"memberLogin", memberVO);

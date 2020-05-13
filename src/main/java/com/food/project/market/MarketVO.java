@@ -7,6 +7,7 @@ import com.food.project.review.ReviewVO;
 public class MarketVO {
 	private long num;
 	private long userNum;
+	private long categoryNum;
 	private String crn;
 	private String marketName;
 	private String openTime;
@@ -18,8 +19,8 @@ public class MarketVO {
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
-	
 	private ReviewVO reviewVO;
+	
 	
 	
 	public ReviewVO getReviewVO() {
@@ -28,9 +29,12 @@ public class MarketVO {
 	public void setReviewVO(ReviewVO reviewVO) {
 		this.reviewVO = reviewVO;
 	}
-	
-	
-	
+	public long getCategoryNum() {
+		return categoryNum;
+	}
+	public void setCategoryNum(long categoryNum) {
+		this.categoryNum = categoryNum;
+	}
 	public Date getCreateAt() {
 		return createAt;
 	}
@@ -73,7 +77,6 @@ public class MarketVO {
 	public void setMarketName(String marketName) {
 		this.marketName = marketName;
 	}
-	
 	public String getOpenTime() {
 		return openTime;
 	}

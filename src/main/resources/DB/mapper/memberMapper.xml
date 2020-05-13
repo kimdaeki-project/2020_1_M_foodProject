@@ -18,6 +18,10 @@
 		select * from member where id=#{id} and deleteAt is null
 	</select>
 	
+	<select id="memberSelect" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where num=#{num}
+	</select>
+	
 	
 	<update id="memberDelete" parameterType="MemberVO">
 		update member set deleteAt=sysdate where id=#{id}	

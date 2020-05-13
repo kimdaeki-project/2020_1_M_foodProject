@@ -177,9 +177,22 @@ input[type="file" i]{
 				<input type="text" name="marketIntro" id="marketIntro" class="mp_infoMod_input">
 			</div>
 			<div class="mp_infoMod_box">
+				<p>분류</p>
+				<select name="categoryNum">
+					<option value="0" selected="selected">한식</option>
+					<option value="1">분식</option>
+					<option value="2">양식</option>
+					<option value="3">일식</option>
+					<option value="4">중식</option>
+				</select>
+			</div>
+			
+			<div class="mp_infoMod_box">
 				<p>트럭 메인 이미지 첨부</p>
 				<input type="file" name="files" id="files" class="mp_infoMod_input_file" style="margin-bottom: 15px;">
 			</div>
+			
+			
 			<div class="mp_infoMod_box">
 				<button type="submit">신청하기</button>
 			</div>
