@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
-		select * from market where userNum = #{userNum}
+		select * from market where num = #{num}
 	</select>
 	
 	<select id="marketCount" resultType="Long">

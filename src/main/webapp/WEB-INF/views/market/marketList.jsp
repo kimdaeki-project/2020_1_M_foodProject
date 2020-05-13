@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상세보기</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/market/marketList.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/market/marketList.css">
 </head>
 <%@ include file="../templates/header.jsp"%>
 

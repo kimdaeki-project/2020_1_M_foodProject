@@ -85,9 +85,14 @@ public class MarketController {
 	//조회 - select One(GET)
 	@GetMapping("marketSelect")
 	public ModelAndView marketSelect(MarketVO marketVO) throws Exception{
-		
 		ModelAndView mv = new ModelAndView();
+		System.out.println("nu:"+marketVO.getNum());
+		
 		marketVO = marketService.marketSelect(marketVO);
+			
+		System.out.println(marketVO.getMarketIntro());
+		System.out.println(marketVO.getMarketName());
+		
 		
 		MenuVO menuVO = new MenuVO();
 		menuVO.setMarketNum(marketVO.getNum());
