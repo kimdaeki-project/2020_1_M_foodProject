@@ -91,7 +91,7 @@
                         }
                     },
                     error: function() {
-                            alert("연결 실패");
+                            console.log("연결 실패");
                     }
                 });
             });
