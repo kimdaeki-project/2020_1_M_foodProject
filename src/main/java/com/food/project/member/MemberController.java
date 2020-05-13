@@ -12,17 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.food.project.market.MarketService;
-import com.food.project.market.MarketVO;
-
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	@Autowired
-	private MarketService marketService;
 	
 
 	// 로그인(GET/POST)
@@ -135,6 +130,8 @@ public class MemberController {
 	@PostMapping("memberUpdate")
 	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("emberid: "+memberVO.getId());
+		
 		int result = memberService.memberUpdate(memberVO);
 		
 		if (result > 0) {
