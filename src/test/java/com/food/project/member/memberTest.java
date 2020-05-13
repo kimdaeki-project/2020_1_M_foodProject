@@ -65,12 +65,13 @@ public class memberTest extends AbstractTestCase {
 		assertEquals(1, result);
 	}
 	
-//	@Test
+	@Test
 	public void memberIdCheck() throws Exception{
 		MemberVO memberVO = new MemberVO();
-		memberVO.setId("admin");
+		memberVO.setId("admin2");
 		
 		memberVO = memberDAO.memberIdCheck(memberVO);
+		System.out.println(memberVO.getId());
 		assertNotNull(memberVO);
 	}
 	
