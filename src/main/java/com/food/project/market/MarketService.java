@@ -29,6 +29,16 @@ public class MarketService {
 	private MemberDAO memberDAO;
 	
 	
+	//isOpen
+	public int isOpen(MarketVO marketVO,MemberVO memberVO) throws Exception{
+		int result = marketDAO.isOpen(marketVO);
+		
+		//위치(위도, 경도) 저장하기
+		result = memberDAO.locationUpdate(memberVO);
+		
+		return result;
+	}
+	
 	//조회 - selectList
 	public List<MarketVO> marketList() throws Exception{
 		return marketDAO.marketList();
@@ -111,32 +121,51 @@ public class MarketService {
 	public int marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
+		System.out.println("path :"+path);
 		
+		
+		String thumbImg = "aaa";
+		System.out.println("thumbImg"+thumbImg);
+		
+		marketVO.setThumbImg(thumbImg);
 		//1.회원정보 수정
 		int result = marketDAO.marketUpdate(marketVO);
+		System.out.println("marketUpdate result : "+result);
 		
 		//파일(이미지) 수정
 		for (MultipartFile file : files) {
 			//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
 			String fileName = fileSaver.saveByUtils(file, path);
+			System.out.println("fileName : "+fileName);
+			
 			//2.DB등록
 			FileInfoVO fileInfoVO = new FileInfoVO();
 			fileInfoVO.setFileName(fileName);
+			System.out.println("fileName:" +fileInfoVO.getFileName());
+			
 			fileInfoVO.setOriName(file.getOriginalFilename());
+			System.out.println("oriName:" +file.getOriginalFilename());
+			
+			
 			fileInfoVO.setKind(1); //market
+			
 			fileInfoVO.setRefNum(marketVO.getNum());
+			System.out.println("fileName:" +fileInfoVO.getRefNum());
+			
 			//reviewNum, foodNum은 입력안해서 null값 부여
 			
 			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
+			System.out.println("fileUpdate result : "+result);
 			
 			if(result<1) {
 				throw new Exception();
 			}
 		}
 		
-		
 		return result;
 	}
+	
+	
 	
 }
 

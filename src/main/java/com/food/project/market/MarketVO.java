@@ -9,15 +9,13 @@ public class MarketVO {
 	private String marketName;
 	private String openTime;
 	private String closeTime;
-	private int isOpen;  //default : 1
-	private int canOrder; //default : 1
+	private int isOpen;  //default : 0
+	private int canOrder; //default : 0
 	private String marketIntro;
 	private String thumbImg;
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
-	
-	
 	
 	
 	public Date getCreateAt() {

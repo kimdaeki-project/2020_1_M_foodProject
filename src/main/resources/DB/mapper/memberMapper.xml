@@ -7,7 +7,7 @@
 	
 	<insert id="memberJoin" parameterType="MemberVO">
 		INSERT INTO member VALUES(member_seq.nextval,#{id},#{email},#{password},#{name},#{age},
-		#{gender},#{nickName},'local',#{phone},0,null,null,null,sysdate,sysdate,null)
+		#{gender},#{nickName},'local',#{phone},#{address},0,#{latitude},#{longitude},null,sysdate,sysdate,null)
 	</insert>
 	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
@@ -30,6 +30,11 @@
 	<update id="isFoodTruck" parameterType="MemberVO">
 		update member set isFoodTruck=#{isFoodTruck} where num=#{num}
 	</update>
+	
+	<update id="locationUpdate" parameterType="MemberVO">
+		update member set latitude=#{latitude},longitude=#{longitude} where num=#{num}
+	</update>
+	
 	
 	
 </mapper>

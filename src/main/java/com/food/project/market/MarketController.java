@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,7 +26,47 @@ public class MarketController {
 	private MarketService marketService;
 	@Autowired
 	private MenuService menuService;
-	@Autowired
+
+	
+	//마켓종료
+	@GetMapping("marketIsOpen")
+	@ResponseBody
+	public int marketIsOpen(MarketVO marketVO,MemberVO memberVO) throws Exception{
+		System.out.println("iiii");
+		//member의 num으로 해당 marketSelect
+		marketVO.setUserNum(memberVO.getNum());
+		
+		System.out.println("isOpen : "+marketVO.getIsOpen());
+		
+		int result = marketService.isOpen(marketVO,memberVO);
+		if(result > 0) {
+			System.out.println("영업종료");
+		}else {
+		}
+		
+		return result;
+	}
+	
+	//마켓 오픈 
+	@PostMapping("marketIsOpen")
+	@ResponseBody
+	public int marketIsOpen2(MarketVO marketVO,MemberVO memberVO) throws Exception{
+		System.out.println("la"+memberVO.getLatitude());
+		System.out.println("lo"+memberVO.getLongitude());
+		//member의 num으로 해당 marketSelect
+		marketVO.setUserNum(memberVO.getNum());
+		
+		System.out.println("isOpen : "+marketVO.getIsOpen());
+		
+		int result = marketService.isOpen(marketVO,memberVO);
+		if(result > 0) {
+			System.out.println("영업시작");
+		}else {
+		}
+		
+		
+		return result;
+	}
 	
 	
 	//조회 - select List(GET)
@@ -100,13 +141,37 @@ public class MarketController {
 	
 	//수정(GET/POST)
 	@GetMapping("marketPage")
-	public String marketUpdate() throws Exception{
-		return "marketPage";
+	public ModelAndView marketUpdate(MemberVO memberVO,MarketVO marketVO,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("marketPAge");
+		
+		marketVO.setUserNum(memberVO.getNum());
+		
+		System.out.println("marketPAge: "+marketVO.getUserNum());
+		
+		marketVO = marketService.marketSelect(marketVO);
+		
+		if(marketVO != null) {
+			System.out.println("마켓 셀렉트");
+			mv.addObject("marketVO", marketVO);
+			mv.setViewName("market/marketPage");
+		}else {
+			System.out.println("조회 실패");
+			mv.setViewName("member/memberPage");
+		}
+		
+		return mv;
 	}
 	
 	@PostMapping("marketPage")
 	public ModelAndView marketUpdate(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		System.out.println("마켓 수정");
+	
+		for (MultipartFile file : files) {
+			System.out.println("file : "+file);
+		}
 		
 		int result = marketService.marketUpdate(marketVO,files,session);
 		
