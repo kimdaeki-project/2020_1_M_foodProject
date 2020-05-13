@@ -55,8 +55,7 @@
                         </div>
                         <div>
                             <p>주소</p>
-                            <input type="text"  class="memberJoin_input" name="address" id="address" readonly="readonly">
-                            <input type="button" value="검색" id="btn-address" onclick="goPopup();">
+                            <input type="text"  class="memberJoin_input" name="address" id="address" readonly="readonly" onclick="goPopup();">
                         </div>
                         <div style="width: 400px;">
                             <p style="margin-bottom: 10px;">성별</p>
@@ -69,11 +68,7 @@
                                 <span>여자</span>
                             </label>
                         </div>
-                        
-                        
-                        
-                        
-                    </fieldset>
+                      </fieldset>
                 </div>
                 <hr class="memberJoin_hr">
                 <div>
@@ -233,13 +228,16 @@
         
         //아이디 중복검사
         $("#id").blur(function() {
+        	console.log('성공');
             var id = $("#id").val();
             $.ajax({
                 url:'./memberIdCheck',
                 type:'get',
                 data:{ id:id },
                 success: function(data) {
+                	console.log(data);
                     if (data==0) {
+                    	console.log('성공1');
                         //사용중인 아이디라고 화면에 뜨게하기
                         $("#mj_showIdChk").text("중복되는 아이디입니다.");
 						$("#mj_showIdChk").css("color", "red");

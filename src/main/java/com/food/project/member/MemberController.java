@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.market.MarketService;
@@ -96,24 +97,18 @@ public class MemberController {
 
 	// 아이디 중복검사(GET)
 	@GetMapping("memberIdCheck")
-	public ModelAndView memberIdCheck(MemberVO memberVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		
+	@ResponseBody
+	public int memberIdCheck(MemberVO memberVO) throws Exception {
 		System.out.println(memberVO.getId());
-		
+		int result = 1;
 		memberVO = memberService.memberIdCheck(memberVO);
 		
 		if (memberVO != null) {
 			System.out.println("이미 있는 아이디");
-			mv.addObject("result", 0);
-		} else {
-			System.out.println("사용 가능 아이디");
-			mv.addObject("result", 1);
+			result = 0;
 		}
-		
-		mv.setViewName("member/memberLogin");
 
-		return mv;
+		return result;
 	}
 
 	// 회원탈퇴(GET)
