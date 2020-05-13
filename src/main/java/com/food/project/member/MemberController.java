@@ -98,8 +98,11 @@ public class MemberController {
 	@GetMapping("memberIdCheck")
 	public ModelAndView memberIdCheck(MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
-
+		
+		System.out.println(memberVO.getId());
+		
 		memberVO = memberService.memberIdCheck(memberVO);
+		
 		if (memberVO != null) {
 			System.out.println("이미 있는 아이디");
 			mv.addObject("result", 0);
@@ -107,6 +110,7 @@ public class MemberController {
 			System.out.println("사용 가능 아이디");
 			mv.addObject("result", 1);
 		}
+		
 		mv.setViewName("member/memberLogin");
 
 		return mv;
