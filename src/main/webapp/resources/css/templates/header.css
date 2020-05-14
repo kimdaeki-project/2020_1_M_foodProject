@@ -1,108 +1,285 @@
-body{
-    padding: 0;
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
+body {
+	padding: 0;
+	margin: 0;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
-.header{
-    position: fixed;
-    z-index:100;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    height: 51px;
-    justify-content: start;
-    align-self: center;
-    background-color: #ffffff;
-    border-bottom: 1px solid gainsboro;
+.header {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	height: 51px;
+	justify-content: start;
+	align-self: center;
+	background-color: #ffffff;
+	border-bottom: 1px solid gainsboro;
 }
 
-.header_a{
-    position: relative;
-    left: 0;
-    top: 0px; 
-    height: 51px;
+.header_a {
+	position: relative;
+	left: 0;
+	top: 0px;
+	height: 51px;
 }
 
-.header_a img{
-    padding-left: 10px;
-    height: 51px;
+.header_a img {
+	padding-left: 10px;
+	height: 51px;
 }
 
-.h_nav_ul{
-    font-size: 15px;
-    display: flex;
-    padding: 0;
-    list-style: none;
-    color: #6f7174;
+.h_nav_ul {
+	font-size: 15px;
+	display: flex;
+	padding: 0;
+	list-style: none;
+	color: #6f7174;
 }
 
-.h_nav_ul a{
-    text-decoration: none;
-    color: #6f7174;
-    padding: 10px 10px;
+.h_nav_ul a {
+	text-decoration: none;
+	color: #6f7174;
+	padding: 10px 10px;
 }
 
-.h_login{
-    outline: transparent;
-    box-shadow: none;
-    cursor: pointer;
-    position: absolute;
-    border: none;
-    height: 51px;
-    right: 10px;
-    padding: 0 20px;
-    font-size: 15px;
-    color: #27b06e;
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: transparent;
+.h_login {
+	outline: transparent;
+	box-shadow: none;
+	cursor: pointer;
+	position: absolute;
+	border: none;
+	height: 51px;
+	right: 10px;
+	padding: 0 20px;
+	font-size: 15px;
+	color: #27b06e;
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: transparent;
 }
 
-.h_name{
-    outline: transparent;
-    box-shadow: none;
-    cursor: pointer;
-    position: absolute;
-    border: none;
-    height: 51px;
-    padding: 0 20px;
-    font-size: 15px;
-    right: 50px;
-    color: #27b06e;
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: transparent;
+.h_name {
+	outline: transparent;
+	box-shadow: none;
+	cursor: pointer;
+	position: absolute;
+	border: none;
+	height: 51px;
+	padding: 0 20px;
+	font-size: 15px;
+	right: 50px;
+	color: #27b06e;
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: transparent;
 }
 
-.fa-shopping-cart{
-    outline: transparent;
-    box-shadow: none;
-    cursor: pointer;
-    position: absolute;
-    border: none;
-    height: 51px;
-    padding: 0 20px;
-    font-size: 15px;
-    top: 19px;
-    right: 10px;
-    color: #27b06e;
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: transparent;
+.fa-shopping-cart {
+	outline: transparent;
+	box-shadow: none;
+	cursor: pointer;
+	position: absolute;
+	border: none;
+	height: 28px;
+	padding: 0 20px;
+	font-size: 15px;
+	top: 12px;
+	right: 1px;
+	color: #27b06e;
+	font-family: 'Noto Sans KR', sans-serif;
+	background-color: transparent;
 }
 
-@media screen and (max-width: 750px){
-    .header{
-       flex-direction: column;
-    }
+/* modal */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 20;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background-color: rgb(0, 0, 0); /* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	overflow: auto;
+}
 
-    .h_nav{
-        padding-left: 8px;
-        background-color: #f9f9f9;
-        border-top: 1px solid #e9e9e9;
-        border-bottom: 1px solid #e9e9e9;
-    }
+.modal_header {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 54px;
+	display: -webkit-box;
+	display: flex;
+	align-items: center;
+	background: #fff;
+}
 
-    .h_name, .h_login{
-        top: 0px;
-    }
+.modal_header img {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	width: 24px;
+	height: 24px;
+	padding: 16px;
+	margin-right: -5px;
+	display: flex;
+}
+
+.modal_header h2 {
+	font-size: 24px;
+	line-height: 28px;
+	font-weight: 300;
+}
+
+.modal_cartAllDel {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 54px;
+	display: -webkit-box;
+	display: flex;
+	align-items: center;
+	margin: 0;
+	height: 40px;
+	padding: 0 16px;
+	background: #27b06e;
+}
+
+.modal_cartAllDel span {
+	display: block;
+	font-size: 14px;
+	line-height: 16px;
+	color: #fff;
+	margin: 0 auto;
+}
+
+.modal_body {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 94px;
+	bottom: 100px;
+	overflow: auto;
+	box-sizing: border-box;
+	background-color: white;
+}
+
+.modal_list ul {
+	margin: 0;
+	padding: 0 16px;
+	list-style: none;
+}
+
+.modal_list li {
+	margin: 15px 0 0;
+}
+
+.modal_itemInfo {
+	margin: 0;
+	padding: 0;
+	display: -webkit-box;
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+}
+
+.modal_itemInfo img {
+	margin: 0;
+	width: 48px;
+	height: 48px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	background-size: cover;
+}
+
+.modal_itemInfo div {
+	margin-left: 10px;
+}
+
+.modal_itemInfo strong {
+	display: block;
+	font-size: 14px;
+	line-height: 16px;
+	font-weight: 500;
+}
+
+.modal_itemInfo span {
+	display: block;
+	margin: 6px 0 0;
+	font-size: 12px;
+	line-height: 12px;
+	color: #98999b;
+}
+
+.modal_itemPay {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal_receipt {
+	position: absolute;
+	top: 818;
+	width: 100%;
+	box-sizing: border-box;
+	background-color: white;
+}
+
+.modal_receipt div {
+	padding: 16px;
+}
+
+.modal_receipt dl {
+	align-items: center;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	box-sizing: border-box;
+	justify-content: space-between;
+}
+
+.modal_order {
+	position: absolute;
+	top: 898;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	margin: 0;
+	height: 40px;
+	padding: 0 16px;
+	background: #27b06e;
+}
+
+.modal_order span{
+	display: block;
+	font-size: 14px;
+	line-height: 16px;
+	color: #fff;
+	margin: 0 auto;
+}
+
+.modal_c{
+	position: fixed;
+	background-color: white;
+	right:0;
+	transition: opacity .3s ease;
+	width: 450px;
+	height: 100%;
+}
+
+@media screen and (max-width: 750px) {
+	.header {
+		flex-direction: column;
+	}
+	.h_nav {
+		padding-left: 8px;
+		background-color: #f9f9f9;
+		border-top: 1px solid #e9e9e9;
+		border-bottom: 1px solid #e9e9e9;
+	}
+	.h_name, .h_login {
+		top: 0;
+	}
 }

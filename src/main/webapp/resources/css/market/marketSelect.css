@@ -109,3 +109,9 @@ border-top: 1px solid #e7e7e7;
 .ml_menuList a {
 	text-decoration: none;
 }
+
+.ml_box4 a{
+	text-decoration: none;
+	padding: 10px;
+	border-bottom: 1px solid #e7e7e7;
+}
