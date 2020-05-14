@@ -76,7 +76,7 @@ public class HomeController {
 		
 		List<GeoVO> list = new ArrayList<GeoVO>();
 		
-		for(int i=1; i<=12; i++) {
+		for(int i=1; i<=10; i++) {
 			
 			double latitude = 126919530;
 			double longitude = 37556546;
@@ -87,11 +87,8 @@ public class HomeController {
 			if(i%2 == 0)
 				n *= -1;
 			
-			if(i%3 == 0)
-				m *= -1;
-			
 			latitude += i*300*n;
-			longitude += i*300*m;
+			longitude += i*300*n;
 			
 			latitude /= 1000000.0;
 			longitude /= 1000000.0;
