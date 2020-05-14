@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상세보기</title>
+<title>마켓 상세보기</title>
 <link rel="stylesheet" href="../resources/css/market/marketSelect.css">
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
@@ -20,9 +20,7 @@
 			<div class="ml_truckInfo">
 				<h2>${marketVO.marketName}</h2>
 				<p>${marketVO.marketIntro}</p>
-				<!-- 				<nav></nav> -->
-				<!-- 				<button>장바구니</button> -->
-				<!-- 				<button>주문하기</button> -->
+				<nav></nav>
 			</div>
 		</div>
 
@@ -45,8 +43,7 @@
 			<ul>
 				<c:forEach items="${menuList}" var="vo">
 					<a href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
-						<li>
-							<img src="${pageContext.request.contextPath}/resources/img/food.jpg">
+						<li><img src="${pageContext.request.contextPath}/resources/img/food.jpg">
 							<strong>${vo.name}</strong> <em>${vo.detail}</em>
 						</li>
 					</a>

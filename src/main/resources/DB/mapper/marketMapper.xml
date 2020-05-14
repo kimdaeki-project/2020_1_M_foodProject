@@ -31,7 +31,7 @@
 	<select id="marketList" resultMap="ListResult">
 		SELECT m.*, r.rating 
 		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
-		ON (m.num = r.marketNum)
+		ON (m.num = r.marketNum) ORDER BY m.num DESC
 	</select>
 	
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
