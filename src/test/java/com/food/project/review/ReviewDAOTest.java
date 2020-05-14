@@ -43,7 +43,7 @@ public class ReviewDAOTest extends AbstractTestCase{
 		assertEquals(1, result);
 	}
 	
-	@Test
+//	@Test
 	public void reviewReplyUpdate() throws Exception{
 		
 		ReviewVO reviewVO = new ReviewVO();
@@ -53,7 +53,7 @@ public class ReviewDAOTest extends AbstractTestCase{
 		assertEquals(1, result);
 	}
 	
-	@Test
+//	@Test
 	public void reviewReply() throws Exception{
 		
 		ReviewVO reviewVO = new ReviewVO();

@@ -6,6 +6,11 @@
   
 <mapper namespace="com.food.project.fileInfo.FileDAO">
 	
+	<select id="fileCount" resultType="Long">
+		select fileInfo_seq.nextval from dual
+	</select>
+	
+	
 	<select id="fileInfoList" parameterType="FileInfoVO" resultType="FileInfoVO">
 		SELECT * FROM fileInfo WHERE kind=#{kind} AND refNum=#{refNum}
 	</select>
@@ -13,7 +18,7 @@
 	
 	<insert id="fileInfoInsert" parameterType="FileInfoVO">
 		INSERT INTO fileInfo VALUES(
-			fileInfo_seq.nextval, #{fileName}, #{oriName}, #{kind}, #{refNum}
+			#{num}, #{fileName}, #{oriName}, #{kind}, #{refNum}
 		)
 	</insert>
 	

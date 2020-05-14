@@ -68,7 +68,12 @@ public class MarketService {
 			//1.HDD등록
 			String fileName = fileSaver.saveByUtils(file, path);
 			//2.DB등록
+			
+			//file의 num시퀀스값 증가
+			num = fileInfoDAO.fileCount();
+			
 			FileInfoVO fileInfoVO = new FileInfoVO();
+			fileInfoVO.setNum(num);
 			fileInfoVO.setFileName(fileName);
 			
 			fileInfoVO.setOriName(file.getOriginalFilename());

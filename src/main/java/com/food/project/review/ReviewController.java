@@ -2,11 +2,14 @@ package com.food.project.review;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.board.BoardVO;
@@ -32,6 +35,7 @@ public class ReviewController {
 		return result;
 	}
 	
+	
 	//리뷰리스트 출력(GET)
 	@GetMapping("reviewList")
 	public ModelAndView reviewList(Pager pager) throws Exception{
@@ -54,8 +58,8 @@ public class ReviewController {
 	//리뷰등록(POST)
 	@PostMapping("reviewInsert")
 	@ResponseBody
-	public int reviewInsert(ReviewVO reviewVO) throws Exception{
-		int result = reviewService.boardInsert(reviewVO);
+	public int reviewInsert(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
+		int result = reviewService.boardInsert(reviewVO,files,session);
 		if(result > 0) {
 			System.out.println("리뷰등록 성공");
 		}else {
