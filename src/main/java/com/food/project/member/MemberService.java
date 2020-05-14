@@ -14,6 +14,11 @@ public class MemberService {
 		return memberDAO.memberLogin(memberVO);
 	}
 	
+	//멤버값 조회
+	public MemberVO memberSelect(MemberVO memberVO) throws Exception{
+		return memberDAO.memberSelect(memberVO);
+	}
+	
 	//회원가입
 	public int memberJoin(MemberVO memberVO) throws Exception{
 		return memberDAO.memberJoin(memberVO);

@@ -64,7 +64,7 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 					<li id="memberUpdate"><a href="#">회원정보 수정</a></li>
 					
 					<c:if test="${memberVO.isFoodTruck eq '0'}">
-						<li id="marketJoin"><a href="${pageContext.request.contextPath}/market/marketJoin">판매자 신청</a></li>
+						<li id="marketJoin"><a>판매자 신청</a></li>
 					</c:if>
 					<c:if test="${memberVO.isFoodTruck eq '1'}">
 						<li id="marketPage"><a>마켓 정보 수정</a></li>

@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.food.project.board.BoardVO;
+import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
 import com.food.project.menu.MenuService;
 import com.food.project.menu.MenuVO;
+import com.food.project.review.ReviewService;
+import com.food.project.util.Pager;
 
 @Controller
 @RequestMapping("/market/**")
@@ -26,6 +30,10 @@ public class MarketController {
 	private MarketService marketService;
 	@Autowired
 	private MenuService menuService;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private ReviewService reviewService;
 
 	
 	//마켓종료
@@ -51,8 +59,8 @@ public class MarketController {
 	@PostMapping("marketIsOpen")
 	@ResponseBody
 	public int marketIsOpen2(MarketVO marketVO,MemberVO memberVO) throws Exception{
-		System.out.println("la"+memberVO.getLatitude());
-		System.out.println("lo"+memberVO.getLongitude());
+//		System.out.println("la"+memberVO.getLatitude());
+//		System.out.println("lo"+memberVO.getLongitude());
 		//member의 num으로 해당 marketSelect
 		marketVO.setUserNum(memberVO.getNum());
 		
@@ -84,23 +92,40 @@ public class MarketController {
 
 	//조회 - select One(GET)
 	@GetMapping("marketSelect")
-	public ModelAndView marketSelect(MarketVO marketVO) throws Exception{
+	public ModelAndView marketSelect(MarketVO marketVO,Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("nu:"+marketVO.getNum());
-		
 		marketVO = marketService.marketSelect(marketVO);
-			
-		System.out.println(marketVO.getMarketIntro());
-		System.out.println(marketVO.getMarketName());
 		
+		//usernum으로 해당 트럭의 주소값 조회
+		MemberVO memberVO = new MemberVO();
+		memberVO.setNum(marketVO.getUserNum());
+		memberVO = memberService.memberSelect(memberVO);
 		
+		System.out.println(memberVO);
+		
+		//메뉴
 		MenuVO menuVO = new MenuVO();
 		menuVO.setMarketNum(marketVO.getNum());
-		
-		List<MenuVO> list = menuService.menuList(menuVO);
+		List<MenuVO> MemuList = menuService.menuList(menuVO);
 
-		mv.addObject("menuList", list);
+		//리뷰																										/////////////
+		List<BoardVO> reviewList = reviewService.boardList(pager);
+		//마켓의 전체 평균 값 조회
+		double marketRate = reviewService.marketAvg(marketVO.getNum()); 
+		
+		//전체 리뷰개수
+		int totalReview = reviewService.marketReviewCount(marketVO.getNum());
+		
+		//파일(이미지)
+		mv.addObject("menuList", MemuList);
 		mv.addObject("marketVO", marketVO);
+		mv.addObject("memberVO", memberVO);
+		mv.addObject("reviewList", reviewList);
+		mv.addObject("pager", pager);
+		
+		mv.addObject("marketRate", marketRate);
+		mv.addObject("totalReview", totalReview);
+		
 		mv.setViewName("market/marketSelect");
 		return mv;
 	}

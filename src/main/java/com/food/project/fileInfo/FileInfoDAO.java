@@ -13,6 +13,11 @@ public class FileInfoDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.food.project.fileInfo.FileDAO.";
 	
+	//파일 시퀀스값 증가
+	public long fileCount() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"fileCount");
+	}
+	
 	//파일 조회
 	public List<FileInfoVO> fileInfoList(FileInfoVO fileInfoVO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"fileInfoList", fileInfoVO);

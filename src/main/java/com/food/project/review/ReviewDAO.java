@@ -17,6 +17,23 @@ public class ReviewDAO implements BoardDAO{
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.food.project.review.ReviewDAO.";
 	
+	
+	//한 마켓의 총 평점 계산
+	public double marketAvg(long marketNum) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"marketAvg", marketNum);
+	}
+	
+	//한 마켓의 총 리뷰개수 
+	public int marketReviewCount(long marketNum) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"marketReviewCount", marketNum);
+	}
+	
+	//reiew seq 증가
+	public long boardSeq() throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"boardSeq");
+	}
+	
+	
 	//board개수 파악
 	public long boardCount(Pager pager) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"boardCount",pager);

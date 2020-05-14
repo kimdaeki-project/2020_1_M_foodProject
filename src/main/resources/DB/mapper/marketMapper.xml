@@ -9,6 +9,7 @@
 	<resultMap type="MarketVO" id="ListResult">
 		<id column="num" property="num"/> 
 		<id column="userNum" property="userNum"/>
+		<result column="categoryNum" property="categoryNum"/>
 		<result column="crn" property="crn"/>
 		<result column="marketName" property="marketName"/>
 		<result column="openTime" property="openTime"/>
@@ -42,7 +43,7 @@
 	</select>
 	
 	<insert id="marketInsert" parameterType="MarketVO">
-		insert into market values(#{num},#{userNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,#{thumbImg})
+		insert into market values(#{num},#{userNum},#{categoryNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,#{thumbImg})
 	</insert>
 	
 	<update id="marketDelete" parameterType="MarketVO">
@@ -50,7 +51,7 @@
 	</update>
 	
 	<update id="marketUpdate" parameterType="MarketVO">
-		update market set openTime=#{openTime},closeTime=#{closeTime},marketName=#{marketName},marketIntro=#{marketIntro},thumbImg=#{thumbImg} where num=#{num}
+		update market set openTime=#{openTime},closeTime=#{closeTime},categoryNum=#{categoryNum},marketName=#{marketName},marketIntro=#{marketIntro},thumbImg=#{thumbImg} where num=#{num}
 	</update>
 	
 	<update id="isOpen" parameterType="MarketVO">

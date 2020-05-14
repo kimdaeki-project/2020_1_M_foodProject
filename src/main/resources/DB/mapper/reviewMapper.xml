@@ -4,23 +4,55 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.food.project.review.ReviewDAO">
+	
+	<resultMap type="ReviewVO" id="reviewResult">
+		<id column="boardNum" property="boardNum"/> 
+		<result column="memberNum" property="memberNum"/>
+		<result column="marketNum" property="marketNum"/>
+		<result column="imageNum" property="imageNum"/>
+		<result column="rating" property="rating"/>
+		<result column="contents" property="contents"/>
+		<result column="regDate" property="regDate"/>
+		<result column="ref" property="ref"/>
+		<result column="step" property="step"/>
+		<result column="depth" property="depth"/>
+		
+		<association property="memberVO" javaType="MemberVO">
+			<result column="nickName" property="nickName"/>
+			<result column="email" property="email"/>
+		</association>
+	
+	</resultMap>
+
+	<select id="marketAvg" parameterType="Long" resultType="Double">
+		select avg(rating) from review where marketNum = #{marketNum}
+	</select>
+	
+	<select id="marketReviewCount" parameterType="Long" resultType="Integer">
+		select count(boardNum) from review where marketNum = #{marketNum}
+	</select>
+	
 
 	<select id="boardCount" parameterType="Pager" resultType="Long">
 		select count(BoardNum) from review
 	</select>
 
-	<select id="baordList" parameterType="Pager" resultType="ReviewVO">
-		select * from
+	<select id="baordList" parameterType="Pager" resultMap="reviewResult">
+		select A.*,B.nickName,B.email from 
+		(select * from
 		(select Q.*,rownum R from
 		(select * from review
 		order by ref desc, step asc) Q)
-		where R between #{startRow} and #{lastRow}
+		where R between 1 and 10)A
+		join (select num,nickname,email from member)B
+		on(a.membernum = B.num)
+	</select>
+	
+	<select id="boardSeq" resultType="Long">
+		select board_seq.nextVal from dual
 	</select>
 	
 	<insert id="boardInsert" parameterType="ReviewVO">
-		<selectKey keyProperty="boardNum" order="BEFORE" resultType="Long">
-			select board_seq.nextVal from dual
-		</selectKey>
 		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{imageNum},#{rating},#{contents},sysdate,
 		#{boardNum},0,0)
 	</insert>
