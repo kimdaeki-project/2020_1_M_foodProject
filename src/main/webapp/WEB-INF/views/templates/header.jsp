@@ -31,13 +31,12 @@
 		<c:if test="${empty sessionScope.memberVO}">
 			<button type="button" class="h_login"
 				onclick="location.href='${pageContext.request.contextPath}/member/memberLogin'">로그인</button>
+			<a><img src="${pageContext.request.contextPath}/resources/img/header/cart.png" class="fa-shopping-cart"></a>
 		</c:if>
 		<c:if test="${not empty sessionScope.memberVO}">
 			<button type="button" class="h_name"
 				onclick="location.href='${pageContext.request.contextPath}/member/memberPage'">${memberVO.name}</button>
-			<a><img
-				src="${pageContext.request.contextPath}/resources/img/header/cart.png"
-				class="fa-shopping-cart"></a>
+			<a><img src="${pageContext.request.contextPath}/resources/img/header/cart.png" class="fa-shopping-cart"></a>
 		</c:if>
 	</div>
 
