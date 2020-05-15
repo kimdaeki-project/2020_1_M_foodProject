@@ -8,18 +8,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.board.BoardVO;
+import com.food.project.member.MemberVO;
 import com.food.project.util.Pager;
 
 @Controller
+@RequestMapping("/review/**")
 public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	
+	//한 멤버가 작성한 리뷰목록 출력
+	@GetMapping("myReviewList")
+	public ModelAndView myReviewList(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		long memberNum = memberVO.getNum();
+		List<ReviewVO> myReviewList = reviewService.myReviewList(memberNum); 
+		
+		if(myReviewList != null) {
+			mv.addObject("myReviewList", myReviewList);
+			mv.setViewName("member/myReview");
+		}
+		
+		return mv;
+	}
+	
 	
 	//덧글달기(GET)
 	@GetMapping("reviewReply")
@@ -54,6 +75,13 @@ public class ReviewController {
 		return mv;
 		
 	}
+	
+	
+	@GetMapping("reviewInsert")
+	public void reviewInsert() throws Exception{
+		
+	}
+	
 	
 	//리뷰등록(POST)
 	@PostMapping("reviewInsert")

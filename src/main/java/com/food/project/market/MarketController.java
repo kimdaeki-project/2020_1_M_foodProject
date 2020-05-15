@@ -144,8 +144,8 @@ public class MarketController {
 		marketVO.setUserNum(memberVO.getNum());
 		
 		int result = marketService.marketInsert(marketVO,files,session);
-		memberVO = memberService.memberSelect(memberVO);
 		
+		memberVO = memberService.memberSelect(memberVO);
 		
 		if(result > 0) {
 			session.setAttribute("memberVO", memberVO);

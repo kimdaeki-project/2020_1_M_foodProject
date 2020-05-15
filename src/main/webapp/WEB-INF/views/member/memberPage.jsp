@@ -135,7 +135,11 @@
 			});
 		});
 		$('#myReview').click(function() {
-			$.get("./myReview?num=${memberVO.num}", function(result) {
+			alert("click");
+			
+			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
+				console.log(result);
+				
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});

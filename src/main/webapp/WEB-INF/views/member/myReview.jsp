@@ -125,18 +125,25 @@
 </style>
 <title>나의 리뷰</title>
 </head>
+
+
+
+
 <body style="width: 100%">
 	<div style="margin-left: 50px;">
 		<h2 class="rev_name">나의 후기</h2>
 		<ul class="rev_ul">
-			<c:forEach items="${reviewList}" var="rev">
-				<li class="rev_li"><a href="#">
+		
+		
+		
+			<c:forEach items="${myReviewList}" var="reviewVO">
+				<li class="rev_li">
+					<a href="#">
 						<div class="rev_item">
-							<img class="rev_item_img" alt=""
-								src="${pageContext.request.contextPath}/resources/img/food2.png">
+							<img class="rev_item_img" alt="" src="${pageContext.request.contextPath}/resources/img/food2.png">
 							<div class="rev_item_div">
-								<strong class="rev_item_strong">상품명</strong> <span
-									class="rev_item_span">상품정보</span>
+								<strong class="rev_item_strong">상품명</strong> 
+								<span class="rev_item_span">상품정보</span>
 							</div>
 						</div>
 						<div class="rev_review">
@@ -146,45 +153,21 @@
 									<p style="color: #5f5f5f;">리뷰내용</p>
 								</div>
 								<div class="rev_review4">
-									<img class="rev_review_img" alt="review_img"
-										src="${pageContext.request.contextPath}/resources/img/food.jpg">
+									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/img/food.jpg">
 								</div>
 								<div class="rev_review5">
 									<button class="rev_mod">수정하기</button>
-									<img class="rev_del" alt="delete"
-										src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
+									<img class="rev_del" alt="delete" src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
 								</div>
 							</div>
 						</div>
-				</a></li>
+					</a>
+				</li>
+			
+			
+			
 			</c:forEach>
-			<li class="rev_li"><a href="#">
-					<div class="rev_item">
-						<img class="rev_item_img" alt=""
-							src="${pageContext.request.contextPath}/resources/img/food2.png">
-						<div class="rev_item_div">
-							<strong class="rev_item_strong">상품명</strong> <span
-								class="rev_item_span">상품정보</span>
-						</div>
-					</div>
-					<div class="rev_review">
-						<div class="rev_review2">
-							<div class="rev_review3">
-								<span style="color: color: #000;">평점</span>
-								<p style="color: #5f5f5f;">리뷰내용</p>
-							</div>
-							<div class="rev_review4">
-								<img class="rev_review_img" alt="review_img"
-									src="${pageContext.request.contextPath}/resources/img/food.jpg">
-							</div>
-							<div class="rev_review5">
-								<button class="rev_mod">수정하기</button>
-								<img class="rev_del" alt="delete"
-									src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
-							</div>
-						</div>
-					</div>
-			</a></li>
+			
 		</ul>
 	</div>
 </body>

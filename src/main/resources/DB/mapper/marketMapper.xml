@@ -43,7 +43,7 @@
 	</select>
 	
 	<insert id="marketInsert" parameterType="MarketVO">
-		insert into market values(#{num},#{userNum},#{categoryNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,#{thumbImg})
+		insert into market values(#{num},#{userNum},#{categoryNum},#{crn},#{marketName}, #{address, jdbcType=VARCHAR}, #{openTime},#{closeTime},1,1,#{marketIntro},#{thumbImg, jdbcType=VARCHAR}, sysdate, sysdate, null)
 	</insert>
 	
 	<update id="marketDelete" parameterType="MarketVO">
@@ -55,7 +55,7 @@
 	</update>
 	
 	<update id="marketUpdate" parameterType="MarketVO">
-		update market set openTime=#{openTime},closeTime=#{closeTime},categoryNum=#{categoryNum},marketName=#{marketName},marketIntro=#{marketIntro},thumbImg=#{thumbImg} where num=#{num}
+		update market set openTime=#{openTime},closeTime=#{closeTime},categoryNum=#{categoryNum},marketName=#{marketName},marketIntro=#{marketIntro},thumbImg=#{thumbImg, jdbcType=VARCHAR} where num=#{num}
 	</update>
 	
 	<update id="isOpen" parameterType="MarketVO">
