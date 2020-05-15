@@ -38,6 +38,11 @@ public class MarketDAO {
 		return sqlSession.update(NAMESPACE+"marketDelete",marketVO);
 	}
 	
+	// Geo 업데이트
+	public int marketGeoUpdate(MarketVO marketVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"marketGeoUpdate", marketVO);
+	}
+	
 	//수정
 	public int marketUpdate(MarketVO marketVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"marketUpdate",marketVO);

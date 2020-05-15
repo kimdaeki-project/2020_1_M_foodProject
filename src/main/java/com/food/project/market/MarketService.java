@@ -118,6 +118,11 @@ public class MarketService {
 		return marketDAO.marketDelete(marketVO);
 	}
 	
+	// Geo 업데이트
+	public int marketGeoUpdate(MarketVO marketVO) throws Exception {
+		return marketDAO.marketGeoUpdate(marketVO);
+	}
+	
 	//수정
 	public int marketUpdate(MarketVO marketVO,MultipartFile file,HttpSession session) throws Exception{
 		//저장될 실제 경로 설정

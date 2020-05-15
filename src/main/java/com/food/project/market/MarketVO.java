@@ -9,6 +9,7 @@ public class MarketVO {
 	private long userNum;
 	private String crn;
 	private String marketName;
+	private String address;
 	private String openTime;
 	private String closeTime;
 	private int isOpen;  //default : 0
@@ -28,9 +29,6 @@ public class MarketVO {
 	public void setReviewVO(ReviewVO reviewVO) {
 		this.reviewVO = reviewVO;
 	}
-	
-	
-	
 	public Date getCreateAt() {
 		return createAt;
 	}
@@ -74,6 +72,14 @@ public class MarketVO {
 		this.marketName = marketName;
 	}
 	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
 	public String getOpenTime() {
 		return openTime;
 	}
@@ -109,8 +115,5 @@ public class MarketVO {
 	}
 	public void setThumbImg(String thumbImg) {
 		this.thumbImg = thumbImg;
-	}
-	
-	
-	
+	}	
 }

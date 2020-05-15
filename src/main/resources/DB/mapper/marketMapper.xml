@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -11,6 +10,7 @@
 		<id column="userNum" property="userNum"/>
 		<result column="crn" property="crn"/>
 		<result column="marketName" property="marketName"/>
+		<result column="address" property="address"/>
 		<result column="openTime" property="openTime"/>
 		<result column="closeTime" property="closeTime"/>
 		<result column="isOpen" property="isOpen"/>
@@ -42,11 +42,15 @@
 	</select>
 	
 	<insert id="marketInsert" parameterType="MarketVO">
-		insert into market values(#{num},#{userNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,#{thumbImg})
+		insert into market values(#{num},#{userNum},#{crn},#{marketName},#{address},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,#{thumbImg})
 	</insert>
 	
 	<update id="marketDelete" parameterType="MarketVO">
 		update market set deleteAt = sysdate where userNum=#{userNum} 
+	</update>
+	
+	<update id="marketGeoUpdate" parameterType="MarketVO">
+		UPDATE market SET address=#{address} WHERE userNum=#{userNum}
 	</update>
 	
 	<update id="marketUpdate" parameterType="MarketVO">

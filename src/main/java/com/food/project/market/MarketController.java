@@ -143,6 +143,18 @@ public class MarketController {
 		
 	}
 	
+	@PostMapping("marketGeoUpdate")
+	@ResponseBody
+	public int marketGeoUpdate(MarketVO marketVO) throws Exception {
+		
+		System.out.println(marketVO.getUserNum());
+		System.out.println(marketVO.getAddress());
+		
+		int result = marketService.marketGeoUpdate(marketVO);
+		
+		return 1;
+	}
+	
 	//수정(GET/POST)
 	@GetMapping("marketPage")
 	public ModelAndView marketUpdate(MemberVO memberVO,MarketVO marketVO,HttpSession session) throws Exception{

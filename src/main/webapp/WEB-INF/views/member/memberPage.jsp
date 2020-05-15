@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../resources/css/member/memberPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
 <style type="text/css">
 
 div.toggleWrap { position: relative; width: 300px; margin: 0 auto; padding: 0 10px; background: #1F3766; }
@@ -102,15 +103,41 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 				    	latitude = Math.floor(latitude*1000000)/1000000;
 				    	longitude = Math.floor(longitude*1000000)/1000000;
 				    	
-						$.post("../market/marketIsOpen",{num:'${memberVO.num}',isOpen:$("#toggle_alarm").val(),latitude:latitude,longitude:longitude},function(result){
+						$.post("../market/marketIsOpen",{
+							num:'${memberVO.num}',isOpen:$("#toggle_alarm").val(), 
+							latitude:latitude, longitude:longitude}, function(result){
 							console.log("p result:"+result);
 						})
-
+						
+						// kakao 이용 현재 마켓 주소 업데이트
+						var geocoder = new kakao.maps.services.Geocoder();
+						var coord = new kakao.maps.LatLng(latitude, longitude);
+						geocoder.coord2Address(coord.getLng(), coord.getLat(), function(result, status) {
+						    if (status === kakao.maps.services.Status.OK) {
+						    	
+						      	console.log(result[0].address.address_name);
+						      	
+						      	$.post("../market/marketGeoUpdate", 
+						      			{ userNum:'${memberVO.num}', address: result[0].address.address_name },
+						      			function(result) {
+						      			
+						      				console.log("GeoUpdate : "+result);
+						      	});
+						    }
+						});
 					});
 				}else { 
 				  	alert("허용안해서 주소 못불러옴")
 				}
 
+				/* geocoder.coord2Address(coord.getLng(), coord.getLat(), function() {
+					
+					// 여기서부터 건드려야함
+					$.post("../market/marketGeoUpdate",{userNum:'${memberVO.num}', isOpen:$("#toggle_alarm").val(),latitude:latitude,longitude:longitude},function(result){
+						console.log("p result:"+result);
+					})
+				}); */
+				
 			}else{
 				//영업종료
 				$("#toggle_alarm").val(0);
@@ -120,6 +147,19 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 
 			}
 			
+			
+			/* var geocoder = new kakao.maps.services.Geocoder();
+
+			var coord = new kakao.maps.LatLng(37.56496830314491, 126.93990862062978);
+			var callback = function(result, status) {
+			    if (status === kakao.maps.services.Status.OK) {
+			    	
+			      	console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
+			      	console.log(result);
+			    }
+			};
+
+			geocoder.coord2Address(coord.getLng(), coord.getLat(), callback); */
 		});
 		
 		

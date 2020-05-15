@@ -72,7 +72,7 @@ public class MenuController {
 		// 메뉴VO 가져오기
 		menuVO = menuService.menuSelect(menuVO);
 		
-		mv.addObject("vo", menuVO);
+		mv.addObject("menuVO", menuVO);
 		mv.setViewName("menu/menuSelect");
 		return mv;
 	}
@@ -83,7 +83,7 @@ public class MenuController {
 		ModelAndView mv = new ModelAndView();
 		
 		menuVO = (MenuVO)menuService.menuSelect(menuVO);
-		mv.addObject("vo",menuVO);
+		mv.addObject("menuVO",menuVO);
 		mv.setViewName("menu/menuUpdate");
 		
 		return mv;
