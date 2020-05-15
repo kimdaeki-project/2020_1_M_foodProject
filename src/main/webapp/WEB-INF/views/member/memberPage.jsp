@@ -16,7 +16,7 @@
 	<div style="margin: 103px 0 50px 0; padding: 0px 10%">
 		<div class="mp_myInfoBox">
 			<div class="mp_pic">
-				<img src="../../../ico-leaf.svg">
+				<img src="${pageContext.request.contextPath}/resources/img/ico-leaf.svg">
 			</div>
 			<div class="mp_me">
 				<strong>${memberVO.name}</strong> <span>${memberVO.email}</span>
