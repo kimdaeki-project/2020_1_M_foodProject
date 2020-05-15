@@ -31,10 +31,15 @@ public class CategoryController {
 	// 카테고리 리스트 읽어오기
 	@GetMapping("categoryList")
 	public ModelAndView categoryList(CategoryVO categoryVO) {
+		System.out.println("ddd");
 
 		ModelAndView mv = new ModelAndView();
 		
 		List<CategoryVO> list = categoryService.categoryList(categoryVO);
+		for (CategoryVO categoryVO2 : list) {
+			System.out.println(categoryVO2.getName());
+		}
+		
 		mv.addObject("categoryList", list);
 		mv.setViewName("category/categoryList");
 		

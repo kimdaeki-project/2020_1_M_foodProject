@@ -40,17 +40,6 @@ body {
 	border-top: 1px solid #e7e7e7;
 }
 
-.ms_menuInfo em {
-	font-style: normal;
-}
-
-.ms_menuInfo select {
-	margin: 0px 10px;
-	padding: 5px; border : 2px solid #e7e7e7;
-	border-radius: 3px;
-	border: 2px solid #e7e7e7;
-}
-
 .ms_menuInfo button {
 	cursor: pointer;
 	padding: 15px 60px;
@@ -62,11 +51,6 @@ body {
 	font-weight: 600;
 }
 
-.ml_opDiv {
-	display: grid;
-	margin-top: 16px;
-}
-
 .ml_opList {
 	background-color: #f8f8f8;
 	padding: 15px;
@@ -75,7 +59,34 @@ body {
 	font-weight: 500;
 }
 
-#ml_opListDel{
+#ml_opListDel {
 	cursor: pointer;
 	float: right;
+}
+
+.ml_opSel_dl {
+	margin: 0;
+}
+
+.ml_radioDiv {
+  display: inline-flex;
+  align-items: center;
+}
+
+
+.ml_radio,
+.ml_radio[type='radio']:checked {
+  appearance: none;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 100%;
+  margin-right: 0.1rem;
+}
+
+.ml_radio[type='radio'] {
+  background-color: $white-color;
+  border: 2px solid $font-color-3;
+}
+.ml_radio[type='radio']:checked {
+  background-color: $font-color-2;
 }

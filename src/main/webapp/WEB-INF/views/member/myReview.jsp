@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -128,6 +129,35 @@
 	<div style="margin-left: 50px;">
 		<h2 class="rev_name">나의 후기</h2>
 		<ul class="rev_ul">
+			<c:forEach items="${reviewList}" var="rev">
+				<li class="rev_li"><a href="#">
+						<div class="rev_item">
+							<img class="rev_item_img" alt=""
+								src="${pageContext.request.contextPath}/resources/img/food2.png">
+							<div class="rev_item_div">
+								<strong class="rev_item_strong">상품명</strong> <span
+									class="rev_item_span">상품정보</span>
+							</div>
+						</div>
+						<div class="rev_review">
+							<div class="rev_review2">
+								<div class="rev_review3">
+									<span style="color: color: #000;">평점</span>
+									<p style="color: #5f5f5f;">리뷰내용</p>
+								</div>
+								<div class="rev_review4">
+									<img class="rev_review_img" alt="review_img"
+										src="${pageContext.request.contextPath}/resources/img/food.jpg">
+								</div>
+								<div class="rev_review5">
+									<button class="rev_mod">수정하기</button>
+									<img class="rev_del" alt="delete"
+										src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
+								</div>
+							</div>
+						</div>
+				</a></li>
+			</c:forEach>
 			<li class="rev_li"><a href="#">
 					<div class="rev_item">
 						<img class="rev_item_img" alt=""
@@ -160,15 +190,13 @@
 </body>
 
 <script type="text/javascript">
-
 	//수정하기 버튼 누르면 수정하기
 	$(".rev_mod").click(function() {
-		
+
 	});
 	//X버튼 누르면 삭제하기
 	$(".rev_del").click(function() {
-		
+
 	});
-	
 </script>
 </html>
