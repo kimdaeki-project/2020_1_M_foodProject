@@ -31,8 +31,19 @@ public class MenuController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		// 이미지 파일 저장 및 fileName 가져와서 thumbImg에 넣어주기
-		System.out.println();
+		
+		System.out.println("name"+menuVO.getName());
+		System.out.println("price"+menuVO.getPrice());
+		System.out.println("detail"+menuVO.getDetail());
+		System.out.println("files"+files[0].getOriginalFilename());
+		System.out.println("category");
+		for (String a : category) {
+			System.out.println(a);
+		}
+		
+		
+		
+		
 		
 		// 메뉴 insert
 		menuVO.setMarketNum(11);// test value
@@ -44,7 +55,6 @@ public class MenuController {
 			url = "./menuList";
 		}
 		
-		// 이미지 테이블에 insert
 		mv.addObject("msg", msg);
 		mv.addObject("path", url);
 		mv.setViewName("common/result");

@@ -149,11 +149,12 @@
 						<div class="rev_review">
 							<div class="rev_review2">
 								<div class="rev_review3">
-									<span style="color: color: #000;">평점</span>
-									<p style="color: #5f5f5f;">리뷰내용</p>
+									<span style="color: color: #000;">${reviewVO.rating}</span>
+									<c:forEach begin="1" end="${reviewVO.rating}">★</c:forEach>
+									<p style="color: #5f5f5f;">${reviewVO.contents}</p>
 								</div>
 								<div class="rev_review4">
-									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/img/food.jpg">
+									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
 								</div>
 								<div class="rev_review5">
 									<button class="rev_mod">수정하기</button>

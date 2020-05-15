@@ -154,6 +154,10 @@ public class MarketService {
 
 		//2.DB등록
 		FileInfoVO fileInfoVO = new FileInfoVO();
+		
+		long num = fileInfoDAO.fileCount();
+		fileInfoVO.setNum(num);
+		
 		fileInfoVO.setFileName(fileName);
 		fileInfoVO.setOriName(file.getOriginalFilename());
 		System.out.println("oriName:" +file.getOriginalFilename());

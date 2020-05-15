@@ -40,7 +40,6 @@
             </div>
          </div>
       </c:if>
-      <c:if test="${memberVO.isFoodTruck eq '0'}"></c:if>
 
       <div class="mp_myInfoNav">
          <aside>
@@ -55,6 +54,8 @@
                </c:if>
                <c:if test="${memberVO.isFoodTruck eq '1'}">
                   <li id="marketPage"><a href="#">마켓 정보 수정</a></li>
+                   <li id="menuAdd"><a href="#">메뉴 & 카테고리 추가</a></li>
+                   <li id="menuUpdate"><a href="#">메뉴 & 카테고리 수정</a></li>
                </c:if>
 
                <li id="member_delete"><a>탈퇴하기</a></li>
@@ -103,12 +104,8 @@
                   geocoder.coord2Address(coord.getLng(), coord.getLat(), function(result, status) {
                      
                       if (status === kakao.maps.services.Status.OK) {
-                         
                            console.log(result[0].address.address_name);
-                           
-                           $.post("../market/marketGeoUpdate", {userNum:'${memberVO.num}', address: result[0].address.address_name },
-                                 function(result) {
-                                 
+                           $.post("../market/marketGeoUpdate", {userNum:'${memberVO.num}', address: result[0].address.address_name },function(result) {
                                     console.log("GeoUpdate : "+result);
                            });
                       }
@@ -125,8 +122,11 @@
                console.log("result:"+result);
             })
             $(".toggleWrap").removeClass("on");
-
-
+         }
+      });
+ 
+ 
+ 
 		//탭 메뉴
 		$('#default').click(function() {
 			$.get("./orderAndPay", function(result) {
@@ -134,79 +134,68 @@
 				$('.mp_box').append(result);
 			});
 		});
+		
+		
 		$('#myReview').click(function() {
 			alert("click");
 			
 			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
-				console.log(result);
+				console.log("result : "+result);
 				
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
+		
+		
+		
 		$('#memberUpdate').click(function() {
 			$.get("./memberUpdate", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
+		
+		
+		
 		$('#marketJoin').click(function() {
 			$.get("../market/marketJoin", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
+		
+		
 		$('#marketPage').click(function() {
 			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
+		
+		$('#menuAdd').click(function() {
+			$.get("../menu/menuAdd", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
+		$('#menuUpdate').click(function() {
+			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
 
-         }
-      });
       
       //탈퇴하기
       $("#member_delete").click(function() {
          var check = confirm("탈퇴하시겠습니까?");
-
-
          if (check) {
             location.href = "./memberDelete?id=${memberVO.id}"
          }
       });
 
-      //탭 메뉴
-      $('#default').click(function() {
-         $.get("./orderAndPay", function(result) {
-            $('.mp_box').empty();
-            $('.mp_box').append(result);
-         });
-      });
-      $('#myReview').click(function() {
-         $.get("./myReview", function(result) {
-            $('.mp_box').empty();
-            $('.mp_box').append(result);
-         });
-      });
-      $('#memberUpdate').click(function() {
-         $.get("./memberUpdate", function(result) {
-            $('.mp_box').empty();
-            $('.mp_box').append(result);
-         });
-      });
-      $('#marketJoin').click(function() {
-         $.get("../market/marketJoin", function(result) {
-            $('.mp_box').empty();
-            $('.mp_box').append(result);
-         });
-      });
-      $('#marketPage').click(function() {
-         $.get("../market/marketPage?num=${memberVO.num}", function(result) {
-            $('.mp_box').empty();
-            $('.mp_box').append(result);
-         });
-      });
 
       $('#default').click();
    </script>

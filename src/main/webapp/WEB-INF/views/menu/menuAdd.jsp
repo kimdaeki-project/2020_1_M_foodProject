@@ -8,20 +8,16 @@
 <title>Menu Add</title>
 </head>
 <body style="margin-top: 61px;">
-	<form action="./menuAdd" method="post" enctype="multipart/form-data"
-		name="menuAdd">
+	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="file_form">
 		<h2>메뉴 추가</h2>
 		<div class="menuAdd_box">
-			<label for="title">메뉴명 : </label> <input type="text" id="title"
-				name="name">
+			<label for="title">메뉴명 : </label> <input type="text" id="name"name="name">
 		</div>
 		<div class="menuAdd_box">
-			<label for="price">가격 : </label> <input type="text" id="price"
-				name="price">
+			<label for="price">가격 : </label> <input type="text" id="price"name="price">
 		</div>
 		<div class="menuAdd_box">
-			<label for="detail">상세 :</label> <input type="text" id="detail"
-				name="detail">
+			<label for="detail">상세 :</label> <input type="text" id="detail"	name="detail">
 		</div>
 		<div class="menuAdd_box">
 			카테고리명:<input type="text" id="input">
@@ -29,12 +25,8 @@
 			<div id="category_box"></div>
 		</div>
 		<div class="menuAdd_box">
-			<label for="thumbImg">메뉴 이미지: </label> <input type="file"
-				id="thumbImg" name="files">
-		</div>
-		<div class="menuAdd_box">
-			<label for="thumbImg">메뉴 이미지: </label> <input type="file"
-				id="thumbImg" name="files">
+			<label for="thumbImg">메뉴 이미지: </label> 
+			<input type="file"id="thumbImg" name="files">
 		</div>
 		<div class="menuAdd_box">
 			<button type="button" id="submit">확인</button>
@@ -98,18 +90,17 @@
 				//console.log(opPrice);
 				
 				var option = {
-						"opName": opName,
-						"opPrice": opPrice
+						opName: opName,
+						opPrice: opPrice
 				}
 				
 				options.push(option);
 			}
 			
-			
 			var categoryName = $(this).text();
 			category = {
-					"categoryName": categoryName,
-					"options" : options
+					categoryName: categoryName,
+					options : options
 			}
 			
 			categorys.push(category);
@@ -119,13 +110,24 @@
 		
 		//ajax 전송
 		var objParams = {
-			"categorys" : categorys
+			categorys : categorys,
 		};
+		
+		
+		
+		var form = $('#file_form')[0];
+        var formData = new FormData(form);
+        formData.append("name", $("#name")[0].files[0]);
+        formData.append("price", $("#price")[0].files[0]);
+        formData.append("detail", $("#detail")[0].files[0]);
+        formData.append("files", $("#files")[0].files[0]);
+
+		
 
 		$.ajax({
-			url : "./menuAdd",
+			url : "../menu/menuAdd",
 			type : "post",
-			data : objParams,
+			data : {objParams,formData},
 			traditional : true,
 			success : function() {
 				console.log('성공');

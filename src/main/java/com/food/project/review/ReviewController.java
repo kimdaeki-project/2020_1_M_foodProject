@@ -24,14 +24,17 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
-	
 	//한 멤버가 작성한 리뷰목록 출력
 	@GetMapping("myReviewList")
 	public ModelAndView myReviewList(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		System.out.println("나의 후기목록");
 		
 		long memberNum = memberVO.getNum();
+		System.out.println("memberNum: "+memberNum);
+		
 		List<ReviewVO> myReviewList = reviewService.myReviewList(memberNum); 
+		
 		
 		if(myReviewList != null) {
 			mv.addObject("myReviewList", myReviewList);

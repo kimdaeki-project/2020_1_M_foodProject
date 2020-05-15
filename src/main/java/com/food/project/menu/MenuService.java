@@ -31,8 +31,8 @@ public class MenuService {
 		System.out.println("path : " + path);
 		
 		// menuCount값 증가
-		long num = menuDAO.menuCount();
-		menuVO.setNum(num);
+		long refNum = menuDAO.menuCount();
+		menuVO.setNum(refNum);
 
 		// menu Table에 insert
 		int result = menuDAO.menuAdd(menuVO);
@@ -43,13 +43,16 @@ public class MenuService {
 			String fileName = fileSaver.saveByUtils(file, path);
 			// 2.DB등록
 			FileInfoVO fileInfoVO = new FileInfoVO();
+			long num = fileInfoDAO.fileCount();
+			
+			fileInfoVO.setNum(num);
 			fileInfoVO.setFileName(fileName);
 			System.out.println("fileName:" + fileName);
 
 			fileInfoVO.setOriName(file.getOriginalFilename());
 			System.out.println("oriName: " + file.getOriginalFilename());
 			fileInfoVO.setKind(3); // menu
-			fileInfoVO.setRefNum(num);
+			fileInfoVO.setRefNum(refNum);
 			System.out.println("num: " + num);
 			// reviewNum, marketNum은 입력안해서 null값 부여
 
@@ -66,19 +69,16 @@ public class MenuService {
 
 	// 메뉴 리스트 읽어오기
 	public List<MenuVO> menuList(MenuVO menuVO) throws Exception {
-
 		return menuDAO.menuList(menuVO);
 	}
 
 	// 메뉴 단일 읽어오기
 	public MenuVO menuSelect(MenuVO menuVO) throws Exception {
-
 		return menuDAO.menuSelect(menuVO);
 	}
 
 	// 메뉴 수정
 	public int menuUpdate(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
-
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 				
@@ -103,7 +103,6 @@ public class MenuService {
 				throw new Exception();
 			}
 		}
-					
 		return menuDAO.menuUpdate(menuVO);
 	}
 
