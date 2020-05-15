@@ -3,6 +3,8 @@ package com.food.project;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,15 +18,21 @@ import com.food.project.member.MemberVO;
 public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home() {
+	public ModelAndView home(HttpSession session) {
 
 		ModelAndView mv = new ModelAndView();
 		
-		// 내 주변 반경 정하기
+		// 내 주변 반경 정하기 ?? 추가 기능으로 넣자
 		
-		// 내 위치 가져오기
-		// 내 주소 (~시)
-		String address = getAddress();
+		// 로그인을 안 했을시, Geolocation으로 위치 가져오기 (서울특별시 중심임을 알림)
+		// 로그인을 했을 시, 내 주소 (~시) 가져오기
+		String address = "";
+		MemberVO user = (MemberVO)session.getAttribute("member");
+		if(user == null) {
+			address = getAddress(); //"서울특별시 중구 세종대로 110";
+		} else {
+			address = user.getAddress();
+		}
 		
 		// 마켓 위치(유저테이블의 Geo date)가져오기
 		List<GeoVO> geoList = getGeoList();
