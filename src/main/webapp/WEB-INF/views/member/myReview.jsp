@@ -4,8 +4,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <style type="text/css">
-h2 {
+.rev_name {
 	margin: 0;
 	font-size: 22px;
 	padding-bottom: 15px;
@@ -30,20 +32,19 @@ h2 {
 	width: 100%;
 }
 
-.rev_item img {
+.rev_item_img {
 	width: 40px;
 	height: 40px;
 }
 
-.rev_item div {
+.rev_item_div {
 	overflow: hidden;
 	width: 50%;
 	padding-left: 10px;
 	overflow: hidden;
 }
 
-.rev_item strong, span {
-	overflow: auto;
+.rev_item_strong, .rev_item_span {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	font-size: 13px;
@@ -56,6 +57,35 @@ h2 {
 	padding: 15px 0 40px;
 }
 
+.rev_review2 {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.rev_review3 {
+	display: table-cell;
+	vertical-align: top;
+	width: 70%;
+}
+
+.rev_review4 {
+	position: relative;
+	display: table-cell;
+	width: 90px;
+	padding: 20px 0 0 20px;
+	vertical-align: top;
+	width: 90px;
+	padding: 20px 0 0 20px;
+}
+
+.rev_review5 {
+	display: table-cell;
+	width: 210px;
+	padding-top: 20px;
+	vertical-align: top;
+}
+
 .rev_review p {
 	margin: 0;
 	overflow: hidden;
@@ -66,40 +96,79 @@ h2 {
 	white-space: pre-wrap;
 }
 
-.rev_review img {
+.rev_review_img {
+	display: table-cell;
 	height: 90px;
 }
 
 .rev_del {
-	width: 15px;
-	height: 15px;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 13px;
+	right: 0;
+}
+
+.rev_mod {
+	position: relative;
+	width: 125px;
+	margin-left: 35px;
+	margin-right: 35px;
+	border: 1px solid #dedede;
+	background-color: #fff;
+	font-size: 12px;
+	line-height: 26px;
+	color: #555555;
+	text-align: center;
 }
 </style>
 <title>나의 리뷰</title>
 </head>
 <body style="width: 100%">
 	<div style="margin-left: 50px;">
-		<h2>나의 후기</h2>
+		<h2 class="rev_name">나의 후기</h2>
 		<ul class="rev_ul">
-			<li class="rev_li">
-				<div class="rev_item">
-					<img alt=""
-						src="${pageContext.request.contextPath}/resources/img/food2.png">
-					<div>
-						<strong>상품명</strong> <span>상품정보</span>
+			<li class="rev_li"><a href="#">
+					<div class="rev_item">
+						<img class="rev_item_img" alt=""
+							src="${pageContext.request.contextPath}/resources/img/food2.png">
+						<div class="rev_item_div">
+							<strong class="rev_item_strong">상품명</strong> <span
+								class="rev_item_span">상품정보</span>
+						</div>
 					</div>
-				</div>
-				<div class="rev_review">
-					<span>평점</span>
-					<p>리뷰내용</p>
-					<img alt=""
-						src="${pageContext.request.contextPath}/resources/img/food.jpg">
-					<img class="rev_del" src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
-					<button class="rev_mod">수정하기</button>
-				</div>
-			</li>
+					<div class="rev_review">
+						<div class="rev_review2">
+							<div class="rev_review3">
+								<span style="color: color: #000;">평점</span>
+								<p style="color: #5f5f5f;">리뷰내용</p>
+							</div>
+							<div class="rev_review4">
+								<img class="rev_review_img" alt="review_img"
+									src="${pageContext.request.contextPath}/resources/img/food.jpg">
+							</div>
+							<div class="rev_review5">
+								<button class="rev_mod">수정하기</button>
+								<img class="rev_del" alt="delete"
+									src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
+							</div>
+						</div>
+					</div>
+			</a></li>
 		</ul>
 	</div>
-
 </body>
+
+<script type="text/javascript">
+
+	//수정하기 버튼 누르면 수정하기
+	$(".rev_mod").click(function() {
+		
+	});
+	//X버튼 누르면 삭제하기
+	$(".rev_del").click(function() {
+		
+	});
+	
+</script>
 </html>
