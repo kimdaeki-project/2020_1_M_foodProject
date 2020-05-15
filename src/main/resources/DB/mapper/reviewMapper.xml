@@ -9,7 +9,7 @@
 		<id column="boardNum" property="boardNum"/> 
 		<result column="memberNum" property="memberNum"/>
 		<result column="marketNum" property="marketNum"/>
-		<result column="imageNum" property="imageNum"/>
+		<result column="fileName" property="fileName"/>
 		<result column="rating" property="rating"/>
 		<result column="contents" property="contents"/>
 		<result column="regDate" property="regDate"/>
@@ -53,7 +53,7 @@
 	</select>
 	
 	<insert id="boardInsert" parameterType="ReviewVO">
-		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{imageNum},#{rating},#{contents},sysdate,
+		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{fileName},#{rating},#{contents},sysdate,
 		#{boardNum},0,0)
 	</insert>
 	
@@ -67,7 +67,7 @@
 	</update>
 	
 	<insert id="boardReply" parameterType="ReviewVO">
-		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},#{imageNum},#{rating},#{contents},sysdate,
+		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},#{fileName},#{rating},#{contents},sysdate,
 		(select ref from review where boardNum=#{boardNum}),
 		(select step from review where boardNum=#{boardNum})+1,
 		(select depth from review where boardNum=#{boardNum})+1

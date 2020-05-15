@@ -39,15 +39,15 @@ public class MarketController {
 	//마켓종료
 	@GetMapping("marketIsOpen")
 	@ResponseBody
-	public int marketIsOpen(MarketVO marketVO,MemberVO memberVO) throws Exception{
-		System.out.println("iiii");
+	public int marketIsOpen(MarketVO marketVO,MemberVO memberVO,HttpSession session) throws Exception{
 		//member의 num으로 해당 marketSelect
 		marketVO.setUserNum(memberVO.getNum());
 		
-		System.out.println("isOpen : "+marketVO.getIsOpen());
+		int result = marketService.isOpen2(marketVO);
+		marketVO = marketService.marketSelect(marketVO);
 		
-		int result = marketService.isOpen(marketVO,memberVO);
 		if(result > 0) {
+			session.setAttribute("marketVO",marketVO);
 			System.out.println("영업종료");
 		}else {
 		}
@@ -58,16 +58,17 @@ public class MarketController {
 	//마켓 오픈 
 	@PostMapping("marketIsOpen")
 	@ResponseBody
-	public int marketIsOpen2(MarketVO marketVO,MemberVO memberVO) throws Exception{
+	public int marketIsOpen2(MarketVO marketVO,MemberVO memberVO,HttpSession session) throws Exception{
 //		System.out.println("la"+memberVO.getLatitude());
 //		System.out.println("lo"+memberVO.getLongitude());
 		//member의 num으로 해당 marketSelect
 		marketVO.setUserNum(memberVO.getNum());
 		
-		System.out.println("isOpen : "+marketVO.getIsOpen());
-		
 		int result = marketService.isOpen(marketVO,memberVO);
+		marketVO = marketService.marketSelect(marketVO);
+		
 		if(result > 0) {
+			session.setAttribute("marketVO",marketVO);
 			System.out.println("영업시작");
 		}else {
 		}
@@ -101,8 +102,6 @@ public class MarketController {
 		memberVO.setNum(marketVO.getUserNum());
 		memberVO = memberService.memberSelect(memberVO);
 		
-		System.out.println(memberVO);
-		
 		//메뉴
 		MenuVO menuVO = new MenuVO();
 		menuVO.setMarketNum(marketVO.getNum());
@@ -110,8 +109,10 @@ public class MarketController {
 
 		//리뷰																										/////////////
 		List<BoardVO> reviewList = reviewService.boardList(pager);
+		
 		//마켓의 전체 평균 값 조회
 		double marketRate = reviewService.marketAvg(marketVO.getNum()); 
+		System.out.println(marketRate);
 		
 		//전체 리뷰개수
 		int totalReview = reviewService.marketReviewCount(marketVO.getNum());
@@ -143,8 +144,11 @@ public class MarketController {
 		marketVO.setUserNum(memberVO.getNum());
 		
 		int result = marketService.marketInsert(marketVO,files,session);
+		memberVO = memberService.memberSelect(memberVO);
+		
 		
 		if(result > 0) {
+			session.setAttribute("memberVO", memberVO);
 			mv.addObject("msg", "판매자 등록에 성공하였습니다.");
 		}else {
 			mv.addObject("msg", "판매자 등록에 실패하였습니다.");

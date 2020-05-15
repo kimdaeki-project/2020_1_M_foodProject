@@ -5,7 +5,7 @@ import java.sql.Date;
 public class BoardVO {
 	private long boardNum;
 	private long memberNum;
-	private long imageNum;
+	private String fileName;
 	private String contents;
 	private Date regDate;
 	
@@ -21,11 +21,12 @@ public class BoardVO {
 	public void setMemberNum(long memberNum) {
 		this.memberNum = memberNum;
 	}
-	public long getImageNum() {
-		return imageNum;
+
+	public String getFileName() {
+		return fileName;
 	}
-	public void setImageNum(long imageNum) {
-		this.imageNum = imageNum;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	public String getContents() {
 		return contents;
