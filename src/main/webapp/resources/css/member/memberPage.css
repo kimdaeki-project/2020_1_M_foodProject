@@ -86,6 +86,7 @@ body {
 }
 
 .mp_myInfoNav a {
+	cursor: pointer;
    color: #6f7174;
    display: block;
    text-decoration: none;

@@ -23,11 +23,24 @@
 					<dl class="ml_opSel_dl">
 						<dt style="color: #3d3d3d;">카테고리명1</dt>
 						<dd>
-							<div class="ml_rdaioDiv">
-								<label class="ml_opLabel"> 
-									<input type="radio" class="ml_radio">카테고리 이름
-								</label>
-							</div>
+							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명1 / 가격 </label>
+						</dd>
+						<dd>
+							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명2 / 가격 </label>
+						</dd>
+						<dd>
+							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명3 / 가격 </label>
+						</dd>
+						<nav></nav>
+						<dt style="color: #3d3d3d;">카테고리명2</dt>
+						<dd>
+							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명1 / 가격 </label>
+						</dd>
+						<dd>
+							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명2 / 가격 </label>
+						</dd>
+						<dd>
+							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명3 / 가격 </label>
 						</dd>
 					</dl>
 				</div>

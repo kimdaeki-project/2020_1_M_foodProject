@@ -180,8 +180,12 @@ border-top: 1px solid #e7e7e7;
     letter-spacing: -.5px;
     color: #fff;
     padding: 15px;
-    margin: 0 -16px;
+    margin: 0 -30px;
     text-align: left;
+}
+
+.wrap_h3{
+	margin: 0;
 }
 
 img {

@@ -1,63 +1,54 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Home</title>
-	
-	<!-- kakao Map API -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
-	
-	<style type="text/css">
-	#main{
-		margin-top: 100px;
-	}
-	
-	#map {
-		margin-left: 100px;
-	}
-	</style>
-	
-	 <style>
-	    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-	    .wrap * {padding: 0;margin: 0;}
-	    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-	    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-	    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-	    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-	    .info .close:hover {cursor: pointer;}
-	    .info .body {position: relative;overflow: hidden;}
-	    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-	    .desc .market {overflow: hidden;text-overflow: market;white-space: nowrap;}
-	    .desc .time {font-size: 11px;color: #888;margin-top: -2px;}
-	    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-	    .info .img:hover {cursor: pointer;}
-	    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-	    .info .link {color: #5085BB;}
-	</style>
-	
+<meta charset="UTF-8">
+<title>Home</title>
+<!-- kakao Map API -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/home.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
+	rel="stylesheet">
 </head>
+
 <body>
-<%@ include file="./templates/header.jsp"%>
+	<%@ include file="./templates/header.jsp"%>
+	<div class="contents">
+		<div>
+			//돌아가는 이미지
+		</div>
+		<div>
+			//추천메뉴
+		</div>
+		<div id="main">
+			<div id="map" style="width: 90%; height: 50%"></div>
+		</div>
+		<div class="home_question">
+			<div class="home_question_wrap">
+				<pre class="home_q_pre">프레시코드는
+"샐러드는 배고픈 다이어트 음식" 이라는 편견을 깨고
+대한민국 직장인의 건강한 식사 문화를 만들고자 합니다.</pre>
+				<ul class="home_q_ul">
+					<li class="home_q_li">이메일 : help@freshcode.me</li>
+					<li class="home_q_li">카카오ID : @프레시코드-freshcode</li>
+					<li class="home_q_li">단체주문 문의 : order@freshcode.me</li>
+				</ul>
+				<nav class="home_q_nav">
+					<button class="home_q_btn">단체/케이터링 문의</button>
+				</nav>
+			</div>
+			<section class="home_insta" style="padding: 48px 30px 72px;">
+				//인스타그램
+			</section>
+		</div>
+	</div>
 
-<div id="main">
-	<div id="map" style="width:1200px;height:600px;"></div>
-</div>
 
-<div>
-	<c:forEach items="${marketList}" var="vo">
-		<h3>${vo.marketName}</h3>
-		<h3>${vo.marketIntro}</h3>
-		<h3>${vo.openTime}</h3>
-		<h3>${vo.closeTime}</h3>
-		<h3>${vo.isOpen}</h3>
-		<h3>${vo.canOrder}</h3>
-		<h3>${vo.thumbImg}</h3>
-	</c:forEach>
-</div>
-
-<%@ include file="./templates/footer.jsp"%>
+	<%@ include file="./templates/footer.jsp"%>
 
 	<script>
 		//=======================================

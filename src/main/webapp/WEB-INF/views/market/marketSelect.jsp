@@ -79,7 +79,7 @@
 				<!-- 리뷰 총 평점 -->
 				<section class="menu-review__rating">
 					<div class="wrap">
-						<h3>평점</h3>
+						<h3 class="wrap_h3">평점</h3>
 						<div class="row--v-center body">
 							<div class="col">
 								<dl class="row--v-center row--h-between">
