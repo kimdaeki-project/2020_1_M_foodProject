@@ -36,7 +36,7 @@ public class ReviewDAOTest extends AbstractTestCase{
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setMemberNum(8);
 		reviewVO.setMarketNum(8);
-		reviewVO.setImageNum(10);
+		reviewVO.setFileName("");
 		reviewVO.setContents("contents");
 		
 		int result = reviewDAO.boardInsert(reviewVO);
@@ -60,7 +60,7 @@ public class ReviewDAOTest extends AbstractTestCase{
 		reviewVO.setBoardNum(16);
 		reviewVO.setMemberNum(8);
 		reviewVO.setMarketNum(8);
-		reviewVO.setImageNum(30);
+		reviewVO.setFileName("");
 		reviewVO.setContents("contents22");
 		
 		int result = reviewDAO.boardReply(reviewVO);

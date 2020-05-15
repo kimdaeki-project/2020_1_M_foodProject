@@ -28,8 +28,8 @@
 		<div class="menu-tab">
 			<ol>
 				<li class="menu on">메뉴</li>
-				<li class="review">후기</li>
 				<li class="map">지도</li>
+				<li class="review">후기</li>
 			</ol>
 		</div>
 
@@ -107,10 +107,10 @@
 								<div class="owl-stage-outer">
 									<div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1535px;">
 										<!-- 반복문 돌려서 이미지 첨삭 -->
-										<c:forEach begin="1" end="7">
+										<c:forEach var="reviewVO" items="${reviewList}">
 											<div class="owl-item active" style="width: 203.2px; margin-right: 16px;">
 												<div class="images__image">
-													<a href="#"><i style="background-image: url(&quot;../resources/img/upload/review/11120_20200513123331.jpg&quot;);">image</i>
+													<a href="#"><i style="background-image: url(&quot;../resources/upload/review/${reviewVO.fileName}&quot;);">image</i>
 													</a>
 												</div>
 											</div>
@@ -162,7 +162,7 @@
 											<!-- 회원이 이미지를 등록했을 때만 이미지 html문을 추가해 출력해준다 -->
 												<p>
 													<a href="javascript:">
-														<i style="background-image: url(&quot;https://s3.ap-northeast-2.amazonaws.com/freshcode/menu/review/sm/11120_20200513123331&quot;);">photo</i>
+														<i style="background-image: url(&quot;../resources/upload/review/${reviewVO.fileName}&quot;);">photo</i>
 													</a>
 												</p>
 											</figure>
@@ -231,9 +231,7 @@
 
 	$("#btn-map").click(
 			function() {
-				window.open("https://map.kakao.com/link/to/"
-						+ '${marketVO.marketName}' + "," + longitude + ","
-						+ latitude);
+				window.open("https://map.kakao.com/link/to/" + '${marketVO.marketName}' + "," + longitude + ","+ latitude);
 			});
 
 	//지도 띄움
@@ -272,7 +270,7 @@
 								infowindow.close();
 							});
 
-				}, 500);
+				}, 1000);
 	}
 
 	function getGeo() {
@@ -288,10 +286,13 @@
 				console.log(longitude);
 				latitude = ${memberVO.longitude};
 				longitude = ${memberVO.latitude};
+				
+				console.log(latitude);
+				console.log(longitude);
 
 			}
 		};
-
+		
 		//주소값 전달 받아야되고
 		geocoder.addressSearch("${memberVO.address}", callback);
 	}
