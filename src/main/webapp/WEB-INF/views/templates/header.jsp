@@ -43,52 +43,53 @@
 
 	<!-- 장바구니 모달창 -->
 	<div class="modal">
-	<div class="modal_c">
-	<div class="modal_header">
-			<img id="m_close" alt=""
-				src="${pageContext.request.contextPath}/resources/img/header/x.png">
-			<h2>장바구니</h2>
-		</div>
-		<div class="modal_cartAllDel">
-			<span>전체 삭제</span>
-		</div>
-		<div class="modal_body">
-			<div class="modal_list">
-				<ul>
-					<li>
-						<div>
-							<div class="modal_itemInfo">
-								<img alt=""
-									src="${pageContext.request.contextPath}/resources/img/food.jpg">
-								<div>
-									<strong>메뉴 이름</strong> <span>메뉴 옵션</span>
+		<div class="modal_c">
+			<div class="modal_header">
+				<img id="m_close" alt=""
+					src="${pageContext.request.contextPath}/resources/img/header/x.png">
+				<h2>장바구니</h2>
+			</div>
+			<div class="modal_cartAllDel">
+				<span>전체 삭제</span>
+			</div>
+			<div class="modal_body">
+				<div class="modal_list">
+					<ul>
+						<li>
+							<div>
+								<div class="modal_itemInfo">
+									<img alt=""
+										src="${pageContext.request.contextPath}/resources/img/food.jpg">
+									<div>
+										<strong>메뉴 이름</strong> <span>메뉴 옵션</span>
+									</div>
+								</div>
+								<div class="modal_itemPay">
+									<em>0000원</em>
 								</div>
 							</div>
-							<div class="modal_itemPay">
-								<em>0000원</em>
-							</div>
-						</div>
-					</li>
-				</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="modal_receipt">
+				<div>
+					<dl>
+						<dt>총 주문 수량</dt>
+						<dt>3개</dt>
+					</dl>
+					<dl>
+						<dt>총 주문 금액</dt>
+						<dt>8000원</dt>
+					</dl>
+				</div>
+			</div>
+			<div class="modal_order"
+				style="position: absolute; top: 898 !important;">
+				<span class="modal_order">주문하기</span>
 			</div>
 		</div>
-		<div class="modal_receipt">
-			<div>
-				<dl>
-					<dt>총 주문 수량</dt>
-					<dt>3개</dt>
-				</dl>
-				<dl>
-					<dt>총 주문 금액</dt>
-					<dt>8000원</dt>
-				</dl>
-			</div>
-		</div>
-		<div class="modal_order">
-			<span>주문하기</span>
-		</div>
-	</div>
-		
+
 	</div>
 
 </body>

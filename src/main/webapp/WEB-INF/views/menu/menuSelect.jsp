@@ -15,19 +15,20 @@
 		<div class="ms_menu">
 			<img src="${pageContext.request.contextPath}/resources/img/food.jpg">
 			<div class="ms_menuInfo">
-				<h2>메뉴 이름</h2>
-				<p>메뉴 가격</p>
+				<h2>${menuVO.name}</h2>
+				<p>${menuVO.price}</p>
 				<nav></nav>
 				<em>카테고리</em> <select id="ml_category">
-					<option value="none">카테고리</option>
-					<option value="카테고리1">카테고리1</option>
-					<option value="카테고리2">카테고리2</option>
+					<option>카테고리</option>
+					<c:forEach items="${categoryList}" var="cl">
+						<option value="">${cl.name}</option>
+					</c:forEach>
 				</select> 
 				<em>옵션</em> <select id="ml_option" disabled="disabled">
-					<option value="none" class="c_option">가격</option>
-					<option value="가격1" class="c_option">가격1</option>
-					<option value="가격2" class="c_option">가격2</option>
-					<option value="가격3" class="c_option">가격3</option>
+					<option>가격</option>
+					<c:forEach items="${menuOptionList}" var="mol">
+						<option value="${mol.name}" class="c_option">${mol.name}</option>
+					</c:forEach>
 				</select>
 				<div class="ml_opDiv">
 					
@@ -44,7 +45,7 @@
 		
 		//카테고리를 선택해야 옵션이 활성화 됨 
 		$("#ml_category").change(function() {
-			if ($("#ml_category").val() == 'none') {
+			if ($("#ml_category").text() == '카테고리') {
 				$("#ml_option").attr('disabled', true);
 			} else{
 				$("#ml_option").attr('disabled', false);
