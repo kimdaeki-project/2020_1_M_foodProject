@@ -20,6 +20,7 @@ public class MarketVO {
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
+	
 	private ReviewVO reviewVO;
 	
 	public ReviewVO getReviewVO() {

@@ -5,60 +5,97 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.food.project.geo.GeoDAO;
 import com.food.project.geo.GeoVO;
+import com.food.project.market.MarketDAO;
 import com.food.project.market.MarketVO;
 import com.food.project.member.MemberVO;
 
 @Controller
 public class HomeController {
 	
+	@Autowired
+	private MarketDAO marketDAO;
+	
+	@Autowired
+	private GeoDAO geoDAO;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public ModelAndView home(HttpSession session) {
+	public ModelAndView home(HttpSession session) throws Exception{
 
 		ModelAndView mv = new ModelAndView();
 		
 		// 내 주변 반경 정하기 ?? 추가 기능으로 넣자
 		
 		// 로그인을 안 했을시, Geolocation으로 위치 가져오기 (서울특별시 중심임을 알림)
-		// 로그인을 했을 시, 내 주소 (~시) 가져오기
+		// 로그인을 했을 시, 주소 가져오기
 		String address = "";
-		MemberVO user = (MemberVO)session.getAttribute("member");
-		if(user == null) {
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		if(memberVO == null) {
 			address = getAddress(); //"서울특별시 중구 세종대로 110";
 		} else {
-			address = user.getAddress();
+			address = memberVO.getAddress();
 		}
 		
-		// 마켓 위치(유저테이블의 Geo date)가져오기
-		List<GeoVO> geoList = getGeoList();
-		
-		// 마켓 정보들 가져오기(~시 검색) 
-		List<MarketVO> marketList = getMarketList();	
-		for (MarketVO marketVO : marketList) {
-			if(marketVO.getThumbImg() == null)
-				marketVO.setThumbImg("");
+		// 유저의 위치 (~구 찾기)
+		String[] addressInfo = address.split(" ");
+		MarketVO marketVO = new MarketVO();
+		for (int i = 0; i < addressInfo.length; i++) {
+			
+			// 주소에서 구만 가져옴
+			if(addressInfo[i].length()-1 == addressInfo[i].lastIndexOf("구")) {
+				
+				marketVO.setAddress(addressInfo[i]);
+				break;
+			}
 		}
+		
+		// 마켓 정보들 가져오기(~구 검색)
+		List<MarketVO> marketList = marketDAO.marketGuList(marketVO); //getMarketList();
+		for (MarketVO vo : marketList) {
+			if(vo.getThumbImg() == null)
+				vo.setThumbImg("");
+		}
+		
+		// 해당되는 마켓들의 위치데이터(유저테이블의 Geo date)가져오기'
+		System.out.println(marketVO.getAddress());
+		List<GeoVO> geoList = geoDAO.geoList(marketVO); //getGeoList();
+		System.out.println(geoList!=null?"not null":"null");
+		
+		// 마켓 및 Geo data 확인
+//		for(int i=0; i<marketList.size(); i++) {
+//			
+//			GeoVO gvo = geoList.get(i);
+//			MarketVO mvo = marketList.get(i);
+//			System.out.println("NUM\t\tLatitude\t\tLongitude\t\tMarketName\t\tAddress");
+//			System.out.print(gvo.getNum()+"\t\t");
+//			System.out.print(gvo.getLatitude()+"\t\t");
+//			System.out.print(gvo.getLongitude()+"\t\t");
+//			System.out.print(mvo.getMarketName()+"\t\t");
+//			System.out.println(mvo.getAddress());
+//		}
 		
 		// 내 위치 보내기
-		mv.addObject("address", address);
-		
-		// 마켓 위치 list로 보내기
-		mv.addObject("geoList", geoList);
-		
-		// 마켓 정보 list로 보내기
-		mv.addObject("marketList", marketList);
-		
+//		System.out.println(address);
+//		mv.addObject("address", address);
+//		
+//		// 마켓 위치 list로 보내기
+//		mv.addObject("geoList", geoList);
+//		
+//		// 마켓 정보 list로 보내기
+//		mv.addObject("marketList", marketList);
 		
 		mv.setViewName("home");
 		
 		return mv;
 	}
-	
+
 	//============================
 	// 유저 주소 가져오기
 	//============================

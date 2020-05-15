@@ -27,6 +27,13 @@
 		</association>
 	</resultMap>
 
+	<select id="marketGuList" parameterType="MarketVO" resultMap="ListResult">
+		SELECT m.*, r.rating 
+		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
+		ON (m.num = r.marketNum) 
+		WHERE address LIKE '%'||#{address}||'%'
+		ORDER BY m.userNum
+	</select>
 	
 	<select id="marketList" resultMap="ListResult">
 		SELECT m.*, r.rating 
@@ -43,7 +50,7 @@
 	</select>
 	
 	<insert id="marketInsert" parameterType="MarketVO">
-		insert into market values(#{num},#{userNum},#{categoryNum},#{crn},#{marketName},#{openTime},#{closeTime},1,1,#{marketIntro},null,sysdate,sysdate,#{thumbImg})
+		insert into market values(#{num},#{userNum},#{categoryNum},#{crn},#{marketName}, #{address, jdbcType=VARCHAR}, #{openTime},#{closeTime},1,1,#{marketIntro},#{thumbImg, jdbcType=VARCHAR}, sysdate, sysdate, null)
 	</insert>
 	
 	<update id="marketDelete" parameterType="MarketVO">
@@ -61,6 +68,5 @@
 	<update id="isOpen" parameterType="MarketVO">
 		update market set isOpen=#{isOpen} where UserNum=#{userNum}
 	</update>
-	
 
 </mapper>

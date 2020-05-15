@@ -47,24 +47,28 @@
 
 <div>
 	<c:forEach items="${marketList}" var="vo">
-		<h3>${vo.marketName}</h3>
-		<h3>${vo.marketIntro}</h3>
-		<h3>${vo.openTime}</h3>
-		<h3>${vo.closeTime}</h3>
-		<h3>${vo.isOpen}</h3>
-		<h3>${vo.canOrder}</h3>
-		<h3>${vo.thumbImg}</h3>
+		<h6>${vo.num}</h6>
+		<h6>${vo.userNum}</h6>
+		<h6>${vo.categoryNum}</h6>
+		<h6>${vo.marketName}</h6>
+		<h6>${vo.openTime}</h6>
+		<h6>${vo.closeTime}</h6>
+		<h6>${vo.isOpen}</h6>
+		<h6>${vo.canOrder}</h6>
+		<h6>${vo.marketIntro}</h6>
+		<h6>${vo.thumbImg}</h6>
+		<h6>${vo.reviewVO.rating}</h6>
 	</c:forEach>
 </div>
 
 <%@ include file="./templates/footer.jsp"%>
 
-	<script>
+	<!-- <script>
 		//=======================================
 		// script 전역변수
 		//=======================================
-		var latitude;
-		var longitude;
+		var latitude;				// 위도 (30~)
+		var longitude;				// 경도 (127~)
 		var map;
 		var g_marketInfos = [];
 		
@@ -73,6 +77,8 @@
 		//========================================
 		function getUserGeo() {
 
+			console.log(`${address}`);
+			
 			var geocoder = new kakao.maps.services.Geocoder();
 
 			var callback = function(result, status) {
@@ -144,13 +150,17 @@
 
 				var market = {
 						//userNum(오버레이 id 값), avg rating(오버레이에 추가로 필요한 정보) 필요
+						marketNum: `${vo.marketNum}`,
+						userNum: `${vo.userNum}`,
+						categoryNum: `{vo.categoryNum}`,
 						marketName: `${vo.marketName}`,
-						marketIntro: `${vo.marketIntro}`,
 						openTime: `${vo.openTime}`,
 						closeTime: `${vo.closeTime}`,
 						isOpen: ${vo.isOpen},
 						canOrder: ${vo.canOrder},
-						thumbImg: `${vo.thumbImg}`
+						marketIntro: `${vo.marketIntro}`,
+						thumbImg: `${vo.thumbImg}`,
+						rating: `${vo.rating}`
 				};
 				
 				markets.push(market);	
@@ -179,7 +189,7 @@
 				geos.push(geo);
 				
 			</c:forEach>
-			
+						
 			return geos;
 		}
 	
@@ -244,9 +254,9 @@
 				var content = '<div class="wrap">' + 
 	            '    <div class="info">' + 
 	            '        <div class="title">' + markets[i].marketName + 
-	            '            <div class="close" id="'+ markets[i].marketName +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
+	            '            <div class="close" id="'+ markets[i].userNum +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
 	            '        <div class="body">' + 
-	            '            <div class="img" id="'+ markets[i].marketName +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
+	            '            <div class="img" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
 	            '                <img src="#" width="73" height="70">' +
 	            '           </div>' + 
 	            '            <div class="desc">' + 
@@ -351,17 +361,19 @@
 		//====================
 		function main() {
 			
+			console.log("before");
 			getUserGeo();
+			console.log("after");
 			
 			setTimeout(function() {
 
-				getMap();
+				/* getMap();
 				getUserMarker();
 				getMarketInfos();
 
 				for(var i=0; i<g_marketInfos.length; i++) {
 					markerEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
-				}
+				} */
 				
 			}, 200);
 		}
@@ -370,5 +382,6 @@
 		main();
 		
 	</script>
+ -->
 </body>
 </html>
