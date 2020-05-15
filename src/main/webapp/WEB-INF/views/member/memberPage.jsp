@@ -67,65 +67,60 @@
 	<%@ include file="../templates/footer.jsp"%>
 
 	<script type="text/javascript">
-		//토글 버튼
-		$("#toggle_alarm")
-				.click(
-						function() {
-							var latitude, longitude;
-
-							var check = $("#toggle_alarm").val();
-							if (check == 0) {
-								//영업시작
-								$("#toggle_alarm").val(1);
-
-								if (navigator.geolocation) {
-									navigator.geolocation
-											.getCurrentPosition(function(
-													position) {
-												latitude = position.coords.latitude;
-												longitude = position.coords.longitude;
-
-												latitude = Math
-														.floor(latitude * 1000000) / 1000000;
-												longitude = Math
-														.floor(longitude * 1000000) / 1000000;
-
-												$
-														.post(
-																"../market/marketIsOpen",
-																{
-																	num : '${memberVO.num}',
-																	isOpen : $(
-																			"#toggle_alarm")
-																			.val(),
-																	latitude : latitude,
-																	longitude : longitude
-																},
-																function(result) {
-																	console
-																			.log("p result:"
-																					+ result);
-																})
-
-											});
-								} else {
-									console.log("허용안해서 주소 못불러옴");
-								}
-
-							} else {
-								//영업종료
-								$("#toggle_alarm").val(0);
-								$.get(
-										"../market/marketIsOpen?num=${memberVO.num}&isOpen="
-												+ $("#toggle_alarm").val(),
-										function(result) {
-											console.log("result:" + result);
-										})
-
-							}
-
+		
+		$("#toggle_alarm").click(function() {
+			var latitude,longitude;
+			
+			var check = $("#toggle_alarm").val();
+			if(check == 0){
+				//영업시작
+				$("#toggle_alarm").val(1);
+				
+				if (navigator.geolocation) {
+				    navigator.geolocation.getCurrentPosition(function(position) {
+				    	latitude = position.coords.latitude;
+				    	longitude = position.coords.longitude;
+				    	
+				    	latitude = Math.floor(latitude*1000000)/1000000;
+				    	longitude = Math.floor(longitude*1000000)/1000000;
+				    	
+						$.post("../market/marketIsOpen",{
+							num:'${memberVO.num}',isOpen:$("#toggle_alarm").val(), 
+							latitude:latitude, longitude:longitude}, function(result){
+							console.log("p result:"+result);
+						})
+						
+						// kakao 이용 현재 마켓 주소 업데이트
+						var geocoder = new kakao.maps.services.Geocoder();
+						var coord = new kakao.maps.LatLng(latitude, longitude);
+						geocoder.coord2Address(coord.getLng(), coord.getLat(), function(result, status) {
+						    if (status === kakao.maps.services.Status.OK) {
+						    	
+						      	console.log(result[0].address.address_name);
+						      	
+						      	$.post("../market/marketGeoUpdate", 
+						      			{ userNum:'${memberVO.num}', address: result[0].address.address_name },
+						      			function(result) {
+						      			
+						      				console.log("GeoUpdate : "+result);
+						      	});
+						    }
 						});
-
+					});
+				}else { 
+				  	alert("허용안해서 주소 못불러옴")
+				}
+				
+			}else{
+				//영업종료
+				$("#toggle_alarm").val(0);
+				$.get("../market/marketIsOpen?num=${memberVO.num}&isOpen="+$("#toggle_alarm").val(),function(result){
+					console.log("result:"+result);
+				})
+	
+			}
+		});
+		
 		//탈퇴하기
 		$("#member_delete").click(function() {
 			var check = confirm("탈퇴하시겠습니까?");
