@@ -82,11 +82,7 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 <%@ include file="../templates/footer.jsp"%>
 
 <script type="text/javascript">
-		
-		
-		
-		
-		
+
 		$("#toggle_alarm").click(function() {
 			var latitude,longitude;
 			
@@ -129,14 +125,6 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 				}else { 
 				  	alert("허용안해서 주소 못불러옴")
 				}
-
-				/* geocoder.coord2Address(coord.getLng(), coord.getLat(), function() {
-					
-					// 여기서부터 건드려야함
-					$.post("../market/marketGeoUpdate",{userNum:'${memberVO.num}', isOpen:$("#toggle_alarm").val(),latitude:latitude,longitude:longitude},function(result){
-						console.log("p result:"+result);
-					})
-				}); */
 				
 			}else{
 				//영업종료
@@ -146,23 +134,7 @@ div.toggleWrap > span { font-size: 15px; font-weight: 600; line-height: 2; color
 				})
 
 			}
-			
-			
-			/* var geocoder = new kakao.maps.services.Geocoder();
-
-			var coord = new kakao.maps.LatLng(37.56496830314491, 126.93990862062978);
-			var callback = function(result, status) {
-			    if (status === kakao.maps.services.Status.OK) {
-			    	
-			      	console.log('그런 너를 마주칠까 ' + result[0].address.address_name + '을 못가');
-			      	console.log(result);
-			    }
-			};
-
-			geocoder.coord2Address(coord.getLng(), coord.getLat(), callback); */
 		});
-		
-		
 
 		$("#member_delete").click(function() {
 			var check = confirm("탈퇴하시겠습니까?");
