@@ -67,12 +67,14 @@
 						<img src="../resources/img/marketSelect/review-icon.png" style="width: 30px; display: inline-block; margin-top: -38px; margin-right: 20px;">
 					</div>
 					<div>
-						지금, 후기를 작성하고 <span style="font-weight: bold;">300원 포인트</span> 를받으세요!
+						지금, 후기를 작성하고 <span style="font-weight: bold;">300원 포인트</span>를 받으세요!
 					</div>
 					<div class="view-review-comment-btn-wrap">
+						<a href="${pageContext.request.contextPath}/review/reviewInsert">
 						<button type="button" class="button button--inline button--side-padding button--size-small button--outline" style="color: white; border: 1px solid white; font-size: 14px; background-color: inherit;">
 							<span class="button__wrap">후기 쓰러가기</span>
 						</button>
+						</a>
 					</div>
 				</div>
 
