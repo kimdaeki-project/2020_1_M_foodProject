@@ -22,7 +22,7 @@ body {
 	display: flex;
 }
 
-.ms_menu img {
+.ms_menu > img {
 	width: 400px;
 	height: 400px;
 }
@@ -32,7 +32,7 @@ body {
 	width: 630px;
 }
 
-.ms_menuInfo nav {
+.ms_menuInfo > nav {
 	display: flex;
 	flex-wrap: wrap;
 	margin-top: 16px;
@@ -40,7 +40,7 @@ body {
 	border-top: 1px solid #e7e7e7;
 }
 
-.ms_menuInfo button {
+.ms_menuInfo > button {
 	cursor: pointer;
 	padding: 15px 60px;
 	outline: transparent;

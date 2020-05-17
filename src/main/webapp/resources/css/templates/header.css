@@ -25,7 +25,7 @@ body {
 	height: 51px;
 }
 
-.header_a img {
+.header_a > img {
 	padding-left: 10px;
 	height: 51px;
 }
@@ -38,7 +38,7 @@ body {
 	color: #6f7174;
 }
 
-.h_nav_ul a {
+.h_nav_ul > a {
 	text-decoration: none;
 	color: #6f7174;
 	padding: 10px 10px;
@@ -115,7 +115,7 @@ body {
 	background: #fff;
 }
 
-.modal_header img {
+.modal_header > img {
 	cursor: pointer;
 	display: flex;
 	align-items: center;
@@ -126,7 +126,7 @@ body {
 	display: flex;
 }
 
-.modal_header h2 {
+.modal_header > h2 {
 	font-size: 24px;
 	line-height: 28px;
 	font-weight: 300;
@@ -146,7 +146,7 @@ body {
 	background: #27b06e;
 }
 
-.modal_cartAllDel span {
+.modal_cartAllDel > span {
 	display: block;
 	font-size: 14px;
 	line-height: 16px;
@@ -165,13 +165,13 @@ body {
 	background-color: white;
 }
 
-.modal_list ul {
+.modal_list > ul {
 	margin: 0;
 	padding: 0 16px;
 	list-style: none;
 }
 
-.modal_list li {
+.modal_list > li {
 	margin: 15px 0 0;
 }
 
@@ -184,7 +184,7 @@ body {
 	box-sizing: border-box;
 }
 
-.modal_itemInfo img {
+.modal_itemInfo > img {
 	margin: 0;
 	width: 48px;
 	height: 48px;
@@ -193,18 +193,18 @@ body {
 	background-size: cover;
 }
 
-.modal_itemInfo div {
+.modal_itemInfo > div {
 	margin-left: 10px;
 }
 
-.modal_itemInfo strong {
+.modal_itemInfo > strong {
 	display: block;
 	font-size: 14px;
 	line-height: 16px;
 	font-weight: 500;
 }
 
-.modal_itemInfo span {
+.modal_itemInfo > span {
 	display: block;
 	margin: 6px 0 0;
 	font-size: 12px;
@@ -225,11 +225,11 @@ body {
 	background-color: white;
 }
 
-.modal_receipt div {
+.modal_receipt > div {
 	padding: 16px;
 }
 
-.modal_receipt dl {
+.modal_receipt > dl {
 	align-items: center;
 	margin: 0;
 	padding: 0;
@@ -252,7 +252,7 @@ body {
 	background: #27b06e;
 }
 
-.modal_order span{
+.modal_order > span{
 	display: block;
 	font-size: 14px;
 	line-height: 16px;

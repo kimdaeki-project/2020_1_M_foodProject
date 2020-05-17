@@ -11,7 +11,7 @@ body{
 
 }
 
-.menuAdd_box input{
+.menuAdd_box > input{
     box-sizing: border-box;
     padding: 0 15px;
     height: 38px;
