@@ -31,7 +31,6 @@
 	    .desc .market {overflow: hidden;text-overflow: market;white-space: nowrap;}
 	    .desc .time {font-size: 11px;color: #888;margin-top: -2px;}
 	    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-	    .info .img:hover {cursor: pointer;}
 	    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 	    .info .link {color: #5085BB;}
 	</style>
@@ -76,8 +75,6 @@
 		//========================================
 		function getUserGeo() {
 
-			//console.log(`${address}`);
-			
 			var geocoder = new kakao.maps.services.Geocoder();
 
 			var callback = function(result, status) {
@@ -250,17 +247,17 @@
 
 				var content = '<div class="wrap">' + 
 	            '    <div class="info">' + 
-	            '        <div class="title">' + markets[i].marketName + 
-	            '            <div class="close" id="'+ markets[i].userNum +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
+	            '        <div class="title click" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' + markets[i].marketName + 
+	            '            <div class="close click" id="'+ markets[i].userNum +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
 	            '        <div class="body">' + 
-	            '            <div class="img" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
+	            '            <div class="img" id="'+ markets[i].userNum +'"'+'>' +
 	            '                <img src="#" width="73" height="70">' +
 	            '           </div>' + 
 	            '            <div class="desc">' + 
 	            '                <div class="market">' + markets[i].marketIntro +
 	            '				 </div>' + 
 	            '                <div class="time">(open ~ close)'+ markets[i].openTime + ' ~ ' + markets[i].closeTime + '</div>' + 
-	            '                <div class="time">별점</div>' + 
+	            '                <div class="time">별점</div>' +
 	            '            </div>' + 
 	            '	    </div>' + 
 	            '    </div>' +    
@@ -297,9 +294,7 @@
 				}
 				
 				g_marketInfos.push(marketInfo);
-			}
-			
-			console.log(g_marketInfos);
+			}	
 		}
 		
 		//==========================
@@ -337,6 +332,15 @@
 					return;
 				}
 			}
+		}
+		
+		//====================
+		// 마켓 select Handler
+		//====================
+		function marketSelectHandler(clickedId) {
+		
+			var ref = '/project/market/marketSelect?userNum='+clickedId;
+			location.href = ref;
 		}
 		
 		//====================
