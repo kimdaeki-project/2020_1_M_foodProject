@@ -1,7 +1,6 @@
 body {
    margin: 0;
-   padding: 0;
-   margin: 103px 150px 0px 0px;
+   padding: 103px 150px 0px 0px;
    font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -27,16 +26,14 @@ body {
    padding-left: 16px;
 }
 
-.mp_me strong {
+.mp_me_strong {
    font-size: 17px;
+   display: block;
 }
 
-.mp_me span {
+.mp_me_span {
    color: #9b9b9b;
    font-size: 14px;
-}
-
-.mp_me strong, span {
    display: block;
 }
 
@@ -46,12 +43,12 @@ body {
    border-left: 1px solid #cccccc;
 }
 
-.mp_num span {
+.mp_num_span {
    font-size: 13px;
    color: #6f7174;
 }
 
-.mp_num em {
+.mp_num_em {
    font-style: normal;
    font-size: 28px;
    color: #27b06e;
@@ -71,21 +68,22 @@ body {
    border-bottom: 1px solid #e7e7e7;
 }
 
-.mp_myInfoNav aside {
+.mp_myInfoNav_aside {
    width: 184px;
 }
 
-.mp_myInfoNav ul {
+.mp_myInfoNav_ul {
    padding: 0;
    margin: 0;
    list-style: none;
 }
 
-.mp_myInfoNav li {
+.mp_myInfoNav_li {
    border-bottom: 1px solid #e7e7e7;
 }
 
-.mp_myInfoNav a {
+.mp_myInfoNav_a {
+	cursor: pointer;
    color: #6f7174;
    display: block;
    text-decoration: none;

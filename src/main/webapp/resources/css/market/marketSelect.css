@@ -5,9 +5,8 @@ body {
 }
 
 .container {
-	padding: 0 30px;
+	padding: 100px 30px;
 	margin: 0 auto;
-	margin-top: 100px;
 }
 
 .container h3 {
@@ -180,8 +179,12 @@ border-top: 1px solid #e7e7e7;
     letter-spacing: -.5px;
     color: #fff;
     padding: 15px;
-    margin: 0 -16px;
+    margin: 0 -30px;
     text-align: left;
+}
+
+.wrap_h3{
+	margin: 0;
 }
 
 img {

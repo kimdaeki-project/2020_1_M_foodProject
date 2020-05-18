@@ -51,6 +51,7 @@
 	font-size: 13px;
 	line-height: 17px;
 	color: #333;
+	display: block;
 }
 
 .rev_review {
@@ -87,7 +88,7 @@
 	vertical-align: top;
 }
 
-.rev_review p {
+.rev_review_p {
 	margin: 0;
 	overflow: hidden;
 	padding-top: 6px;
@@ -151,8 +152,7 @@
 								<div class="rev_review3">
 									<span style="color: color: #000;">${reviewVO.rating}</span>
 									<c:forEach begin="1" end="${reviewVO.rating}">★</c:forEach>
-									<p style="color: #5f5f5f;">${reviewVO.contents}</p>
-								</div>
+									<p style="color: #5f5f5f;">${reviewVO.contents}</p></div>
 								<div class="rev_review4">
 									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
 								</div>
@@ -168,7 +168,6 @@
 			
 			
 			</c:forEach>
-			
 		</ul>
 	</div>
 </body>

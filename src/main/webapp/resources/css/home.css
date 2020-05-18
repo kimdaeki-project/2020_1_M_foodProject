@@ -1,0 +1,193 @@
+@charset "UTF-8";
+
+#main {
+	margin-top: 100px;
+}
+
+#map {
+	margin-left: 100px;
+}
+
+</
+style> <style>.wrap {
+	position: absolute;
+	left: 0;
+	bottom: 40px;
+	width: 288px;
+	height: 132px;
+	margin-left: -144px;
+	text-align: left;
+	overflow: hidden;
+	font-size: 12px;
+	font-family: 'Noto Sans KR', sans-serif;
+	line-height: 1.5;
+}
+
+.wrap * {
+	padding: 0;
+	margin: 0;
+}
+
+.wrap .info {
+	width: 286px;
+	height: 120px;
+	border-radius: 5px;
+	border-bottom: 2px solid #ccc;
+	border-right: 1px solid #ccc;
+	overflow: hidden;
+	background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+	padding: 5px 0 0 10px;
+	height: 30px;
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.info .close {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #888;
+	width: 17px;
+	height: 17px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .close:hover {
+	cursor: pointer;
+}
+
+.info .body {
+	position: relative;
+	overflow: hidden;
+}
+
+.info .desc {
+	position: relative;
+	margin: 13px 0 0 90px;
+	height: 75px;
+}
+
+.desc .market {
+	overflow: hidden;
+	text-overflow: market;
+	white-space: nowrap;
+}
+
+.desc .time {
+	font-size: 11px;
+	color: #888;
+	margin-top: -2px;
+}
+
+.info .img {
+	position: absolute;
+	top: 6px;
+	left: 5px;
+	width: 73px;
+	height: 71px;
+	border: 1px solid #ddd;
+	color: #888;
+	overflow: hidden;
+}
+
+.info .img:hover {
+	cursor: pointer;
+}
+
+.info:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: 0;
+	width: 22px;
+	height: 12px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.info .link {
+	color: #5085BB;
+}
+
+.home_question {
+	position: relative;
+	padding: 16px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #fafafa url(../img/home/bg-home-contact.jpg) 50% 50% no-repeat;
+	background-size: auto;
+	background-size: cover;
+}
+
+.home_question::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.6);
+}
+
+.home_question_wrap{
+	position: relative;
+}
+
+.home_q_pre{
+	margin: 0;
+	font-size: 16px;
+	color: #fff;
+	font-weight: 600;
+	letter-spacing: -.7px;
+	text-align: center;   
+	line-height: 1.5; 
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.home_q_ul{
+	margin: 15px 0 0;
+	padding: 0;
+	list-style: none;
+	text-align: center;
+	line-height: 1.5;
+}
+
+.home_q_li{
+	font-size: 15px;
+	color: #fff;
+	font-weight: 300;
+	opacity: .75;
+	}
+	
+.home_q_nav{
+	margin: 30px 0 0;
+}
+
+.home_q_btn{
+	font-size: 15px;
+	font-weight: 600;
+	display: block;
+	margin: 0 auto;
+	padding: 13px 0;
+	width: 300px;
+	background: #fff;
+	color: #27b06e;
+	border: none;
+	outline: none;
+	user-select: none;
+	cursor: pointer;
+}

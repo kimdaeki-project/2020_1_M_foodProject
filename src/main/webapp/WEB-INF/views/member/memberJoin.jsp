@@ -11,7 +11,7 @@
 </head>
 <body>
 <%@ include file="../templates/header.jsp"%>
-	<div class="memberJoin_container" style="margin: 103px 0 50px 0px;">
+	<div class="memberJoin_container" style="padding: 103px 0 50px 0px;">
         <article class="memberJoin_article">
             <form action="./memberJoin" method="post" id="joinForm">
                 <header class="memberJoin_header">

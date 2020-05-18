@@ -1,0 +1,170 @@
+@charset "UTF-8";
+
+.rl_body {
+	margin-top: 52px;
+	padding: 55px 25%;
+}
+
+.rl_section {
+	margin: 0 auto;
+}
+
+.rl_item {
+	display: table;
+	overflow: hidden;
+	width: 100%;
+	padding: 20px;
+	box-sizing: border-box;
+	table-layout: fixed;
+}
+
+.rl_item_pic {
+	display: table-cell;
+	width: 75px;
+	vertical-align: middle;;
+}
+
+.rl_item_img {
+	width: 75px;
+	vertical-align: middle;
+	width: 75px;
+	height: 75px;
+}
+
+.rl_item_info {
+	display: table-cell;
+	overflow: hidden;
+	padding-left: 14px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.rl_item_p {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	line-height: 16px;
+	white-space: nowrap;
+	font-size: 13px;
+	color: #bbb;
+}
+
+.rl_item_h2 {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	line-height: 17px;
+	white-space: nowrap;
+	margin-top: 8px;
+	font-size: 14px;
+	font-weight: normal;
+}
+
+.rl_rate {
+	color: #27b06e;
+	border-top: 1px solid #eee;
+	background-color: #fff;
+	text-align: center;
+	border-top: 1px solid #eee;
+}
+
+.rl_rate_span {
+	display: block;
+	padding-top: 28px;
+	font-size: 18px;
+}
+
+.rl_rating {
+	position: relative;
+	padding: 12px 0 26px;
+}
+
+.rl_review {
+	border-top: 1px solid #eee;
+	background-color: #fff;
+	text-align: center;
+}
+
+.rl_review_strong {
+	display: block;
+	padding-top: 28px;
+	font-size: 18px;
+	color: #5f5f5f;
+}
+
+.rl_ta {
+	height: 150px;
+	width: 100%;
+	position: relative;
+	margin: 20px 0;
+	border: 1px solid #cbcbcb;
+	background-color: #f4f4f4;
+	width: 100%;
+}
+
+.rl_send {
+	margin-top: 9px;
+	background-color: #fff;
+	text-align: center;
+}
+
+.rl_div {
+	padding: 29px 20px;
+}
+
+.rl_file {
+	isplay: block;
+	height: 24px;
+	border: 1px dashed #666;
+	background-color: #fff;
+	text-align: center;
+	font-weight: bold;
+	color: #222;
+}
+
+.rl_send {
+	margin-top: 9px;
+	background-color: #fff;
+	text-align: center;
+}
+
+.rl_send2 {
+	display: table;
+	margin: 0 auto;
+	padding: 20px 2px 0;
+	padding-top: 20px;
+	background-color: #fff;
+	box-sizing: border-box;
+	table-layout: fixed;
+}
+
+.rl_send_div {
+	display: table-cell;
+	width: 180px;
+	padding: 0 2px;
+}
+
+.rl_sbtn1 {
+	width: 100%;
+	height: 40px;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	border: 1px solid;
+	line-height: 38px;
+	font-size: 13px;
+	font-weight: 500;
+	text-align: center;
+}
+
+.rl_cbtn {
+	border-color: #c5cbd0;
+	color: #555;
+}
+
+.rl_sbtn {
+	background-color:#27b06e; 
+	color: #ffffff;
+	
+}

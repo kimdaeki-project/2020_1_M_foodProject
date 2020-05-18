@@ -4,15 +4,14 @@ body{
 }
 
 .ml_container{
-	margin-top: 52px;
-	padding: 55px 30px 15px;
+	padding: 107px 30px 15px;
 }
 
 .ml_container2{
 	margin: 0px auto;
 }
 
-.ml_container2 h3{
+.ml_container2_h3{
 	display: flex;
 	margin: 0px auto;
 	padding-bottom: 24px;
@@ -22,7 +21,7 @@ body{
 	color: #3d3d3d;
 }
 
-.ml_container2 ul{
+.ml_container2_ul{
 	display: flex;
 	flex-wrap: wrap;
 	list-style: none;
@@ -31,32 +30,32 @@ body{
 	padding: 0px;
 }
 
-.ml_container2 li{
+.ml_container2_li{
 	box-sizing: border-box;
 	padding: 5px;  
 	width: 25%;
 	height: 434px;
 }
 
-.ml_container2 a{
+.ml_container2_a{
 	text-decoration: none;
 	display: grid;
 } 
 
-.ml_container2 strong{
+.ml_container2_strong{
 	color: #3d3d3d;
 	margin: 7px 0;
 } 
 
-.ml_container2 span{
+.ml_container2_span{
 	color: #6f7174;
 } 
 
-.ml_container2 em{
+.ml_container2_em{
 	color: #27b06e;
 } 
 
-.ml_container2 img{
+.ml_container2_img{
 	width: 100%;
 	min-width: 150px;	
 }
@@ -66,7 +65,7 @@ body{
 	padding-top: 86px;
 }
 
-.ml_container2 li{
+.ml_container2_li{
 	box-sizing: border-box;
 	padding: 5px;  
 	width: 50%;

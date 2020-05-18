@@ -149,6 +149,18 @@ input[type="file" i]{
 .mp_infoMod_box p{
     margin-top: 0;
 }
+
+.mp_select{
+	box-sizing: border-box;
+    padding: 0 10px;
+    height: 38px;
+    width: 50%;
+    margin-bottom: 15px;
+    border: 1px solid #e7e7e7;
+    font-size: 15px;
+    color: #3d3d3d;
+    display: block;
+}
 </style>
 </head>
 <body>
@@ -178,7 +190,7 @@ input[type="file" i]{
 			</div>
 			<div class="mp_infoMod_box">
 				<p>분류</p>
-				<select name="categoryNum">
+				<select name="categoryNum" class="mp_select">
 					<option value="0" selected="selected">한식</option>
 					<option value="1">분식</option>
 					<option value="2">양식</option>
@@ -186,7 +198,6 @@ input[type="file" i]{
 					<option value="4">중식</option>
 				</select>
 			</div>
-			
 			<div class="mp_infoMod_box">
 				<p>트럭 메인 이미지 첨부</p>
 				<input type="file" name="files" id="files" class="mp_infoMod_input_file" style="margin-bottom: 15px;">
