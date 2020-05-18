@@ -40,15 +40,10 @@ public class MenuController {
 		System.out.println("detail : "+request.getParameter("detail"));
 		System.out.println("json : "+request.getParameter("objParams"));
 		
-		System.out.println("json[0] : "+request.getParameter("objParams").length());
+	
 		
 		MultipartFile file = request.getFile("file");
 		System.out.println("file : "+file.getOriginalFilename());
-		
-		
-		
-		
-		
 		
 		
 		
@@ -132,8 +127,5 @@ public class MenuController {
 		mv.addObject("path", url);
 		mv.setViewName("common/result");
 		return mv;
-	}
-	
-	@GetMapping("menuMod") public void menuMod() throws Exception{
 	}
 }
