@@ -16,6 +16,7 @@ import com.food.project.geo.GeoVO;
 import com.food.project.market.MarketDAO;
 import com.food.project.market.MarketVO;
 import com.food.project.member.MemberVO;
+import com.food.project.review.ReviewVO;
 
 @Controller
 public class HomeController {
@@ -60,13 +61,13 @@ public class HomeController {
 		List<MarketVO> marketList = marketDAO.marketGuList(marketVO); //getMarketList();
 		for (MarketVO vo : marketList) {
 			if(vo.getThumbImg() == null)
-				vo.setThumbImg("");
+				vo.setThumbImg("");			
 		}
 		
 		// 해당되는 마켓들의 위치데이터(유저테이블의 Geo date)가져오기'
-		System.out.println(marketVO.getAddress());
+		//System.out.println(marketVO.getAddress());
 		List<GeoVO> geoList = geoDAO.geoList(marketVO); //getGeoList();
-		System.out.println(geoList!=null?"not null":"null");
+		//System.out.println(geoList!=null?"not null":"null");
 		
 		// 마켓 및 Geo data 확인
 //		for(int i=0; i<marketList.size(); i++) {
@@ -82,14 +83,14 @@ public class HomeController {
 //		}
 		
 		// 내 위치 보내기
-//		System.out.println(address);
-//		mv.addObject("address", address);
-//		
-//		// 마켓 위치 list로 보내기
-//		mv.addObject("geoList", geoList);
-//		
-//		// 마켓 정보 list로 보내기
-//		mv.addObject("marketList", marketList);
+		//System.out.println(address);
+		mv.addObject("address", address);
+		
+		// 마켓 위치 list로 보내기
+		mv.addObject("geoList", geoList);
+		
+		// 마켓 정보 list로 보내기
+		mv.addObject("marketList", marketList);
 		
 		mv.setViewName("home");
 		
@@ -127,7 +128,6 @@ public class HomeController {
 			double longitude = 37556546;
 			
 			int n = 1;
-			int m = 1;
 			
 			if(i%2 == 0)
 				n *= -1;

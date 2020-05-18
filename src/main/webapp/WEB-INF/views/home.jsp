@@ -8,7 +8,6 @@
 	
 	<!-- kakao Map API -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
-	
 	<style type="text/css">
 	#main{
 		margin-top: 100px;
@@ -45,25 +44,25 @@
 	<div id="map" style="width:1200px;height:600px;"></div>
 </div>
 
-<div>
+<%-- <div>
 	<c:forEach items="${marketList}" var="vo">
-		<h6>${vo.num}</h6>
-		<h6>${vo.userNum}</h6>
-		<h6>${vo.categoryNum}</h6>
-		<h6>${vo.marketName}</h6>
-		<h6>${vo.openTime}</h6>
-		<h6>${vo.closeTime}</h6>
-		<h6>${vo.isOpen}</h6>
-		<h6>${vo.canOrder}</h6>
-		<h6>${vo.marketIntro}</h6>
-		<h6>${vo.thumbImg}</h6>
-		<h6>${vo.reviewVO.rating}</h6>
+		<h6>num : ${vo.num}</h6>
+		<h6>userNum : ${vo.userNum}</h6>
+		<h6>categoryNum : ${vo.categoryNum}</h6>
+		<h6>marketName : ${vo.marketName}</h6>
+		<h6>openTime : ${vo.openTime}</h6>
+		<h6>closeTime : ${vo.closeTime}</h6>
+		<h6>isOpen : ${vo.isOpen}</h6>
+		<h6>canOrder : ${vo.canOrder}</h6>
+		<h6>marketIntro : ${vo.marketIntro}</h6>
+		<h6>thumbImg : ${vo.thumbImg}</h6>
+		<h6>rating : ${vo.reviewVO.rating}</h6>
 	</c:forEach>
-</div>
+</div> --%>
 
 <%@ include file="./templates/footer.jsp"%>
 
-	<!-- <script>
+	<script>
 		//=======================================
 		// script 전역변수
 		//=======================================
@@ -77,14 +76,15 @@
 		//========================================
 		function getUserGeo() {
 
-			console.log(`${address}`);
+			//console.log(`${address}`);
 			
 			var geocoder = new kakao.maps.services.Geocoder();
 
 			var callback = function(result, status) {
 				if (status === kakao.maps.services.Status.OK) {
-					latitude = Math.floor((result[0].x) * 1000000) / 1000000;
-					longitude = Math.floor((result[0].y) * 1000000) / 1000000;
+					longitude = Math.floor((result[0].x) * 1000000) / 1000000;
+					latitude = Math.floor((result[0].y) * 1000000) / 1000000;
+					
 				}
 			};
 
@@ -97,11 +97,9 @@
 		function getMap() {
 			
 			var container = document.getElementById('map');
-			console.log(latitude);
-			console.log(longitude);
 			var options = {
-				center : new kakao.maps.LatLng(longitude, latitude), // 지도 중심좌표 설정
-				level : 3											 // 줌인정도
+				center : new kakao.maps.LatLng(latitude, longitude), // 지도 중심좌표 설정
+				level : 5											 // 줌인정도
 			};
 
 			map = new kakao.maps.Map(container, options);
@@ -149,10 +147,9 @@
 			<c:forEach items="${marketList}" var="vo">
 
 				var market = {
-						//userNum(오버레이 id 값), avg rating(오버레이에 추가로 필요한 정보) 필요
-						marketNum: `${vo.marketNum}`,
+						num: `${vo.num}`,
 						userNum: `${vo.userNum}`,
-						categoryNum: `{vo.categoryNum}`,
+						categoryNum: `${vo.categoryNum}`,
 						marketName: `${vo.marketName}`,
 						openTime: `${vo.openTime}`,
 						closeTime: `${vo.closeTime}`,
@@ -160,7 +157,7 @@
 						canOrder: ${vo.canOrder},
 						marketIntro: `${vo.marketIntro}`,
 						thumbImg: `${vo.thumbImg}`,
-						rating: `${vo.rating}`
+						rating: `${vo.reviewVO.rating}`
 				};
 				
 				markets.push(market);	
@@ -189,7 +186,7 @@
 				geos.push(geo);
 				
 			</c:forEach>
-						
+			
 			return geos;
 		}
 	
@@ -204,7 +201,7 @@
 
 				var position = {
 					title: markets[i].marketName,
-					latlng: new kakao.maps.LatLng(geos[i].longitude, geos[i].latitude)
+					latlng: new kakao.maps.LatLng(geos[i].latitude, geos[i].longitude)
 				}
 				
 				positions.push(position);	
@@ -233,7 +230,7 @@
 			        map: map, // 마커를 표시할 지도
 			        position: positions[i].latlng, // 마커를 표시할 위치
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			        image : markerImage // 마커 이미지 
+			        image : markerImage // 마커 이미지
 			    });
 			    
 			    markers.push(marker);
@@ -287,13 +284,7 @@
 		//======================
 		// 마켓Infos 생성
 		//======================
-		function getMarketInfos() {
-			
-			var markets = getMarkets();
-			var geos = getGeos();
-			var positions = getPositions(markets, geos);
-			var markers = getMarkers(positions);
-			var overlays = getOverlays(markets, markers);
+		function getMarketInfos(markets, geos, positions, markers, overlays) {
 			
 			for(var i=0; i<markets.length; i++) {
 				
@@ -307,6 +298,8 @@
 				
 				g_marketInfos.push(marketInfo);
 			}
+			
+			console.log(g_marketInfos);
 		}
 		
 		//==========================
@@ -335,9 +328,8 @@
 			
 			for(var i=0; i<g_marketInfos.length; i++) {
 				
-				console.log(g_marketInfos[i].market.marketName);
-				var marketName = g_marketInfos[i].market.marketName;
-				if(clickedId === marketName) {
+				var userNum = g_marketInfos[i].market.userNum;
+				if(clickedId === userNum) {
 					
 					var overlay = g_marketInfos[i].overlay;
 					overlay.setMap(null);
@@ -348,40 +340,34 @@
 		}
 		
 		//====================
-		// 마켓 select Handler
-		//====================
-		function marketSelectHandler(clickedId) {
-		
-			console.log("save");
-			location.href = '/project/market/marketSelect?userNum=29';
-		}
-		
-		//====================
 		// 메인함수
 		//====================
 		function main() {
 			
-			console.log("before");
 			getUserGeo();
-			console.log("after");
 			
 			setTimeout(function() {
 
-				/* getMap();
+				getMap();
 				getUserMarker();
-				getMarketInfos();
-
+				var markets = getMarkets();
+				var geos = getGeos();
+				var positions = getPositions(markets, geos);
+				var markers = getMarkers(positions);
+				var overlays = getOverlays(markets, markers);
+				getMarketInfos(markets, geos, positions, markers, overlays);
+				
 				for(var i=0; i<g_marketInfos.length; i++) {
 					markerEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
-				} */
+				}
 				
 			}, 200);
 		}
 		
 		// main함수 안에서 실행
 		main();
-		
+
 	</script>
- -->
+
 </body>
 </html>
