@@ -10,7 +10,7 @@ body {
 	margin-top: 100px;
 }
 
-.container > h3 {
+.container h3 {
 	max-width: 1140px;
 	margin: 0 auto;
 	margin-top: 30px;
@@ -24,7 +24,7 @@ body {
 	box-sizing: border-box;
 }
 
-.ml_truck > img {
+.ml_truck img {
 	width: 400px;
 	height: 400px;
 }
@@ -34,12 +34,12 @@ body {
 	width: 630px;
 }
 
-.ml_truckInfo > h2 {
+.ml_truckInfo h2 {
 	font-size: 24px;
 	line-height: 28px;
 }
 
-.ml_truckInfo > p {
+.ml_truckInfo p {
 	margin: 7px 0 0;
 	font-size: 14px;
 	line-height: 20px;
@@ -47,7 +47,7 @@ body {
 	font-weight: 300;
 }
 
-.ml_truckInfo > nav{
+.ml_truckInfo nav{
 display: flex;
 flex-wrap: wrap;
 margin-top: 16px;
@@ -55,7 +55,7 @@ padding-top: 16px;
 border-top: 1px solid #e7e7e7;
 }
 
-.ml_truckInfo > button {
+.ml_truckInfo button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -71,7 +71,7 @@ border-top: 1px solid #e7e7e7;
 	font-weight: 500;
 }
 
-.ml_menuList > ul {
+.ml_menuList ul {
 	display: flex;
 	list-style: none;
 	margin: 0;
@@ -82,23 +82,23 @@ border-top: 1px solid #e7e7e7;
 	margin-bottom: 30px;
 }
 
-.ml_menuList > li {
+.ml_menuList li {
 	padding: 10px;
 	width: 264px;
 }
 
-.ml_menuList > img {
+.ml_menuList img {
 	width: 264px;
 	height: 264px;
 }
 
-.ml_menuList > strong {
+.ml_menuList strong {
 	color: black; font-size : 15px;
 	display: block;
 	font-size: 15px;
 }
 
-.ml_menuList > em {
+.ml_menuList em {
 	font-size: 15px;
 	margin-top: 10px;
 	display: block;
@@ -120,7 +120,7 @@ border-top: 1px solid #e7e7e7;
 	margin: 0 auto;
 }
 
-.menu-tab > ol{
+.menu-tab ol{
 	padding: 0;
 	list-style: none;
 	border-bottom: 1px solid gray;
@@ -242,7 +242,7 @@ img {
     align-items: center;
 }
 
-.menu-review__rating > h3 {
+.menu-review__rating h3 {
     width: 160px;
     margin: 0;
 }
@@ -312,16 +312,16 @@ img {
     justify-content: space-between;
 }
 
-.menu-review__rating > dt {
+.menu-review__rating dt {
     font-size: 13px;
     font-weight: 300;
 }
 
-.menu-review__rating .body > dd {
+.menu-review__rating .body dd {
     margin-bottom: -3px;
 }
 
-.menu-review__rating > dd {
+.menu-review__rating dd {
     font-family: Roboto,sans-serif;
     font-size: 28px;
     color: #27b06e;
@@ -336,7 +336,7 @@ dd, dl {
     margin: 24px auto 0;
 }
 
-.menu-review > h3 {
+.menu-review h3 {
     margin: 0 0 16px;
     font-size: 17px;
     line-height: 19px;
@@ -471,7 +471,7 @@ a {
     margin: 24px auto 0;
 }
 
-.menu-review >vh3 {
+.menu-review h3 {
     margin: 0 0 16px;
     font-size: 17px;
     line-height: 19px;
@@ -484,17 +484,17 @@ a {
     color: #27b06e;
 }
 
-.menu-review__index > ul {
+.menu-review__index ul {
     margin: 0;
     padding: 0;
     list-style: none;
 }
 
-.menu-review__index > li {
+.menu-review__index li {
     padding: 24px 0 20px;
 }
 
-.review-item__head > dt {
+.review-item__head dt {
     font-size: 17px;
     line-height: 16px;
 }
@@ -510,7 +510,7 @@ a {
     font-style: normal;
 }
 
-.review-item__head > dd {
+.review-item__head dd {
     font-size: 15px;
     line-height: 16px;
     font-weight: 300;
@@ -568,7 +568,7 @@ a {
     color: #6f7174;
 }
 
-.review-item__date > em {
+.review-item__date em {
     font-style: normal;
     font-family: Roboto,sans-serif;
 }
@@ -577,22 +577,22 @@ a {
     border-top: 1px solid #e7e7e7;
 }
 
-.review-item__photos > p {
+.review-item__photos p {
     -webkit-box-flex: 0;
     flex: none;
     padding: 0 8px;
 }
 
-.review-item__photos > a {
+.review-item__photos a {
     display: block;
 }
 
-.review-item__photos > i {
+.review-item__photos i {
     width: 128px;
     height: 128px;
 }
 
-.review-item__photos > i{
+.review-item__photos i{
     height: 128px;
     display: block;
     background-repeat: no-repeat;
@@ -610,7 +610,7 @@ a {
     justify-content: center;
 }
 
-.nav-paginate > a{
+.nav-paginate a{
     color: #9b9b9b;
     font-weight: 400;
     
@@ -677,13 +677,13 @@ a {
     color: #6f7174;
 }
 
-.review-item__date > em {
+.review-item__date em {
     font-style: normal;
     font-family: Roboto,sans-serif;
 }
 
 
-.ml_box4 > a{
+.ml_box4 a{
 	text-decoration: none;
 	padding: 10px;
 	border-bottom: 1px solid #e7e7e7;

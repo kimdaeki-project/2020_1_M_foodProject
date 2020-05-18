@@ -52,7 +52,7 @@ a {
 	margin-bottom: 7px;
 }
 
-.autologin > span:hover {
+.autologin span:hover {
 	cursor: pointer;
 }
 
@@ -108,7 +108,7 @@ a {
 	outline: none;
 }
 
-.ml_kakao > a{
+.ml_kakao a{
 	color: #222;
 	margin-top: 6px; 
 }

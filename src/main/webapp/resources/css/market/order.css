@@ -44,7 +44,7 @@ body{
     display: inline;
 }
 
-.cart_lists > img{
+.cart_lists img{
     padding: 15px 0;
     padding-right: 10px;
     width: 150px;

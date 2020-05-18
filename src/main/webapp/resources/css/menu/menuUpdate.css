@@ -17,7 +17,7 @@ body {
 	justify-content: flex-start;
 }
 
-.mp_myRecord > span{
+.mp_myRecord span{
 	font-size: 13px;
 	color: #6f7174;	
 }
@@ -40,7 +40,7 @@ body {
 	border-left: 1px solid #e9ebef;
 }
 
-.mp_myRecords > em{
+.mp_myRecords em{
 	margin-top: 6px;
 	font-size: 28px;
 	font-weight: 400;
@@ -53,13 +53,13 @@ body {
 	margin: 30px 20%;
 }
 
-.mp_myContainer > h2{
+.mp_myContainer h2{
 	margin: 0px;
     font-size: 22px;
     font-weight: 500;
 }
 
-.mp_myContainer > ul{
+.mp_myContainer ul{
 	margin: 12px 0 0 0;
 	padding: 0;
 	width: 184px;
@@ -88,13 +88,13 @@ body {
 	padding: 5px;
 }
 
-.mp_infoMod_box > input{
+.mp_infoMod_box input{
 	margin-left: 5px;
 	margin-top: 5px;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
-.mu_box > button{
+.mu_box button{
 	display: block;
 	border: none;
 	height: 38px;

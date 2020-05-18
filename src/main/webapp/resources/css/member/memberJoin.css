@@ -23,7 +23,7 @@
 	text-align: center;
 }
 
-.memberJoin_header > p {
+.memberJoin_header p {
 	margin: 8px;
 	font-size: 14px;
 	line-height: 16px;
@@ -59,7 +59,7 @@
 	border: none;
 }
 
-.memberJoin_fieldset > p {
+.memberJoin_fieldset p {
 	color: #000000;
 	font-size: 14px;
 	font-weight: 500;
