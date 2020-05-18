@@ -13,6 +13,11 @@ public class MarketDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.food.project.market.MarcketDAO.";
 
+	//조회 - SELECT List (주소로 해당 구 안에 있는 모든 푸드트럭의 정보 조회 - address(String)으로 조회)
+	public List<MarketVO> marketGuList(MarketVO marketVO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"marketGuList", marketVO);
+	}
+	
 	//조회 - select List (하나의 판매자에 대한 여러 푸드트럭의 정보 - userNum으로 조회)
 	public List<MarketVO> marketList() throws Exception{
 		return sqlSession.selectList(NAMESPACE+"marketList");

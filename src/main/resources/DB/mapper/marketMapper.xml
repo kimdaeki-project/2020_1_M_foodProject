@@ -27,6 +27,13 @@
 		</association>
 	</resultMap>
 
+	<select id="marketGuList" parameterType="MarketVO" resultMap="ListResult">
+		SELECT m.*, r.rating 
+		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
+		ON (m.num = r.marketNum) 
+		WHERE address LIKE '%'||#{address}||'%'
+		ORDER BY m.userNum
+	</select>
 	
 	<select id="marketList" resultMap="ListResult">
 		SELECT m.*, r.rating 
@@ -61,6 +68,5 @@
 	<update id="isOpen" parameterType="MarketVO">
 		update market set isOpen=#{isOpen} where UserNum=#{userNum}
 	</update>
-	
 
 </mapper>

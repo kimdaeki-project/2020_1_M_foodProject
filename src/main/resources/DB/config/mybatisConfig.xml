@@ -23,6 +23,7 @@
 		<typeAlias type="com.food.project.menuOption.MenuOptionVO" alias="MenuOptionVO"/>
 		<typeAlias type="com.food.project.review.ReviewVO" alias="ReviewVO"/>
 		<typeAlias type="com.food.project.notice.NoticeVO" alias="NoticeVO"/>
+		<typeAlias type="com.food.project.geo.GeoVO" alias="GeoVO"/>
 		
 	</typeAliases>
 </configuration>
