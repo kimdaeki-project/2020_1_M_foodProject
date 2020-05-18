@@ -73,7 +73,7 @@ border-top: 1px solid #e7e7e7;
 .ml_menuList ul {
 	display: flex;
 	list-style: none;
-	margin: 0;
+	margin: 30px 0;
 	padding: 0;
 	box-sizing: border-box;
 	max-width: 1140px;
@@ -115,30 +115,37 @@ border-top: 1px solid #e7e7e7;
 .menu-tab{
 	display: flex;
     background-origin: border-box;
-    max-width: 1140px;
-	margin: 0 auto;
+	background-color: white;
+	position: sticky;
+    top: 52px;
+    z-index: 60;
+    justify-content: center;
+    height: 46px;
+    margin: 0 -30px;
 }
 
 .menu-tab ol{
 	padding: 0;
 	list-style: none;
-	border-bottom: 1px solid gray;
+	border-bottom: 1px solid #e7e7e7;
+	margin: 0;
 }
 
-.menu-tab ol > li{
+.mt_a > li{
+	color: #8a8d8b;
 	display: inline-block;
 	width: 372px;
 	text-align: center;
-	padding: 8px 0;
+	padding: 10px 0;
 	cursor: pointer;
+	font-weight: 600;
+	background-color: white;
 }
 
-.menu-tab ol > li.on{
+.mt_a > li.on{
+	font-weight: 600;
+	color: black;
 	border-bottom: 2px solid black;
-}
-
-.menu-tab ol >li.menu:hover, .menu-tab ol >li.review:hover, .menu-tab ol >li.map:hover{
-	font-weight: bold;
 }
 
 
@@ -336,7 +343,7 @@ dd, dl {
 }
 
 .menu-review h3 {
-    margin: 0 0 16px;
+    margin: 0;
     font-size: 17px;
     line-height: 19px;
     font-weight: 500;
@@ -403,10 +410,8 @@ dd, dl {
     display: block;
 }
 
-a {
-    color: #27b06e;
-    text-decoration: none;
-    background-color: transparent;
+a{
+	text-decoration: none;
 }
 
 .menu-review__album .images__image i {
@@ -471,7 +476,7 @@ a {
 }
 
 .menu-review h3 {
-    margin: 0 0 16px;
+    margin: 0;
     font-size: 17px;
     line-height: 19px;
     font-weight: 500;
@@ -612,7 +617,6 @@ a {
 .nav-paginate a{
     color: #9b9b9b;
     font-weight: 400;
-    
     margin: 15px 4px;
     width: 24px;
     height: 24px;
@@ -621,6 +625,12 @@ a {
     font-size: 16px;
     line-height: 16px;
     -webkit-tap-highlight-color: transparent;
+}
+
+.nav-paginate a.on{
+	font-weight: 600;
+    color: #27b06e;
+	
 }
 
 
