@@ -127,16 +127,11 @@ public class ReviewController {
 		
 		return result;
 	}
-	
-	@GetMapping("reviewInsert")
-	   public void reviewInsert() throws Exception{
-	      
-	 }
-	
+
 	@GetMapping("reviewUpdate")
-	   public void reviewUpdate() throws Exception{
+	public void reviewUpdate() throws Exception{
 	      
-	   }
+	}
 
 }
 
