@@ -75,7 +75,7 @@
 		//옵션추가 버튼을 누르면 각 카테고리에 옵션추가
 		$("#category_box").on('click','.addO',function() {
 							var index = $(this).parent().prop("title");
-							var c_name = '<div class="opDiv"><input class="opName" placeholder="옵션 이름" type="text" id="opName'+index+opIndex[index]+'"><input class="opPrice" type="text" placeholder="가격" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
+							var c_name = '<div class="opDiv"><input name="opName" class="opName" placeholder="옵션 이름" type="text" id="opName'+index+opIndex[index]+'"><input name="opPrice" class="opPrice" type="text" placeholder="가격" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
 							$(this).parent().append(c_name);
 							opIndex[index]++;
 						});
@@ -153,7 +153,9 @@
 	$("#manuAdd").validate({
         rules:{
             title:{required: true},
-            price:{required: true, digits: true}
+            price:{required: true, digits: true},
+            opName:{required: true},
+            opPrice:{required: true, digits: true}
         },
         messages:{
             title:{
@@ -162,6 +164,13 @@
            price:{
                 required:"필수 입력 사항입니다.",
                 digits:"숫자만 입력해주세요."
+            },
+           opName:{
+                required:"필수 입력 사항"
+                },
+           opPrice:{
+                required:"필수 입력 사항",
+                digits:"숫자만 입력"
             }
         }
     });

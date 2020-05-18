@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menuUpdate.css">
 </head>
 <body>
-    <form action="./menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="manuAdd">
+    <form action="./menuUpdate" method="post" enctype="multipart/form-data" name="menuUpdate" id="manuUpdate">
 		<h2>메뉴 추가</h2>
 		<div class="menuAdd_box">
 			<label for="title">메뉴명 : </label> <input type="text" id="title" name="title" value="${vo.title}이전값">
@@ -28,12 +28,14 @@
 		
 		<!-- 추가된 카테고리 박스 -->
 		<div id="category_box">
-			<!-- 기존 카테고리박스와 옵션값 -->
+		
+			<%-- <!-- 기존 카테고리박스와 옵션값 -->
 			<c:forEach items="" var="">
 				<div class="opDiv">
 					<input class="opName" type="text" id="" value="">
 				</div>
-			</c:forEach>
+			</c:forEach> --%>
+			
 		</div>
 		
 		<div class="menuAdd_box">
@@ -85,7 +87,7 @@
 		//옵션추가 버튼을 누르면 각 카테고리에 옵션추가
 		$("#category_box").on('click','.addO',function() {
 							var index = $(this).parent().prop("title");
-							var c_name = '<div class="opDiv"><input class="opName" placeholder="옵션 이름" type="text" id="opName'+index+opIndex[index]+'"><input class="opPrice" type="text" placeholder="가격" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
+							var c_name = '<div class="opDiv"><input name="opName" class="opName" placeholder="옵션 이름" type="text" id="opName'+index+opIndex[index]+'"><input name="opPrice" class="opPrice" type="text" placeholder="가격" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
 							$(this).parent().append(c_name);
 							opIndex[index]++;
 						});
@@ -160,10 +162,12 @@
 	
 
 	//유효성 검사
-	$("#manuAdd").validate({
+	$("#manuUpdate").validate({
         rules:{
             title:{required: true},
-            price:{required: true, digits: true}
+            price:{required: true, digits: true},
+            opName:{required: true},
+            opPrice:{required: true, digits: true}
         },
         messages:{
             title:{
@@ -172,6 +176,13 @@
            price:{
                 required:"필수 입력 사항입니다.",
                 digits:"숫자만 입력해주세요."
+            },
+           opName:{
+                required:"필수 입력 사항"
+                },
+           opPrice:{
+                required:"필수 입력 사항",
+                digits:"숫자만 입력"
             }
         }
     });
