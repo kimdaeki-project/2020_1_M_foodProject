@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.fasterxml.jackson.core.JsonParser;
 
 @Controller
 @RequestMapping("/menu/**")
@@ -25,39 +27,31 @@ public class MenuController {
 
 	}
 	
+	
 	// transaction 필요
 	@PostMapping("menuAdd")
-	public ModelAndView menuAdd(@RequestParam(value="category[]", required=false) List<String> category ,MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
+	public ModelAndView menuAdd(MultipartHttpServletRequest request) throws Exception {
+		System.out.println("메뉴 추가");
 		
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("name : "+request.getParameter("name"));
+		System.out.println("price : "+request.getParameter("price"));
+		System.out.println("detail : "+request.getParameter("detail"));
+		System.out.println("json : "+request.getParameter("objParams"));
 		
-		System.out.println("name"+menuVO.getName());
-		System.out.println("price"+menuVO.getPrice());
-		System.out.println("detail"+menuVO.getDetail());
-		System.out.println("files"+files[0].getOriginalFilename());
-		System.out.println("category");
-		for (String a : category) {
-			System.out.println(a);
-		}
+		System.out.println("json[0] : "+request.getParameter("objParams").length());
 		
-		
+		MultipartFile file = request.getFile("file");
+		System.out.println("file : "+file.getOriginalFilename());
 		
 		
 		
-		// 메뉴 insert
-		menuVO.setMarketNum(11);// test value
-		int result = menuService.menuAdd(menuVO, files, session);
-		String msg = "메뉴 추가 실패";
-		String url = "./menuAdd";
-		if(result > 0) {
-			msg = "메뉴가 추가 되었습니다";
-			url = "./menuList";
-		}
 		
-		mv.addObject("msg", msg);
-		mv.addObject("path", url);
-		mv.setViewName("common/result");
+		
+		
+		
+		
 		return mv;
 	}
 

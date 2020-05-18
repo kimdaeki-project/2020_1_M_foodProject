@@ -5,39 +5,38 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="../resources/css/menu/menuAdd.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <title>Menu Add</title>
 </head>
 <body style="margin-top: 61px;">
-	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="file_form">
+	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="file_upload">
 		<h2>메뉴 추가</h2>
 		<div class="menuAdd_box">
-			<label for="title">메뉴명 : </label> <input type="text" id="name"name="name">
+			<label for="title">메뉴명 : </label> <input type="text" id="name"name="name" value="돼지갈비">  
 		</div>
 		<div class="menuAdd_box">
-			<label for="price">가격 : </label> <input type="text" id="price"name="price">
+			<label for="price">가격 : </label> <input type="text" id="price"name="price" value="20000">
 		</div>
 		<div class="menuAdd_box">
-			<label for="detail">상세 :</label> <input type="text" id="detail"	name="detail">
+			<label for="detail">상세 :</label> <input type="text" id="detail"	name="detail" value="갈비갈비">
 		</div>
 		<div class="menuAdd_box">
-			카테고리명:<input type="text" id="input">
+			카테고리명:<input type="text" id="input" value="카테고리명">
 			<button id="addCategory" type="button">카테고리 생성</button>
 			<div id="category_box"></div>
 		</div>
 		<div class="menuAdd_box">
 			<label for="thumbImg">메뉴 이미지: </label> 
-			<input type="file"id="thumbImg" name="files">
+			<input type="file"id="thumbImg" name="file">
 		</div>
 		<div class="menuAdd_box">
-			<button type="button" id="submit">확인</button>
+			<input type="button" id="btn-sub" value="확인">
 		</div>
 	</form>
 </body>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+
 <script type="text/javascript">
 
 	//카테고리, 옵션 html 추가
@@ -59,7 +58,7 @@
 		$("#category_box").on('click', '.addO', function () {
 			var index = $(this).parent().prop("title");
 			
-			var c_name = '<div class="opDiv"><input type="text" id="opName'+index+opIndex[index]+'"><input type="text" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
+			var c_name = '<div class="opDiv"><input type="text" value="옵션명" id="opName'+index+opIndex[index]+'"><input type="text" value="500" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
 			$(this).parent().append(c_name);
 			opIndex[index]++;		
 		});		
@@ -71,23 +70,21 @@
 			
 	});
 		
-	$("#submit").click(function() {
+	$("#btn-sub").click(function() {
+		
+		event.preventDefault();
 		
 		var categorys = [];
 		$('.cb').each(function(){
 			caNum = $(this).prop("title");
-			//console.log("caNum : "+caNum);
 			
 			ep = opIndex[caNum];
-			//console.log("ep : "+ep);
 			
 			var options = [];
 			
 			for(i=0; i<ep; i++) {
 				var opName = $("#opName"+caNum+i).val();
-				//console.log(opName);
 				var opPrice = $("#opPrice"+caNum+i).val();
-				//console.log(opPrice);
 				
 				var option = {
 						opName: opName,
@@ -113,29 +110,31 @@
 			categorys : categorys,
 		};
 		
+		//폼 읽어오기
+		var formData = new FormData($('#file_upload')[0]);
+		formData.append("objParams",JSON.stringify(objParams));
 		
-		
-		var form = $('#file_form')[0];
-        var formData = new FormData(form);
-        formData.append("name", $("#name")[0].files[0]);
-        formData.append("price", $("#price")[0].files[0]);
-        formData.append("detail", $("#detail")[0].files[0]);
-        formData.append("files", $("#files")[0].files[0]);
+		console.log(formData);
 
 		
-
 		$.ajax({
-			url : "../menu/menuAdd",
-			type : "post",
-			data : {objParams,formData},
-			traditional : true,
-			success : function() {
-				console.log('성공');
-			},
-			error : function() {
-				console.log('실패');
-			}
-		});
+            url : "../menu/menuAdd",
+            type : "POST",
+            dataType : "json", // ajax 통신으로 받는 타입
+			contentType: false,
+			processData: false,
+            data : formData,
+            success : function(result) {
+
+               console.log(result);
+            }
+         });
+         
+ 
+// 		$("#file_upload").submit();
 	});
+	
+
+	
 </script>
 </html>
