@@ -103,7 +103,7 @@ public class MemberController {
 	@GetMapping("memberIdCheck")
 	@ResponseBody
 	public int memberIdCheck(MemberVO memberVO) throws Exception {
-		System.out.println(memberVO.getId());
+		//System.out.println(memberVO.getId());
 		int result = 1;
 		memberVO = memberService.memberIdCheck(memberVO);
 		

@@ -77,11 +77,11 @@
 
    <script type="text/javascript">
 
-   if('${marketVO.isOpen}' == 1){
-	   $(".toggleWrap").addClass("on");
-   }
+      if('${marketVO.isOpen}' == 1){
+         $(".toggleWrap").addClass("on");
+      }
    
- //menu-tab누를시 적용 클래스 변경
+      //menu-tab누를시 적용 클래스 변경
       $("#toggle_alarm").click(function() {
          var latitude,longitude;
          

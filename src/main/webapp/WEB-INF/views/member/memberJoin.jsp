@@ -227,10 +227,11 @@
 	$(function() {
         
         //아이디 중복검사
-        $("#id").blur(function() {
+        $("#id").keyup(function() {
         	console.log('성공');
             var id = $("#id").val();
             console.log(id);
+            console.log(id.length);
             $.ajax({
                 url:'./memberIdCheck',
                 type:'get',
@@ -241,9 +242,13 @@
                         $("#mj_showIdChk").text("중복되는 아이디입니다.");
 						$("#mj_showIdChk").css("color", "red");
                     } else if(data===1) {
-                        //사용 가능한 아이디라고 화면에 뜨게하기
-                        $("#mj_showIdChk").text("사용가능한 아이디입니다.");
-						$("#mj_showIdChk").css("color", "#27b06e");
+                    	// 5자리 갯수 이상, 사용 가능한 아이디라고 화면에 뜨게하기
+                    	if(id.length > 4) {
+                        	$("#mj_showIdChk").text("사용가능한 아이디입니다.");
+							$("#mj_showIdChk").css("color", "#27b06e");
+                    	} else {
+                    		$("#mj_showIdChk").empty();
+                    	}
                     }
                 },
                 error: function() {
