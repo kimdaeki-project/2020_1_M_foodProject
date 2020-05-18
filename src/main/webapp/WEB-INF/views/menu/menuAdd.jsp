@@ -8,9 +8,9 @@
 <title>Menu Add</title>
 </head>
 <body style="margin-top: 61px;">
-	<form action="./menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="manuAdd">
+	<form action="./menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="manuAdd" class="ma_body">
 		<h2>메뉴 추가</h2>
-		<div class="menuAdd_box">
+		<div class="menuAdd_box" style="margin-top: 12px;">
 			<label for="title">메뉴명 : </label> <input type="text" id="title" name="title">
 		</div>
 		<div class="menuAdd_box">
