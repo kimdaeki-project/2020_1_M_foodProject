@@ -13,7 +13,7 @@
 </head>
 <body>
 	<%@ include file="../templates/header.jsp"%>
-	<div class="memberLogin_container" style="margin-top: 103px">
+	<div class="memberLogin_container" style="padding-top: 103px">
 		<article class="memberLogin_article">
 			<header class="memberLogin_header">
 				<img alt="logo"

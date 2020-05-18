@@ -12,19 +12,22 @@
 </head>
 <body>
    <%@ include file="../templates/header.jsp"%>
-   <div style="margin: 103px 0 50px 0; padding: 0px 10%">
+   <div style="padding: 103px 10%">
       <div class="mp_myInfoBox">
          <div class="mp_pic">
             <img src="${pageContext.request.contextPath}/resources/img/ico-leaf.svg">
          </div>
          <div class="mp_me">
-            <strong>${memberVO.name}</strong> <span>${memberVO.email}</span>
+            <strong class="mp_me_strong">${memberVO.name}</strong> 
+            <span class="mp_me_span">${memberVO.email}</span>
          </div>
          <div class="mp_num">
-            <span>수령예정</span> <em>0</em>
+            <span class="mp_num_span">수령예정</span> 
+            <em class="mp_num_em">0</em>
          </div>
          <div class="mp_num">
-            <span>총 주문회수</span> <em>0</em>
+            <span class="mp_num_span">총 주문회수</span> 
+            <em class="mp_num_em">0</em>
          </div>
       </div>
 
@@ -43,22 +46,29 @@
       <c:if test="${memberVO.isFoodTruck eq '0'}"></c:if>
 
       <div class="mp_myInfoNav">
-         <aside>
+         <aside class="mp_myInfoNav_aside">
             <h2>마이 페이지</h2>
-            <ul>
-               <li id="default"><a href="#">주문/결제 내역</a></li>
-               <li id="myReview"><a href="#">나의 후기</a></li>
-               <li id="memberUpdate"><a href="#">회원정보 수정</a></li>
+            <ul class="mp_myInfoNav_ul">
+               <li id="default" class="mp_myInfoNav_li">
+               <a class="mp_myInfoNav_a" href="#">주문/결제 내역</a></li>
+               <li id="myReview" class="mp_myInfoNav_li">
+               <a class="mp_myInfoNav_a" href="#">나의 후기</a></li>
+               <li id="memberUpdate" class="mp_myInfoNav_li">
+               <a class="mp_myInfoNav_a" href="#">회원정보 수정</a></li>
 
                <c:if test="${memberVO.isFoodTruck eq '0'}">
-                  <li id="marketJoin"><a>판매자 신청</a></li>
+                  <li id="marketJoin" class="mp_myInfoNav_li">
+                  <a class="mp_myInfoNav_a">판매자 신청</a></li>
                </c:if>
                <c:if test="${memberVO.isFoodTruck eq '1'}">
-                  <li id="marketPage"><a href="#">마켓 정보 수정</a></li>
+                  <li id="marketPage" class="mp_myInfoNav_li">
+                  <a class="mp_myInfoNav_a" href="#">마켓 정보 수정</a></li>
                </c:if>
 
-               <li id="member_delete"><a>탈퇴하기</a></li>
-               <li id="li5"><a href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
+               <li id="member_delete" class="mp_myInfoNav_li">
+               <a class="mp_myInfoNav_a">탈퇴하기</a></li>
+               <li id="li5" class="mp_myInfoNav_li">
+               <a class="mp_myInfoNav_a" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
             </ul>
          </aside>
          <div class="mp_box" style="width: 100%"></div>

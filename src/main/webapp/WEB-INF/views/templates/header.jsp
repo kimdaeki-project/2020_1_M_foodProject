@@ -31,64 +31,68 @@
 		<c:if test="${empty sessionScope.memberVO}">
 			<button type="button" class="h_login"
 				onclick="location.href='${pageContext.request.contextPath}/member/memberLogin'">로그인</button>
-			<a><img src="${pageContext.request.contextPath}/resources/img/header/cart.png" class="fa-shopping-cart"></a>
+			<a><img
+				src="${pageContext.request.contextPath}/resources/img/header/cart.png"
+				class="fa-shopping-cart"></a>
 		</c:if>
 		<c:if test="${not empty sessionScope.memberVO}">
 			<button type="button" class="h_name"
 				onclick="location.href='${pageContext.request.contextPath}/member/memberPage'">${memberVO.name}</button>
-			<a><img src="${pageContext.request.contextPath}/resources/img/header/cart.png" class="fa-shopping-cart"></a>
+			<a><img
+				src="${pageContext.request.contextPath}/resources/img/header/cart.png"
+				class="fa-shopping-cart"></a>
 		</c:if>
 	</div>
 
 	<!-- 장바구니 모달창 -->
-	<div class="modal">
-		<div class="modal_c">
-			<div class="modal_header">
-				<img id="m_close" alt=""
-					src="${pageContext.request.contextPath}/resources/img/header/x.png">
+	<div class="modal_cart">
+		<!-- 장바구니 영역을 감싸는 div -->
+		<div style="width: 450px; position: sticky; left: 10000;">
+			<!-- 닫는 버튼 / 장바구니 -->
+			<div class="cart1">
+				<span id="m_close">✖</span>
 				<h2>장바구니</h2>
 			</div>
-			<div class="modal_cartAllDel">
-				<span>전체 삭제</span>
+			<!-- 전체삭제 -->
+			<div class="cart2">
+				<span> 전체삭제 </span>
 			</div>
-			<div class="modal_body">
-				<div class="modal_list">
-					<ul>
-						<li>
-							<div>
-								<div class="modal_itemInfo">
-									<img alt=""
-										src="${pageContext.request.contextPath}/resources/img/food.jpg">
-									<div>
-										<strong>메뉴 이름</strong> <span>메뉴 옵션</span>
-									</div>
-								</div>
-								<div class="modal_itemPay">
-									<em>0000원</em>
-								</div>
+			<!-- 장바구니 아이템 영역 -->
+			<div class="cart3">
+				<ul>
+					<li class="cart3_li">
+						<div class="cart_li1">
+							<img alt="사진" src="food.jpg" class="cart_pic">
+							<div class="cart_li1-1">
+								<strong>프레시코드 - 프레시코드 샐러드</strong> <span>1. 샐러리 빼기 / 2.
+									드레싱 없이</span>
 							</div>
-						</li>
-					</ul>
-				</div>
+							<div class="cart_li1-2">
+								<span id="cart_li1Del">✖</span>
+							</div>
+						</div>
+						<div class="cart_li2">
+							<em>8000 원</em>
+						</div>
+					</li>
+				</ul>
 			</div>
-			<div class="modal_receipt">
-				<div>
+			<div class="cart4">
+				<!-- 계산서 영역 -->
+				<div class="cart4-1">
 					<dl>
-						<dt>총 주문 수량</dt>
-						<dt>3개</dt>
-					</dl>
-					<dl>
-						<dt>총 주문 금액</dt>
-						<dt>8000원</dt>
+						<dt class="cart4-1dt">총 갯수
+						<dd class="cart4-1dd">0개</dd>
+						</dt>
+						<dt>총 가격
+						<dd>0원</dd>
+						</dt>
 					</dl>
 				</div>
-			</div>
-			<div class="modal_order"
-				style="position: absolute; top: 898 !important;">
-				<span class="modal_order">주문하기</span>
+				<!-- 결제 버튼 영역 -->
+				<div class="cart4-2">결제하기</div>
 			</div>
 		</div>
-
 	</div>
 
 </body>
@@ -96,11 +100,11 @@
 <script type="text/javascript">
 	//장바구니 누르면 옆에 모달레이어로 뜨기 / X버튼 누르면 닫히기
 	$(".fa-shopping-cart").click(function() {
-		$(".modal").css('display', 'block');
+		$(".modal_cart").css('display', 'block');
 	});
 
 	$("#m_close").click(function() {
-		$(".modal").css('display', 'none');
+		$(".modal_cart").css('display', 'none');
 	});
 
 	//전체 삭제 버튼 누르면 장바구니 내용 삭제

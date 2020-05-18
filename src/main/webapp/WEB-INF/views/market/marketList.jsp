@@ -12,17 +12,17 @@
 <body>
 	<div class="ml_container">
 		<section class="ml_container2">
-			<h3>트럭 리스트</h3>
-			<ul>
+			<h3 class="ml_container2_h3">트럭 리스트</h3>
+			<ul class="ml_container2_ul">
 				<c:forEach items="${marketList}" var="vo">
-					<li><a
+					<li class="ml_container2_li"><a class="ml_container2_a"
 						href="${pageContext.request.contextPath}/market/marketSelect?userNum=${vo.userNum}">
-							<img alt=""
+							<img class="ml_container2_img" alt=""
 							src="${pageContext.request.contextPath}/resources/img/food.jpg">
-							<strong>${vo.marketName}</strong>
-							<span>${vo.marketIntro}</span>
-							<em>${vo.canOrder}</em>
-							<span>${vo.isOpen}</span>
+							<strong class="ml_container2_strong">${vo.marketName}</strong>
+							<span class="ml_container2_span">${vo.marketIntro}</span>
+							<em class="ml_container2_em">${vo.canOrder}</em>
+							<span class="ml_container2_span">${vo.isOpen}</span>
 					</a></li>
 				</c:forEach>
 			</ul>

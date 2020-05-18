@@ -51,6 +51,7 @@
 	font-size: 13px;
 	line-height: 17px;
 	color: #333;
+	display: block;
 }
 
 .rev_review {
@@ -87,7 +88,7 @@
 	vertical-align: top;
 }
 
-.rev_review p {
+.rev_review_p {
 	margin: 0;
 	overflow: hidden;
 	padding-top: 6px;
@@ -142,8 +143,8 @@
 						<div class="rev_review">
 							<div class="rev_review2">
 								<div class="rev_review3">
-									<span style="color: color: #000;">평점</span>
-									<p style="color: #5f5f5f;">리뷰내용</p>
+									<span style="color: #000;">평점</span>
+									<p class="rev_review_p" style="color: #5f5f5f;">리뷰내용</p>
 								</div>
 								<div class="rev_review4">
 									<img class="rev_review_img" alt="review_img"
@@ -158,7 +159,7 @@
 						</div>
 				</a></li>
 			</c:forEach>
-			<li class="rev_li"><a href="#">
+			<li class="rev_li"><a href="#" style="text-decoration: none;">
 					<div class="rev_item">
 						<img class="rev_item_img" alt=""
 							src="${pageContext.request.contextPath}/resources/img/food2.png">
@@ -170,8 +171,8 @@
 					<div class="rev_review">
 						<div class="rev_review2">
 							<div class="rev_review3">
-								<span style="color: color: #000;">평점</span>
-								<p style="color: #5f5f5f;">리뷰내용</p>
+								<span style="color: #000;">평점</span>
+								<p class="rev_review_p" style="color: #5f5f5f;">리뷰내용</p>
 							</div>
 							<div class="rev_review4">
 								<img class="rev_review_img" alt="review_img"
