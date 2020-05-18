@@ -119,7 +119,7 @@ input[type="file" i]{
     border: none;
     color: #ffffff;
     background-color: #27b06e;
-    width: 20%;
+    width: 22%;
 }
 
 #category_box{
@@ -134,7 +134,7 @@ input[type="file" i]{
 }
 
 .opName{
-	width: 30%;
+	width: 20%;
 	height: 38px;
 	border: 1px solid #e7e7e7;
     padding: 0 15px;
@@ -142,7 +142,7 @@ input[type="file" i]{
 }
 
 .opPrice{
-	width: 30%;
+	width: 20%;
 	height: 38px;
 	border: 1px solid #e7e7e7;
     padding: 0 15px;
@@ -159,4 +159,20 @@ input[type="file" i]{
     background-color: #27b06e;
     padding: 5px;
     font-size: 145.px;
+}
+
+#thumbImg{
+	width: 48%;
+}
+
+#ma_fileDel, #ma_fileDel2{
+	margin: 10px;
+	line-height: 38px;
+	padding: 0 5px;
+	cursor: pointer;
+}
+
+.error{
+	color: #008080;
+	font-weight: bolder;
 }
