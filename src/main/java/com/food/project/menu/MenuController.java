@@ -129,4 +129,7 @@ public class MenuController {
 		mv.setViewName("common/result");
 		return mv;
 	}
+	
+	@GetMapping("menuMod") public void menuMod() throws Exception{
+	}
 }

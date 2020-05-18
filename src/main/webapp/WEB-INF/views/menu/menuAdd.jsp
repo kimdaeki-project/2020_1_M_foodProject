@@ -23,11 +23,12 @@
 			<label for="detail">상세 :</label> <input type="text" id="detail"
 				name="detail">
 		</div>
-		<div class="menuAdd_box">
-			카테고리명:<input type="text" id="input">
+		<label>카테고리명:</label>
+		<div class="menuAdd_box_cate">
+			<input type="text" id="input">
 			<button id="addCategory" type="button">카테고리 생성</button>
-			<div id="category_box"></div>
 		</div>
+		<div id="category_box"></div>
 		<div class="menuAdd_box">
 			<label for="thumbImg">메뉴 이미지: </label> <input type="file"
 				id="thumbImg" name="files">
@@ -67,7 +68,7 @@
 		$("#category_box").on('click', '.addO', function () {
 			var index = $(this).parent().prop("title");
 			
-			var c_name = '<div class="opDiv"><input type="text" id="opName'+index+opIndex[index]+'"><input type="text" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
+			var c_name = '<div class="opDiv"><input class="opName" placeholder="옵션 이름" type="text" id="opName'+index+opIndex[index]+'"><input class="opPrice" type="text" placeholder="가격" id="opPrice'+index+opIndex[index]+'"><input type="button" class="delO" value="옵션 삭제"></div>';
 			$(this).parent().append(c_name);
 			opIndex[index]++;		
 		});		
