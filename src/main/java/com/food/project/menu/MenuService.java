@@ -34,6 +34,10 @@ public class MenuService {
 		long refNum = menuDAO.menuCount();
 		menuVO.setNum(refNum);
 
+		//카테고리 리스트에 메뉴 num반영 해야됨  					<<<<<<<<<<<<<<<<<<<<<<<
+		
+		
+		
 		// menu Table에 insert
 		int result = menuDAO.menuAdd(menuVO);
 		
