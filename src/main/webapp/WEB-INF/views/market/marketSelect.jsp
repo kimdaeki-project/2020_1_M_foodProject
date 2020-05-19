@@ -202,19 +202,19 @@
 							<c:if test="${pager.curBlock gt 1}">
 								<a
 									href="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}"
-									class="nav-paginate__dir nav-paginate-dir-prev">
+									class="nav-paginate__dir nav-paginate-dir-prev"> <i></i>
 								</a>
 							</c:if>
 
 							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 								var="i">
-								<a class="nav_pagerA" href="">${i}</a>
+								<a class="nav_pagerA" href="./marketSelect?curPage=${i}&userNum=${marketVO.userNum}">${i}</a>
 							</c:forEach>
 
 							<c:if test="${pager.curBlock lt pager.totalBlock}">
 								<a
 									href="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}"
-									class="nav-paginate__dir nav-paginate-dir-next">
+									class="nav-paginate__dir nav-paginate-dir-next"> <i></i>
 								</a>
 							</c:if>
 						</nav>
@@ -229,17 +229,6 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 <script type="text/javascript">
-	
-	//페이징
-	$('.nav_pagerA').click(function() {
-		console.log("href:"+ window.location.href);
-		console.log("pathname:" + window.location.pathname);
-			$.get("./marketSelect?curPage=${i}&userNum=${marketVO.userNum}", 
-					function(result) {
-				console.log("href:"+ window.location.href);
-				console.log("pathname:" + window.location.pathname);
-			});
-		});
 	
 	//리뷰 사진
 	new Swiper('.swiper-container', {
