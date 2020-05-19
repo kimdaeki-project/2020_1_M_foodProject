@@ -39,7 +39,7 @@ public class HomeController {
 		// 로그인을 안 했을시, Geolocation으로 위치 가져오기 (서울특별시 중심임을 알림)
 		// 로그인을 했을 시, 주소 가져오기
 		String address = "";
-		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 		if(memberVO == null) {
 			address = getAddress(); //"서울특별시 중구 세종대로 110";
 		} else {

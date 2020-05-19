@@ -118,13 +118,13 @@
 							<div class="swiper-wrapper">
 
 								<c:forEach var="reviewVO" items="${reviewList}">
-									<div class="swiper-slide"
-										style="width: 200px!import; height: 200px;">
-										<img style="width: 200px; height: 200px;" class="swiper-slide"
-											alt=""
+									<c:if test="${not empty reviewVO.fileName}">
+										<div class="swiper-slide" style="width: 200px!import; height: 200px;">
+										<img style="width: 200px; height: 200px;" class="swiper-slide" alt="" 
 											src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}"
 											style="background-image: url('${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}');">
 									</div>
+									</c:if>
 								</c:forEach>
 							</div>
 						</div>
@@ -185,8 +185,7 @@
 							<!-- 판매자의 덧글 존재시 출력 -->
 							<c:if test="${reviewVO.step eq 1}">
 								<div class="review-item__reply" style="margin-bottom: 20px;">
-									<p
-										style="margin: 0px; color: rgb(31, 182, 109); font-size: 15px;">${reviewVO.memberVO.nickName}</p>
+									<p style="margin: 0px; color: rgb(31, 182, 109); font-size: 15px;">${reviewVO.memberVO.nickName}</p>
 									<p class="review-item__comment">${reviewVO.contents}</p>
 									<p class="review-item__date">
 										작성일 <em>${reviewVO.regDate}</em>
@@ -200,21 +199,16 @@
 					<div class="nav-paginate-wrap__desktop">
 						<nav class="nav-paginate">
 							<c:if test="${pager.curBlock gt 1}">
-								<a
-									href="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}"
-									class="nav-paginate__dir nav-paginate-dir-prev">
+								<a href="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-prev">
 								</a>
 							</c:if>
 
-							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
-								var="i">
-								<a class="nav_pagerA" href="">${i}</a>
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+								<a class="nav_pagerA" href="./marketSelect?curPage=${i}&userNum=${marketVO.userNum}">${i}</a>
 							</c:forEach>
 
 							<c:if test="${pager.curBlock lt pager.totalBlock}">
-								<a
-									href="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}"
-									class="nav-paginate__dir nav-paginate-dir-next">
+								<a href="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-next">
 								</a>
 							</c:if>
 						</nav>
@@ -295,8 +289,7 @@
 					};
 					var map = new kakao.maps.Map(container, options);
 
-					var markerPosition = new kakao.maps.LatLng(longitude,
-							latitude);
+					var markerPosition = new kakao.maps.LatLng(longitude,latitude);
 					var marker = new kakao.maps.Marker({
 						position : markerPosition
 					});
@@ -329,16 +322,9 @@
 
 				console.log(latitude);
 				console.log(longitude);
-				latitude = $
-				{
-					memberVO.longitude
-				}
-				;
-				longitude = $
-				{
-					memberVO.latitude
-				}
-				;
+				
+				latitude = ${memberVO.longitude};
+				longitude = ${memberVO.latitude};
 
 				console.log(latitude);
 				console.log(longitude);

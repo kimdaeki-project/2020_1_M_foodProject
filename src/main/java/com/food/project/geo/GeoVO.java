@@ -2,7 +2,7 @@ package com.food.project.geo;
 
 public class GeoVO {
 	
-	private long num;
+	private long num;//userNum
 	private double latitude;
 	private double longitude;
 	
