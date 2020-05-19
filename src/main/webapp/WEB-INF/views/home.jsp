@@ -60,7 +60,9 @@
 						<li id="chinese" class="category" title="5" style="border: 1px; color: #27B06E;">중식</li>
 					</ul>
 				</div>
-				
+
+				<input type="text" id="text-search" placeholder="검색어를 입력하세요" >
+            	<input type="button" id="btn-search" value="검색">
 				<div id="map" style="width: 90%; height:80%;position:relative;overflow:hidden;"></div>
 			</div>
 		</div>
@@ -93,7 +95,40 @@
 		var map;
 		var g_marketInfos = [];
 		var ctrl = false;
-		var categoryShow = 5;
+		var categorySelected = "0";
+		
+		//tm---------------------------------------------------->>
+	    $("#btn-search").click(function() {
+	    	var str = $("#text-search").val()
+	        
+	        $.get("./search?str="+str,function(result){
+	        	alert("result1");
+	            
+	            var markers = [];
+	            
+	            for(var i=0;i<result.length;i++){
+	               console.log(result[i].name + " la : "+result[i].latitude + " lo : "+result[i].longitude);
+	               
+	               var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	               var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기 입니다 
+	               var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성합니다    
+	                
+	               var position = {
+	                     title: result[i].name,
+	                     latlng: new kakao.maps.LatLng(result[i].latitude, result[i].longitude)
+	               }
+	                
+	                // 마커를 생성합니다
+	                var marker = new kakao.maps.Marker({
+	                    map: map, // 마커를 표시할 지도
+	                    position: position.latlng, // 마커를 표시할 위치
+	                    title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+	                    image : markerImage // 마커 이미지
+	                });
+	                markers.push(marker);
+	            }
+	         });
+	    });
 		
 		
 		
@@ -189,7 +224,7 @@
 				};
 				
 				markets.push(market);	
-
+				
 			</c:forEach>
 			
 			return markets;
@@ -198,7 +233,7 @@
 		//===============================
 		// 마켓의 Geo 데이터 가져오기
 		//===============================
-		function getGeos(l, a) {
+		function getGeos() {
 			
 			var geos = [];
 			
@@ -255,7 +290,7 @@
 			    
 			 	// 마커를 생성합니다
 			    var marker = new kakao.maps.Marker({
-			        map: map, // 마커를 표시할 지도
+			        map: null, // 지도 지정안함
 			        position: positions[i].latlng, // 마커를 표시할 위치
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			        image : markerImage // 마커 이미지
@@ -314,6 +349,37 @@
 		//======================
 		function getMarketInfos(markets, geos, positions, markers, overlays) {
 			
+			// list들 데이터 초기화
+			markets = geos = positions = markers = overlays = g_marketInfos = [];
+			
+			// 마켓, Geo 값 가져오기
+			markets = getMarkets();
+			geos = getGeos();
+		
+			// Category에 따른 마켓, Geo 선별작업
+			var index=0;	
+			while(true) {
+			
+				if(categorySelected === "0")
+					break;	// 전체보기라면 선별 종료
+				
+				if(markets.length === index)
+					break;	// 선별 완료로 인한 종료 
+				
+				if(markets[index].categoryNum != categorySelected) {
+					markets.splice(index, 1);
+					geos.splice(index, 1);
+					index=0;
+					continue;	// List가 자동 정렬되므로 처음부터 재탐색
+				}
+				index++;
+			}
+			
+			// 선별된 market, Geo를 이용하여 position, marker, overlay값 갱신
+			positions = getPositions(markets, geos);
+			markers = getMarkers(positions);
+			overlays = getOverlays(markets, markers);
+			
 			for(var i=0; i<markets.length; i++) {
 				
 				var marketInfo = {
@@ -325,13 +391,15 @@
 				}
 				
 				g_marketInfos.push(marketInfo);
-			}	
+			}
+			
+			//console.log(g_marketInfos);
 		}
 		
 		//==========================
-		// 마켓 관련 이벤트 등록
+		// 오버레이 관련 이벤트 등록
 		//==========================
-		function markerEventHandler(marker, overlay) {
+		function overlayEventHandler(marker, overlay) {
 			
 			kakao.maps.event.addListener(marker, 'click', function() {
 				
@@ -340,7 +408,6 @@
 					if(g_marketInfos[i].overlay === overlay) {
 						g_marketInfos[i].overlay.setMap(map);
 					} else {
-						
 						g_marketInfos[i].overlay.setMap(null);
 					}
 				}
@@ -348,7 +415,7 @@
 		}
 		
 		//====================
-		// 마켓 close Handler
+		// 오버레이 close Handler
 		//====================
 		function overlayCloseHandler(clickedId) {
 			
@@ -362,6 +429,15 @@
 					
 					return;
 				}
+			}
+		}
+		
+		//====================
+		// 오버레이 지우기
+		//====================
+		function hiddenOverlays() {
+			for(var i=0; i<g_marketInfos.length; i++) {
+				g_marketInfos[i].overlay.setMap(null);
 			}
 		}
 		
@@ -425,41 +501,21 @@
 		}
 		
 		//====================
-		// 카테고리별 검색 (구데기 알고리즘)
+		// 마커 보이기
 		//====================
-		function categorysEventHandler() {
-			
-			var category = document.getElementsByClassName("category");
-
-			for (let item of category) {
-			   
-				item.addEventListener("click", function() {
-
-					categoryShow = item.title;
-					console.log(categoryShow);
-					
-					var markets = getMarkets();
-					var geos = getGeos();
-					
-					var index=0;
-					
-					while(true) {
-					
-						if(markets.length === index)
-							break;
-						
-						if(markets[index].categoryNum != categoryShow) {
-							markets.splice(index, 1);
-							geos.splice(index, 1);
-							index=0;
-							continue;
-						}
-						index++;
-					}
-					
-					//카테고리 검색
-					console.log(geos);
-				});
+		function showMarkers() {
+			for(var i=0; i<g_marketInfos.length; i++) {
+				console.log(g_marketInfos[i].marker);
+				g_marketInfos[i].marker.setMap(map);
+			}
+		}
+		
+		//====================
+		// 마커 감추기
+		//====================
+		function hiddenMarkers() {
+			for(var i=0; i<g_marketInfos.length; i++) {
+				g_marketInfos[i].marker.setMap(null);
 			}
 		}
 		//====================
@@ -467,27 +523,66 @@
 		//====================
 		function main() {
 			
+			// 지역변수
+			var markets = [];
+			var geos = [];
+			var positions = [];
+			var markers = [];
+			var overlays = [];
+			
+			// client Geo date
 			getUserGeo();
 			
 			setTimeout(function() {
 
 				getMap();
 				getUserMarker();
-				var markets = getMarkets();
-				var geos = getGeos();
 				
-				var positions = getPositions(markets, geos);
-				var markers = getMarkers(positions);
-				var overlays = getOverlays(markets, markers);
+				// 필요한 데이터 생성
 				getMarketInfos(markets, geos, positions, markers, overlays);
 				
+				// 마커 표시
+				showMarkers();
+				
+				// 오버레이 이벤트 등록
 				for(var i=0; i<g_marketInfos.length; i++) {
-					markerEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
+					overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
 				}
 				
+				// 줌인아웃 관련 이벤트
 				setZoomable(false);
 				setMapWheelEvent();
-				categorysEventHandler();
+				
+				//=====================================================
+				// 카테고리별 보기  (클릭시, 카테고리에 따라 마켓 종류 선별하여 보여주기)
+				var category = document.getElementsByClassName("category");
+				for (let item of category) {
+					   
+					item.addEventListener("click", function() {
+	
+						// 현재 Category value
+						categorySelected = item.title;
+						
+						// 마커 지우기, 오버레이 초기화
+						console.log(g_marketInfos.length);
+						if(g_marketInfos.length !== 0) {
+							hiddenMarkers();
+							hiddenOverlays();
+						}
+						
+						// 필요한 데이터 생성
+						getMarketInfos(markets, geos, positions, markers, overlays);
+						
+						// 마커 표시
+						showMarkers();
+						
+						// 오버레이 이벤트 등록
+						for(var i=0; i<g_marketInfos.length; i++) {
+							overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
+						}
+					});
+				}
+				//=====================================================
 				
 			}, 200);
 		}
@@ -498,3 +593,20 @@
 	</script>
 </body>
 </html>
+
+				<!-- getMap();
+				getUserMarker();
+				var markets = getMarkets();
+				var geos = getGeos();
+				var positions = getPositions(markets, geos);
+				var markers = getMarkers(positions);
+				showMarkers(markers);
+				var overlays = getOverlays(markets, markers);
+				getMarketInfos(markets, geos, positions, markers, overlays);
+				
+				for(var i=0; i<g_marketInfos.length; i++)
+					overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
+				
+				setZoomable(false);
+				setMapWheelEvent();
+				categorysEventHandler();-->
