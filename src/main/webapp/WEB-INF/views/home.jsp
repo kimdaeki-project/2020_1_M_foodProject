@@ -48,8 +48,20 @@
 			//추천메뉴
 		</div>
 		<div id="main">
-			<div id="ctrlMap"></div>
-			<div id="map" style="width: 90%; height: 80%"></div>
+			<div id="map_wrapper">
+				<div id="ctrlMap"></div>
+				<div id="categorys_wrapper">
+					<ul id="categorys">
+						<li id="all" class="category" title="0" style="border: 1px; color: #27B06E;">전체</li>
+						<li id="korean" class="category" title="1" style="border: 1px; color: #27B06E;">한식</li>
+						<li id="snack" class="category" title="2" style="border: 1px; color: #27B06E;">분식</li>
+						<li id="western" class="category" title="3" style="border: 1px; color: #27B06E;">양식</li>
+						<li id="japanese" class="category" title="4" style="border: 1px; color: #27B06E;">일식</li>
+						<li id="chinese" class="category" title="5" style="border: 1px; color: #27B06E;">중식</li>
+					</ul>
+				</div>
+				<div id="map" style="width: 90%; height:80%;position:relative;overflow:hidden;"></div>
+			</div>
 		</div>
 		<div class="home_question">
 			<div class="home_question_wrap">
@@ -82,6 +94,7 @@
 		var map;
 		var g_marketInfos = [];
 		var ctrl = false;
+		var categoryShow = 5;
 		
 		//========================================
 		//main marker 좌표값 받아오기
@@ -271,7 +284,7 @@
 	            '                <div class="market">' + markets[i].marketIntro +
 	            '				 </div>' + 
 	            '                <div class="time">(open ~ close)'+ markets[i].openTime + ' ~ ' + markets[i].closeTime + '</div>' + 
-	            '                <div class="time">별점</div>' +
+	            '                <div class="time">별점 : '+ markets[i].rating+'</div>' +
 	            '            </div>' + 
 	            '	    </div>' + 
 	            '    </div>' +    
@@ -366,7 +379,6 @@
 				return;
 			
 			if(event.ctrlKey) {
-				console.log('ctrl down');
 				ctrl = true;
 				setZoomable(ctrl);
 			}
@@ -374,10 +386,7 @@
 		
 		window.addEventListener("keyup", function(event) {
 			
-			console.log("keyup");
-			
 			if(ctrl === true) {
-				console.log('ctrl up');
 				ctrl = false;
 				setZoomable(ctrl);
 			}
@@ -412,6 +421,44 @@
 		}
 		
 		//====================
+		// 카테고리별 검색 (구데기 알고리즘)
+		//====================
+		function categorysEventHandler() {
+			
+			var category = document.getElementsByClassName("category");
+
+			for (let item of category) {
+			   
+				item.addEventListener("click", function() {
+
+					categoryShow = item.title;
+					console.log(categoryShow);
+					
+					var markets = getMarkets();
+					var geos = getGeos();
+					
+					var index=0;
+					
+					while(true) {
+					
+						if(markets.length === index)
+							break;
+						
+						if(markets[index].categoryNum != categoryShow) {
+							markets.splice(index, 1);
+							geos.splice(index, 1);
+							index=0;
+							continue;
+						}
+						index++;
+					}
+					
+					//카테고리 검색
+					console.log(geos);
+				});
+			}
+		}
+		//====================
 		// 메인함수
 		//====================
 		function main() {
@@ -424,6 +471,7 @@
 				getUserMarker();
 				var markets = getMarkets();
 				var geos = getGeos();
+				
 				var positions = getPositions(markets, geos);
 				var markers = getMarkers(positions);
 				var overlays = getOverlays(markets, markers);
@@ -435,6 +483,7 @@
 				
 				setZoomable(false);
 				setMapWheelEvent();
+				categorysEventHandler();
 				
 			}, 200);
 		}
@@ -443,7 +492,5 @@
 		main();
 
 	</script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/home/map.js"></script>
 </body>
 </html>
