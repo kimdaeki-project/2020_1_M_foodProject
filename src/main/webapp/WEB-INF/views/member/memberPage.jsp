@@ -143,7 +143,7 @@
 			});
 		});
 		
-		
+		//나의 리뷰 목록
 		$('#myReview').click(function() {
 			alert("click");
 			
@@ -156,16 +156,19 @@
 		});
 		
 		
-		
+		//회원정보 수정
 		$('#memberUpdate').click(function() {
 			$.get("./memberUpdate", function(result) {
+				
+				console.log(result);
+				
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
 		
 		
-		
+		//마켓 등록
 		$('#marketJoin').click(function() {
 			$.get("../market/marketJoin", function(result) {
 				$('.mp_box').empty();
@@ -174,6 +177,7 @@
 		});
 		
 		
+		//
 		$('#marketPage').click(function() {
 			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
 				$('.mp_box').empty();
@@ -181,6 +185,7 @@
 			});
 		});
 		
+		//메뉴 카테고리 추가
 		$('#menuAdd').click(function() {
 			$.get("../menu/menuAdd", function(result) {
 				$('.mp_box').empty();
@@ -188,6 +193,8 @@
 			});
 		});
 		
+		
+		//메뉴 카테고리 수정
 		$('#menuUpdate').click(function() {
 			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
 				$('.mp_box').empty();

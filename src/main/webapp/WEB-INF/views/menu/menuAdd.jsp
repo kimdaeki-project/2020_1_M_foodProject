@@ -60,12 +60,11 @@
 		
 		i++;
 		var c_name = '<div class="cb" title="1"><input type="button" class="add" value="옵션 추가" id="cateName'+i+'" name="cate_name_'+i+'" title="'+i+'"></div>';
-		var c_hidden = '<input type="hidden" value="'+cateVal+'" name="cateName'+i+'">';
+		var c_hidden = '<input type="hidden" value="'+cateVal+'" name="cate_name_'+i+'">';
 		$("#category_box").append(c_name);
 		$("#category_box").append(c_hidden);
 		console.log("i : "+i)
 	});
-
 		//옵션추가 버튼을 누르면 각 카테고리에 옵션추가
 	$("#category_box").on('click', ".add", function () {
 		
