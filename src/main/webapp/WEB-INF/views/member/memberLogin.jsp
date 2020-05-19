@@ -26,18 +26,20 @@
 				<input id="latitude" type="hidden" name="latitude" value="">
 				<input id="longitude" type="hidden" name="longitude" value="">
 				<div>
-					<input name="id" type="text" placeholder="이메일을 입력해주세요"
-						class="memberLogin_input" id="id"> 
-						<input name="password" id="password"
-						type="password" placeholder="비밀번호를 입력해주세요"
-						class="memberLogin_input">
+					<input name="id" type="text" placeholder="이메일을 입력해주세요" class="memberLogin_input" id="id" value="${cookie.cId.value}"> 
+					<input name="password" id="password" type="password" placeholder="비밀번호를 입력해주세요" class="memberLogin_input">
 				</div>
-				<label class="autologin"> <input type="checkbox"
-					id="idSaveCheck">아이디 기억하기
+				<label class="autologin"> 
+				<c:if test="${cookie.cookieId.value eq ''}">
+					<input type="checkbox" name="remember" id="idSaveCheck" value="remember" >아이디 기억하기
+				</c:if>
+				<c:if test="${cookie.cookieId.value ne ''}">
+					<input type="checkbox" name="remember" id="idSaveCheck" value="remember" checked="checked" >아이디 기억하기
+				</c:if>
+				
 				</label>
 				<nav>
-					<input id="btn-login" class="memberLogin_login memberLogin_button"
-						type="submit" value="로그인">
+					<input id="btn-login" class="memberLogin_login memberLogin_button" type="submit" value="로그인">
 				</nav>
 			</form>
 

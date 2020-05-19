@@ -33,8 +33,7 @@ public class MemberController {
 	}
 
 	@PostMapping("memberLogin")
-	public ModelAndView memberLogin(MemberVO memberVO, HttpSession session, String remember,
-			HttpServletResponse response) throws Exception {
+	public ModelAndView memberLogin(MemberVO memberVO, HttpSession session, String remember,HttpServletResponse response) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
 

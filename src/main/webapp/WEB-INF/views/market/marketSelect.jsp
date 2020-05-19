@@ -41,20 +41,22 @@
 			<!-- Ajax 내용 출력 위치 -->
 			<ul>
 				<c:forEach items="${menuList}" var="vo">
-					<a
-						href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
-						<li><a name="map2"></a> <img
-							src="${pageContext.request.contextPath}/resources/img/food.jpg">
-							<strong>${vo.name}</strong> <em>${vo.detail}</em></li>
-					</a>
+					<li>	
+						<a href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
+							<img src="${pageContext.request.contextPath}/resources/img/food.jpg">
+							<strong>${vo.name}</strong>
+							<em>${vo.detail}</em>
+						</a>
+					</li>
 				</c:forEach>
 			</ul>
 		</div>
+		<a name="map2"></a>
 
 		<div id="map" style="width: 800px; height: 400px; margin: 50px auto;"></div>
 		<div style="margin: 0 auto; text-align: center;">
-			<input type="button" value="길찾기" id="btn-map"> <a
-				name="review"></a>
+			<input type="button" value="길찾기" id="btn-map"> 
+			<a name="review"></a>
 		</div>
 
 		<!-- 리뷰 배너-->
