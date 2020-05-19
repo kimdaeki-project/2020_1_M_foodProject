@@ -12,14 +12,15 @@
 <body style="margin-top: 61px;">
 	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="file_upload">
 		<h2>메뉴 추가</h2>
+		
 		<div class="menuAdd_box">
-			<label for="title">메뉴명 : </label> <input type="text" id="name"name="name" value="돼지갈비">  
+			<label for="title">메뉴명 : </label> <input type="text" id="name"name="menu_name" value="돼지갈비">  
 		</div>
 		<div class="menuAdd_box">
-			<label for="price">가격 : </label> <input type="text" id="price"name="price" value="20000">
+			<label for="price">가격 : </label> <input type="text" id="price"name="menu_price" value="20000">
 		</div>
 		<div class="menuAdd_box">
-			<label for="detail">상세 :</label> <input type="text" id="detail"	name="detail" value="갈비갈비">
+			<label for="detail">상세 :</label> <input type="text" id="detail"	name="menu_detail" value="갈비갈비">
 		</div>
 		
 		<label>카테고리명 :</label>
@@ -39,7 +40,7 @@
 		</div>
 		<div id="category_box"></div>
 		<div class="menuAdd_box">
-			<input type="button" id="btn-sub" value="확인"></div>
+			<input type="submit" id="btn-sub" value="확인"></div>
 	</form>
 </body>
 
@@ -53,23 +54,36 @@
 // 			$('#input').attr("placeholder", "카테고리명을 입력해주세요!");
 // 			preventDefault();
 // 		}
+	
+		var cateVal = $("#input").val();
+		console.log(cateVal);
 		
 		i++;
-		var c_name = '<div class="cb"><input type="button" class="add'+i+'" value="옵션 추가" name="cateName'+i+'" title="'+i+'"></div>';
+		var c_name = '<div class="cb" title="1"><input type="button" class="add" value="옵션 추가" id="cateName'+i+'" name="cate_name_'+i+'" title="'+i+'"></div>';
+		var c_hidden = '<input type="hidden" value="'+cateVal+'" name="cate_name_'+i+'">';
 		$("#category_box").append(c_name);
+		$("#category_box").append(c_hidden);
+		console.log("i : "+i)
 	});
-
 		//옵션추가 버튼을 누르면 각 카테고리에 옵션추가
-	$("#category_box").on('click', '.add'+i, function () {
-		var index = $(this).parent().prop("title");
-		console.log(index);
-		alert("click"+i);
-		var c_name = '<div class="opDiv"><input name="opName" class="opName" placeholder="옵션 이름" type="text"><input name="opPrice" class="opPrice" type="text" placeholder="가격"><input type="button" class="delO" value="옵션 삭제"></div>';
+	$("#category_box").on('click', ".add", function () {
+		
+// 		console.log($("#cateName1").val());
+		console.log("cb: "+$(this).parent().attr("title"));
+		var index = $(this).attr("title")
+		var index2 = $(this).parent().attr("title");
+		
+		var c_name = '<div class="opDiv"><input name="op_name_'+index+'_'+ index2 +'" class="opName" placeholder="옵션 이름" type="text"><input name="op_price_'+index+'_'+ index2 +'" class="opPrice" type="text" placeholder="가격"><input type="button" class="delO" value="옵션 삭제"></div>';
 		$(this).parent().append(c_name);
+		
+		$(this).parent().attr("title",++index2);
+		
 	});	//옵션삭제 버튼을 누르면 옵션삭제
 	
 	$("#category_box").on('click', '.delO', function() {
 		$(this).parent().remove();
+		
+		
 	});
 
 
@@ -85,65 +99,65 @@
 	});
 
 	//전송
-	$("#btn-sub").click(function() {
+// 	$("#btn-sub").click(function() {
 
-		var categorys = [];
-		$('.cb').each(function() {
-			caNum = $(this).prop("title");
+// 		var categorys = [];
+// 		$('.cb').each(function() {
+// 			caNum = $(this).prop("title");
 			
-			ep = opIndex[caNum];
+// 			ep = opIndex[caNum];
 			
-			var options = [];
+// 			var options = [];
 			
-			for(i=0; i<ep; i++) {
-				var opName = $("#opName"+caNum+i).val();
-				var opPrice = $("#opPrice"+caNum+i).val();
+// 			for(i=0; i<ep; i++) {
+// 				var opName = $("#opName"+caNum+i).val();
+// 				var opPrice = $("#opPrice"+caNum+i).val();
 				
-				var option = {
-						opName: opName,
-						opPrice: opPrice				
-				}
+// 				var option = {
+// 						opName: opName,
+// 						opPrice: opPrice				
+// 				}
 
-				options.push(option);
-			}
+// 				options.push(option);
+// 			}
 			
-			var categoryName = $(this).text();
-			category = {
-					categoryName: categoryName,
-					options : options}
+// 			var categoryName = $(this).text();
+// 			category = {
+// 					categoryName: categoryName,
+// 					options : options}
 
-			categorys.push(category);
-		});
+// 			categorys.push(category);
+// 		});
 
-		console.log(categorys);
+// 		console.log(categorys);
 
-		//ajax 전송
-		var objParams = {
-			categorys : categorys,
-		};
+// 		//ajax 전송
+// 		var objParams = {
+// 			categorys : categorys,
+// 		};
 		
-		//폼 읽어오기
-		var formData = new FormData($('#file_upload')[0]);
-		formData.append("objParams",JSON.stringify(objParams));
+// 		//폼 읽어오기
+// 		var formData = new FormData($('#file_upload')[0]);
+// 		formData.append("objParams",JSON.stringify(objParams));
 		
-		console.log(formData);
+// 		console.log(formData);
 
 		
-		$.ajax({
-            url : "../menu/menuAdd",
-            type : "POST",
-            dataType : "json", // ajax 통신으로 받는 타입
-			contentType: false,
-			processData: false,
-            data : formData,
-            success : function(result) {
+// 		$.ajax({
+//             url : "../menu/menuAdd",
+//             type : "POST",
+//             dataType : "json", // ajax 통신으로 받는 타입
+// 			contentType: false,
+// 			processData: false,
+//             data : formData,
+//             success : function(result) {
 
-               console.log(result);
-            }
-         });
+//                console.log(result);
+//             }
+//          });
          
  
-	});
+// 	});
 
 	//유효성 검사
 	$("#file_upload").validate({

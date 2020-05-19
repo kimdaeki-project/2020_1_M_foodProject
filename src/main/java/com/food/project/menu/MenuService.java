@@ -1,5 +1,6 @@
 package com.food.project.menu;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -8,8 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.food.project.category.CategoryVO;
 import com.food.project.fileInfo.FileInfoDAO;
 import com.food.project.fileInfo.FileInfoVO;
+import com.food.project.market.MarketVO;
+import com.food.project.menuOption.MenuOptionVO;
 import com.food.project.util.FileSaver;
 
 @Service
@@ -25,17 +29,16 @@ public class MenuService {
 	// Transaction
 	// 메뉴 추가
 	public int menuAdd(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
-		
 		// 저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		System.out.println("path : " + path);
 		
-		// menuCount값 증가
-		long refNum = menuDAO.menuCount();
-		menuVO.setNum(refNum);
+		int result = 0;
+		
+		// menuCount값 증가(menu의 num값 시퀀스 사용 1증가)
+		long num = menuDAO.menuCount();
+		menuVO.setNum(num);
 
-		// menu Table에 insert
-		int result = menuDAO.menuAdd(menuVO);
 		
 		//파일(이미지) 등록
 		for (MultipartFile file : files) {
@@ -43,26 +46,32 @@ public class MenuService {
 			String fileName = fileSaver.saveByUtils(file, path);
 			// 2.DB등록
 			FileInfoVO fileInfoVO = new FileInfoVO();
-			long num = fileInfoDAO.fileCount();
+			long filNum = fileInfoDAO.fileCount();
 			
-			fileInfoVO.setNum(num);
+			fileInfoVO.setNum(filNum);
 			fileInfoVO.setFileName(fileName);
 			System.out.println("fileName:" + fileName);
 
 			fileInfoVO.setOriName(file.getOriginalFilename());
 			System.out.println("oriName: " + file.getOriginalFilename());
 			fileInfoVO.setKind(3); // menu
-			fileInfoVO.setRefNum(refNum);
-			System.out.println("num: " + num);
-			// reviewNum, marketNum은 입력안해서 null값 부여
-
+			fileInfoVO.setRefNum(num);
+			System.out.println("Refnum: " + num);
+			
 			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
-			System.out.println("result: " + result);
 
+			
+			//menuVO에 thumbImg값에 fileName값 삽입
+			menuVO.setThumbImg(fileName);
+			System.out.println("menuVO.thumbImg : "+fileName);
+			
 			if (result < 1) {
 				throw new Exception();
 			}
 		}
+		
+		// menu Table에 insert
+		result = menuDAO.menuAdd(menuVO);
 		
 		return result;
 	}

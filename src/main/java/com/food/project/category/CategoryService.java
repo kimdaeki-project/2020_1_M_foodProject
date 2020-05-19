@@ -14,7 +14,11 @@ public class CategoryService {
 	// 카테고리 추가
 	public int categoryInsert(CategoryVO categoryVO) {
 		
+		System.out.println("category Service들어옴");
+		System.out.println("category의 넣은 get MenuNum : "+categoryVO.getMenuNum());
+		
 		categoryVO.setNum(categoryDAO.categoryCount());
+		
 		return categoryDAO.categoryInsert(categoryVO);
 	}
 

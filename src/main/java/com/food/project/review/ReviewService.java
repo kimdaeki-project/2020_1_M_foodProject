@@ -56,11 +56,18 @@ public class ReviewService implements BoardService{
 	//리뷰리스트 출력
 	@Override
 	public List<BoardVO> boardList(Pager pager) throws Exception {
-		pager.makeRow();
+		System.out.println("Review Servcie _baordList");
 		
+		pager.makeRow();
 		long totalCount = reviewDAO.boardCount(pager);
+		System.out.println("totalCount : "+totalCount);
+		
 		pager.makePage(totalCount);
-		return reviewDAO.boarList(pager);
+		
+		
+		List<BoardVO> list = reviewDAO.boarList(pager);
+		
+		return list;
 	}
 
 	//리뷰 등록

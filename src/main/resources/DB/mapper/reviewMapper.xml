@@ -47,7 +47,7 @@
 		(select Q.*,rownum R from
 		(select * from review
 		order by ref desc, step asc) Q)
-		where R between 1 and 10)A
+		where R between #{startRow} and #{lastRow})A
 		join (select num,nickname,email from member)B
 		on(a.membernum = B.num)
 	</select>

@@ -152,8 +152,7 @@ input[type="file" i] {
 	pageEncoding="UTF-8"%>
 
 <div class="mp_box mp_box_all">
-	<form action="../market/marketPage" id="mp_update" method="post"
-		enctype="multipart/form-data">
+	<form action="../market/marketPage" id="mp_update" method="post" enctype="multipart/form-data">
 		<h2>마켓정보 수정</h2>
 		<input type="hidden" name="num" value="${marketVO.num}">
 		<div class="mp_infoMod_box" style="margin-top: 12px">

@@ -7,7 +7,7 @@
 
 	<insert id="menuAdd" parameterType="MenuVO">
 		INSERT INTO menu VALUES(
-		    #{num}, #{marketNum}, #{name}, #{price}, #{detail}, null, null
+		    #{num}, #{marketNum}, #{name}, #{price}, #{detail}, #{thumbImg}, null
 		)
 	</insert>
 	

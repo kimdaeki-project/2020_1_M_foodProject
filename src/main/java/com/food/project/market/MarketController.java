@@ -97,6 +97,11 @@ public class MarketController {
 		ModelAndView mv = new ModelAndView();
 		marketVO = marketService.marketSelect(marketVO);
 		
+		System.out.println("marketController");
+		System.out.println("userNum : "+marketVO.getUserNum());
+		System.out.println("curPage : "+pager.getCurPage());
+		System.out.println();
+		
 		//usernum으로 해당 트럭의 주소값 조회
 		MemberVO memberVO = new MemberVO();
 		memberVO.setNum(marketVO.getUserNum());
@@ -181,7 +186,7 @@ public class MarketController {
 		
 		int result = marketService.marketGeoUpdate(marketVO);
 		
-		return 1;
+		return result;
 	}
 	
 	//수정(GET/POST)

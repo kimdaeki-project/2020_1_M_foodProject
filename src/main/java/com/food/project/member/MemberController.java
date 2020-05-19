@@ -132,24 +132,34 @@ public class MemberController {
 
 	// 회원정보수정(GET/POST)
 	@GetMapping("memberUpdate")
-	public void memberUpdate() {
+	public ModelAndView memberUpdate(HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+		memberVO = memberService.memberSelect(memberVO);
+		
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("member/memberUpdate");
+		
+		return mv;
 	}
 
 	@PostMapping("memberUpdate")
 	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("emberid: "+memberVO.getId());
 		
+		System.out.println("memberUpdate");
 		int result = memberService.memberUpdate(memberVO);
 		
 		if (result > 0) {
-			session.setAttribute("memberVO", memberVO);
-			mv.setViewName("redirect:./memberPage");
-		} else {
-			mv.addObject("result", "업데이트 실패");
-			mv.addObject("path", "./memberPage");
-			mv.setViewName("common/result");
+//			session.setAttribute("memberVO", memberVO);
 		}
+		
+		System.out.println("result: "+result);
+		mv.addObject("msg",result);
+		mv.addObject("path","./memberPage");
+		
+		mv.setViewName("common/result");
 
 		return mv;
 	}
