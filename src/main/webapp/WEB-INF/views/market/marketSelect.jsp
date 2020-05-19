@@ -105,23 +105,28 @@
 				<section class="menu-review__album">
 					<h3 style="margin-bottom: 10px;">
 						사진 모아보기<small>7</small>
+						<!-- 화살표 -->
+						<img style="float: right; padding-left: 10px;"
+							class="swiper-btn-prev" alt=""
+							src="${pageContext.request.contextPath}/resources/img/ico-arrow-box-right.svg">
+						<img style="float: right;" class="swiper-btn-next" alt=""
+							src="${pageContext.request.contextPath}/resources/img/ico-arrow-box-left.svg">
 					</h3>
 
 					<div class="images">
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
-							
+
 								<c:forEach var="reviewVO" items="${reviewList}">
-									<div class="swiper-slide" style="width: 200px !import; height: 200px;" >
-										<img style="width: 200px; height: 200px;" class="swiper-slide" alt=""
+									<div class="swiper-slide"
+										style="width: 200px!import; height: 200px;">
+										<img style="width: 200px; height: 200px;" class="swiper-slide"
+											alt=""
 											src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}"
 											style="background-image: url('${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}');">
 									</div>
 								</c:forEach>
-								
 							</div>
-							<div class="swiper-button-next"></div>
-							<div class="swiper-button-prev"></div>
 						</div>
 					</div>
 				</section>
@@ -140,7 +145,6 @@
 											<dt class="col">
 												<strong>${reviewVO.memberVO.nickName}</strong> <em>(${reviewVO.memberVO.email})</em>
 											</dt>
-											<dd data-v-7fa225ca="">1번 구매</dd>
 										</dl>
 										<div class="review-item__body">
 											<div>
@@ -149,11 +153,13 @@
 													<div class="vue-star-rating">
 														<!-- 별점 5개 -->
 														<c:forEach begin="1" end="${reviewVO.rating}">
-															<span class="vue-star-rating-star"
-																style="margin-right: 0px;"> ★ </span>
+															<span class="vue-star-rating-star"> 
+																<img alt="pngwing.com.png" src="${pageContext.request.contextPath}/resources/img/pngwing.com.png">
+															</span>
 														</c:forEach>
-														<span data-v-34cbeed1=""
-															class="vue-star-rating-rating-text state-rating-label">
+														<span
+															class="vue-star-rating-rating-text state-rating-label"
+															style="font-size: 16px; color: #6f7174; font-weight: 600;">
 															${reviewVO.rating}</span>
 													</div>
 													<p class="review-item__comment">${reviewVO.contents}</p>
@@ -196,20 +202,19 @@
 							<c:if test="${pager.curBlock gt 1}">
 								<a
 									href="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}"
-									class="nav-paginate__dir nav-paginate-dir-prev"> <i></i>
+									class="nav-paginate__dir nav-paginate-dir-prev">
 								</a>
 							</c:if>
 
 							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
 								var="i">
-								<a
-									href="./marketSelect?curPage=${i}&userNum=${marketVO.userNum}">${i}</a>
+								<a class="nav_pagerA" href="">${i}</a>
 							</c:forEach>
 
 							<c:if test="${pager.curBlock lt pager.totalBlock}">
 								<a
 									href="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}"
-									class="nav-paginate__dir nav-paginate-dir-next"> <i></i>
+									class="nav-paginate__dir nav-paginate-dir-next">
 								</a>
 							</c:if>
 						</nav>
@@ -224,16 +229,28 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 <script type="text/javascript">
-	//////////////////////////////////
+	
+	//페이징
+	$('.nav_pagerA').click(function() {
+		console.log("href:"+ window.location.href);
+		console.log("pathname:" + window.location.pathname);
+			$.get("./marketSelect?curPage=${i}&userNum=${marketVO.userNum}", 
+					function(result) {
+				console.log("href:"+ window.location.href);
+				console.log("pathname:" + window.location.pathname);
+			});
+		});
+	
+	//리뷰 사진
 	new Swiper('.swiper-container', {
 
-		slidesPerView : 4, // 동시에 보여줄 슬라이드 갯수
+		slidesPerView : 5, // 동시에 보여줄 슬라이드 갯수
 		spaceBetween : 5, // 슬라이드간 간격
 		slidesPerGroup : 1, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
 
 		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
 		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
-		loopFillGroupWithBlank : true,
+		loopFillGroupWithBlank : false,
 
 		loop : false, // 무한 반복
 
@@ -242,11 +259,10 @@
 			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
 		},
 		navigation : { // 네비게이션
-			nextEl : '.swiper-button-next', // 다음 버튼 클래스명
-			prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+			prevEl : '.swiper-btn-next', // 다음 버튼 클래스명
+			nextEl : '.swiper-btn-prev', // 이번 버튼 클래스명
 		},
 	});
-	//////////////////////////////////
 
 	var latitude;
 	var longitude;
@@ -337,6 +353,7 @@
 		$(".menu-tab ol li").removeClass("on");
 		$(this).addClass("on");
 	});
+	
 </script>
 
 </html>

@@ -323,10 +323,6 @@ img {
     font-weight: 300;
 }
 
-.menu-review__rating .body dd {
-    margin-bottom: -3px;
-}
-
 .menu-review__rating dd {
     font-family: Roboto,sans-serif;
     font-size: 28px;
@@ -412,6 +408,11 @@ dd, dl {
 
 a{
 	text-decoration: none;
+}
+
+.swiper-btn-next, .swiper-btn-prev{
+	cursor: pointer;
+	outline: transparent;
 }
 
 .menu-review__album .images__image i {
@@ -504,7 +505,8 @@ a{
 }
 
 .review-item__head dt strong {
-    font-weight: 500;
+    font-weight: 600;
+    color: #3d3d3d;
 }
 
 .review-item__head dt em {
@@ -524,7 +526,7 @@ a{
 .review-item__body {
     display: -webkit-box;
     display: flex;
-    margin: 30px 0 0;
+    margin: 15px 0 0;
 }
 
 .review-item__body>div {
@@ -540,6 +542,13 @@ a{
 
 .vue-star-rating-star {
     display: inline-block;
+    margin-right: 0px;
+}
+
+.vue-star-rating-star > img {
+    height: 18px; 
+    padding-right: 3px;
+    
 }
 
 .state-rating-label {
@@ -673,9 +682,9 @@ a{
 .review-item__comment {
     font-size: 17px;
     margin: 8px 0 0;
-    font-size: 15px;
     line-height: 24px;
     font-weight: 200;
+    color: #3d3d3d;
 }
 
 .review-item__date {
