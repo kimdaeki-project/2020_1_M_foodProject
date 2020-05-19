@@ -48,7 +48,8 @@
 			//추천메뉴
 		</div>
 		<div id="main">
-			<div id="map" style="width: 90%; height: 50%"></div>
+			<div id="ctrlMap"></div>
+			<div id="map" style="width: 90%; height: 80%"></div>
 		</div>
 		<div class="home_question">
 			<div class="home_question_wrap">
@@ -80,6 +81,7 @@
 		var longitude;				// 경도 (127~)
 		var map;
 		var g_marketInfos = [];
+		var ctrl = false;
 		
 		//========================================
 		//main marker 좌표값 받아오기
@@ -107,7 +109,8 @@
 			var container = document.getElementById('map');
 			var options = {
 				center : new kakao.maps.LatLng(latitude, longitude), // 지도 중심좌표 설정
-				level : 5											 // 줌인정도
+				//draggable: false,									 // 지도 생성시, 휠로 인한 줌 인아웃 막기
+				level : 4											 // 줌인정도
 			};
 
 			map = new kakao.maps.Map(container, options);
@@ -178,7 +181,7 @@
 		//===============================
 		// 마켓의 Geo 데이터 가져오기
 		//===============================
-		function getGeos() {
+		function getGeos(l, a) {
 			
 			var geos = [];
 			
@@ -258,10 +261,10 @@
 
 				var content = '<div class="wrap">' + 
 	            '    <div class="info">' + 
-	            '        <div class="title click" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' + markets[i].marketName + 
+	            '        <div class="title click" id="'+ markets[i].userNum +'"'+'>' + markets[i].marketName + 
 	            '            <div class="close click" id="'+ markets[i].userNum +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
 	            '        <div class="body">' + 
-	            '            <div class="img" id="'+ markets[i].userNum +'"'+'>' +
+	            '            <div class="img" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
 	            '                <img src="#" width="73" height="70">' +
 	            '           </div>' + 
 	            '            <div class="desc">' + 
@@ -355,6 +358,60 @@
 		}
 		
 		//====================
+		// window keydown/up event
+		//====================
+		window.addEventListener("keydown", function(event) {
+			
+			if(ctrl === true)
+				return;
+			
+			if(event.ctrlKey) {
+				console.log('ctrl down');
+				ctrl = true;
+				setZoomable(ctrl);
+			}
+		});
+		
+		window.addEventListener("keyup", function(event) {
+			
+			console.log("keyup");
+			
+			if(ctrl === true) {
+				console.log('ctrl up');
+				ctrl = false;
+				setZoomable(ctrl);
+			}
+		});
+		
+		//====================
+		// 버튼 클릭에 따른 확대/축소 기능 on/off
+		//====================
+		function setZoomable(zoomable) {
+		    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+		    map.setZoomable(zoomable);    
+		}
+		
+		//====================
+		// 맵 위에 마우스가 있을 때, 휠 업다운에 따른 이벤트 (firefox는 적용 안됨)
+		//====================
+		function setMapWheelEvent() {
+			
+			var mapDiv = document.getElementById("map");
+			mapDiv.addEventListener("mousewheel", function() {
+				
+				if(ctrl === true)
+					return;
+				
+				var ctrlMapDiv = document.getElementById("ctrlMap");
+				console.log(ctrlMapDiv);
+				ctrlMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 ctrl을 누르고 스크롤 해주세요(1.5초뒤에 사라짐)</h2>';		
+				setTimeout(function() {
+					ctrlMapDiv.innerHTML = '';
+				}, 1500);
+			});
+		}
+		
+		//====================
 		// 메인함수
 		//====================
 		function main() {
@@ -376,6 +433,9 @@
 					markerEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
 				}
 				
+				setZoomable(false);
+				setMapWheelEvent();
+				
 			}, 200);
 		}
 		
@@ -383,6 +443,7 @@
 		main();
 
 	</script>
-
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/home/map.js"></script>
 </body>
 </html>
