@@ -118,7 +118,7 @@
 		<!-- 단체/케이터링 -->
 		<div class="home_question">
 			<div class="home_question_wrap">
-				<pre class="home_q_pre">프레시코드는"샐러드는 배고픈 다이어트 음식" 이라는 편견을 깨고대한민국 직장인의 건강한 식사 문화를 만들고자 합니다.</pre>
+				<pre class="home_q_pre">프레시코드는<br>"샐러드는 배고픈 다이어트 음식" 이라는 편견을 깨고<br>대한민국 직장인의 건강한 식사 문화를 만들고자 합니다.</pre>
 				<ul class="home_q_ul">
 					<li class="home_q_li">이메일 : help@freshcode.me</li>
 					<li class="home_q_li">카카오ID : @프레시코드-freshcode</li>
