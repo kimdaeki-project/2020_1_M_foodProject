@@ -3,54 +3,104 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Home</title>
-	
-	<!-- kakao Map API -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
-	<style type="text/css">
-	#main{
-		margin-top: 100px;
-	}
-	
-	#map {
-		margin-left: 100px;
-	}
-	</style>
+<meta charset="UTF-8">
+<title>Home</title>
 
-	 <style>
-	    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-	    .wrap * {padding: 0;margin: 0;}
-	    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-	    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-	    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-	    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-	    .info .close:hover {cursor: pointer;}
-	    .info .body {position: relative;overflow: hidden;}
-	    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-	    .desc .market {overflow: hidden;text-overflow: market;white-space: nowrap;}
-	    .desc .time {font-size: 11px;color: #888;margin-top: -2px;}
-	    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-	    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-	    .info .link {color: #5085BB;}
-	</style>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<!-- kakao Map API -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/home.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/swiper.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
 </head>
 
 <body>
 	<%@ include file="./templates/header.jsp"%>
 	<div class="contents">
-		<div>
-			//돌아가는 이미지
+
+		<!-- swiper 이미지 -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/1.jpg');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/2.png');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/3.jpg');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/4.jpg');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/5.jpg');"></div>
+			</div>
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
 		</div>
-		<div>
-			//추천메뉴
-		</div>
+
+		<!-- 지도 -->
 		<div id="main">
+			<div class="rec1">
+				<h2>언제나 무료배송되는 프코스팟</h2>
+				<p>1개만 주문해도 무료배송되는 프레시코드</p>
+			</div>
+			<div class="rec1">
+				<h2 style="font-size: 35px; margin-top: 25px;">936개</h2>
+				<p>현재 오픈된 프코스팟</p>
+			</div>
 			<div id="ctrlMap"></div>
-			<div id="map" style="width: 90%; height: 80%"></div>
+			<div id="map" style="width: 100%; height: 100%; margin-top: 50px;"></div>
 		</div>
+
+		<!-- 스팟 신청하기 -->
+		<div class="main_spot">
+			<div>
+				<header class="ms_header">
+					<h2>프코스팟이 없으신가요?</h2>
+					<p>오픈 희망하는 곳을 직접 신청해주세요! 동료들과 함께 신청하면 오픈 확률도 쭉쭉 상승해요</p>
+				</header>
+				<nav class="ms_nav">
+					<button>신청하기</button>
+				</nav>
+			</div>
+		</div>
+
+		<!-- 배달 -->
+		<div class="main_deliver">
+			<div class="rec1">
+				<h2>건강편의식 공유배송, <b style="color: #27b06e; font-size: 24px;">프레시코드!</b></h2>
+				<p>나에게 맞는 스마트한 방법을 선택하세요</p>
+			</div>
+			<div class="md_way">
+				<section class="md_section">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-spot-delivery.png');">
+						<em>프코스팟</em>
+						<h2><b>점심시간에 배송비 무료료</b><br>직장에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+				<section class="md_section" style="margin-left: 20px;">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-gs25-delivery.png');">
+						<em>편의점</em>
+						<h2><b>아무떄나 배송비 무료료</b><br>편의점에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+				<section class="md_section" style="margin-left: 20px;">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-midnight-delivery.png');">
+						<em>새벽배송</em>
+						<h2><b>새벽에 배송비 무료료</b><br>집에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+				<section class="md_section" style="margin-left: 20px;">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-quick-delivery.png');">
+						<em>바로배송</em>
+						<h2><b>어디서든 배송비 무료료</b><br>직장에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+			</div>
+		</div>
+
+		<!-- 단체/케이터링 -->
 		<div class="home_question">
 			<div class="home_question_wrap">
 				<pre class="home_q_pre">프레시코드는
@@ -65,13 +115,78 @@
 					<button class="home_q_btn">단체/케이터링 문의</button>
 				</nav>
 			</div>
-			<section class="home_insta" style="padding: 48px 30px 72px;">
-				//인스타그램
-			</section>
+		</div>
+
+		<!-- 인스타그램-->
+		<div class="main_insata">
+			<div class="mi_div1">
+				<header class="mi_header">
+					<em>Instagram</em>
+					<h2>@freshcode_salad</h2>
+					<p>프레시코드 인스타그램에서<br>최신 소식과 이벤트를 확인해보세요</p>
+				</header>
+				<div class="mi_div2">
+					<ul class="mi_ul">
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta1.jpg">
+							</a>
+						</li>
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta2.jpg">
+							</a>
+						</li>
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta3.jpg">
+							</a>
+						</li>
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta4.jpg">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 
 	<%@ include file="./templates/footer.jsp"%>
+
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/home/map.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+	<script type="text/javascript">
+	new Swiper('.swiper-container', {
+
+		slidesPerView : 1, // 동시에 보여줄 슬라이드 갯수
+		spaceBetween : 5, // 슬라이드간 간격
+		slidesPerGroup : 1, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		loopFillGroupWithBlank : false,
+
+		loop : true, // 무한 반복
+
+		pagination : { // 페이징
+			el : '.swiper-pagination',
+			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+		},
+		navigation : { // 네비게이션
+			prevEl : '.swiper-btn-next', // 다음 버튼 클래스명
+			nextEl : '.swiper-btn-prev', // 이번 버튼 클래스명
+		},
+		autoplay: { //오토플레이 설정
+		    delay: 2000, //딜레이 시간 설정
+			speed : 2000 // 슬라이드 속도 2초
+	     }
+	});
+
+	</script>
 
 	<script>
 		//=======================================
@@ -404,7 +519,7 @@
 				
 				var ctrlMapDiv = document.getElementById("ctrlMap");
 				console.log(ctrlMapDiv);
-				ctrlMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 ctrl을 누르고 스크롤 해주세요(1.5초뒤에 사라짐)</h2>';		
+				ctrlMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 ctrl을 누르고 스크롤 해주세요</h2>';		
 				setTimeout(function() {
 					ctrlMapDiv.innerHTML = '';
 				}, 1500);
@@ -443,7 +558,6 @@
 		main();
 
 	</script>
-	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/home/map.js"></script>
+
 </body>
 </html>

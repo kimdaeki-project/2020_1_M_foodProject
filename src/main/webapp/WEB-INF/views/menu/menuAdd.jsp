@@ -44,6 +44,7 @@
 	</form>
 </body>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript">
 
 	var i=0;

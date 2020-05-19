@@ -62,10 +62,18 @@
                   <li id="marketJoin" class="mp_myInfoNav_li">
                   <a class="mp_myInfoNav_a">판매자 신청</a></li>
                </c:if>
+               
                <c:if test="${memberVO.isFoodTruck eq '1'}">
-                  <li id="marketPage"><a href="#">마켓 정보 수정</a></li>
-                   <li id="menuAdd"><a href="#">메뉴 & 카테고리 추가</a></li>
-                   <li id="menuUpdate"><a href="#">메뉴 & 카테고리 수정</a></li> </c:if>
+                  <li id="marketPage" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">마켓 정보 수정</a>
+                  </li>
+                  <li id="menuAdd" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 추가</a>
+                  </li>
+                  <li id="menuUpdate" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 수정</a>
+                  </li> 
+                 </c:if>
 
                <li id="member_delete" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a">탈퇴하기</a></li>
