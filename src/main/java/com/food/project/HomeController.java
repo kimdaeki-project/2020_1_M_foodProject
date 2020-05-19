@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,18 +16,57 @@ import org.springframework.web.servlet.ModelAndView;
 import com.food.project.geo.GeoDAO;
 import com.food.project.geo.GeoVO;
 import com.food.project.market.MarketDAO;
+import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
+import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
-import com.food.project.review.ReviewVO;
 
 @Controller
 public class HomeController {
 	
-	@Autowired
+	@Autowired	
 	private MarketDAO marketDAO;
-	
 	@Autowired
 	private GeoDAO geoDAO;
+	@Autowired
+	private MarketService marketService;
+	@Autowired
+	private MemberService memberService;
+	
+	
+	@GetMapping("/search")
+	@ResponseBody
+	public List<MemberVO> search(String str) throws Exception{
+		System.out.println("str : "+str);
+		
+		ModelAndView mv = new ModelAndView();
+		ArrayList<MemberVO> memberList = new ArrayList<MemberVO>();
+		MarketVO marketVO = new MarketVO();
+		
+		
+		marketVO.setMarketName(str);
+		
+		System.out.println("marketList search");
+		
+		List<MarketVO> marketList = marketService.marketSearch(marketVO);
+		for (MarketVO vo : marketList) {
+			
+			MemberVO memberVO = new MemberVO();
+			
+			memberVO.setNum(vo.getUserNum());
+			memberVO = memberService.memberSelect(memberVO);
+			
+			System.out.println("memberVO : "+memberVO.getName()+", la : "+memberVO.getLatitude()+", lo : "+memberVO.getLongitude());
+			
+			memberList.add(memberVO);
+		}
+		
+		System.out.println("memberList");
+
+		
+		return memberList;
+	}
+	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(HttpSession session) throws Exception{

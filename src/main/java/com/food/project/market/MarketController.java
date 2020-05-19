@@ -102,7 +102,7 @@ public class MarketController {
 		System.out.println("curPage : "+pager.getCurPage());
 		System.out.println();
 		
-		//usernum으로 해당 트럭의 주소값 조회
+		//Market의  usernum으로 해당 트럭의 주소값 조회
 		MemberVO memberVO = new MemberVO();
 		memberVO.setNum(marketVO.getUserNum());
 		memberVO = memberService.memberSelect(memberVO);

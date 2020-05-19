@@ -60,6 +60,7 @@
 						<li id="chinese" class="category" title="5" style="border: 1px; color: #27B06E;">중식</li>
 					</ul>
 				</div>
+				
 				<div id="map" style="width: 90%; height:80%;position:relative;overflow:hidden;"></div>
 			</div>
 		</div>
@@ -93,6 +94,11 @@
 		var g_marketInfos = [];
 		var ctrl = false;
 		var categoryShow = 5;
+		
+		
+		
+		
+		
 		
 		//========================================
 		//main marker 좌표값 받아오기

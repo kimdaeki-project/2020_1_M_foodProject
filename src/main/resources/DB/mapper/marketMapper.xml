@@ -45,6 +45,10 @@
 		select * from market where userNum = #{userNum}
 	</select>
 	
+	<select id="marketSearch" parameterType="MarketVO" resultType="MarketVO">
+		select * from market where marketName like  '%' || #{marketName} || '%'
+	</select>
+	
 	<select id="marketCount" resultType="Long">
 		select market_seq.nextval from dual
 	</select>

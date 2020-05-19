@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.executor.ReuseExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +27,12 @@ public class MarketService {
 	private FileInfoDAO fileInfoDAO;
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	
+	//marketName을 이용해 userName(MarketVO) 도출
+	public List<MarketVO> marketSearch(MarketVO marketVO) throws Exception{
+		return marketDAO.marketSearch(marketVO);
+	}
 	
 	
 	//isOpen
