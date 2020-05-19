@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>마켓 상세보기</title>
 <link rel="stylesheet" href="../resources/css/market/marketSelect.css">
+<link rel="stylesheet" href="../resources/css/swiper.min.css">
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
 <script
@@ -23,29 +24,28 @@
 				<nav></nav>
 			</div>
 		</div>
-
+		<a name="menu"></a>
 
 		<div class="menu-tab">
 			<ol>
-				<li class="menu on">메뉴</li>
-				<li class="map">지도</li>
-				<li class="review">후기</li>
+				<a href="#menu" class="mt_a"><li class="menu on">메뉴</li></a>
+				<a href="#map2" class="mt_a"><li class="map">지도</li></a>
+				<a href="#review" class="mt_a"><li class="review">후기</li></a>
 			</ol>
 		</div>
-
 
 		<!--지도 -->
 		<input type="hidden" title="address"
 			value="${requestScope.memberVO.address}">
-
 		<div class="ml_menuList">
 			<!-- Ajax 내용 출력 위치 -->
 			<ul>
 				<c:forEach items="${menuList}" var="vo">
-					<a href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
-						<li><img src="${pageContext.request.contextPath}/resources/img/food.jpg">
-							<strong>${vo.name}</strong> <em>${vo.detail}</em>
-						</li>
+					<a
+						href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
+						<li><a name="map2"></a> <img
+							src="${pageContext.request.contextPath}/resources/img/food.jpg">
+							<strong>${vo.name}</strong> <em>${vo.detail}</em></li>
 					</a>
 				</c:forEach>
 			</ul>
@@ -53,27 +53,29 @@
 
 		<div id="map" style="width: 800px; height: 400px; margin: 50px auto;"></div>
 		<div style="margin: 0 auto; text-align: center;">
-			<input type="button" value="길찾기" id="btn-map">
+			<input type="button" value="길찾기" id="btn-map"> <a
+				name="review"></a>
 		</div>
 
-
-
-
-<!-- 리뷰 배너-->
-		<div id="tab_menu_review" class="menu__tab-review">
+		<!-- 리뷰 배너-->
+		<div id="tab_menu_review" class="menu__tab-review" name="review">
 			<div class="menu-review">
 				<div class="view-review-comment">
 					<div>
-						<img src="../resources/img/marketSelect/review-icon.png" style="width: 30px; display: inline-block; margin-top: -38px; margin-right: 20px;">
+						<img src="../resources/img/marketSelect/review-icon.png"
+							style="width: 30px; display: inline-block; margin-top: -38px; margin-right: 20px;">
 					</div>
 					<div>
-						지금, 후기를 작성하고 <span style="font-weight: bold;">300원 포인트</span>를 받으세요!
+						지금, 후기를 작성하고 <span style="font-weight: bold;">300원 포인트</span>를
+						받으세요!
 					</div>
 					<div class="view-review-comment-btn-wrap">
 						<a href="${pageContext.request.contextPath}/review/reviewInsert">
-						<button type="button" class="button button--inline button--side-padding button--size-small button--outline" style="color: white; border: 1px solid white; font-size: 14px; background-color: inherit;">
-							<span class="button__wrap">후기 쓰러가기</span>
-						</button>
+							<button type="button"
+								class="button button--inline button--side-padding button--size-small button--outline"
+								style="color: white; border: 1px solid white; font-size: 14px; background-color: inherit;">
+								<span class="button__wrap">후기 쓰러가기</span>
+							</button>
 						</a>
 					</div>
 				</div>
@@ -87,7 +89,6 @@
 								<dl class="row--v-center row--h-between">
 									<dt>사용자 총 평점</dt>
 									<dd>${marketRate}</dd>
-							
 								</dl>
 							</div>
 							<div class="col">
@@ -102,27 +103,29 @@
 
 				<!-- 리뷰 총 등록된 이미지들 -->
 				<section class="menu-review__album">
-					<h3>사진 모아보기<small>7</small></h3>
+					<h3 style="margin-bottom: 10px;">
+						사진 모아보기<small>7</small>
+						<!-- 화살표 -->
+						<img style="float: right; padding-left: 10px;"
+							class="swiper-btn-prev" alt=""
+							src="${pageContext.request.contextPath}/resources/img/ico-arrow-box-right.svg">
+						<img style="float: right;" class="swiper-btn-next" alt=""
+							src="${pageContext.request.contextPath}/resources/img/ico-arrow-box-left.svg">
+					</h3>
+
 					<div class="images">
-						<div>
-							<div id="carousel_pfe9ns59uir" class="owl-carousel owl-theme owl-loaded">
-								<div class="owl-stage-outer">
-									<div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1535px;">
-										<!-- 반복문 돌려서 이미지 첨삭 -->
-										<c:forEach var="reviewVO" items="${reviewList}">
-											<div class="owl-item active" style="width: 203.2px; margin-right: 16px;">
-												<div class="images__image">
-													<a href="#"><i style="background-image: url(&quot;../resources/upload/review/${reviewVO.fileName}&quot;);">image</i>
-													</a>
-												</div>
-											</div>
-										</c:forEach>
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+
+								<c:forEach var="reviewVO" items="${reviewList}">
+									<div class="swiper-slide"
+										style="width: 200px!import; height: 200px;">
+										<img style="width: 200px; height: 200px;" class="swiper-slide"
+											alt=""
+											src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}"
+											style="background-image: url('${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}');">
 									</div>
-								</div>
-								<div class="owl-nav">
-									<div class="owl-prev">next</div>
-									<div class="owl-next">prev</div>
-								</div>
+								</c:forEach>
 							</div>
 						</div>
 					</div>
@@ -140,91 +143,127 @@
 									<div class="review-item">
 										<dl class="row--v-center review-item__head">
 											<dt class="col">
-												<strong>${reviewVO.memberVO.nickName}</strong>
-												<em>(${reviewVO.memberVO.email})</em>
+												<strong>${reviewVO.memberVO.nickName}</strong> <em>(${reviewVO.memberVO.email})</em>
 											</dt>
-											<dd data-v-7fa225ca="">1번 구매</dd>
 										</dl>
 										<div class="review-item__body">
 											<div>
-												<div class="review-item__score vue-star-rating" style="display: grid">
+												<div class="review-item__score vue-star-rating"
+													style="display: grid">
 													<div class="vue-star-rating">
 														<!-- 별점 5개 -->
 														<c:forEach begin="1" end="${reviewVO.rating}">
-															<span class="vue-star-rating-star" style="margin-right: 0px;">
-																★
+															<span class="vue-star-rating-star"> 
+																<img alt="pngwing.com.png" src="${pageContext.request.contextPath}/resources/img/pngwing.com.png">
 															</span>
 														</c:forEach>
-														<span data-v-34cbeed1="" class="vue-star-rating-rating-text state-rating-label"> ${reviewVO.rating}</span>
+														<span
+															class="vue-star-rating-rating-text state-rating-label"
+															style="font-size: 16px; color: #6f7174; font-weight: 600;">
+															${reviewVO.rating}</span>
 													</div>
 													<p class="review-item__comment">${reviewVO.contents}</p>
 												</div>
 											</div>
 											<figure class="review-item__photos">
-											<!-- 회원이 이미지를 등록했을 때만 이미지 html문을 추가해 출력해준다 -->
+												<!-- 회원이 이미지를 등록했을 때만 이미지 html문을 추가해 출력해준다 -->
 												<p>
-													<a href="javascript:">
-														<i style="background-image: url(&quot;../resources/upload/review/${reviewVO.fileName}&quot;);">photo</i>
+													<a href="javascript:"> <i
+														style="background-image: url(&quot;../resources/upload/review/${reviewVO.fileName}&quot;);">photo</i>
 													</a>
 												</p>
 											</figure>
 										</div>
-										<p class="review-item__date">작성일 <em>${reviewVO.regDate}</em></p>
+										<p class="review-item__date">
+											작성일 <em>${reviewVO.regDate}</em>
+										</p>
 									</div>
 								</li>
 							</c:if>
 
 
-							<!-- 판매자의 덧글 존재시 출력 -->	
+							<!-- 판매자의 덧글 존재시 출력 -->
 							<c:if test="${reviewVO.step eq 1}">
 								<div class="review-item__reply" style="margin-bottom: 20px;">
-									<p style="margin: 0px; color: rgb(31, 182, 109); font-size: 15px;">${reviewVO.memberVO.nickName}</p>
+									<p
+										style="margin: 0px; color: rgb(31, 182, 109); font-size: 15px;">${reviewVO.memberVO.nickName}</p>
 									<p class="review-item__comment">${reviewVO.contents}</p>
-							        <p class="review-item__date">작성일 
-							        	<em>${reviewVO.regDate}</em>
-							        </p>
+									<p class="review-item__date">
+										작성일 <em>${reviewVO.regDate}</em>
+									</p>
 								</div>
 							</c:if>
-						
 						</c:forEach>
-						
 					</ul>
-					
-<!-- 페이지 버튼 구현 -->
+
+					<!-- 페이지 버튼 구현 -->
 					<div class="nav-paginate-wrap__desktop">
 						<nav class="nav-paginate">
 							<c:if test="${pager.curBlock gt 1}">
-								<a  href="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-prev">
-									<i></i>
+								<a
+									href="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}"
+									class="nav-paginate__dir nav-paginate-dir-prev">
 								</a>
 							</c:if>
-						
-							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-								<a href="./marketSelect?curPage=${i}&userNum=${marketVO.userNum}">${i}</a>
+
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+								var="i">
+								<a class="nav_pagerA" href="">${i}</a>
 							</c:forEach>
-							
+
 							<c:if test="${pager.curBlock lt pager.totalBlock}">
-								<a href="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-next">
-									<i></i>
+								<a
+									href="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}"
+									class="nav-paginate__dir nav-paginate-dir-next">
 								</a>
 							</c:if>
-							
 						</nav>
 					</div>
-					
 				</section>
 			</div>
 		</div>
-
-
-
-
-
 	</div>
 	<%@ include file="../templates/footer.jsp"%>
 </body>
 
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 <script type="text/javascript">
+	
+	//페이징
+	$('.nav_pagerA').click(function() {
+		console.log("href:"+ window.location.href);
+		console.log("pathname:" + window.location.pathname);
+			$.get("./marketSelect?curPage=${i}&userNum=${marketVO.userNum}", 
+					function(result) {
+				console.log("href:"+ window.location.href);
+				console.log("pathname:" + window.location.pathname);
+			});
+		});
+	
+	//리뷰 사진
+	new Swiper('.swiper-container', {
+
+		slidesPerView : 5, // 동시에 보여줄 슬라이드 갯수
+		spaceBetween : 5, // 슬라이드간 간격
+		slidesPerGroup : 1, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		loopFillGroupWithBlank : false,
+
+		loop : false, // 무한 반복
+
+		pagination : { // 페이징
+			el : '.swiper-pagination',
+			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+		},
+		navigation : { // 네비게이션
+			prevEl : '.swiper-btn-next', // 다음 버튼 클래스명
+			nextEl : '.swiper-btn-prev', // 이번 버튼 클래스명
+		},
+	});
+
 	var latitude;
 	var longitude;
 
@@ -233,7 +272,9 @@
 
 	$("#btn-map").click(
 			function() {
-				window.open("https://map.kakao.com/link/to/" + '${marketVO.marketName}' + "," + longitude + ","+ latitude);
+				window.open("https://map.kakao.com/link/to/"
+						+ '${marketVO.marketName}' + "," + longitude + ","
+						+ latitude);
 			});
 
 	//지도 띄움
@@ -252,13 +293,13 @@
 					};
 					var map = new kakao.maps.Map(container, options);
 
-					var markerPosition = new kakao.maps.LatLng(longitude, latitude);
+					var markerPosition = new kakao.maps.LatLng(longitude,
+							latitude);
 					var marker = new kakao.maps.Marker({
 						position : markerPosition
 					});
 					marker.setMap(map);
 
-					
 					var iwContent = '<div style="padding:5px;">${marketVO.marketName}</div>'; // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 					var infowindow = new kakao.maps.InfoWindow({
 						content : iwContent
@@ -286,15 +327,23 @@
 
 				console.log(latitude);
 				console.log(longitude);
-				latitude = ${memberVO.longitude};
-				longitude = ${memberVO.latitude};
-				
+				latitude = $
+				{
+					memberVO.longitude
+				}
+				;
+				longitude = $
+				{
+					memberVO.latitude
+				}
+				;
+
 				console.log(latitude);
 				console.log(longitude);
 
 			}
 		};
-		
+
 		//주소값 전달 받아야되고
 		geocoder.addressSearch("${memberVO.address}", callback);
 	}
@@ -304,6 +353,7 @@
 		$(".menu-tab ol li").removeClass("on");
 		$(this).addClass("on");
 	});
+	
 </script>
 
 </html>

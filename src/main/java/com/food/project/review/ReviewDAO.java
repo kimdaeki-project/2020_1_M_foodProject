@@ -18,6 +18,11 @@ public class ReviewDAO implements BoardDAO{
 	private final String NAMESPACE="com.food.project.review.ReviewDAO.";
 	
 	
+	//한 사용자가 작성한 리뷰 목록 출력
+	public List<ReviewVO> myReviewList(long memberNum) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"myReviewList",memberNum);
+	}
+	
 	//한 마켓의 총 평점 계산
 	public double marketAvg(long marketNum) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"marketAvg", marketNum);

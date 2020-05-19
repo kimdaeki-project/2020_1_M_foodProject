@@ -3,16 +3,39 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Home</title>
-<!-- kakao Map API -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/home.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap"
-	rel="stylesheet">
+	<meta charset="UTF-8">
+	<title>Home</title>
+	
+	<!-- kakao Map API -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
+	<style type="text/css">
+	#main{
+		margin-top: 100px;
+	}
+	
+	#map {
+		margin-left: 100px;
+	}
+	</style>
+
+	 <style>
+	    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+	    .wrap * {padding: 0;margin: 0;}
+	    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+	    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+	    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+	    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+	    .info .close:hover {cursor: pointer;}
+	    .info .body {position: relative;overflow: hidden;}
+	    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+	    .desc .market {overflow: hidden;text-overflow: market;white-space: nowrap;}
+	    .desc .time {font-size: 11px;color: #888;margin-top: -2px;}
+	    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+	    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	    .info .link {color: #5085BB;}
+	</style>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -25,7 +48,8 @@
 			//추천메뉴
 		</div>
 		<div id="main">
-			<div id="map" style="width: 90%; height: 50%"></div>
+			<div id="ctrlMap"></div>
+			<div id="map" style="width: 90%; height: 80%"></div>
 		</div>
 		<div class="home_question">
 			<div class="home_question_wrap">
@@ -47,17 +71,17 @@
 		</div>
 	</div>
 
-
 	<%@ include file="./templates/footer.jsp"%>
 
 	<script>
 		//=======================================
 		// script 전역변수
 		//=======================================
-		var latitude;
-		var longitude;
+		var latitude;				// 위도 (30~)
+		var longitude;				// 경도 (127~)
 		var map;
 		var g_marketInfos = [];
+		var ctrl = false;
 		
 		//========================================
 		//main marker 좌표값 받아오기
@@ -68,8 +92,9 @@
 
 			var callback = function(result, status) {
 				if (status === kakao.maps.services.Status.OK) {
-					latitude = Math.floor((result[0].x) * 1000000) / 1000000;
-					longitude = Math.floor((result[0].y) * 1000000) / 1000000;
+					longitude = Math.floor((result[0].x) * 1000000) / 1000000;
+					latitude = Math.floor((result[0].y) * 1000000) / 1000000;
+					
 				}
 			};
 
@@ -82,11 +107,10 @@
 		function getMap() {
 			
 			var container = document.getElementById('map');
-			console.log(latitude);
-			console.log(longitude);
 			var options = {
-				center : new kakao.maps.LatLng(longitude, latitude), // 지도 중심좌표 설정
-				level : 3											 // 줌인정도
+				center : new kakao.maps.LatLng(latitude, longitude), // 지도 중심좌표 설정
+				//draggable: false,									 // 지도 생성시, 휠로 인한 줌 인아웃 막기
+				level : 4											 // 줌인정도
 			};
 
 			map = new kakao.maps.Map(container, options);
@@ -134,14 +158,17 @@
 			<c:forEach items="${marketList}" var="vo">
 
 				var market = {
-						//userNum(오버레이 id 값), avg rating(오버레이에 추가로 필요한 정보) 필요
+						num: `${vo.num}`,
+						userNum: `${vo.userNum}`,
+						categoryNum: `${vo.categoryNum}`,
 						marketName: `${vo.marketName}`,
-						marketIntro: `${vo.marketIntro}`,
 						openTime: `${vo.openTime}`,
 						closeTime: `${vo.closeTime}`,
 						isOpen: ${vo.isOpen},
 						canOrder: ${vo.canOrder},
-						thumbImg: `${vo.thumbImg}`
+						marketIntro: `${vo.marketIntro}`,
+						thumbImg: `${vo.thumbImg}`,
+						rating: `${vo.reviewVO.rating}`
 				};
 				
 				markets.push(market);	
@@ -154,7 +181,7 @@
 		//===============================
 		// 마켓의 Geo 데이터 가져오기
 		//===============================
-		function getGeos() {
+		function getGeos(l, a) {
 			
 			var geos = [];
 			
@@ -185,7 +212,7 @@
 
 				var position = {
 					title: markets[i].marketName,
-					latlng: new kakao.maps.LatLng(geos[i].longitude, geos[i].latitude)
+					latlng: new kakao.maps.LatLng(geos[i].latitude, geos[i].longitude)
 				}
 				
 				positions.push(position);	
@@ -214,7 +241,7 @@
 			        map: map, // 마커를 표시할 지도
 			        position: positions[i].latlng, // 마커를 표시할 위치
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-			        image : markerImage // 마커 이미지 
+			        image : markerImage // 마커 이미지
 			    });
 			    
 			    markers.push(marker);
@@ -234,17 +261,17 @@
 
 				var content = '<div class="wrap">' + 
 	            '    <div class="info">' + 
-	            '        <div class="title">' + markets[i].marketName + 
-	            '            <div class="close" id="'+ markets[i].marketName +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
+	            '        <div class="title click" id="'+ markets[i].userNum +'"'+'>' + markets[i].marketName + 
+	            '            <div class="close click" id="'+ markets[i].userNum +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
 	            '        <div class="body">' + 
-	            '            <div class="img" id="'+ markets[i].marketName +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
+	            '            <div class="img" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
 	            '                <img src="#" width="73" height="70">' +
 	            '           </div>' + 
 	            '            <div class="desc">' + 
 	            '                <div class="market">' + markets[i].marketIntro +
 	            '				 </div>' + 
 	            '                <div class="time">(open ~ close)'+ markets[i].openTime + ' ~ ' + markets[i].closeTime + '</div>' + 
-	            '                <div class="time">별점</div>' + 
+	            '                <div class="time">별점</div>' +
 	            '            </div>' + 
 	            '	    </div>' + 
 	            '    </div>' +    
@@ -268,13 +295,7 @@
 		//======================
 		// 마켓Infos 생성
 		//======================
-		function getMarketInfos() {
-			
-			var markets = getMarkets();
-			var geos = getGeos();
-			var positions = getPositions(markets, geos);
-			var markers = getMarkers(positions);
-			var overlays = getOverlays(markets, markers);
+		function getMarketInfos(markets, geos, positions, markers, overlays) {
 			
 			for(var i=0; i<markets.length; i++) {
 				
@@ -287,7 +308,7 @@
 				}
 				
 				g_marketInfos.push(marketInfo);
-			}
+			}	
 		}
 		
 		//==========================
@@ -316,9 +337,8 @@
 			
 			for(var i=0; i<g_marketInfos.length; i++) {
 				
-				console.log(g_marketInfos[i].market.marketName);
-				var marketName = g_marketInfos[i].market.marketName;
-				if(clickedId === marketName) {
+				var userNum = g_marketInfos[i].market.userNum;
+				if(clickedId === userNum) {
 					
 					var overlay = g_marketInfos[i].overlay;
 					overlay.setMap(null);
@@ -333,8 +353,62 @@
 		//====================
 		function marketSelectHandler(clickedId) {
 		
-			console.log("save");
-			location.href = '/project/market/marketSelect?userNum=29';
+			var ref = '/project/market/marketSelect?userNum='+clickedId;
+			location.href = ref;
+		}
+		
+		//====================
+		// window keydown/up event
+		//====================
+		window.addEventListener("keydown", function(event) {
+			
+			if(ctrl === true)
+				return;
+			
+			if(event.ctrlKey) {
+				console.log('ctrl down');
+				ctrl = true;
+				setZoomable(ctrl);
+			}
+		});
+		
+		window.addEventListener("keyup", function(event) {
+			
+			console.log("keyup");
+			
+			if(ctrl === true) {
+				console.log('ctrl up');
+				ctrl = false;
+				setZoomable(ctrl);
+			}
+		});
+		
+		//====================
+		// 버튼 클릭에 따른 확대/축소 기능 on/off
+		//====================
+		function setZoomable(zoomable) {
+		    // 마우스 휠로 지도 확대,축소 가능여부를 설정합니다
+		    map.setZoomable(zoomable);    
+		}
+		
+		//====================
+		// 맵 위에 마우스가 있을 때, 휠 업다운에 따른 이벤트 (firefox는 적용 안됨)
+		//====================
+		function setMapWheelEvent() {
+			
+			var mapDiv = document.getElementById("map");
+			mapDiv.addEventListener("mousewheel", function() {
+				
+				if(ctrl === true)
+					return;
+				
+				var ctrlMapDiv = document.getElementById("ctrlMap");
+				console.log(ctrlMapDiv);
+				ctrlMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 ctrl을 누르고 스크롤 해주세요(1.5초뒤에 사라짐)</h2>';		
+				setTimeout(function() {
+					ctrlMapDiv.innerHTML = '';
+				}, 1500);
+			});
 		}
 		
 		//====================
@@ -348,18 +422,28 @@
 
 				getMap();
 				getUserMarker();
-				getMarketInfos();
-
+				var markets = getMarkets();
+				var geos = getGeos();
+				var positions = getPositions(markets, geos);
+				var markers = getMarkers(positions);
+				var overlays = getOverlays(markets, markers);
+				getMarketInfos(markets, geos, positions, markers, overlays);
+				
 				for(var i=0; i<g_marketInfos.length; i++) {
 					markerEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
 				}
+				
+				setZoomable(false);
+				setMapWheelEvent();
 				
 			}, 200);
 		}
 		
 		// main함수 안에서 실행
 		main();
-		
+
 	</script>
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/home/map.js"></script>
 </body>
 </html>

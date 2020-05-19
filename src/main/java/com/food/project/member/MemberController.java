@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.food.project.market.MarketService;
+import com.food.project.market.MarketVO;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private MarketService marketService;
 	
 
 	// 로그인(GET/POST)
@@ -45,6 +50,14 @@ public class MemberController {
 		memberVO = memberService.memberLogin(memberVO);
 		
 		if (memberVO != null) {
+			
+			if(memberVO.getIsFoodTruck() == 1) {
+				MarketVO marketVO = new MarketVO();
+				marketVO.setUserNum(memberVO.getNum());
+				marketVO= marketService.marketSelect(marketVO);
+				
+				session.setAttribute("marketVO", marketVO);
+			}
 			session.setAttribute("memberVO", memberVO);
 			
 			mv.setViewName("redirect:../");
@@ -90,7 +103,7 @@ public class MemberController {
 	@GetMapping("memberIdCheck")
 	@ResponseBody
 	public int memberIdCheck(MemberVO memberVO) throws Exception {
-		System.out.println(memberVO.getId());
+		//System.out.println(memberVO.getId());
 		int result = 1;
 		memberVO = memberService.memberIdCheck(memberVO);
 		

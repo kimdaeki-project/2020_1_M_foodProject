@@ -17,6 +17,19 @@ public class ReviewDAOTest extends AbstractTestCase{
 	@Autowired
 	private ReviewDAO reviewDAO; 
 	
+	
+	@Test
+	public void myReviewList() throws Exception{
+		
+		List<ReviewVO> list = reviewDAO.myReviewList(29);
+		for (ReviewVO reviewVO : list) {
+			System.out.println(reviewVO.getContents());
+		}
+		
+		assertNotNull(list);
+		
+	}
+	
 //	@Test
 	public void reviewList() throws Exception{
 		Pager pager = new Pager();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.executor.ReuseExecutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -65,9 +66,14 @@ public class MarketService {
 		long num = marketDAO. marketCount();
 		marketVO.setNum(num);
 		
+		
+//		System.out.println("userNum: "+marketVO.getUserNum());
+		
 		//marketDB저장
 		marketVO.setThumbImg("");
 		int result = marketDAO.marketInsert(marketVO);
+		
+//		System.out.println("marketinsert result : "+result);
 		
 		//파일(이미지) 등록
 		for (MultipartFile file : files) {
@@ -148,13 +154,16 @@ public class MarketService {
 
 		//2.DB등록
 		FileInfoVO fileInfoVO = new FileInfoVO();
+		
+		long num = fileInfoDAO.fileCount();
+		fileInfoVO.setNum(num);
+		
 		fileInfoVO.setFileName(fileName);
-		System.out.println("fileName:" +fileInfoVO.getFileName());
 		fileInfoVO.setOriName(file.getOriginalFilename());
 		System.out.println("oriName:" +file.getOriginalFilename());
 		fileInfoVO.setKind(1); //market
 		fileInfoVO.setRefNum(marketVO.getNum());
-		System.out.println("fileName:" +fileInfoVO.getRefNum());
+		System.out.println("refNum:" +fileInfoVO.getRefNum());
 		//reviewNum, foodNum은 입력안해서 null값 부여
 
 		result = fileInfoDAO.fileInfoInsert(fileInfoVO);

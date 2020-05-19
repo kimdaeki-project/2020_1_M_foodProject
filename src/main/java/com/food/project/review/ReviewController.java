@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.board.BoardVO;
+import com.food.project.member.MemberVO;
 import com.food.project.util.Pager;
 
 @Controller
@@ -22,6 +23,27 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	//한 멤버가 작성한 리뷰목록 출력
+	@GetMapping("myReviewList")
+	public ModelAndView myReviewList(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("나의 후기목록");
+		
+		long memberNum = memberVO.getNum();
+		System.out.println("memberNum: "+memberNum);
+		
+		List<ReviewVO> myReviewList = reviewService.myReviewList(memberNum); 
+		
+		
+		if(myReviewList != null) {
+			mv.addObject("myReviewList", myReviewList);
+			mv.setViewName("member/myReview");
+		}
+		
+		return mv;
+	}
+	
 	
 	//덧글달기(GET)
 	@GetMapping("reviewReply")
@@ -56,6 +78,13 @@ public class ReviewController {
 		return mv;
 		
 	}
+	
+	
+	@GetMapping("reviewInsert")
+	public void reviewInsert() throws Exception{
+		
+	}
+	
 	
 	//리뷰등록(POST)
 	@PostMapping("reviewInsert")
@@ -99,15 +128,10 @@ public class ReviewController {
 		return result;
 	}
 	
-	@GetMapping("reviewInsert")
-	   public void reviewInsert() throws Exception{
-	      
-	 }
-	
 	@GetMapping("reviewUpdate")
-	   public void reviewUpdate() throws Exception{
+	public void reviewUpdate() throws Exception{
 	      
-	   }
+	}
 
 }
 

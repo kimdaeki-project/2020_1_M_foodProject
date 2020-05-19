@@ -28,6 +28,12 @@ public class ReviewService implements BoardService{
 	private FileSaver fileSaver;
 	
 	
+	//한 계정이 등록한 리뷰목록 조회
+	public List<ReviewVO> myReviewList(long memberNum) throws Exception{
+		return reviewDAO.myReviewList(memberNum);
+	}
+	
+	
 	//한 마켓의 총 평점 계산
 	public double marketAvg(long marketNum) throws Exception{
 		return reviewDAO.marketAvg(marketNum);

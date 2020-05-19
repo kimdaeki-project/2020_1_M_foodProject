@@ -21,8 +21,12 @@
 			<result column="nickName" property="nickName"/>
 			<result column="email" property="email"/>
 		</association>
-	
 	</resultMap>
+	
+	
+	<select id="myReviewList" parameterType="Long" resultType="ReviewVO">
+		select * from review where memberNum=#{memberNum}
+	</select>
 
 	<select id="marketAvg" parameterType="Long" resultType="Double">
 		select avg(rating) from review where marketNum = #{marketNum}
