@@ -3,51 +3,48 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Home</title>
-	
-	<!-- kakao Map API -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
-	<style type="text/css">
-	#main{
-		margin-top: 100px;
-	}
-	
-	#map {
-		margin-left: 100px;
-	}
-	</style>
+<meta charset="UTF-8">
+<title>Home</title>
 
-	 <style>
-	    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-	    .wrap * {padding: 0;margin: 0;}
-	    .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-	    .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-	    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-	    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-	    .info .close:hover {cursor: pointer;}
-	    .info .body {position: relative;overflow: hidden;}
-	    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-	    .desc .market {overflow: hidden;text-overflow: market;white-space: nowrap;}
-	    .desc .time {font-size: 11px;color: #888;margin-top: -2px;}
-	    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-	    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-	    .info .link {color: #5085BB;}
-	</style>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/home.css">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<!-- kakao Map API -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
+
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/home.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/css/swiper.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
 </head>
 
 <body>
 	<%@ include file="./templates/header.jsp"%>
 	<div class="contents">
-		<div>
-			//돌아가는 이미지
+
+		<!-- swiper 이미지 -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/1.jpg');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/2.png');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/3.jpg');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/4.jpg');"></div>
+				<div class="swiper-slide" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/swiper/5.jpg');"></div>
+			</div>
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
 		</div>
-		<div>
-			//추천메뉴
-		</div>
+
+		<!-- 지도 -->
 		<div id="main">
+			<div class="rec1">
+				<h2>언제나 무료배송되는 프코스팟</h2>
+				<p>1개만 주문해도 무료배송되는 프레시코드</p>
+			</div>
+			<div class="rec1">
+				<h2 style="font-size: 35px; margin-top: 25px;">936개</h2>
+				<p>현재 오픈된 프코스팟</p>
+			</div>
 			<div id="map_wrapper">
 				<div id="ctrlMap"></div>
 				<div id="categorys_wrapper">
@@ -60,10 +57,65 @@
 						<li id="chinese" class="category" title="5" style="border: 1px; color: #27B06E;">중식</li>
 					</ul>
 				</div>
-				
-				<div id="map" style="width: 90%; height:80%;position:relative;overflow:hidden;"></div>
+
+				<input type="text" id="text-search" placeholder="검색어를 입력하세요" >
+            	<input type="button" id="btn-search" value="검색">
+				<div id="map" style="width: 100%; height: 100%; margin-top: 50px;position:relative;overflow:hidden;"></div>
 			</div>
 		</div>
+
+		<!-- 스팟 신청하기 -->
+		<div class="main_spot">
+			<div>
+				<header class="ms_header">
+					<h2>프코스팟이 없으신가요?</h2>
+					<p>오픈 희망하는 곳을 직접 신청해주세요! 동료들과 함께 신청하면 오픈 확률도 쭉쭉 상승해요</p>
+				</header>
+				<nav class="ms_nav">
+					<button>신청하기</button>
+				</nav>
+			</div>
+		</div>
+
+		<!-- 배달 -->
+		<div class="main_deliver">
+			<div class="rec1">
+				<h2>건강편의식 공유배송, <b style="color: #27b06e; font-size: 24px;">프레시코드!</b></h2>
+				<p>나에게 맞는 스마트한 방법을 선택하세요</p>
+			</div>
+			<div class="md_way">
+				<section class="md_section">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-spot-delivery.png');">
+						<em>프코스팟</em>
+						<h2><b>점심시간에 배송비 무료료</b><br>직장에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+				<section class="md_section" style="margin-left: 20px;">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-gs25-delivery.png');">
+						<em>편의점</em>
+						<h2><b>아무떄나 배송비 무료료</b><br>편의점에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+				<section class="md_section" style="margin-left: 20px;">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-midnight-delivery.png');">
+						<em>새벽배송</em>
+						<h2><b>새벽에 배송비 무료료</b><br>집에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+				<section class="md_section" style="margin-left: 20px;">
+					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-quick-delivery.png');">
+						<em>바로배송</em>
+						<h2><b>어디서든 배송비 무료료</b><br>직장에서 받는 방법</h2>
+						<p>한 개만 주문해도 무료배송</p>
+					</a>
+				</section>
+			</div>
+		</div>
+
+		<!-- 단체/케이터링 -->
 		<div class="home_question">
 			<div class="home_question_wrap">
 				<pre class="home_q_pre">프레시코드는"샐러드는 배고픈 다이어트 음식" 이라는 편견을 깨고대한민국 직장인의 건강한 식사 문화를 만들고자 합니다.</pre>
@@ -76,13 +128,78 @@
 					<button class="home_q_btn">단체/케이터링 문의</button>
 				</nav>
 			</div>
-			<section class="home_insta" style="padding: 48px 30px 72px;">
-				//인스타그램
-			</section>
+		</div>
+
+		<!-- 인스타그램-->
+		<div class="main_insata">
+			<div class="mi_div1">
+				<header class="mi_header">
+					<em>Instagram</em>
+					<h2>@freshcode_salad</h2>
+					<p>프레시코드 인스타그램에서<br>최신 소식과 이벤트를 확인해보세요</p>
+				</header>
+				<div class="mi_div2">
+					<ul class="mi_ul">
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta1.jpg">
+							</a>
+						</li>
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta2.jpg">
+							</a>
+						</li>
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta3.jpg">
+							</a>
+						</li>
+						<li>
+							<a href="" class="mi_a">
+								<img alt="" src="${pageContext.request.contextPath}/resources/img/home/insta/insta4.jpg">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 
 	<%@ include file="./templates/footer.jsp"%>
+
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/home/map.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+	<script type="text/javascript">
+	new Swiper('.swiper-container', {
+
+		slidesPerView : 1, // 동시에 보여줄 슬라이드 갯수
+		spaceBetween : 5, // 슬라이드간 간격
+		slidesPerGroup : 1, // 그룹으로 묶을 수, slidesPerView 와 같은 값을 지정하는게 좋음
+
+		// 그룹수가 맞지 않을 경우 빈칸으로 메우기
+		// 3개가 나와야 되는데 1개만 있다면 2개는 빈칸으로 채워서 3개를 만듬
+		loopFillGroupWithBlank : false,
+
+		loop : true, // 무한 반복
+
+		pagination : { // 페이징
+			el : '.swiper-pagination',
+			clickable : true, // 페이징을 클릭하면 해당 영역으로 이동, 필요시 지정해 줘야 기능 작동
+		},
+		navigation : { // 네비게이션
+			prevEl : '.swiper-btn-next', // 다음 버튼 클래스명
+			nextEl : '.swiper-btn-prev', // 이번 버튼 클래스명
+		},
+		autoplay: { //오토플레이 설정
+		    delay: 2000, //딜레이 시간 설정
+			speed : 2000 // 슬라이드 속도 2초
+	     }
+	});
+
+	</script>
 
 	<script>
 		//=======================================
@@ -93,7 +210,40 @@
 		var map;
 		var g_marketInfos = [];
 		var ctrl = false;
-		var categoryShow = 5;
+		var categorySelected = "0";
+		
+		//tm---------------------------------------------------->>
+	    $("#btn-search").click(function() {
+	    	var str = $("#text-search").val()
+	        
+	        $.get("./search?str="+str,function(result){
+	        	alert("result1");
+	            
+	            var markers = [];
+	            
+	            for(var i=0;i<result.length;i++){
+	               console.log(result[i].name + " la : "+result[i].latitude + " lo : "+result[i].longitude);
+	               
+	               var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+	               var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기 입니다 
+	               var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성합니다    
+	                
+	               var position = {
+	                     title: result[i].name,
+	                     latlng: new kakao.maps.LatLng(result[i].latitude, result[i].longitude)
+	               }
+	                
+	                // 마커를 생성합니다
+	                var marker = new kakao.maps.Marker({
+	                    map: map, // 마커를 표시할 지도
+	                    position: position.latlng, // 마커를 표시할 위치
+	                    title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+	                    image : markerImage // 마커 이미지
+	                });
+	                markers.push(marker);
+	            }
+	         });
+	    });
 		
 		
 		
@@ -189,7 +339,7 @@
 				};
 				
 				markets.push(market);	
-
+				
 			</c:forEach>
 			
 			return markets;
@@ -198,7 +348,7 @@
 		//===============================
 		// 마켓의 Geo 데이터 가져오기
 		//===============================
-		function getGeos(l, a) {
+		function getGeos() {
 			
 			var geos = [];
 			
@@ -255,7 +405,7 @@
 			    
 			 	// 마커를 생성합니다
 			    var marker = new kakao.maps.Marker({
-			        map: map, // 마커를 표시할 지도
+			        map: null, // 지도 지정안함
 			        position: positions[i].latlng, // 마커를 표시할 위치
 			        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			        image : markerImage // 마커 이미지
@@ -314,6 +464,37 @@
 		//======================
 		function getMarketInfos(markets, geos, positions, markers, overlays) {
 			
+			// list들 데이터 초기화
+			markets = geos = positions = markers = overlays = g_marketInfos = [];
+			
+			// 마켓, Geo 값 가져오기
+			markets = getMarkets();
+			geos = getGeos();
+		
+			// Category에 따른 마켓, Geo 선별작업
+			var index=0;	
+			while(true) {
+			
+				if(categorySelected === "0")
+					break;	// 전체보기라면 선별 종료
+				
+				if(markets.length === index)
+					break;	// 선별 완료로 인한 종료 
+				
+				if(markets[index].categoryNum != categorySelected) {
+					markets.splice(index, 1);
+					geos.splice(index, 1);
+					index=0;
+					continue;	// List가 자동 정렬되므로 처음부터 재탐색
+				}
+				index++;
+			}
+			
+			// 선별된 market, Geo를 이용하여 position, marker, overlay값 갱신
+			positions = getPositions(markets, geos);
+			markers = getMarkers(positions);
+			overlays = getOverlays(markets, markers);
+			
 			for(var i=0; i<markets.length; i++) {
 				
 				var marketInfo = {
@@ -325,13 +506,15 @@
 				}
 				
 				g_marketInfos.push(marketInfo);
-			}	
+			}
+			
+			//console.log(g_marketInfos);
 		}
 		
 		//==========================
-		// 마켓 관련 이벤트 등록
+		// 오버레이 관련 이벤트 등록
 		//==========================
-		function markerEventHandler(marker, overlay) {
+		function overlayEventHandler(marker, overlay) {
 			
 			kakao.maps.event.addListener(marker, 'click', function() {
 				
@@ -340,7 +523,6 @@
 					if(g_marketInfos[i].overlay === overlay) {
 						g_marketInfos[i].overlay.setMap(map);
 					} else {
-						
 						g_marketInfos[i].overlay.setMap(null);
 					}
 				}
@@ -348,7 +530,7 @@
 		}
 		
 		//====================
-		// 마켓 close Handler
+		// 오버레이 close Handler
 		//====================
 		function overlayCloseHandler(clickedId) {
 			
@@ -362,6 +544,15 @@
 					
 					return;
 				}
+			}
+		}
+		
+		//====================
+		// 오버레이 지우기
+		//====================
+		function hiddenOverlays() {
+			for(var i=0; i<g_marketInfos.length; i++) {
+				g_marketInfos[i].overlay.setMap(null);
 			}
 		}
 		
@@ -417,7 +608,7 @@
 				
 				var ctrlMapDiv = document.getElementById("ctrlMap");
 				console.log(ctrlMapDiv);
-				ctrlMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 ctrl을 누르고 스크롤 해주세요(1.5초뒤에 사라짐)</h2>';		
+				ctrlMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 ctrl을 누르고 스크롤 해주세요</h2>';		
 				setTimeout(function() {
 					ctrlMapDiv.innerHTML = '';
 				}, 1500);
@@ -425,41 +616,21 @@
 		}
 		
 		//====================
-		// 카테고리별 검색 (구데기 알고리즘)
+		// 마커 보이기
 		//====================
-		function categorysEventHandler() {
-			
-			var category = document.getElementsByClassName("category");
-
-			for (let item of category) {
-			   
-				item.addEventListener("click", function() {
-
-					categoryShow = item.title;
-					console.log(categoryShow);
-					
-					var markets = getMarkets();
-					var geos = getGeos();
-					
-					var index=0;
-					
-					while(true) {
-					
-						if(markets.length === index)
-							break;
-						
-						if(markets[index].categoryNum != categoryShow) {
-							markets.splice(index, 1);
-							geos.splice(index, 1);
-							index=0;
-							continue;
-						}
-						index++;
-					}
-					
-					//카테고리 검색
-					console.log(geos);
-				});
+		function showMarkers() {
+			for(var i=0; i<g_marketInfos.length; i++) {
+				console.log(g_marketInfos[i].marker);
+				g_marketInfos[i].marker.setMap(map);
+			}
+		}
+		
+		//====================
+		// 마커 감추기
+		//====================
+		function hiddenMarkers() {
+			for(var i=0; i<g_marketInfos.length; i++) {
+				g_marketInfos[i].marker.setMap(null);
 			}
 		}
 		//====================
@@ -467,27 +638,66 @@
 		//====================
 		function main() {
 			
+			// 지역변수
+			var markets = [];
+			var geos = [];
+			var positions = [];
+			var markers = [];
+			var overlays = [];
+			
+			// client Geo date
 			getUserGeo();
 			
 			setTimeout(function() {
 
 				getMap();
 				getUserMarker();
-				var markets = getMarkets();
-				var geos = getGeos();
 				
-				var positions = getPositions(markets, geos);
-				var markers = getMarkers(positions);
-				var overlays = getOverlays(markets, markers);
+				// 필요한 데이터 생성
 				getMarketInfos(markets, geos, positions, markers, overlays);
 				
+				// 마커 표시
+				showMarkers();
+				
+				// 오버레이 이벤트 등록
 				for(var i=0; i<g_marketInfos.length; i++) {
-					markerEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
+					overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
 				}
 				
+				// 줌인아웃 관련 이벤트
 				setZoomable(false);
 				setMapWheelEvent();
-				categorysEventHandler();
+				
+				//=====================================================
+				// 카테고리별 보기  (클릭시, 카테고리에 따라 마켓 종류 선별하여 보여주기)
+				var category = document.getElementsByClassName("category");
+				for (let item of category) {
+					   
+					item.addEventListener("click", function() {
+	
+						// 현재 Category value
+						categorySelected = item.title;
+						
+						// 마커 지우기, 오버레이 초기화
+						console.log(g_marketInfos.length);
+						if(g_marketInfos.length !== 0) {
+							hiddenMarkers();
+							hiddenOverlays();
+						}
+						
+						// 필요한 데이터 생성
+						getMarketInfos(markets, geos, positions, markers, overlays);
+						
+						// 마커 표시
+						showMarkers();
+						
+						// 오버레이 이벤트 등록
+						for(var i=0; i<g_marketInfos.length; i++) {
+							overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
+						}
+					});
+				}
+				//=====================================================
 				
 			}, 200);
 		}

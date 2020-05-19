@@ -8,7 +8,10 @@ body{
 
 .menuAdd_box{
 	padding: 5px;
+}
 
+.ma_body{
+	margin-left: 50px;
 }
 
 .menuAdd_box input{

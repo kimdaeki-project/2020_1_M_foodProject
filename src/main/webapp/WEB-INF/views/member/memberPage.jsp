@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <link rel="stylesheet" href="../resources/css/member/memberPage.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
 </head>
 <body>
    <%@ include file="../templates/header.jsp"%>
@@ -59,10 +62,18 @@
                   <li id="marketJoin" class="mp_myInfoNav_li">
                   <a class="mp_myInfoNav_a">판매자 신청</a></li>
                </c:if>
+               
                <c:if test="${memberVO.isFoodTruck eq '1'}">
-                  <li id="marketPage"><a href="#">마켓 정보 수정</a></li>
-                   <li id="menuAdd"><a href="#">메뉴 & 카테고리 추가</a></li>
-                   <li id="menuUpdate"><a href="#">메뉴 & 카테고리 수정</a></li> </c:if>
+                  <li id="marketPage" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">마켓 정보 수정</a>
+                  </li>
+                  <li id="menuAdd" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 추가</a>
+                  </li>
+                  <li id="menuUpdate" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 수정</a>
+                  </li> 
+                 </c:if>
 
                <li id="member_delete" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a">탈퇴하기</a></li>
@@ -167,7 +178,6 @@
 			});
 		});
 		
-		
 		//마켓 등록
 		$('#marketJoin').click(function() {
 			$.get("../market/marketJoin", function(result) {
@@ -175,9 +185,8 @@
 				$('.mp_box').append(result);
 			});
 		});
-		
-		
-		//
+
+      //마켓 페이지
 		$('#marketPage').click(function() {
 			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
 				$('.mp_box').empty();
@@ -201,19 +210,29 @@
 				$('.mp_box').append(result);
 			});
 		});
+		$('#menuAdd').click(function() {
+			$.get("../menu/menuAdd", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
 
-      
-      //탈퇴하기
-      $("#member_delete").click(function() {
-         var check = confirm("탈퇴하시겠습니까?");
-         if (check) {
-            location.href = "./memberDelete?id=${memberVO.id}"
-         }
-      });
+		$('#menuUpdate').click(function() {
+			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
 
+		//탈퇴하기
+		$("#member_delete").click(function() {
+			var check = confirm("탈퇴하시겠습니까?");
+			if (check) {
+				location.href = "./memberDelete?id=${memberVO.id}"
+			}
+		});
 
-      $('#default').click();
-   </script>
-
+		$('#default').click();
+	</script>
 </body>
 </html>

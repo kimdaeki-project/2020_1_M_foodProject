@@ -10,6 +10,7 @@
 <title>Menu Add</title>
 </head>
 <body style="margin-top: 61px;">
+
 	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="file_upload">
 		<h2>메뉴 추가</h2>
 		
@@ -44,6 +45,7 @@
 	</form>
 </body>
 
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript">
 
 	var i=0;
