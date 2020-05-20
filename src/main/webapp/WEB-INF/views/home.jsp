@@ -46,22 +46,29 @@
 				<p>현재 오픈된 프코스팟</p>
 			</div>
 			<div id="map_wrapper">
-				<div id="shiftMap"></div>
-				<div id="searchingNon"></div>
-				<div id="categorys_wrapper">
-					<ul id="categorys">
-						<li id="all" class="category" title="0" style="border: 1px; color: #27B06E;">전체</li>
-						<li id="korean" class="category" title="1" style="border: 1px; color: #27B06E;">한식</li>
-						<li id="snack" class="category" title="2" style="border: 1px; color: #27B06E;">분식</li>
-						<li id="western" class="category" title="3" style="border: 1px; color: #27B06E;">양식</li>
-						<li id="japanese" class="category" title="4" style="border: 1px; color: #27B06E;">일식</li>
-						<li id="chinese" class="category" title="5" style="border: 1px; color: #27B06E;">중식</li>
-					</ul>
+				
+				<div id="map" style="width: 100%; height: 80%; margin-top: 50px;position:relative;overflow:hidden;">
+				<div>
 				</div>
-
-				<input type="text" id="text-search" placeholder="검색어를 입력하세요" >
-            	<input type="button" id="btn-search" value="검색">
-				<div id="map" style="width: 100%; height: 80%; margin-top: 50px;position:relative;overflow:hidden;"></div>
+					<div id="categorys_wrapper">
+						<ul class="categorys">
+							<input type="text" id="text-search" placeholder="검색어를 입력하세요">
+							<input type="button" id="btn-search" value="검색">
+						</ul>
+						<ul class="categorys">
+							<li id="all" class="category" title="0">전체</li>
+							<li id="korean" class="category" title="1">한식</li>
+							<li id="snack" class="category" title="2">분식</li>
+							<li id="western" class="category" title="3">양식</li>
+							<li id="japanese" class="category" title="4">일식</li>
+							<li id="chinese" class="category" title="5">중식</li>
+						</ul>
+						<ul class="categorys">
+							<div id="shiftMap" style="z-index: 100"></div>
+							<div id="searchingNon" style="z-index: 100"></div>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -171,6 +178,20 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 	<script type="text/javascript">
+	
+	/* 클릭시 변경 */
+	$(".category").click(function() {
+		console.log('click');
+		
+		var li = $('.category');
+		
+		$(this).css('background-color','#27b06e');
+		$(this).css('color','#fff');
+		li.not($(this)).css('background-color','white');
+		li.not($(this)).css('color','#3d3d3d');
+	});
+	
+	
 	new Swiper('.swiper-container', {
 
 		slidesPerView : 1, // 동시에 보여줄 슬라이드 갯수
@@ -663,9 +684,12 @@
 				
 				var shiftMapDiv = document.getElementById("shiftMap");
 				
-				shiftMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 shift을 누르고 스크롤 해주세요</h2>';		
+				shiftMap.style.display = "block";
+				shiftMapDiv.innerHTML = 
+					'<center style= "line-height: 775px; color: #ffffff; margin: 0px auto; text-align: center;">지도 확대/축소를 원한다면 shift을 누르고 스크롤 하세요.</center>';		
 				setTimeout(function() {
 					shiftMapDiv.innerHTML = '';
+					shiftMap.style.display = "none";
 				}, 1500);
 			});
 		}
@@ -697,11 +721,14 @@
 			if(g_marketInfos.length !== 0) 
 				return false;
 			
-         	var searchingNonDiv = document.getElementById("searchingNon");
-         	searchingNonDiv.innerHTML = '<h2>해당하는 푸드트럭이 존재하지 않아요!</h2>';		
+			var shiftMapDiv = document.getElementById("shiftMap");
+			
+			shiftMap.style.display = "block";
+			shiftMapDiv.innerHTML = '<center style= "line-height: 775px; color: #ffffff; margin: 0px auto; text-align: center;"> 해당 푸드트럭이 존재하지 않습니다!</center>';		
 			setTimeout(function() {
-				searchingNonDiv.innerHTML = '';
-			}, 1500);
+				shiftMapDiv.innerHTML = '';
+				shiftMap.style.display = "none";
+			}, 1000);
          		
          	return true;
 		}
@@ -770,14 +797,20 @@
 				
 				//=====================================================
 				// 검색별 보기 (클릭시, 검색어가 들어간 마켓명 선별하여 보여주기)
-			    $("#btn-search").click(function() {
-			    	var str = $("#text-search").val()
+				$("#btn-search").click(function() {
+
+			    	var str = $("#text-search").val();
 			        	
 			    	$.get("./search?str="+str,function(result){
 			        
 						// 마켓 마커 생성 및 마커,오버레이 그리기
 						getMarketMarker(result,CATEGORY_DEFAULT);
 			         });
+			    	
+
+			    	
+					$(".category").css('background-color','white');
+					$(".category").css('color','#3d3d3d');
 			    });
 				//=====================================================	
 					
