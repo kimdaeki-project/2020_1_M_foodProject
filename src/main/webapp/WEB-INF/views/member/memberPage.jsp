@@ -58,11 +58,13 @@
                <li id="memberUpdate" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a" href="#">회원정보 수정</a></li>
 
+				<!-- 판매자가 아닐때 -->
                <c:if test="${memberVO.isFoodTruck eq '0'}">
                   <li id="marketJoin" class="mp_myInfoNav_li">
                   <a class="mp_myInfoNav_a">판매자 신청</a></li>
                </c:if>
                
+				<!-- 판매자 일 때 -->
                <c:if test="${memberVO.isFoodTruck eq '1'}">
                   <li id="marketPage" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">마켓 정보 수정</a>
@@ -156,7 +158,6 @@
 		
 		//나의 리뷰 목록
 		$('#myReview').click(function() {
-			alert("click");
 			
 			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
 				console.log("result : "+result);
@@ -205,20 +206,7 @@
 		
 		//메뉴 카테고리 수정
 		$('#menuUpdate').click(function() {
-			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		$('#menuAdd').click(function() {
-			$.get("../menu/menuAdd", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-
-		$('#menuUpdate').click(function() {
-			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
+			$.get("../market/menuUpdate", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
@@ -228,7 +216,7 @@
 		$("#member_delete").click(function() {
 			var check = confirm("탈퇴하시겠습니까?");
 			if (check) {
-				location.href = "./memberDelete?id=${memberVO.id}"
+				location.href = "./reviewDelete"
 			}
 		});
 
