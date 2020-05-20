@@ -2,18 +2,78 @@
 
 /* 마커 */
 
-#categorys{
+.categorys{
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	display: flex;
 }
 
+.category{
+    width: 50px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #3d3d3d;
+    background-color: #fff;
+    border-radius: 15px;
+    margin-left: 10px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    padding: 3px;
+    z-index: 2;
+}
 
+#text-search{
+	width: 321px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #3d3d3d;
+    background-color: #fff;
+    border-radius: 30px;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    padding: 10px 20px;
+    border: transparent;
+    outline: transparent;
+    margin-bottom: 10px;
+    z-index: 3;
+}
 
+#btn-search{
+    width: 56px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #3d3d3d;
+    font-weight: 600;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,.2);
+    padding: 3px;
+    z-index: 3;
+    border-radius: 30px;
+    margin: 10px 0px;
+    border: transparent;
+    outline: transparent;
+    z-index: 3;
+}
 
+#shiftMap{
+	display: none;
+	position: absolute;
+    background-color: #000000;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    color:white;
+    font-size:20px;
+    top: 0;
+}
 
+#shiftMap > h2{
+	margin: 0px auto;
+}
 
-/*  */
+/* 지도 */
 
 </
 style> <style>.wrap {
