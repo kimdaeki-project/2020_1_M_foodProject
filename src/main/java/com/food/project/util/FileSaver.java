@@ -14,6 +14,13 @@ public class FileSaver {
 
 	public String saveByUtils(MultipartFile file, String path) throws Exception{
 		
+		System.out.println("fileSaver: oriName:"+file.getOriginalFilename());
+		
+		if(file.getSize() > 0) {
+			System.out.println("파일이 존재");
+			System.out.println(file.getSize());
+		}
+		
 		// 폴더가 없다면 생성
 		File f = new File(path);
 		if(!f.exists()) {
@@ -27,9 +34,11 @@ public class FileSaver {
 		String fileName = null;
 		fileName = this.makeNameByUUID(file.getOriginalFilename());
 	
+		System.out.println("fileSaver: fileName: "+fileName);
+		
 		// 파일 HDD에 저장 (FileCopyUtils 사용)
 		f = new File(f, fileName);
-		FileCopyUtils.copy(file.getBytes(), f); 
+		FileCopyUtils.copy(file.getBytes(), f);
 		
 		return fileName;
 	}
@@ -98,9 +107,9 @@ public class FileSaver {
 	public String makeNameByUUID(String name) {
 		
 		String uuid = UUID.randomUUID().toString();
-		String extension = name.substring(name.lastIndexOf("."));
+		//String extension = name.substring(name.lastIndexOf("."));
 		
-		return uuid + extension;
+		return uuid +"_"+name;
 	}
 	
 	// fileDelete

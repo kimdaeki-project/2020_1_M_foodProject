@@ -489,7 +489,8 @@
 				}
 				index++;
 			}
-			
+			console.log(markets);
+			console.log(geos);
 			// 선별된 market, Geo를 이용하여 position, marker, overlay값 갱신
 			positions = getPositions(markets, geos);
 			markers = getMarkers(positions);

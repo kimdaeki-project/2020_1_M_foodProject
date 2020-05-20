@@ -19,6 +19,7 @@ import com.food.project.member.MemberVO;
 import com.food.project.menu.MenuService;
 import com.food.project.menu.MenuVO;
 import com.food.project.review.ReviewService;
+import com.food.project.review.ReviewVO;
 import com.food.project.util.Pager;
 
 @Controller
@@ -95,12 +96,14 @@ public class MarketController {
 	@GetMapping("marketSelect")
 	public ModelAndView marketSelect(MarketVO marketVO,Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		//해당 마켓에 대한 정보 조회
 		marketVO = marketService.marketSelect(marketVO);
 		
-		System.out.println("marketController");
-		System.out.println("userNum : "+marketVO.getUserNum());
-		System.out.println("curPage : "+pager.getCurPage());
-		System.out.println();
+//		System.out.println("marketController");
+//		System.out.println("userNum : "+marketVO.getUserNum());
+//		System.out.println("curPage : "+pager.getCurPage());
+//		System.out.println();
 		
 		//Market의  usernum으로 해당 트럭의 주소값 조회
 		MemberVO memberVO = new MemberVO();
@@ -112,7 +115,11 @@ public class MarketController {
 		menuVO.setMarketNum(marketVO.getNum());
 		List<MenuVO> MemuList = menuService.menuList(menuVO);
 
-		//리뷰																										/////////////
+		//이미지가 존재하는 리뷰의 전체 목록 조회
+		List<ReviewVO> totalImageList = reviewService.imgTatalList(marketVO);
+		
+		//리뷰																				/////////////
+		pager.setMarketNum(marketVO.getNum());
 		List<BoardVO> reviewList = reviewService.boardList(pager);
 		
 		//마켓의 전체 평균 값 조회
@@ -131,6 +138,7 @@ public class MarketController {
 		
 		mv.addObject("marketRate", marketRate);
 		mv.addObject("totalReview", totalReview);
+		mv.addObject("totalImageList",totalImageList);
 		
 		mv.setViewName("market/marketSelect");
 		return mv;
@@ -224,6 +232,8 @@ public class MarketController {
 		
 		return mv;
 	}
+	
+	
 
 }
 

@@ -14,8 +14,8 @@ public class CategoryService {
 	// 카테고리 추가
 	public int categoryInsert(CategoryVO categoryVO) {
 		
-		System.out.println("category Service들어옴");
-		System.out.println("category의 넣은 get MenuNum : "+categoryVO.getMenuNum());
+//		System.out.println("category Service들어옴");
+//		System.out.println("category의 넣은 get MenuNum : "+categoryVO.getMenuNum());
 		
 		categoryVO.setNum(categoryDAO.categoryCount());
 		
@@ -24,7 +24,6 @@ public class CategoryService {
 
 	// 카테고리 리스트 읽어오기
 	public List<CategoryVO> categoryList(CategoryVO categoryVO) {
-
 		return categoryDAO.categoryList(categoryVO);
 	}
 

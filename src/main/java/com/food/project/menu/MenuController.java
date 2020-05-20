@@ -214,13 +214,39 @@ public class MenuController {
 	@GetMapping("menuSelect")
 	public ModelAndView menuSelect(MenuVO menuVO) throws Exception {
 		
-		ModelAndView mv = new ModelAndView();
+//		System.out.println("menuSelect");
 		
-		// 메뉴VO 가져오기
+		ModelAndView mv = new ModelAndView();
+		CategoryVO categoryVO = new CategoryVO();
+		
+//		System.out.println("menuNum"+ menuVO.getNum());
+		
+		//해당 메뉴의 대한  정보가져오기(MenuVO)
 		menuVO = menuService.menuSelect(menuVO);
 		
+		//menu의 num값을 이용해 categrory목록 조회
+		categoryVO.setMenuNum(menuVO.getNum());
+		
+		System.out.println("cateMenuNum : "+categoryVO.getMenuNum());
+		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
+
+		
+		System.out.println("size : "+cateList.size());
+		for (CategoryVO vo : cateList) {
+			
+			List<MenuOptionVO> moList = vo.getMenuOptionVOs();
+			for (MenuOptionVO moVO : moList) {
+				System.out.println(moVO.getName());
+				System.out.println(moVO.getPrice());
+			}
+		}
+				
 		mv.addObject("menuVO", menuVO);
+		mv.addObject("cateList", cateList);
+		
 		mv.setViewName("menu/menuSelect");
+			
+		
 		return mv;
 	}
 	

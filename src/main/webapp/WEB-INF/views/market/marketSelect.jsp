@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +44,7 @@
 				<c:forEach items="${menuList}" var="vo">
 					<li>	
 						<a href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
-							<img src="${pageContext.request.contextPath}/resources/img/food.jpg">
+							<img src="${pageContext.request.contextPath}/resources/upload/menu/${vo.thumbImg}">
 							<strong>${vo.name}</strong>
 							<em>${vo.detail}</em>
 						</a>
@@ -72,7 +73,13 @@
 						받으세요!
 					</div>
 					<div class="view-review-comment-btn-wrap">
-						<a href="${pageContext.request.contextPath}/review/reviewInsert">
+						<c:if test="${empty sessionScope.memberVO}">
+							<a href="${pageContext.request.contextPath}/member/memberLogin">
+						</c:if>
+						<c:if test="${not empty sessionScope.memberVO}">
+							<a href="${pageContext.request.contextPath}/member/memberPage">
+						</c:if>
+						
 							<button type="button"
 								class="button button--inline button--side-padding button--size-small button--outline"
 								style="color: white; border: 1px solid white; font-size: 14px; background-color: inherit;">
@@ -106,10 +113,12 @@
 				<!-- 리뷰 총 등록된 이미지들 -->
 				<section class="menu-review__album">
 					<h3 style="margin-bottom: 10px;">
-						사진 모아보기<small>7</small>
+						사진 모아보기
+						<small>
+							<span>${fn:length(totalImageList)} </span>
+						</small>
 						<!-- 화살표 -->
-						<img style="float: right; padding-left: 10px;"
-							class="swiper-btn-prev" alt=""
+						<img style="float: right; padding-left: 10px;" class="swiper-btn-prev" alt=""
 							src="${pageContext.request.contextPath}/resources/img/ico-arrow-box-right.svg">
 						<img style="float: right;" class="swiper-btn-next" alt=""
 							src="${pageContext.request.contextPath}/resources/img/ico-arrow-box-left.svg">
@@ -119,14 +128,12 @@
 						<div class="swiper-container">
 							<div class="swiper-wrapper">
 
-								<c:forEach var="reviewVO" items="${reviewList}">
-									<c:if test="${not empty reviewVO.fileName}">
-										<div class="swiper-slide" style="width: 200px!import; height: 200px;">
-										<img style="width: 200px; height: 200px;" class="swiper-slide" alt="" 
-											src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}"
-											style="background-image: url('${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}');">
+								<c:forEach var="reviewVO" items="${totalImageList}">
+									<div class="swiper-slide" style="width: 200px!import; height: 200px;">
+									<img style="width: 200px; height: 200px;" class="swiper-slide" alt="" 
+										src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}"
+										style="background-image: url('${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}');">
 									</div>
-									</c:if>
 								</c:forEach>
 							</div>
 						</div>
@@ -138,7 +145,7 @@
 					<h3>
 						등록된 리뷰 <small>${totalReview}</small>
 					</h3>
-					<ul>
+					<ul id="review_table">
 						<c:forEach var="reviewVO" items="${reviewList}">
 							<c:if test="${reviewVO.step eq 0}">
 								<li>
@@ -201,22 +208,20 @@
 					<div class="nav-paginate-wrap__desktop">
 						<nav class="nav-paginate">
 							<c:if test="${pager.curBlock gt 1}">
-
-								<a href="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-prev">
-								</a>
+								<a id="btn-pre" title="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-prev"></a>
 							</c:if>
-
+	
 							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-
-								<a class="nav_pagerA" href="./marketSelect?curPage=${i}&userNum=${marketVO.userNum}">${i}</a>
+								<a class="nav_pagerA btn_page">${i}</a>
 							</c:forEach>
-
+								
+								
 							<c:if test="${pager.curBlock lt pager.totalBlock}">
-								<a href="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-next">
-
-							 <i></i>
+								<a id="btn-next" title="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-next">
+									<i></i>
 								</a>
 							</c:if>
+							
 						</nav>
 					</div>
 				</section>
@@ -226,8 +231,40 @@
 	<%@ include file="../templates/footer.jsp"%>
 </body>
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
+<script type="text/javascript">
+								
+	$(".btn_page").each(function() {
+		$(this).click(function() {
+			console.log($(this).text());
+										
+			var curPage = $(this).text();
+			$.get("../review/reviewList?curPage="+curPage+"&userNum=${marketVO.userNum}",function(result){
+				$("#review_table").html(result);
+			});
+		});
+	});
+								
+
+	$("#btn-pre").click(function() {
+		alert($(this).attr("title"));
+		var url = $(this).attr("title");
+
+		$.get(url, function(result) {
+			$("#review_table").html(result);
+		});
+	})
+
+	$("#btn-next").click(function() {
+		alert($(this).attr("title"));
+		var url = $(this).attr("title");
+
+		$.get(url, function(result) {
+			$("#review_table").html(result);
+		});
+	})
+</script>
+
 <script type="text/javascript">
 	
 	//리뷰 사진

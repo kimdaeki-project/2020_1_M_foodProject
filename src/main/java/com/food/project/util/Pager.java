@@ -18,15 +18,26 @@ public class Pager {
 	
 	private String kind;
 	private String search;
+	private long marketNum;
 	
+	
+
+	public long getMarketNum() {
+		return marketNum;
+	}
+
+	public void setMarketNum(long marketNum) {
+		this.marketNum = marketNum;
+	}
+
 	public void makeRow() {
 		this.startRow = (this.getCurPage() - 1) * this.getPerPage() + 1;
 		this.lastRow = this.getCurPage() * this.getPerPage();
 		
 		
-		System.out.println("maketRow");
-		System.out.println("startRow : " + this.startRow);
-		System.out.println("lastRow : "+this.lastRow);
+//		System.out.println("maketRow");
+//		System.out.println("startRow : " + this.startRow);
+//		System.out.println("lastRow : "+this.lastRow);
 	}
 	
 	public void setStartRow(long startRow) {

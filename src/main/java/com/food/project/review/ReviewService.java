@@ -13,6 +13,7 @@ import com.food.project.board.BoardService;
 import com.food.project.board.BoardVO;
 import com.food.project.fileInfo.FileInfoDAO;
 import com.food.project.fileInfo.FileInfoVO;
+import com.food.project.market.MarketVO;
 import com.food.project.util.FileSaver;
 import com.food.project.util.Pager;
 
@@ -28,6 +29,12 @@ public class ReviewService implements BoardService{
 	private FileSaver fileSaver;
 	
 	
+	//이미지가 존재하는 리뷰의 전체 목록 조회
+	public List<ReviewVO> imgTatalList(MarketVO marketVO) throws Exception{
+		return reviewDAO.imgTatalList(marketVO);
+	}
+	
+	
 	//한 계정이 등록한 리뷰목록 조회
 	public List<ReviewVO> myReviewList(long memberNum) throws Exception{
 		return reviewDAO.myReviewList(memberNum);
@@ -36,7 +43,10 @@ public class ReviewService implements BoardService{
 	
 	//한 마켓의 총 평점 계산
 	public double marketAvg(long marketNum) throws Exception{
-		return reviewDAO.marketAvg(marketNum);
+		
+		double avg = reviewDAO.marketAvg(marketNum);
+		System.out.println("avg: " +avg);
+		return avg;
 	}
 	
 	//한 마켓의 전체 리뷰 개수 
@@ -59,7 +69,8 @@ public class ReviewService implements BoardService{
 		System.out.println("Review Servcie _baordList");
 		
 		pager.makeRow();
-		long totalCount = reviewDAO.boardCount(pager);
+		long marketNum = pager.getMarketNum();
+		long totalCount = reviewDAO.marketReviewCount(marketNum);
 		System.out.println("totalCount : "+totalCount);
 		
 		pager.makePage(totalCount);
