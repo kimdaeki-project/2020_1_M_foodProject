@@ -1,207 +1,189 @@
 @charset "UTF-8";
 
-body{
-    margin: 61px 0 0 50px;
-    padding: 0;
-    font-family: 'Noto Sans KR', sans-serif !important;
+body {
+	margin: 61px 0 0 50px;
+	padding: 0;
+	font-family: 'Noto Sans KR', sans-serif !important;
 }
 
-#file_upload{
-   margin-left: 50px;
-	
-}
-
-.menuAdd_box{
-	padding: 5px;
-}
-
-.ma_body{
+#file_upload {
 	margin-left: 50px;
 }
 
-.menuAdd_box input{
-    box-sizing: border-box;
-    padding: 0 15px;
-    height: 38px;
-    width: 50%;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #e7e7e7;
-    font-size: 15px;
-    color: #3d3d3d;
-    display: block;
+.menuAdd_box {
+	padding: 5px;
 }
 
-#submit{
-    display: block;
-    border: none;
-    height: 38px;
-    width: 100%;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1rem;
-    outline: none;
-    margin-top: 8px;
-    width: 50%;
-    color: #ffffff;
-    background-color: #27b06e;
+.ma_body {
+	margin-left: 50px;
 }
 
-input[type="file" i]{
-    padding: 6px 0 0 6px;
-    font-family: 'Noto Sans KR', sans-serif;
-}
-
-.category{
-    font-size: 20px;
-}
-
-.c_box{
-    display: flex;
-    vertical-align: middle;
-    margin: 0 auto;
-}
-
-#addOption{
-    cursor: pointer;
-    margin-left: 5px;
-    display: block;
-    border: transparent;
-    outline: transparent;
-    background-color: transparent;
-}
-
-#delOption{
-    cursor: pointer;
-    margin-left: 5px;
-    display: block;
-    border: transparent;
-    outline: transparent;
-    background-color: transparent;
-    }
-
-
-#addCategory{
-    display: block;
-    border: none;
-    height: 40px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1rem;
-    outline: none;
-    width: 30%;
-    color: #ffffff;
-    background-color: #27b06e; 
-    margin-left: 10px;
-}
-
-
-.menuAdd_box_cate{
+.menuAdd_box input {
 	box-sizing: border-box;
-    height: 38px;
-    width: 50%;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    font-size: 15px;
-    color: #3d3d3d;
-    display: flex;
-    padding: 5px;
-    padding-right: 0px;
+	padding: 0 15px;
+	height: 38px;
+	width: 50%;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #e7e7e7;
+	font-size: 15px;
+	color: #3d3d3d;
+	display: block;
 }
 
-#input{
+#submit {
+	display: block;
+	border: none;
+	height: 38px;
+	width: 100%;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	outline: none;
+	margin-top: 8px;
+	width: 50%;
+	color: #ffffff;
+	background-color: #27b06e;
+}
+
+input[type="file" i] {
+	padding: 6px 0 0 6px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.category {
+	font-size: 20px;
+}
+
+.c_box {
+	display: flex;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+
+#addOption {
+	cursor: pointer;
+	margin-left: 5px;
+	display: block;
+	border: transparent;
+	outline: transparent;
+	background-color: transparent;
+}
+
+#delOption {
+	cursor: pointer;
+	margin-left: 5px;
+	display: block;
+	border: transparent;
+	outline: transparent;
+	background-color: transparent;
+}
+
+#addCategory {
+	display: block;
+	border: none;
+	height: 40px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	outline: none;
+	width: 30%;
+	color: #ffffff;
+	background-color: #27b06e;
+	margin-left: 10px;
+}
+
+.menuAdd_box_cate {
+	box-sizing: border-box;
+	height: 38px;
+	width: 50%;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	font-size: 15px;
+	color: #3d3d3d;
+	display: flex;
+	padding: 5px;
+	padding-right: 0px;
+}
+
+#input {
 	height: 38px;
 	width: 70%;
 	border: 1px solid #e7e7e7;
 	font-size: 15px;
-    color: #3d3d3d;
-    padding: 0 15px;
+	color: #3d3d3d;
+	padding: 0 15px;
 }
 
-.delO{
+.delO {
 	margin-left: 10px;
-    height: 40px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1rem;
-    border: none;
-    color: #ffffff;
-    background-color: #27b06e;
-    width: 22%;
+	height: 40px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	border: none;
+	color: #ffffff;
+	background-color: #27b06e;
+	width: 22%;
 }
 
-#category_box{
+#category_box {
 	display: block;
-	
 }
 
-.opDiv{
+.opDiv {
 	width: 50%;
 	display: flex;
 	padding: 5px;
 }
 
-.opName{
+.opName {
 	width: 20%;
 	height: 38px;
 	border: 1px solid #e7e7e7;
-    padding: 0 15px;
-    color: #3d3d3d;
+	padding: 0 15px;
+	color: #3d3d3d;
 }
 
-.opPrice{
+.opPrice {
 	width: 20%;
 	height: 38px;
 	border: 1px solid #e7e7e7;
-    padding: 0 15px;
-    color: #3d3d3d;
-    margin-left: 5px;
+	padding: 0 15px;
+	color: #3d3d3d;
+	margin-left: 5px;
 }
 
-.addO{
+.addO {
 	margin: 5px;
-    cursor: pointer;
-    text-align: center;
-    border: none;
-    color: #ffffff;
-    background-color: #27b06e;
-    padding: 5px;
-    font-size: 145.px;
+	cursor: pointer;
+	text-align: center;
+	border: none;
+	color: #ffffff;
+	background-color: #27b06e;
+	padding: 5px;
+	font-size: 145.px;
 }
 
-#thumbImg{
+#thumbImg {
 	width: 48%;
 }
 
-#ma_fileDel, #ma_fileDel2{
+#ma_fileDel, #ma_fileDel2 {
 	margin: 10px;
 	line-height: 38px;
 	padding: 0 5px;
 	cursor: pointer;
 }
 
-.error{
+.error {
 	color: #008080;
 	font-weight: bolder;
 }
 
-.opDiv > .error{
+.opDiv>.error {
 	line-height: 38px;
-    padding: 0 5px 0 10px;
-    overflow: hidden;
-    height: 38px;
+	padding: 0 5px 0 10px;
+	overflow: hidden;
+	height: 38px;
 }
-
-.cb > input, .add{
-display: block;
-    border: none;
-    height: 40px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 1rem;
-    outline: none;
-    width: 30%;
-    color: #ffffff;
-    background-color: #27b06e;
-    margin-left: 10px;
-    }
