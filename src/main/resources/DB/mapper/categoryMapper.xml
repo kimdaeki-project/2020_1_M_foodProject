@@ -5,14 +5,32 @@
   
 <mapper namespace="com.food.project.category.CategoryDAO">
 
+	<resultMap type="CategoryVO" id="ResultList">
+		
+		<id column="num" property="num"/>
+		<result column="menuNum" property="menuNum"/>
+		<result column="name" property="name"/>
+	
+		<collection property="menuOptionVOs" javaType="List" ofType="MenuOptionVO">
+			<result column="optionName" property="name"/>
+			<result column="price" property="price"/>
+		</collection>
+	
+	</resultMap>
+	
+
+
 	<insert id="categoryInsert" parameterType="CategoryVO">
 		INSERT INTO category VALUES( 
 			#{num}, #{menuNum}, #{name} 
 		)
 	</insert>
 	
-	<select id="categoryList" parameterType="CategoryVO" resultType="CategoryVO">
-		SELECT * FROM category WHERE menuNum = #{menuNum}
+	<select id="categoryList" parameterType="CategoryVO" resultMap="ResultList">
+		select c.*,m.name as optionName,m.price
+		from category c join menuoption m
+		on(c.num = m.categorynum)
+		where c.menunum = #{menuNum}
 	</select>
 	
 	<select id="categorySelect" parameterType="CategoryVO" resultType="CategoryVO">

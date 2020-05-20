@@ -1,6 +1,5 @@
 package com.food.project.menu;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -9,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.food.project.category.CategoryVO;
 import com.food.project.fileInfo.FileInfoDAO;
 import com.food.project.fileInfo.FileInfoVO;
-import com.food.project.market.MarketVO;
-import com.food.project.menuOption.MenuOptionVO;
 import com.food.project.util.FileSaver;
 
 @Service
@@ -32,6 +28,8 @@ public class MenuService {
 		// 저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		System.out.println("path : " + path);
+		
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
 		
 		int result = 0;
 		

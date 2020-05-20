@@ -1,10 +1,27 @@
 package com.food.project.category;
 
+import java.util.List;
+
+import com.food.project.menuOption.MenuOptionVO;
+
 public class CategoryVO {
 
 	private long num;
 	private long menuNum;
 	private String name;
+	
+	private List<MenuOptionVO> menuOptionVOs;
+	
+	public List<MenuOptionVO> getMenuOptionVOs() {
+		return menuOptionVOs;
+	}
+	public void setMenuOptionVOs(List<MenuOptionVO> menuOptionVOs) {
+		this.menuOptionVOs = menuOptionVOs;
+	}
+	
+	
+	
+	
 	public long getNum() {
 		return num;
 	}

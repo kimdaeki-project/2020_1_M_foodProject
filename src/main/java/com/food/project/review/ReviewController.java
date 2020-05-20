@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.board.BoardVO;
+import com.food.project.market.MarketService;
+import com.food.project.market.MarketVO;
 import com.food.project.member.MemberVO;
 import com.food.project.util.Pager;
 
@@ -23,6 +25,8 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private MarketService marketService;
 	
 	//한 멤버가 작성한 리뷰목록 출력
 	@GetMapping("myReviewList")
@@ -62,17 +66,25 @@ public class ReviewController {
 	
 	//리뷰리스트 출력(GET)
 	@GetMapping("reviewList")
-	public ModelAndView reviewList(Pager pager) throws Exception{
+	public ModelAndView reviewList(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		
+		System.out.println("reviewController curPage : "+pager.getCurPage());
+		System.out.println("유저번호 : "+marketVO.getUserNum());
+		
+		//넘겨받은 userNum으로 해당 마켓의 전체 정보 조회
+		marketVO = marketService.marketSelect(marketVO);
+		
+		//다음 페이저 값 계산해서 출력할 리뷰 페이지 연산 및 조회
+		pager.setMarketNum(marketVO.getNum());
 		List<BoardVO> list = reviewService.boardList(pager);
+		
 		if(list != null) {
 			mv.addObject("pager", pager);
 			mv.addObject("reviewList", list);
 			
-			mv.setViewName("");
-		}else {
-			mv.setViewName("");
+			mv.setViewName("review/reviewPagingAjax");
 		}
 		
 		return mv;

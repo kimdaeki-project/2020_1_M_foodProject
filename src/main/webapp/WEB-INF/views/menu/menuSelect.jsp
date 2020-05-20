@@ -21,30 +21,20 @@
 				<!-- 옵션 선택 페이지 -->
 				<div class="ml_opSel">
 					<dl class="ml_opSel_dl">
-						<dt style="color: #3d3d3d;">카테고리명1</dt>
-						<dd>
-							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명1 / 가격 </label>
-						</dd>
-						<dd>
-							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명2 / 가격 </label>
-						</dd>
-						<dd>
-							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명3 / 가격 </label>
-						</dd>
-						<nav></nav>
-						<dt style="color: #3d3d3d;">카테고리명2</dt>
-						<dd>
-							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명1 / 가격 </label>
-						</dd>
-						<dd>
-							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명2 / 가격 </label>
-						</dd>
-						<dd>
-							<label class="ml_opLabel"> <input type="radio" name="test1">옵션명3 / 가격 </label>
-						</dd>
+						
+						<c:forEach var="categoryVO" items="${cateList}">
+
+								<dt style="color: #3d3d3d;">${categoryVO.name}</dt>
+									<c:forEach var="vo" items="${categoryVO.menuOptionVOs}">
+										<dd>
+											<label class="ml_opLabel">
+											<input type="radio" name="test1">${vo.name} / ${vo.price}</label>
+										</dd>
+									</c:forEach>
+								<nav></nav>
+							</c:forEach>
 					</dl>
 				</div>
-				<nav></nav>
 				<button id="ml_cart" type="button">장바구니</button>
 				<button id="ml_order" type="submit">주문하기</button>
 			</div>
@@ -53,6 +43,8 @@
 	<%@ include file="../templates/footer.jsp"%>
 
 	<script type="text/javascript">
+	
+		
 		//장바구니를 누르면 메뉴(옵션포함)추가
 		$("#ml_cart").click(function() {
 			alert('장바구니에 추가되었습니다.');

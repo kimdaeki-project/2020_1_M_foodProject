@@ -29,7 +29,7 @@
 	</select>
 
 	<select id="marketAvg" parameterType="Long" resultType="Double">
-		select avg(rating) from review where marketNum = #{marketNum}
+		select trunc(avg(rating),1) from review where marketNum = #{marketNum}
 	</select>
 	
 	<select id="marketReviewCount" parameterType="Long" resultType="Integer">
@@ -40,16 +40,22 @@
 	<select id="boardCount" parameterType="Pager" resultType="Long">
 		select count(BoardNum) from review
 	</select>
+	
+	<select id="imgTatalList" parameterType="MarketVO" resultType="ReviewVO">
+		select * from review where marketNum=#{num} and fileName is not null
+	</select>
 
 	<select id="baordList" parameterType="Pager" resultMap="reviewResult">
 		select A.*,B.nickName,B.email from 
 		(select * from
 		(select Q.*,rownum R from
 		(select * from review
+		where marketNum=#{marketNum}
 		order by ref desc, step asc) Q)
 		where R between #{startRow} and #{lastRow})A
 		join (select num,nickname,email from member)B
 		on(a.membernum = B.num)
+		
 	</select>
 	
 	<select id="boardSeq" resultType="Long">
