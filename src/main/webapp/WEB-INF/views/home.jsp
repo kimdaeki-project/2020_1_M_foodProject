@@ -46,7 +46,8 @@
 				<p>현재 오픈된 프코스팟</p>
 			</div>
 			<div id="map_wrapper">
-				<div id="ctrlMap"></div>
+				<div id="shiftMap"></div>
+				<div id="searchingNon"></div>
 				<div id="categorys_wrapper">
 					<ul id="categorys">
 						<li id="all" class="category" title="0" style="border: 1px; color: #27B06E;">전체</li>
@@ -60,7 +61,7 @@
 
 				<input type="text" id="text-search" placeholder="검색어를 입력하세요" >
             	<input type="button" id="btn-search" value="검색">
-				<div id="map" style="width: 100%; height: 100%; margin-top: 50px;position:relative;overflow:hidden;"></div>
+				<div id="map" style="width: 100%; height: 80%; margin-top: 50px;position:relative;overflow:hidden;"></div>
 			</div>
 		</div>
 
@@ -167,9 +168,6 @@
 	</div>
 
 	<%@ include file="./templates/footer.jsp"%>
-
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/resources/js/home/map.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 	<script type="text/javascript">
@@ -209,46 +207,9 @@
 		var longitude;				// 경도 (127~)
 		var map;
 		var g_marketInfos = [];
-		var ctrl = false;
-		var categorySelected = "0";
-		
-		//tm---------------------------------------------------->>
-	    $("#btn-search").click(function() {
-	    	var str = $("#text-search").val()
-	        
-	        $.get("./search?str="+str,function(result){
-	        	alert("result1");
-	            
-	            var markers = [];
-	            
-	            for(var i=0;i<result.length;i++){
-	               console.log(result[i].name + " la : "+result[i].latitude + " lo : "+result[i].longitude);
-	               
-	               var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-	               var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기 입니다 
-	               var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성합니다    
-	                
-	               var position = {
-	                     title: result[i].name,
-	                     latlng: new kakao.maps.LatLng(result[i].latitude, result[i].longitude)
-	               }
-	                
-	                // 마커를 생성합니다
-	                var marker = new kakao.maps.Marker({
-	                    map: map, // 마커를 표시할 지도
-	                    position: position.latlng, // 마커를 표시할 위치
-	                    title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
-	                    image : markerImage // 마커 이미지
-	                });
-	                markers.push(marker);
-	            }
-	         });
-	    });
-		
-		
-		
-		
-		
+		var shift = false;
+		var CATEGORY_DEFAULT = "0";
+		var categorySelected = CATEGORY_DEFAULT;
 		
 		//========================================
 		//main marker 좌표값 받아오기
@@ -353,8 +314,9 @@
 			var geos = [];
 			
 			<c:forEach items="${geoList}" var="vo">
-				
+			
 				var geo = {
+						
 						latitude: ${vo.latitude},
 						longitude: ${vo.longitude}
 				};
@@ -362,12 +324,73 @@
 				geo.latitude = Math.ceil(geo.latitude*1000000)/1000000;
 				geo.longitude = Math.ceil(geo.longitude*1000000)/1000000;
 				geos.push(geo);
-				
+			
 			</c:forEach>
 			
 			return geos;
 		}
-	
+		
+		//===============================
+		// 마켓의 Map 데이터 가져오기
+		//===============================
+		function getMarketMaps(resultVOs) {
+			
+			var marketMaps = [];
+			
+			if(typeof resultVOs == "undefined" || resultVOs == null) {
+				
+				<c:forEach items="${mapList}" var="vo">
+				
+					var marketMap = {
+							num: `${vo.marketVO.num}`,
+							userNum: `${vo.marketVO.userNum}`,
+							categoryNum: `${vo.marketVO.categoryNum}`,
+							marketName: `${vo.marketVO.marketName}`,
+							openTime: `${vo.marketVO.openTime}`,
+							closeTime: `${vo.marketVO.closeTime}`,
+							isOpen: ${vo.marketVO.isOpen},
+							canOrder: ${vo.marketVO.canOrder},
+							marketIntro: `${vo.marketVO.marketIntro}`,
+							thumbImg: `${vo.marketVO.thumbImg}`,
+							rating: `${vo.marketVO.reviewVO.rating}`,
+							latitude: ${vo.latitude},
+							longitude: ${vo.longitude}
+					};
+					
+					marketMap.latitude = Math.ceil(marketMap.latitude*1000000)/1000000;
+					marketMap.longitude = Math.ceil(marketMap.longitude*1000000)/1000000;
+					marketMaps.push(marketMap);
+					
+				</c:forEach>
+			} else {
+			
+				for(var i=0; i<resultVOs.length; i++) {
+					
+					var marketMap = {
+							num: resultVOs[i].marketVO.num,
+							userNum: resultVOs[i].marketVO.userNum,
+							categoryNum: resultVOs[i].marketVO.categoryNum,
+							marketName: resultVOs[i].marketVO.marketName,
+							openTime: resultVOs[i].marketVO.openTime,
+							closeTime: resultVOs[i].marketVO.closeTime,
+							isOpen: resultVOs[i].marketVO.isOpen,
+							canOrder: resultVOs[i].marketVO.canOrder,
+							marketIntro: resultVOs[i].marketVO.marketIntro,
+							thumbImg: resultVOs[i].marketVO.thumbImg,
+							rating: resultVOs[i].marketVO.reviewVO.rating,
+							latitude: resultVOs[i].latitude,
+							longitude: resultVOs[i].longitude
+					};
+					
+					marketMap.latitude = Math.ceil(marketMap.latitude*1000000)/1000000;
+					marketMap.longitude = Math.ceil(marketMap.longitude*1000000)/1000000;
+					marketMaps.push(marketMap);
+				}
+			}
+			
+			return marketMaps;
+		}
+			
 		//===============================
 		// 마켓 포지션 가져오기
 		//===============================
@@ -462,20 +485,52 @@
 		//======================
 		// 마켓Infos 생성
 		//======================
-		function getMarketInfos(markets, geos, positions, markers, overlays) {
+		function getMarketInfos(resultVOs) {
 			
-			// list들 데이터 초기화
-			markets = geos = positions = markers = overlays = g_marketInfos = [];
+			// 지역변수
+			var markets = [];
+			var geos = [];
+			var marketMaps = [];
+			var positions = [];
+			var markers = [];
+			var overlays = [];
+			g_marketInfos = [];
 			
-			// 마켓, Geo 값 가져오기
-			markets = getMarkets();
-			geos = getGeos();
-		
+			// 마켓 데이터 가져오기
+			marketMaps = getMarketMaps(resultVOs);
+			
+			// make markets, geos
+			for(var i=0; i<marketMaps.length; i++) {
+				
+				var market = {
+					num: marketMaps[i].num,
+					userNum: marketMaps[i].userNum,
+					categoryNum: marketMaps[i].categoryNum,
+					marketName: marketMaps[i].marketName,
+					openTime: marketMaps[i].openTime,
+					closeTime: marketMaps[i].closeTime,
+					isOpen: marketMaps[i].isOpen,
+					canOrder: marketMaps[i].canOrder,
+					marketIntro: marketMaps[i].marketIntro,
+					thumbImg: marketMaps[i].thumbImg,
+					rating: marketMaps[i].rating
+				}
+				
+				markets.push(market);
+			
+				var geo = {
+					latitude: marketMaps[i].latitude,
+					longitude: marketMaps[i].longitude
+				}
+				
+				geos.push(geo);
+			}
+			
 			// Category에 따른 마켓, Geo 선별작업
 			var index=0;	
 			while(true) {
 			
-				if(categorySelected === "0")
+				if(categorySelected === CATEGORY_DEFAULT)
 					break;	// 전체보기라면 선별 종료
 				
 				if(markets.length === index)
@@ -507,8 +562,6 @@
 				
 				g_marketInfos.push(marketInfo);
 			}
-			
-			//console.log(g_marketInfos);
 		}
 		
 		//==========================
@@ -537,8 +590,9 @@
 			for(var i=0; i<g_marketInfos.length; i++) {
 				
 				var userNum = g_marketInfos[i].market.userNum;
-				if(clickedId === userNum) {
-					
+				
+				// 문자열인 경우도, 숫자인 경우도 있으므로, ==
+				if(clickedId == userNum) {
 					var overlay = g_marketInfos[i].overlay;
 					overlay.setMap(null);
 					
@@ -570,20 +624,20 @@
 		//====================
 		window.addEventListener("keydown", function(event) {
 			
-			if(ctrl === true)
+			if(shift === true)
 				return;
 			
-			if(event.ctrlKey) {
-				ctrl = true;
-				setZoomable(ctrl);
+			if(event.shiftKey) {
+				shift = true;
+				setZoomable(shift);
 			}
 		});
 		
 		window.addEventListener("keyup", function(event) {
 			
-			if(ctrl === true) {
-				ctrl = false;
-				setZoomable(ctrl);
+			if(shift === true) {
+				shift = false;
+				setZoomable(shift);
 			}
 		});
 		
@@ -603,14 +657,14 @@
 			var mapDiv = document.getElementById("map");
 			mapDiv.addEventListener("mousewheel", function() {
 				
-				if(ctrl === true)
+				if(shift === true)
 					return;
 				
-				var ctrlMapDiv = document.getElementById("ctrlMap");
-				console.log(ctrlMapDiv);
-				ctrlMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 ctrl을 누르고 스크롤 해주세요</h2>';		
+				var shiftMapDiv = document.getElementById("shiftMap");
+				
+				shiftMapDiv.innerHTML = '<h2>지도 확대/축소를 원한다면 shift을 누르고 스크롤 해주세요</h2>';		
 				setTimeout(function() {
-					ctrlMapDiv.innerHTML = '';
+					shiftMapDiv.innerHTML = '';
 				}, 1500);
 			});
 		}
@@ -620,7 +674,7 @@
 		//====================
 		function showMarkers() {
 			for(var i=0; i<g_marketInfos.length; i++) {
-				console.log(g_marketInfos[i].marker);
+				
 				g_marketInfos[i].marker.setMap(map);
 			}
 		}
@@ -633,17 +687,57 @@
 				g_marketInfos[i].marker.setMap(null);
 			}
 		}
+		
+		//====================
+		// 결과 없을시 없다고 출력
+		//====================
+		function searchingNon(g_marketInfos) {
+			
+			if(g_marketInfos.length !== 0) 
+				return false;
+			
+         	var searchingNonDiv = document.getElementById("searchingNon");
+         	searchingNonDiv.innerHTML = '<h2>해당하는 푸드트럭이 존재하지 않아요!</h2>';		
+			setTimeout(function() {
+				searchingNonDiv.innerHTML = '';
+			}, 1500);
+         		
+         	return true;
+		}
+		
+		//====================
+		// 공통 부분
+		//====================
+		function getMarketMarker(resultVOs, categoryVal) {
+			
+			// 현재 Category value
+			categorySelected = categoryVal;
+			
+			// 마커 지우기, 오버레이 초기화
+			if(g_marketInfos.length !== 0) {
+				hiddenMarkers();
+				hiddenOverlays();
+			}
+			
+			// 필요한 데이터 생성
+			getMarketInfos(resultVOs);
+			
+			// 결과가 없을 때, 마커 표시 및 오버레이 이벤트 등록 필요 X
+         	if(searchingNon(g_marketInfos))
+         		return;
+			
+			// 마커 표시
+			showMarkers();
+			
+			// 오버레이 이벤트 등록
+			for(var i=0; i<g_marketInfos.length; i++) {
+				overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
+			}
+		}
 		//====================
 		// 메인함수
 		//====================
 		function main() {
-			
-			// 지역변수
-			var markets = [];
-			var geos = [];
-			var positions = [];
-			var markers = [];
-			var overlays = [];
 			
 			// client Geo date
 			getUserGeo();
@@ -653,16 +747,8 @@
 				getMap();
 				getUserMarker();
 				
-				// 필요한 데이터 생성
-				getMarketInfos(markets, geos, positions, markers, overlays);
-				
-				// 마커 표시
-				showMarkers();
-				
-				// 오버레이 이벤트 등록
-				for(var i=0; i<g_marketInfos.length; i++) {
-					overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
-				}
+				// 마켓 마커 생성 및 마커,오버레이 그리기
+				getMarketMarker(null,CATEGORY_DEFAULT);
 				
 				// 줌인아웃 관련 이벤트
 				setZoomable(false);
@@ -675,30 +761,25 @@
 					   
 					item.addEventListener("click", function() {
 	
-						// 현재 Category value
-						categorySelected = item.title;
-						
-						// 마커 지우기, 오버레이 초기화
-						console.log(g_marketInfos.length);
-						if(g_marketInfos.length !== 0) {
-							hiddenMarkers();
-							hiddenOverlays();
-						}
-						
-						// 필요한 데이터 생성
-						getMarketInfos(markets, geos, positions, markers, overlays);
-						
-						// 마커 표시
-						showMarkers();
-						
-						// 오버레이 이벤트 등록
-						for(var i=0; i<g_marketInfos.length; i++) {
-							overlayEventHandler(g_marketInfos[i].marker, g_marketInfos[i].overlay);
-						}
+						// 마켓 마커 생성 및 마커,오버레이 그리기
+						getMarketMarker(null, item.title);
 					});
 				}
 				//=====================================================
 				
+				//=====================================================
+				// 검색별 보기 (클릭시, 검색어가 들어간 마켓명 선별하여 보여주기)
+			    $("#btn-search").click(function() {
+			    	var str = $("#text-search").val()
+			        	
+			    	$.get("./search?str="+str,function(result){
+			        
+						// 마켓 마커 생성 및 마커,오버레이 그리기
+						getMarketMarker(result,CATEGORY_DEFAULT);
+			         });
+			    });
+				//=====================================================	
+					
 			}, 200);
 		}
 		

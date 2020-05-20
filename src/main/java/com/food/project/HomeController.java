@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.geo.GeoDAO;
 import com.food.project.geo.GeoVO;
+import com.food.project.map.MapVO;
 import com.food.project.market.MarketDAO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
@@ -36,35 +37,34 @@ public class HomeController {
 	
 	@GetMapping("/search")
 	@ResponseBody
-	public List<MemberVO> search(String str) throws Exception{
+	public List<MapVO> search(String str) throws Exception{
 		System.out.println("str : "+str);
 		
 		ModelAndView mv = new ModelAndView();
-		ArrayList<MemberVO> memberList = new ArrayList<MemberVO>();
+		ArrayList<MapVO> mapList = new ArrayList<MapVO>();
 		MarketVO marketVO = new MarketVO();
 		
 		
 		marketVO.setMarketName(str);
-		
 		System.out.println("marketList search");
 		
 		List<MarketVO> marketList = marketService.marketSearch(marketVO);
 		for (MarketVO vo : marketList) {
 			
-			MemberVO memberVO = new MemberVO();
+			MapVO mapVO = new MapVO();
 			
+			MemberVO memberVO = new MemberVO();
 			memberVO.setNum(vo.getUserNum());
 			memberVO = memberService.memberSelect(memberVO);
 			
-			System.out.println("memberVO : "+memberVO.getName()+", la : "+memberVO.getLatitude()+", lo : "+memberVO.getLongitude());
+			mapVO.setMarketVO(vo);
+			mapVO.setLatitude(memberVO.getLatitude());
+			mapVO.setLongitude(memberVO.getLongitude());
 			
-			memberList.add(memberVO);
+			mapList.add(mapVO);
 		}
-		
-		System.out.println("memberList");
 
-		
-		return memberList;
+		return mapList;
 	}
 	
 	
@@ -78,11 +78,11 @@ public class HomeController {
 		// 로그인을 안 했을시, Geolocation으로 위치 가져오기 (서울특별시 중심임을 알림)
 		// 로그인을 했을 시, 주소 가져오기
 		String address = "";
-		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
-		if(memberVO == null) {
+		MemberVO userVO = (MemberVO)session.getAttribute("memberVO");
+		if(userVO == null) {
 			address = getAddress(); //"서울특별시 중구 세종대로 110";
 		} else {
-			address = memberVO.getAddress();
+			address = userVO.getAddress();
 		}
 		
 		// 유저의 위치 (~구 찾기)
@@ -100,14 +100,27 @@ public class HomeController {
 		
 		// 마켓 정보들 가져오기(~구 검색)
 		List<MarketVO> marketList = marketDAO.marketGuList(marketVO); //getMarketList();
+		List<MapVO> mapList = new ArrayList<MapVO>();
 		for (MarketVO vo : marketList) {
 			if(vo.getThumbImg() == null)
-				vo.setThumbImg("");			
+				vo.setThumbImg("");
+			
+			MapVO mapVO = new MapVO();
+			
+			MemberVO memberVO = new MemberVO();
+			memberVO.setNum(vo.getUserNum());
+			memberVO = memberService.memberSelect(memberVO);
+			
+			mapVO.setMarketVO(vo);
+			mapVO.setLatitude(memberVO.getLatitude());
+			mapVO.setLongitude(memberVO.getLongitude());
+			
+			mapList.add(mapVO);
 		}
 		
 		// 해당되는 마켓들의 위치데이터(유저테이블의 Geo date)가져오기'
 		//System.out.println(marketVO.getAddress());
-		List<GeoVO> geoList = geoDAO.geoList(marketVO); //getGeoList();
+		//List<GeoVO> geoList = geoDAO.geoList(marketVO); //getGeoList();
 		//System.out.println(geoList!=null?"not null":"null");
 		
 		// 마켓 및 Geo data 확인
@@ -128,10 +141,13 @@ public class HomeController {
 		mv.addObject("address", address);
 		
 		// 마켓 위치 list로 보내기
-		mv.addObject("geoList", geoList);
+		//mv.addObject("geoList", geoList);
 		
 		// 마켓 정보 list로 보내기
-		mv.addObject("marketList", marketList);
+		//mv.addObject("marketList", marketList);
+		
+		// 마켓 정보 list로 보내기
+		mv.addObject("mapList", mapList);
 		
 		mv.setViewName("home");
 		

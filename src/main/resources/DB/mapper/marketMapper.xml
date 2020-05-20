@@ -45,8 +45,12 @@
 		select * from market where userNum = #{userNum}
 	</select>
 	
-	<select id="marketSearch" parameterType="MarketVO" resultType="MarketVO">
-		select * from market where marketName like  '%' || #{marketName} || '%'
+	<select id="marketSearch" parameterType="MarketVO" resultMap="ListResult">
+		SELECT m.*, r.rating 
+		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
+		ON (m.num = r.marketNum) 
+		WHERE marketName LIKE '%' || #{marketName} || '%'
+		ORDER BY m.userNum
 	</select>
 	
 	<select id="marketCount" resultType="Long">
