@@ -15,7 +15,7 @@
 	<%@ include file="../templates/header.jsp"%>
 	<div class="mkjcontainer">
 		<article class="mkj_article">
-			<form action="../member/memberJoin" method="post">
+			<form action="../member/memberJoin" method="post" id="memberJoin">
 				<header class="mkj_header">
 					<p>푸드트럭</p>
 				</header>
@@ -83,6 +83,9 @@
 			</form>
 		</article>
 	</div>
+	
+	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 	<script type="text/javascript">
 		//성별가져오기?
 		var gender = $('#genderData').val();
@@ -95,7 +98,55 @@
 		}
 	
 		//유효성 검사
-		
+		//validate 유효성 검사
+    $("#memberJoin").validate({
+        rules:{
+            name:{required: true, maxlength: 6},
+            nickName:{required: true, maxlength: 6},
+            id:{required: true, rangelength:[5, 10], eng_number:true},
+            email:{required: true, email:true},
+            password:{required: true, rangelength:[5, 10], eng_number:true},
+            phone:{required: true, maxlength:11, digits: true},
+            birth:{required: true},
+            gender:{required: true}
+        },
+        messages:{
+            name:{
+                required:"필수 입력 사항입니다.",
+                maxlength:"6글자까지만 입력 가능합니다."
+                },
+            nickName:{
+                required:"필수 입력 사항입니다.",
+                maxlength:"6글자까지만 입력 가능합니다."
+            },
+            id:{
+                required:"필수 입력 사항입니다.",
+                rangelength:"최소 5글자, 10글자 사이여야 합니다.",
+                eng_number:"영어와 숫자만 입력가능합니다."
+            },
+            email:{
+                required:"필수 입력 사항입니다.", 
+                email:"이메일 형식으로 입력해주세요."
+            },
+            password:{
+                required:"필수 입력 사항입니다.",
+                rangelength:"최소 5글자, 10글자 사이여야 합니다.",
+                eng_number:"영어와 숫자만 입력가능합니다."
+            },
+            phone:{
+                required:"필수 입력 사항입니다.",
+                maxlength:"최대 11자리까지 입력 가능합니다.",
+                digits:"숫자만 입력해 주세요."
+            },
+            birth:{
+                required:"필수 입력 사항입니다."
+            },
+            gender:{
+                required:"필수 입력 사항입니다."
+            }
+        }
+    });
+
 	</script>
 	<%@ include file="../templates/footer.jsp"%>
 </body>
