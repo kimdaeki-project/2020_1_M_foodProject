@@ -77,13 +77,14 @@
 
 .rl_rating {
 	position: relative;
-	padding: 12px 0 26px;
+	padding: 12px 0 12px;
 }
 
 .rl_review {
 	border-top: 1px solid #eee;
 	background-color: #fff;
 	text-align: center;
+	margin-top: 12px;
 }
 
 .rl_review_strong {
@@ -166,5 +167,8 @@
 .rl_sbtn {
 	background-color:#27b06e; 
 	color: #ffffff;
-	
+}
+
+.error{
+	color: #008080;
 }

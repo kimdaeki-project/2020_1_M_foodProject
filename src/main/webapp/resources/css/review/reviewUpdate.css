@@ -172,3 +172,7 @@
 .rl_fileDel{
     cursor: pointer;
 }
+
+.error{
+	color: #008080;
+}

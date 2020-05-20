@@ -156,7 +156,6 @@
 		
 		//나의 리뷰 목록
 		$('#myReview').click(function() {
-			alert("click");
 			
 			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
 				console.log("result : "+result);
@@ -228,7 +227,7 @@
 		$("#member_delete").click(function() {
 			var check = confirm("탈퇴하시겠습니까?");
 			if (check) {
-				location.href = "./memberDelete?id=${memberVO.id}"
+				location.href = "./reviewDelete"
 			}
 		});
 

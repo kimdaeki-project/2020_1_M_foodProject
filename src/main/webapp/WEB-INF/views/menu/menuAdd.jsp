@@ -11,23 +11,26 @@
 </head>
 <body style="margin-top: 61px;">
 
-	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="file_upload">
-		<h2>메뉴 추가</h2>
+	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="file_upload" style="margin-left: 50px;">
+		<h2>트럭메뉴 추가</h2>
 		
-		<div class="menuAdd_box">
-			<label for="title">메뉴명 : </label> <input type="text" id="name"name="menu_name" value="돼지갈비">  
+		<div class="menuAdd_box" style="margin-top: 12px;">
+			<label for="title">메뉴명 : </label> 
+			<input type="text" id="name"name="menu_name">  
 		</div>
 		<div class="menuAdd_box">
-			<label for="price">가격 : </label> <input type="text" id="price"name="menu_price" value="20000">
+			<label for="price">가격 : </label> 
+			<input type="text" id="price"name="menu_price">
 		</div>
 		<div class="menuAdd_box">
-			<label for="detail">상세 :</label> <input type="text" id="detail"	name="menu_detail" value="갈비갈비">
+			<label for="detail">상세 :</label> 
+			<input type="text" id="detail"	name="menu_detail">
 		</div>
 		
 		<label>카테고리명 :</label>
 		<div class="menuAdd_box_cate">
-			<input type="text" id="input" name="name" value="카테고리명">
-			<input id="addCategory" type="button" value="카테고리 생성">
+			<input type="text" id="input" name="name">
+			<input id="addCategory" type="button">
 		</div>
 		<div id="category_box"></div>
 		
@@ -51,11 +54,11 @@
 	var i=0;
 	
 	$("#addCategory").click(function () {
-// 		if ($("#input").val() == '') {
-// 			//placeholder수정하고 작동X
-// 			$('#input').attr("placeholder", "카테고리명을 입력해주세요!");
-// 			preventDefault();
-// 		}
+ 		if ($("#input").val() == '') {
+ 			//placeholder수정하고 작동X
+ 			$('#input').attr("placeholder", "카테고리명을 입력해주세요!");
+ 			preventDefault();
+ 		}
 	
 		var cateVal = $("#input").val();
 		console.log(cateVal);
@@ -70,8 +73,6 @@
 		//옵션추가 버튼을 누르면 각 카테고리에 옵션추가
 	$("#category_box").on('click', ".add", function () {
 		
-// 		console.log($("#cateName1").val());
-		console.log("cb: "+$(this).parent().attr("title"));
 		var index = $(this).attr("title")
 		var index2 = $(this).parent().attr("title");
 		

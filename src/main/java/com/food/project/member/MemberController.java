@@ -165,10 +165,7 @@ public class MemberController {
 
 	//마이페이지
 	@GetMapping("memberPage") public void memberPage() throws Exception{
-	  
 	}
-	
-	
 	//회원 리뷰관리 페이지
 	@GetMapping("myReview") public void myReview() throws Exception{
 	}

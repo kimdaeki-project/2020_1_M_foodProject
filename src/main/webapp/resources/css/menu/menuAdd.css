@@ -6,6 +6,11 @@ body{
     font-family: 'Noto Sans KR', sans-serif !important;
 }
 
+#file_upload{
+   margin-left: 50px;
+	
+}
+
 .menuAdd_box{
 	padding: 5px;
 }
@@ -186,3 +191,17 @@ input[type="file" i]{
     overflow: hidden;
     height: 38px;
 }
+
+.cb > input, .add{
+display: block;
+    border: none;
+    height: 40px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 1rem;
+    outline: none;
+    width: 30%;
+    color: #ffffff;
+    background-color: #27b06e;
+    margin-left: 10px;
+    }
