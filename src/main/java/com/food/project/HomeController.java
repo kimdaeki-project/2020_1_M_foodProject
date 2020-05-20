@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,8 @@ public class HomeController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Value("${kakao.map.appkey}")
+	private String kakaoAppKey;
 	
 	@GetMapping("/search")
 	@ResponseBody
@@ -118,36 +121,14 @@ public class HomeController {
 			mapList.add(mapVO);
 		}
 		
-		// 해당되는 마켓들의 위치데이터(유저테이블의 Geo date)가져오기'
-		//System.out.println(marketVO.getAddress());
-		//List<GeoVO> geoList = geoDAO.geoList(marketVO); //getGeoList();
-		//System.out.println(geoList!=null?"not null":"null");
-		
-		// 마켓 및 Geo data 확인
-//		for(int i=0; i<marketList.size(); i++) {
-//			
-//			GeoVO gvo = geoList.get(i);
-//			MarketVO mvo = marketList.get(i);
-//			System.out.println("NUM\t\tLatitude\t\tLongitude\t\tMarketName\t\tAddress");
-//			System.out.print(gvo.getNum()+"\t\t");
-//			System.out.print(gvo.getLatitude()+"\t\t");
-//			System.out.print(gvo.getLongitude()+"\t\t");
-//			System.out.print(mvo.getMarketName()+"\t\t");
-//			System.out.println(mvo.getAddress());
-//		}
-		
 		// 내 위치 보내기
-		//System.out.println(address);
 		mv.addObject("address", address);
 		
-		// 마켓 위치 list로 보내기
-		//mv.addObject("geoList", geoList);
-		
-		// 마켓 정보 list로 보내기
-		//mv.addObject("marketList", marketList);
-		
-		// 마켓 정보 list로 보내기
+		// 마켓 정보 list 보내기
 		mv.addObject("mapList", mapList);
+		
+		// 맵 api key 보내기
+		mv.addObject("kakaoAppKey", kakaoAppKey);
 		
 		mv.setViewName("home");
 		

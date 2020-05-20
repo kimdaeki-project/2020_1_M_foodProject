@@ -8,7 +8,7 @@
 
 <!-- kakao Map API -->
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoAppKey}&libraries=services,clusterer,drawing"></script>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/home.css">
