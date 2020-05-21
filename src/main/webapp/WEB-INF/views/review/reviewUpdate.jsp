@@ -9,6 +9,7 @@
 	href="${pageContext.request.contextPath}/resources/css/review/reviewUpdate.css">
 </head>
 <body>
+	<%@ include file="../templates/header.jsp"%>
 	<div class="rl_body">
 		<section class="rl_section">
 			<form action="" id="reviewUpdate">
@@ -27,8 +28,8 @@
 					<span class="rl_rate_span">음식을 평가해주세요!</span>
 					<div class="rl_rating">
 						<!-- 기존 평점이 체크되어있어야함 -->
-						<input type="radio" class="ratings" name="rate" title="5">5점 
-						<input type="radio" class="ratings" name="rate" title="4">4점 
+						<input type="radio" class="ratings" name="rate" title="5">5점
+						<input type="radio" class="ratings" name="rate" title="4">4점
 						<input type="radio" class="ratings" name="rate" title="3">3점
 						<input type="radio" class="ratings" name="rate" title="2">2점
 						<input type="radio" class="ratings" name="rate" title="1">1점
@@ -39,11 +40,8 @@
 					<!-- 기존 리뷰가 써있어야함 -->
 					<textarea id="reviewText" class="rl_ta" name="reviewText"></textarea>
 					<div class="rl_div">
-						<input class="rl_file" type="file" id="rl_file1"> <span
-							class="rl_fileDel" id="rl_fileDel1">❌</span>
-						<div style="height: 10px;"></div>
-						<input class="rl_file" type="file" id="rl_file2"> <span
-							class="rl_fileDel" id="rl_fileDel2">❌</span>
+						<input class="rl_file" type="file" id="rl_file2"> 
+						<span class="rl_fileDel" id="rl_fileDel2">❌</span>
 					</div>
 				</div>
 				<div class="rl_send">
@@ -59,6 +57,8 @@
 			</form>
 		</section>
 	</div>
+	<%@ include file="../templates/footer.jsp"%>
+
 
 	<script type="text/javascript"
 		src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
@@ -101,13 +101,11 @@
 			});
 			
 			// textarea write
-			console.log(`${reviewVO.contents}`);
 			$('#reviewText').text(`${reviewVO.contents}`);
 		}
 		
 		// main (한번만 실행)
 		$(function() {
-			
 			reviewVOHandler();
 		});
 	</script>

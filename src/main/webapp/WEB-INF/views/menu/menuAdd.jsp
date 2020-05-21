@@ -1,25 +1,206 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="../resources/css/menu/menuAdd.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<title>Menu Add</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <style type="text/css">
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Noto Sans KR', sans-serif !important;
+}
+
+#file_upload {
+	margin-left: 50px;
+}
+
+.menuAdd_box {
+	padding: 5px;
+}
+
+.ma_body {
+	margin-left: 50px;
+}
+
+.menuAdd_box input {
+	box-sizing: border-box;
+	padding: 0 15px;
+	height: 38px;
+	width: 50%;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	border: 1px solid #e7e7e7;
+	font-size: 15px;
+	color: #3d3d3d;
+	display: block;
+}
+
+#submit {
+	display: block;
+	border: none;
+	height: 38px;
+	width: 100%;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	outline: none;
+	margin-top: 8px;
+	width: 50%;
+	color: #ffffff;
+	background-color: #27b06e;
+}
+
+input[type="file" i] {
+	padding: 6px 0 0 6px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.category {
+	font-size: 20px;
+}
+
+.c_box {
+	display: flex;
+	vertical-align: middle;
+	margin: 0 auto;
+}
+
+#addOption {
+	cursor: pointer;
+	margin-left: 5px;
+	display: block;
+	border: transparent;
+	outline: transparent;
+	background-color: transparent;
+}
+
+#delOption {
+	cursor: pointer;
+	margin-left: 5px;
+	display: block;
+	border: transparent;
+	outline: transparent;
+	background-color: transparent;
+}
+
+#addCategory {
+	display: block;
+	border: none;
+	height: 40px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	outline: none;
+	width: 30%;
+	color: #ffffff;
+	background-color: #27b06e;
+	margin-left: 10px;
+}
+
+.menuAdd_box_cate {
+	box-sizing: border-box;
+	height: 38px;
+	width: 50%;
+	margin-top: 10px;
+	margin-bottom: 15px;
+	font-size: 15px;
+	color: #3d3d3d;
+	display: flex;
+	padding: 5px;
+	padding-right: 0px;
+}
+
+#input {
+	height: 38px;
+	width: 70%;
+	border: 1px solid #e7e7e7;
+	font-size: 15px;
+	color: #3d3d3d;
+	padding: 0 15px;
+}
+
+.delO {
+	margin-left: 10px;
+	height: 40px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	border: none;
+	color: #ffffff;
+	background-color: #27b06e;
+	width: 22%;
+}
+
+#category_box {
+	display: block;
+}
+
+.opDiv {
+	width: 50%;
+	display: flex;
+	padding: 5px;
+}
+
+.opName {
+	width: 20%;
+	height: 38px;
+	border: 1px solid #e7e7e7;
+	padding: 0 15px;
+	color: #3d3d3d;
+}
+
+.opPrice {
+	width: 20%;
+	height: 38px;
+	border: 1px solid #e7e7e7;
+	padding: 0 15px;
+	color: #3d3d3d;
+	margin-left: 5px;
+}
+
+.addO {
+	margin: 5px;
+	cursor: pointer;
+	text-align: center;
+	border: none;
+	color: #ffffff;
+	background-color: #27b06e;
+	padding: 5px;
+	font-size: 145.px;
+}
+
+#thumbImg {
+	width: 48%;
+}
+
+#ma_fileDel, #ma_fileDel2 {
+	margin: 10px;
+	line-height: 38px;
+	padding: 0 5px;
+	cursor: pointer;
+}
+
+.error {
+	color: #008080;
+	font-weight: bolder;
+}
+
+.opDiv>.error {
+	line-height: 38px;
+	padding: 0 5px 0 10px;
+	overflow: hidden;
+	height: 38px;
+}
+
 .add {
 	display: initial;
-    border: none;
-    height: 30px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 15px;
-    outline: none;
-    width: 80px;
-    color: #ffffff;
-    background-color: #27b06e;
-    margin-left: 10px;
+	border: none;
+	height: 30px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	outline: none;
+	width: 80px;
+	color: #ffffff;
+	background-color: #27b06e;
+	margin-left: 10px;
 }
 
 #btn-sub {
@@ -37,55 +218,61 @@
 	background-color: #27b06e;
 	margin: 32px 0 0 0;
 }
-
 </style>
 </head>
 <body style="margin-top: 61px;">
 
-	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="fileUpload" class="file_upload" style="margin-left: 50px;">
+	<form action="../menu/menuAdd" method="post"
+		enctype="multipart/form-data" name="menuAdd" id="fileUpload"
+		class="file_upload" style="margin-left: 50px;">
 		<h2>트럭메뉴 추가</h2>
-		
+
 		<div class="menuAdd_box" style="margin-top: 12px;">
-			<label for="title">메뉴명 : </label> 
-			<input type="text" id="name" name="menu_name">  
+			<label for="title">메뉴명 : </label> <input type="text" id="name"
+				name="menu_name">
 		</div>
 		<div class="menuAdd_box">
-			<label for="price">가격 : </label> 
-			<input type="number" id="price" name="menu_price">
+			<label for="price">가격 : </label> <input type="number" id="price"
+				name="menu_price">
 		</div>
 		<div class="menuAdd_box">
-			<label for="detail">상세 :</label> 
-			<input type="text" id="detail"	name="menu_detail">
+			<label for="detail">상세 :</label> <input type="text" id="detail"
+				name="menu_detail">
 		</div>
-		
+
 		<label>카테고리명 :</label>
 		<div class="menuAdd_box_cate">
-			<input type="text" id="input" name="name">
-			<input id="addCategory" type="button" value="카테고리 추가">
+			<input type="text" id="input" name="name"> <input
+				id="addCategory" type="button" value="카테고리 추가">
 		</div>
 		<div id="category_box"></div>
-		
-		
+
+
 		<div class="menuAdd_box">
-			<label for="thumbImg">메뉴 이미지: </label> 
+			<label for="thumbImg">메뉴 이미지: </label>
 			<div style="display: flex;">
-          	  <input type="file" id="thumbImg" name="files" class="thumbImg1" accept="image/jpeg,image/png,image/jpg">
-          	  <span id="ma_fileDel">✖</span>
-         	</div>
+				<input type="file" id="thumbImg" name="files" class="thumbImg1"
+					accept="image/jpeg,image/png,image/jpg"> <span
+					id="ma_fileDel">✖</span>
+			</div>
 		</div>
-		<label class="error" for="thumbImg" generated="true" style="display:none; padding-left: 5px;"></label>
+		<label class="error" for="thumbImg" generated="true"
+			style="display: none; padding-left: 5px;"></label>
 		<div class="menuAdd_box">
 			<button type="submit" id="btn-sub">확인</button>
 		</div>
 	</form>
 </body>
 
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript">
+	var i = 0;
 
-	var i=0;
-	
 	//옵션추가 해놓고 아무것도 안적으면 submit안됨
 	$("#btn-sub").click(function() {
 		if ($(".opName").val() == '' && $(".opPrice").val() == '') {
@@ -93,7 +280,7 @@
 			event.preventDefault();
 		}
 	});
-	
+
 	//가격에 숫자만 입력
 	$(".opPrice").on("keyup", function() {
 		$(this).val($(this).val().replace(/[^0-9]/g, ""));
@@ -243,4 +430,3 @@
 		}
 	});
 </script>
-</html>

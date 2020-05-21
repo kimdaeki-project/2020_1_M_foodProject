@@ -146,6 +146,17 @@ input[type="file" i] {
 .mp_infoMod_box p {
 	margin-top: 0;
 }
+
+.mp_delPic {
+	margin: 0 10px;
+	line-height: 38px;
+	padding: 0 5px;
+	cursor: pointer;
+}
+
+.mp_filep{
+	width: 47%;
+}
 </style>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -174,25 +185,46 @@ input[type="file" i] {
 			<input type="text" name="marketIntro" id="marketIntro"
 				class="mp_infoMod_input" value="${marketVO.marketIntro}">
 		</div>
+		
+		
 		<div class="mp_infoMod_box">
 			<p>트럭 메인 이미지 첨부</p>
-			<input type="file" name="files" id="thumbImg"
-				class="mp_infoMod_input" value="${marketVO.thumbImg}">
+			<!-- 기존 이미지 -->
+			<input type="text" value="${marketVO.thumbImg}" readonly="readonly" class="mp_infoMod_input mp_filep">
+			
+			<!-- 새로 첨부할 이미지 -->
+			<input type="file" class="mp_infoMod_input mp_filep" style="display: none;">
+			
+			<!-- toggle버튼 -->
+			<span class="mp_delPic">✖</span>
 		</div>
+				
+		
 		<div class="mp_infoMod_box">
-			<button type="submit">수정하기</button>
+			<button id="market-modify" type="submit" style="font-weight: 600;">수정하기</button>
 		</div>
 	</form>
 	<!-- 푸드트럭 탈퇴하기 추가 -->
 	<div class="mp_infoMod_box">
-		<button type="submit">푸드트럭 탈퇴</button>
+		<button id="secession-truck" type="button" 
+		style="margin: 0; background-color: #fbbc04; color: #000; font-weight: 600;">푸드트럭 탈퇴</button>
 	</div>
 </div>
 
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<!--     <script type="text/javascript" src="jquery.validate.js"></script> -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
+
+	//기존이미지 삭제하면 새로운 이미 선택 가능(toggle)
+	
+	//푸드트럭 탈퇴하기
+	$('#secession-truck').click(function() {
+		if(confirm("푸드트럭을 탈퇴하시겠습니까?") == true){
+	        alert("탈퇴되었습니다!");
+			location.href = "./marketDelete"
+	    }
+	});
+	
 	//validate 유효성 검사
 	$("#mp_update").validate({
 		rules : {
@@ -235,7 +267,6 @@ input[type="file" i] {
 	});
 
 	$(function() {
-
 		//상점명 중복검사
 		$("#marketName")
 				.blur(
@@ -266,6 +297,5 @@ input[type="file" i] {
 										}
 									});
 						});
-
 	});
 </script>

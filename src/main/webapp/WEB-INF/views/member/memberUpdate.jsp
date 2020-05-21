@@ -148,7 +148,7 @@ input[type="file" i]{
 </style>
 
 	<div class="mp_box mp_box_all" style="margin-left: 50px">
-		<form action="./memberUpdate" method="post">
+		<form action="./memberUpdate" method="post" id="memberUpdate">
 			<input type="hidden" name="id" value="${memberVO.id}">
 			<h2>회원정보 수정</h2>
 			<div class="mp_infoMod_box" style="margin-top: 12px">
@@ -171,11 +171,58 @@ input[type="file" i]{
 				<p>휴대폰 번호</p>
 				<input type="text" name="phone" class="mp_infoMod_input" value="${memberVO.phone}">
 			</div>
-			
 			<div class="mp_infoMod_box">
-				<button type="submit">저장하기</button>
+				<button type="submit" id="mu-submit">저장하기</button>
 			</div>
 		</form>
 	</div>
 	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+	
+    //validate 유효성 검사
+    $("#memberUpdate").validate({
+        rules:{
+            name:{required: true, maxlength: 6},
+            nickName:{required: true, maxlength: 6},
+            email:{required: true, email:true},
+            password:{required: true, rangelength:[5, 10], eng_number:true},
+            phone:{required: true, maxlength:11, digits: true}
+        },
+        messages:{
+            name:{
+                required:"필수 입력 사항입니다.",
+                maxlength:"6글자까지만 입력 가능합니다."
+                },
+            nickName:{
+                required:"필수 입력 사항입니다.",
+                maxlength:"6글자까지만 입력 가능합니다."
+            },
+            email:{
+                required:"필수 입력 사항입니다.", 
+                email:"이메일 형식으로 입력해주세요."
+            },
+            password:{
+                required:"필수 입력 사항입니다.",
+                rangelength:"최소 5글자, 10글자 사이여야 합니다.",
+                eng_number:"영어와 숫자만 입력가능합니다."
+            },
+            phone:{
+                required:"필수 입력 사항입니다.",
+                maxlength:"최대 11자리까지 입력 가능합니다.",
+                digits:"숫자만 입력해 주세요."
+            }
+        }
+    });
+    
+    
+    $('#mu-submit').click(function() {
+        if ($('.mp_infoMod_input').val() == '') {
+        	console.log('없음');
+        	preventDefault();
+    	}
+	});
+    
+	</script>
 

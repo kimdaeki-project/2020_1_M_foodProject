@@ -151,12 +151,19 @@ a {
 						</div>
 						<div class="rev_review">
 							<div class="rev_review2">
-								<div class="rev_review3">
-									<c:forEach begin="1" end="${reviewVO.rating}">★</c:forEach>
-									<span style="color: color: #000000;">${reviewVO.rating}</span>
-									<p style="color: #5f5f5f;">${reviewVO.contents}</p>
+							<div class="rev_review3">
+								<div>
+									<c:forEach begin="1" end="${reviewVO.rating}">
+										<img alt=""
+											src="${pageContext.request.contextPath}/resources/img/review/green-star.png"
+											style="width: 16px; height: 16px;">
+									</c:forEach>
+									<span style="color: #6f7174; font-size: 18px; margin-left: 3px;">${reviewVO.rating}</span>
+
 								</div>
-								<div class="rev_review4">
+								<p style="color: #5f5f5f;">${reviewVO.contents}</p>
+							</div>
+							<div class="rev_review4">
 									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
 								</div>
 								<div class="rev_review5">

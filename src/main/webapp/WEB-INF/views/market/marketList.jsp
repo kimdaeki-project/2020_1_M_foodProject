@@ -18,7 +18,7 @@
 					<li class="ml_container2_li"><a class="ml_container2_a"
 						href="${pageContext.request.contextPath}/market/marketSelect?userNum=${vo.userNum}">
 							<img class="ml_container2_img" alt=""
-							src="${pageContext.request.contextPath}/resources/img/food.jpg">
+							src="${pageContext.request.contextPath}/resources/upload/market/${vo.thumbImg}">
 							<strong class="ml_container2_strong">${vo.marketName}</strong>
 							<span class="ml_container2_span">${vo.marketIntro}</span>
 							<em class="ml_container2_em">${vo.canOrder}</em>
