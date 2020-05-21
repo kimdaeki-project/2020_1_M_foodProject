@@ -28,7 +28,7 @@
 	</select>
 	
 	<select id="myReviewList" parameterType="Long" resultType="ReviewVO">
-		select * from review where memberNum=#{memberNum}
+		select * from review where memberNum=#{memberNum} ORDER BY boardNum DESC
 	</select>
 
 	<select id="marketAvg" parameterType="Long" resultType="Double">
