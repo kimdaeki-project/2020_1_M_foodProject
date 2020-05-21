@@ -174,7 +174,6 @@ input[type="file" i] {
 
 #newfile{
 	margin-bottom: 0;
-	display: none;
 }
 </style>
 
@@ -207,16 +206,10 @@ input[type="file" i] {
 
 
 		<div class="mp_infoMod_box">
-			<p>트럭 메인 이미지 첨부</p>
+			<p>트럭 메인 이미지 첨부 (변경을 원하는 경우에만 첨부하세요!)</p>
 			<div style="display: flex;">
-				<!-- 기존 이미지 -->
-				<input type="text" value="${marketVO.thumbImg}" readonly="readonly" class="mp_filep" id="oldfile" name="files">
-
-				<!-- 새로 첨부할 이미지 -->
-				<input type="file" class="mp_infoMod_input mp_filep" id="newfile" name="notfiles">
-
-				<!-- toggle버튼 -->
-				<span class="mp_delPic">✖</span>
+			<!-- 새로 첨부할 이미지 -->
+				<input type="file" class="mp_infoMod_input mp_filep" id="newfile" name="files">
 			</div>
 		</div>
 
@@ -235,9 +228,6 @@ input[type="file" i] {
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
-
-	console.log( 'oldfiles:'+ $("#oldfile").css("display"), $("#oldfile").attr("name") );
-	console.log( 'newfiles:'+ $("#newfile").css("display"), $("#newfile").attr("name") );
 
 	//기존이미지 삭제하면 새로운 이미 선택 가능(toggle)
 	//name을 바꾸기...
@@ -309,15 +299,13 @@ input[type="file" i] {
 
 	$(function() {
 		//상점명 중복검사
-		$("#marketName")
-				.blur(
-						function() {
-							var user_id = $("#marketName").val();
-							$
-									.ajax({
-										url : '${pageContext.request.contextPath}/member/memberIdCheck?marketName='
+		$("#marketName").blur(
+			function() {
+				var user_id = $("#marketName").val();
+				$.ajax({
+					url : '${pageContext.request.contextPath}/member/memberIdCheck?marketName='
 												+ marketName,
-										type : 'get',
+					type : 'get',
 										success : function(data) {
 											if (data == 0) {
 												//사용중인 아이디라고 화면에 뜨게하기

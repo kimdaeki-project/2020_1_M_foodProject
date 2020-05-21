@@ -77,7 +77,12 @@
 											<img alt=""
 												src="${pageContext.request.contextPath}/resources/img/food.jpg">
 											<div class="cart-col">
-												<strong>상품명</strong> <span>옵션</span>
+												<div style="display: flex; justify-content: space-between;">
+													<strong>상품명</strong> 
+													<span class="cart-item-del" style="cursor: pointer;">✖</span>
+												</div>
+												
+												<span>옵션</span>
 											</div>
 										</div>
 										<div class="cart-row2">
