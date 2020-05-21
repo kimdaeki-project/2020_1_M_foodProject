@@ -48,7 +48,7 @@
 	<div class="modal-cart" style="display: none;">
 		<div class="modal-cart-body">
 			<div class="cart-body">
-				
+
 			</div>
 		</div>
 	</div>

@@ -440,11 +440,11 @@
 			var markers = [];
 		
 			// 마커 이미지의 이미지 주소입니다
-			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png"; 
+			var imageSrc = "${pageContext.request.contextPath}/resources/img/home/marker.png"; 
 			    
 			for (var i=0; i<positions.length; i++) {
 			    
-			    var imageSize = new kakao.maps.Size(24, 35); // 마커 이미지의 이미지 크기 입니다 
+			    var imageSize = new kakao.maps.Size(50, 50); // 마커 이미지의 이미지 크기 입니다 
 			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); // 마커 이미지를 생성합니다    
 			    
 			 	// 마커를 생성합니다
