@@ -44,53 +44,70 @@
 		</c:if>
 	</div>
 
-	<!-- 장바구니 모달창 -->
-	<div class="modal_cart">
-		<!-- 장바구니 영역을 감싸는 div -->
-		<div style="width: 450px; position: sticky; left: 10000;">
-			<!-- 닫는 버튼 / 장바구니 -->
-			<div class="cart1">
-				<span id="m_close">✖</span>
-				<h2>장바구니</h2>
-			</div>
-			<!-- 전체삭제 -->
-			<div class="cart2">
-				<span> 전체삭제 </span>
-			</div>
-			<!-- 장바구니 아이템 영역 -->
-			<div class="cart3">
-				<ul>
-					<li class="cart3_li">
-						<div class="cart_li1">
-							<img alt="사진" src="food.jpg" class="cart_pic">
-							<div class="cart_li1-1">
-								<strong>프레시코드 - 프레시코드 샐러드</strong> <span>1. 샐러리 빼기 / 2.
-									드레싱 없이</span>
+	<!-- 장바구니 모달창 세번째^^!!! -->
+	<div class="modal-cart">
+		<div class="modal-cart-body">
+			<div class="cart-body">
+				<article class="cart">
+					<header class="cart-header">
+						<nav class="ch-nav" id="m_close">
+							<button>✖</button>
+						</nav>
+						<h2>장바구니</h2>
+					</header>
+					<div class="cart-div1">
+						<span>프코스팟배송 | 무료배송</span>
+					</div>
+					<div class="cart-div2">
+						<div class="cart-selectAll">
+							<label></label>
+							<nav>
+								<button class="btn-delAll">
+									<span>전체 삭제</span>
+								</button>
+							</nav>
+						</div>
+						<hr>
+						<div class="cart-index">
+							<ul class="cart-items">
+								<li class="cart-item">
+									<!-- div가 반복 -->
+									<div class="cart-item-body">
+										<div class="cart-row1">
+											<img alt=""
+												src="${pageContext.request.contextPath}/resources/img/food.jpg">
+											<div class="cart-col">
+												<strong>상품명</strong> <span>옵션</span>
+											</div>
+										</div>
+										<div class="cart-row2">
+											<div>가격 0000원</div>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<nav class="cart-nav">
+						<div class="cart-result">
+							<hr>
+							<div class="cart-result-body">
+								<dl class="cart-dl">
+									<dt>갯수</dt>
+									<dd>0개</dd>
+								</dl>
+								<dl class="cart-dl">
+									<dt>가격</dt>
+									<dd>0원</dd>
+								</dl>
 							</div>
-							<div class="cart_li1-2">
-								<span id="cart_li1Del">✖</span>
+							<div class="nav-button">
+								<button class="nav-more">상품 더 담기</button>
+								<button class="nav-order">주문하기</button>
 							</div>
 						</div>
-						<div class="cart_li2">
-							<em>8000 원</em>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="cart4">
-				<!-- 계산서 영역 -->
-				<div class="cart4-1">
-					<dl>
-						<dt class="cart4-1dt">총 갯수
-						<dd class="cart4-1dd">0개</dd>
-						</dt>
-						<dt>총 가격
-						<dd>0원</dd>
-						</dt>
-					</dl>
-				</div>
-				<!-- 결제 버튼 영역 -->
-				<div class="cart4-2">결제하기</div>
+					</nav>
+				</article>
 			</div>
 		</div>
 	</div>
@@ -100,11 +117,12 @@
 <script type="text/javascript">
 	//장바구니 누르면 옆에 모달레이어로 뜨기 / X버튼 누르면 닫히기
 	$(".fa-shopping-cart").click(function() {
-		$(".modal_cart").css('display', 'block');
+		$(".modal-cart").css('display', 'block');
 	});
 
 	$("#m_close").click(function() {
-		$(".modal_cart").css('display', 'none');
+		console.log('click');
+		$(".modal-cart").css('display', 'none');
 	});
 
 	//전체 삭제 버튼 누르면 장바구니 내용 삭제
