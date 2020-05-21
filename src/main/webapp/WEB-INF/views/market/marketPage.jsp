@@ -149,13 +149,32 @@ input[type="file" i] {
 
 .mp_delPic {
 	margin: 0 10px;
-	line-height: 38px;
+	line-height: 44px;
 	padding: 0 5px;
 	cursor: pointer;
 }
 
 .mp_filep{
-	width: 47%;
+	margin-top: 0px;
+	margin-left: 5px;
+    width: 47%;
+    font-family: 'Noto Sans KR', sans-serif;
+    box-sizing: border-box;
+    padding: 0 15px;
+    height: 38px;
+    border: 1px solid #e7e7e7;
+    font-size: 15px;
+    color: #3d3d3d;
+    display: block;
+}
+
+#oldfile{
+	display: block;
+}
+
+#newfile{
+	margin-bottom: 0;
+	display: none;
 }
 </style>
 
@@ -185,21 +204,23 @@ input[type="file" i] {
 			<input type="text" name="marketIntro" id="marketIntro"
 				class="mp_infoMod_input" value="${marketVO.marketIntro}">
 		</div>
-		
-		
+
+
 		<div class="mp_infoMod_box">
 			<p>트럭 메인 이미지 첨부</p>
-			<!-- 기존 이미지 -->
-			<input type="text" value="${marketVO.thumbImg}" readonly="readonly" class="mp_infoMod_input mp_filep">
-			
-			<!-- 새로 첨부할 이미지 -->
-			<input type="file" class="mp_infoMod_input mp_filep" style="display: none;">
-			
-			<!-- toggle버튼 -->
-			<span class="mp_delPic">✖</span>
+			<div style="display: flex;">
+				<!-- 기존 이미지 -->
+				<input type="text" value="${marketVO.thumbImg}" readonly="readonly" class="mp_filep" id="oldfile" name="files">
+
+				<!-- 새로 첨부할 이미지 -->
+				<input type="file" class="mp_infoMod_input mp_filep" id="newfile" name="notfiles">
+
+				<!-- toggle버튼 -->
+				<span class="mp_delPic">✖</span>
+			</div>
 		</div>
-				
-		
+
+
 		<div class="mp_infoMod_box">
 			<button id="market-modify" type="submit" style="font-weight: 600;">수정하기</button>
 		</div>
@@ -215,7 +236,27 @@ input[type="file" i] {
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript">
 
+	console.log( 'oldfiles:'+ $("#oldfile").css("display"), $("#oldfile").attr("name") );
+	console.log( 'newfiles:'+ $("#newfile").css("display"), $("#newfile").attr("name") );
+
 	//기존이미지 삭제하면 새로운 이미 선택 가능(toggle)
+	//name을 바꾸기...
+	$('.mp_delPic').click(function() {
+		$("#oldfile").toggle();
+		$("#newfile").toggle();
+
+		if ( $("#oldfile").css("display") == 'block' ) {
+			$("#oldfile").attr("name","files");
+			$("#newfile").attr("name","notfiles");
+		} else if ( $("#oldfile").css("display") == 'none' ) {
+			$("#newfile").attr("name","files");
+			$("#oldfile").attr("name","notfiles");
+		}
+		
+		console.log( 'oldfiles:'+ $("#oldfile").css("display"), $("#oldfile").attr("name") );
+		console.log( 'newfiles:'+ $("#newfile").css("display"), $("#newfile").attr("name") );
+		
+	});
 	
 	//푸드트럭 탈퇴하기
 	$('#secession-truck').click(function() {
