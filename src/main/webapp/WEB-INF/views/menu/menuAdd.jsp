@@ -308,20 +308,16 @@ input[type="file" i] {
 					});
 
 	//옵션추가 버튼을 누르면 각 카테고리에 옵션추가 (O)
-	$("#category_box")
-			.on(
-					'click',
-					".add",
-					function() {
+	$("#category_box").on('click',".add",function() {
 
-						var index = $(this).attr("title")
-						var index2 = $(this).parent().attr("title");
-						var c_name = '<div class="opDiv"><input name="op_name_'+index+'_'+ index2 +'" class="opName" placeholder="옵션 이름" type="text"><input name="op_price_'+index+'_'+ index2 +'" class="opPrice" type="number" placeholder="가격"><input type="button" class="delO" value="옵션 삭제"></div>';
+			var index = $(this).attr("title")
+			var index2 = $(this).parent().attr("title");
+			var c_name = '<div class="opDiv"><input name="op_name_'+index+'_'+ index2 +'" class="opName" placeholder="옵션 이름" type="text"><input name="op_price_'+index+'_'+ index2 +'" class="opPrice" type="number" placeholder="가격"><input type="button" class="delO" value="옵션 삭제"></div>';
 
-						$(this).parent().append(c_name);
-						$(this).parent().attr("title", ++index2);
+			$(this).parent().append(c_name);
+			$(this).parent().attr("title", ++index2);
 
-					});
+		});
 
 	//옵션삭제 버튼을 누르면 옵션삭제 (O)
 	$("#category_box").on('click', '.delO', function() {
