@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.category.CategoryService;
 import com.food.project.category.CategoryVO;
+import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
 import com.food.project.menuOption.MenuOptionService;
 import com.food.project.menuOption.MenuOptionVO;
@@ -33,6 +34,8 @@ public class MenuController {
 	private CategoryService categoryService;
 	@Autowired
 	private MenuOptionService menuOptionSerice;
+	@Autowired
+	private MarketService marketService;
 	
 	
 	
@@ -214,12 +217,9 @@ public class MenuController {
 	@GetMapping("menuSelect")
 	public ModelAndView menuSelect(MenuVO menuVO,long marketNum) throws Exception {
 		
-//		System.out.println("menuSelect");
 		
 		ModelAndView mv = new ModelAndView();
 		CategoryVO categoryVO = new CategoryVO();
-		
-//		System.out.println("menuNum"+ menuVO.getNum());
 		
 		//해당 메뉴의 대한  정보가져오기(MenuVO)
 		menuVO = menuService.menuSelect(menuVO);
@@ -227,29 +227,28 @@ public class MenuController {
 		//menu의 num값을 이용해 categrory목록 조회
 		categoryVO.setMenuNum(menuVO.getNum());
 		
-//		System.out.println("cateMenuNum : "+categoryVO.getMenuNum());
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
 
-		
-//		System.out.println("size : "+cateList.size());
-		for (CategoryVO vo : cateList) {
-			
-			List<MenuOptionVO> moList = vo.getMenuOptionVOs();
-			for (MenuOptionVO moVO : moList) {
-//				System.out.println(moVO.getName());
-//				System.out.println(moVO.getPrice());
-			}
-		}
+		MarketVO marketVO = new MarketVO();
+		marketVO.setNum(marketNum);
+		marketVO = marketService.marketSelect(marketVO);
 				
 		mv.addObject("menuVO", menuVO);
 		mv.addObject("cateList", cateList);
-		mv.addObject("marketNum", marketNum);
+		mv.addObject("marketVO", marketVO);
 		
 		
 		mv.setViewName("menu/menuSelect");
 			
 		
 		return mv;
+//		for (CategoryVO vo : cateList) {
+//		
+//		List<MenuOptionVO> moList = vo.getMenuOptionVOs();
+//		for (MenuOptionVO moVO : moList) {
+//			System.out.println(moVO.getPrice());
+//		}
+//	}
 	}
 	
 	@GetMapping("menuUpdate")

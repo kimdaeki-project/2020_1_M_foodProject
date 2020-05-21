@@ -110,8 +110,12 @@
                    latitude = Math.floor(latitude*1000000)/1000000;
                    longitude = Math.floor(longitude*1000000)/1000000;
                    
+                   console.log(latitude);
+                   console.log(longitude);
+                   
                   $.post("../market/marketIsOpen",{
-                     num:'${memberVO.num}',isOpen:$("#toggle_alarm").val(), 
+                     num:'${memberVO.num}',
+                     isOpen:$("#toggle_alarm").val(), 
                      latitude:latitude, longitude:longitude}, function(result){
                      console.log("p result:"+result);
                   })
