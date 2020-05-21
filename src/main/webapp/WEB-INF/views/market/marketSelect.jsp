@@ -43,7 +43,7 @@
 			<ul>
 				<c:forEach items="${menuList}" var="vo">
 					<li>	
-						<a href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}">
+						<a href="${pageContext.request.contextPath}/menu/menuSelect?num=${vo.num}&marketNum=${marketVO.num}">
 							<img src="${pageContext.request.contextPath}/resources/upload/menu/${vo.thumbImg}">
 							<strong>${vo.name}</strong>
 							<em>${vo.detail}</em>

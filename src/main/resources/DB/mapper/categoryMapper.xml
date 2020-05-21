@@ -12,6 +12,7 @@
 		<result column="name" property="name"/>
 	
 		<collection property="menuOptionVOs" javaType="List" ofType="MenuOptionVO">
+			<result column="optionNum" property="num"/>
 			<result column="optionName" property="name"/>
 			<result column="price" property="price"/>
 		</collection>
@@ -27,7 +28,7 @@
 	</insert>
 	
 	<select id="categoryList" parameterType="CategoryVO" resultMap="ResultList">
-		select c.*,m.name as optionName,m.price
+		select c.*,m.num as optionNum,m.name as optionName,m.price
 		from category c join menuoption m
 		on(c.num = m.categorynum)
 		where c.menunum = #{menuNum}
