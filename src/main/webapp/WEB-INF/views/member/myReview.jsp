@@ -132,9 +132,6 @@ a {
 <title>나의 리뷰</title>
 </head>
 
-
-
-
 <body style="width: 100%">
 	<div style="margin-left: 50px;">
 		<h2 class="rev_name">나의 후기</h2>
@@ -143,13 +140,13 @@ a {
 
 
 			<c:forEach items="${myReviewList}" var="reviewVO">
-				<li class="rev_li"><a href="#">
+				<li class="rev_li">
+					<!-- <a href="#"> -->
 						<div class="rev_item">
-							<img class="rev_item_img" alt=""
-								src="${pageContext.request.contextPath}/resources/img/food2.png">
+							<img class="rev_item_img" alt="" src="${pageContext.request.contextPath}/resources/img/food2.png">
 							<div class="rev_item_div">
-								<strong class="rev_item_strong">${reviewVO.boardNum}</strong> <span
-									class="rev_item_span">상품정보</span>
+								<strong class="rev_item_strong">${reviewVO.boardNum}</strong> 
+								<span class="rev_item_span">상품정보</span>
 							</div>
 						</div>
 						<div class="rev_review">
@@ -160,17 +157,16 @@ a {
 									<p style="color: #5f5f5f;">${reviewVO.contents}</p>
 								</div>
 								<div class="rev_review4">
-									<img class="rev_review_img" alt="review_img"
-										src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
+									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
 								</div>
 								<div class="rev_review5">
-									<button class="rev_mod">수정하기</button>
-									<img class="rev_del" alt="delete"
-										src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
+									<button class="rev_mod" title="${reviewVO.boardNum}">수정하기</button>
+									<img class="rev_del" alt="delete" title="${reviewVO.boardNum}" src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
 								</div>
 							</div>
 						</div>
-				</a></li>
+					<!-- </a> -->
+				</li>
 			</c:forEach>
 		</ul>
 	</div>
@@ -180,15 +176,15 @@ a {
 
 	//수정하기 버튼 누르면 수정하기
 	$(".rev_mod").click(function() {
-		location.href="./reviewUpdate?";
+		
+		location.href="../review/reviewUpdate?boardNum="+$(this).attr("title");
 	});
 	
 	//X버튼 누르면 삭제하기
 	$(".rev_del").click(function() {
 		var check = confirm("삭제하시겠습니까?");
 		if (check) {
-			//삭제하는...
-			location.href = "./reviewDelete?"
+			location.href = "../review/reviewDelete?boardNum="+$(this).attr("title");
 		}
 	});
 </script>

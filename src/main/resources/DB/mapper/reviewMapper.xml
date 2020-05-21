@@ -23,6 +23,9 @@
 		</association>
 	</resultMap>
 	
+	<select id="reviewSelect" parameterType="ReviewVO" resultType="ReviewVO">
+		select * from review where boardNum = #{boardNum}
+	</select>
 	
 	<select id="myReviewList" parameterType="Long" resultType="ReviewVO">
 		select * from review where memberNum=#{memberNum}

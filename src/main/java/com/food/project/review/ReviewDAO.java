@@ -25,6 +25,11 @@ public class ReviewDAO implements BoardDAO{
 		return sqlSession.selectList(NAMESPACE+"imgTatalList", marketVO);
 	}
 	
+	//boardNum으로 하나의 리뷰 조회
+	public ReviewVO reviewSelect(ReviewVO reviewVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"reviewSelect", reviewVO);
+	}
+	
 	//한 사용자가 작성한 리뷰 목록 출력
 	public List<ReviewVO> myReviewList(long memberNum) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"myReviewList",memberNum);

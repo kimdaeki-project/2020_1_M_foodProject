@@ -158,9 +158,7 @@
 		
 		//나의 리뷰 목록
 		$('#myReview').click(function() {
-			
 			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
-				console.log("result : "+result);
 				
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
@@ -171,8 +169,6 @@
 		//회원정보 수정
 		$('#memberUpdate').click(function() {
 			$.get("./memberUpdate", function(result) {
-				
-				console.log(result);
 				
 				$('.mp_box').empty();
 				$('.mp_box').append(result);

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.transform.impl.AddDelegateTransformer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -141,20 +142,20 @@ public class ReviewController {
 	}
 	
 	@GetMapping("reviewUpdate")
-	public void reviewUpdate() throws Exception{
-	      
+	public ModelAndView getReviewUpdate(ReviewVO reviewVO) throws Exception{
+	 
+		System.out.println("input num : "+reviewVO.getBoardNum());
+		
+		ModelAndView mv = new ModelAndView();
+		
+		// reviewVO 보내기
+		reviewVO = reviewService.reviewSelect(reviewVO);
+		mv.addObject("reviewVO", reviewVO);
+		
+		// reviewUpdate.jsp로 전달
+		mv.setViewName("review/reviewUpdate");
+		
+		return mv;
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-

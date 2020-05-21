@@ -34,6 +34,10 @@ public class ReviewService implements BoardService{
 		return reviewDAO.imgTatalList(marketVO);
 	}
 	
+	//boardNum으로 하나의 리뷰 조회
+	public ReviewVO reviewSelect(ReviewVO reviewVO) throws Exception {
+		return reviewDAO.reviewSelect(reviewVO);
+	}
 	
 	//한 계정이 등록한 리뷰목록 조회
 	public List<ReviewVO> myReviewList(long memberNum) throws Exception{

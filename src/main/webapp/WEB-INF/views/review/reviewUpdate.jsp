@@ -27,16 +27,17 @@
 					<span class="rl_rate_span">음식을 평가해주세요!</span>
 					<div class="rl_rating">
 						<!-- 기존 평점이 체크되어있어야함 -->
-						<input type="radio" name="rate">5점 <input type="radio"
-							name="rate">4점 <input type="radio" name="rate">3점
-						<input type="radio" name="rate">2점 <input type="radio"
-							name="rate">1점
+						<input type="radio" class="ratings" name="rate" title="5">5점 
+						<input type="radio" class="ratings" name="rate" title="4">4점 
+						<input type="radio" class="ratings" name="rate" title="3">3점
+						<input type="radio" class="ratings" name="rate" title="2">2점
+						<input type="radio" class="ratings" name="rate" title="1">1점
 					</div>
 				</div>
 				<div class="rl_review">
 					<strong class="rl_review_strong">리뷰를 작성해 주세요!</strong>
 					<!-- 기존 리뷰가 써있어야함 -->
-					<textarea class="rl_ta" name="reviewText"></textarea>
+					<textarea id="reviewText" class="rl_ta" name="reviewText"></textarea>
 					<div class="rl_div">
 						<input class="rl_file" type="file" id="rl_file1"> <span
 							class="rl_fileDel" id="rl_fileDel1">❌</span>
@@ -85,6 +86,29 @@
 					required : "리뷰를 작성해주세요!"
 				}
 			}
+		});
+		
+		// reviewVO 관련 handler
+		function reviewVOHandler() {
+			
+			// rating select
+			$('.ratings').each(function(index, item) {
+				
+				if($(this).attr("title") == ${reviewVO.rating}) {
+					
+					$(this).attr("checked", "checked");
+				}
+			});
+			
+			// textarea write
+			console.log(`${reviewVO.contents}`);
+			$('#reviewText').text(`${reviewVO.contents}`);
+		}
+		
+		// main (한번만 실행)
+		$(function() {
+			
+			reviewVOHandler();
 		});
 	</script>
 </body>
