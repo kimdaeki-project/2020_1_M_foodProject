@@ -5,16 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.food.project.orderOption.OrderOptionDAO;
-import com.food.project.orderOption.OrderOptionVO;
 
 @Service
 public class OrderedService {
 
 	@Autowired
 	private OrderedDAO orderedDAO;
-	@Autowired
-	private OrderOptionDAO orderOptionDAO;
 	
 	//주문 전체 조회 - SelectList (판매자ID)
 	public List<OrderedVO> orderedList(OrderedVO orderedVO) throws Exception{
@@ -34,16 +30,9 @@ public class OrderedService {
 	public int orderedInsert(OrderedVO orderedVO) throws Exception{
 		//주문번호 sequence 증가
 		long orderNum = orderedDAO.orderedCount();
-		orderedVO.setOrderNum(orderNum);
 
 		//주문등록
 		int result = orderedDAO.orderedInsert(orderedVO);
-		
-		//주문 옵션등록
-		OrderOptionVO orderOptionVO = new OrderOptionVO();
-		orderOptionVO.setOrderNum(orderNum);
-//		orderOptionVO.setOptionNum();
-		result = orderOptionDAO.orderOptionInsert(orderOptionVO);
 		
 		return result;
 	}

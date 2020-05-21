@@ -9,23 +9,27 @@
 		select ordered_seq.nextval from dual
 	</select>
 
-
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
-		select * from ordered where sellerID=#{sellerID}
+		SELECT * FROM ordered WHERE memberNum=#{memberNum}
 	</select>
 	
 	<select id="orderedSelect" parameterType="OrderedVO" resultType="OrderedVO">
-		select * from ordered where userID=#{userID}
+		SELECT * FROM ordered WHERE num=#{num}
 	</select>
 	
 	<insert id="orderedInsert" parameterType="OrderedVO">
-		insert into ordered values(#{orderNum},#{sellerID},#{userID},#{payType},null,#{count},#{menuNum},null)
+		INSERT INTO ordered VALUES(
+			#{num}, #{memberNum}, #{menuNum}, #{cateMenuOptions}, amount, null, #{merchant_uid}, 
+			#{pg}, #{pay_method}, #{cancleType}, #{cancleDetail}, #{isOrderChecked}, sysdate, null
+		)
 	</insert>
 	
 	<update id="orderedCancle" parameterType="OrderedVO">
-		update ordered set cancleType=#{cancleType} where userID=#{userID}
+		update ordered set cancleType=#{cancleType} where num=#{num}
 	</update>
 	
-	
+	<delete id="orderDelete" parameterType="OrderedVO">
+		DELETE FROM ordered WHERE num = #{num}
+	</delete>
 	
 </mapper>
