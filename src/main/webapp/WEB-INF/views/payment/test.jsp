@@ -26,9 +26,10 @@
         IMP.request_pay({
             //pg : 'kakaopay',
             //pay_method : 'card',
+            pg : 'html5_inicis',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : '결제테스트',
-        	amount : 1,
+        	amount : 100,	// 최소 100원이상(이니시스 기준)
         	buyer_email : 'iamport@siot.do',
         	buyer_name : '구매자',
         	buyer_tel : '010-1234-5678',
