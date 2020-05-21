@@ -115,16 +115,20 @@ public class ReviewController {
 	
 	//리뷰삭제(GET)
 	@GetMapping("reviewDelete")
-	@ResponseBody
-	public int reviewDelete(ReviewVO reviewVO) throws Exception{
+	public ModelAndView reviewDelete(ReviewVO reviewVO) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
 		int result = reviewService.boardDelete(reviewVO);
 		if(result > 0) {
-			System.out.println("삭제 성공");
+			System.out.println("리뷰 삭제 완료");
 		}else {
-			System.out.println("삭제실패");
+			System.out.println("리뷰 삭제 실패");
 		}
 		
-		return result;
+		mv.setViewName("redirect: ../member/memberPage");
+		
+		return mv;
 	}
 	
 	//리뷰수정(POST)
