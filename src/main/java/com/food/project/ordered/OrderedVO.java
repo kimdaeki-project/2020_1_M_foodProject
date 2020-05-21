@@ -1,51 +1,40 @@
 package com.food.project.ordered;
 
+import java.sql.Date;
+
 public class OrderedVO {
-	private long orderNum;
-	private String sellerID;
-	private String userID;
-	private int payType;
-	private String merchant_uid;
-	private int count;
+	
+	private long num;
+	private long memberNum;
+	private long marketNum;
 	private long menuNum;
-	private int cancleType;
-	
-	
-	public long getOrderNum() {
-		return orderNum;
+	private String cateMenuOptions;
+	private int	amount;
+    private String imp_uid;
+    private String merchant_uid; 
+    private String pg;
+    private String pay_method;
+    private Date createAt;
+    private Date deleteAt;
+    private String cancleReason;
+    
+	public long getNum() {
+		return num;
 	}
-	public void setOrderNum(long orderNum) {
-		this.orderNum = orderNum;
+	public void setNum(long num) {
+		this.num = num;
 	}
-	public String getSellerID() {
-		return sellerID;
+	public long getMemberNum() {
+		return memberNum;
 	}
-	public void setSellerID(String sellerID) {
-		this.sellerID = sellerID;
+	public void setMemberNum(long memberNum) {
+		this.memberNum = memberNum;
 	}
-	public String getUserID() {
-		return userID;
+	public long getMarketNum() {
+		return marketNum;
 	}
-	public void setUserID(String userID) {
-		this.userID = userID;
-	}
-	public int getPayType() {
-		return payType;
-	}
-	public void setPayType(int payType) {
-		this.payType = payType;
-	}
-	public String getMerchant_uid() {
-		return merchant_uid;
-	}
-	public void setMerchant_uid(String merchant_uid) {
-		this.merchant_uid = merchant_uid;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
+	public void setMarketNum(long marketNum) {
+		this.marketNum = marketNum;
 	}
 	public long getMenuNum() {
 		return menuNum;
@@ -53,11 +42,58 @@ public class OrderedVO {
 	public void setMenuNum(long menuNum) {
 		this.menuNum = menuNum;
 	}
-	public int getCancleType() {
-		return cancleType;
+	public String getCateMenuOptions() {
+		return cateMenuOptions;
 	}
-	public void setCancleType(int cancleType) {
-		this.cancleType = cancleType;
+	public void setCateMenuOptions(String cateMenuOptions) {
+		this.cateMenuOptions = cateMenuOptions;
 	}
-	
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
+	public String getImp_uid() {
+		return imp_uid;
+	}
+	public void setImp_uid(String imp_uid) {
+		this.imp_uid = imp_uid;
+	}
+	public String getMerchant_uid() {
+		return merchant_uid;
+	}
+	public void setMerchant_uid(String merchant_uid) {
+		this.merchant_uid = merchant_uid;
+	}
+	public String getPg() {
+		return pg;
+	}
+	public void setPg(String pg) {
+		this.pg = pg;
+	}
+	public String getPay_method() {
+		return pay_method;
+	}
+	public void setPay_method(String pay_method) {
+		this.pay_method = pay_method;
+	}
+	public Date getCreateAt() {
+		return createAt;
+	}
+	public void setCreateAt(Date createAt) {
+		this.createAt = createAt;
+	}
+	public Date getDeleteAt() {
+		return deleteAt;
+	}
+	public void setDeleteAt(Date deleteAt) {
+		this.deleteAt = deleteAt;
+	}
+	public String getCancleReason() {
+		return cancleReason;
+	}
+	public void setCancleReason(String cancleReason) {
+		this.cancleReason = cancleReason;
+	}
 }
