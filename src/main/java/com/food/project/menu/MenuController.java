@@ -212,7 +212,7 @@ public class MenuController {
 	}
 	
 	@GetMapping("menuSelect")
-	public ModelAndView menuSelect(MenuVO menuVO) throws Exception {
+	public ModelAndView menuSelect(MenuVO menuVO,long marketNum) throws Exception {
 		
 //		System.out.println("menuSelect");
 		
@@ -227,22 +227,24 @@ public class MenuController {
 		//menu의 num값을 이용해 categrory목록 조회
 		categoryVO.setMenuNum(menuVO.getNum());
 		
-		System.out.println("cateMenuNum : "+categoryVO.getMenuNum());
+//		System.out.println("cateMenuNum : "+categoryVO.getMenuNum());
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
 
 		
-		System.out.println("size : "+cateList.size());
+//		System.out.println("size : "+cateList.size());
 		for (CategoryVO vo : cateList) {
 			
 			List<MenuOptionVO> moList = vo.getMenuOptionVOs();
 			for (MenuOptionVO moVO : moList) {
-				System.out.println(moVO.getName());
-				System.out.println(moVO.getPrice());
+//				System.out.println(moVO.getName());
+//				System.out.println(moVO.getPrice());
 			}
 		}
 				
 		mv.addObject("menuVO", menuVO);
 		mv.addObject("cateList", cateList);
+		mv.addObject("marketNum", marketNum);
+		
 		
 		mv.setViewName("menu/menuSelect");
 			

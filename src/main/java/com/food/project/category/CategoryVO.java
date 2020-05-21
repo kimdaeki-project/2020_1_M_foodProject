@@ -18,8 +18,7 @@ public class CategoryVO {
 	public void setMenuOptionVOs(List<MenuOptionVO> menuOptionVOs) {
 		this.menuOptionVOs = menuOptionVOs;
 	}
-	
-	
+
 	
 	
 	public long getNum() {
