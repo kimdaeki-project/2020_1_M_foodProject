@@ -45,7 +45,7 @@
 	</div>
 
 	<!-- 장바구니 모달창 세번째^^!!! -->
-	<div class="modal-cart">
+	<div class="modal-cart" style="display: none;">
 		<div class="modal-cart-body">
 			<div class="cart-body">
 				<article class="cart">
