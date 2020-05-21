@@ -8,16 +8,59 @@ public class OrderedVO {
 	private long memberNum;
 	private long marketNum;
 	private long menuNum;
+	private String marketName;
+	private String menuName;
+	private String menuThumbImg;
 	private String cateMenuOptions;
 	private int	amount;
     private String imp_uid;
     private String merchant_uid; 
     private String pg;
     private String pay_method;
+    private int cancleType;
+    private String cancleDetail;
+    private int isOrderChecked;
     private Date createAt;
     private Date deleteAt;
-    private String cancleReason;
     
+    
+    
+	public String getMarketName() {
+		return marketName;
+	}
+	public void setMarketName(String marketName) {
+		this.marketName = marketName;
+	}
+	public String getMenuName() {
+		return menuName;
+	}
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+	public String getMenuThumbImg() {
+		return menuThumbImg;
+	}
+	public void setMenuThumbImg(String menuThumbImg) {
+		this.menuThumbImg = menuThumbImg;
+	}
+	public int getCancleType() {
+		return cancleType;
+	}
+	public void setCancleType(int cancleType) {
+		this.cancleType = cancleType;
+	}
+	public String getCancleDetail() {
+		return cancleDetail;
+	}
+	public void setCancleDetail(String cancleDetail) {
+		this.cancleDetail = cancleDetail;
+	}
+	public int getIsOrderChecked() {
+		return isOrderChecked;
+	}
+	public void setIsOrderChecked(int isOrderChecked) {
+		this.isOrderChecked = isOrderChecked;
+	}
 	public long getNum() {
 		return num;
 	}
@@ -89,11 +132,5 @@ public class OrderedVO {
 	}
 	public void setDeleteAt(Date deleteAt) {
 		this.deleteAt = deleteAt;
-	}
-	public String getCancleReason() {
-		return cancleReason;
-	}
-	public void setCancleReason(String cancleReason) {
-		this.cancleReason = cancleReason;
 	}
 }

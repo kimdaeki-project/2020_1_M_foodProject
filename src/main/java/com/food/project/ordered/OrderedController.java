@@ -7,28 +7,87 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/ordered/**")
 public class OrderedController {
-
+	
 	@Autowired
 	private OrderedService orderedService;
+	
+	
+	
+	//장바구니에 값 추가
+	@PostMapping("cartAdd")
+	@ResponseBody
+	public int cartAdd(OrderedVO orderedVO,String menuPrice,@RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
+		System.out.println("memberNum : "+orderedVO.getMemberNum());
+		System.out.println("marketNum : "+orderedVO.getMarketNum());
+		System.out.println("menuNum : "+orderedVO.getMenuNum());
+		System.out.println("menuPrice : "+menuPrice);
+		
+		String cateMenuOptions = "";
+		if(optionNum == null) {
+			cateMenuOptions = null;
+		}
+		
+		int amount = Integer.parseInt(menuPrice);
+		
+		for (String str : optionNum) {
+			if(str.equals("null"))
+				break;
+			
+			cateMenuOptions = cateMenuOptions + str +"/";
+			
+			String[] price = str.split(" ");
+			amount += Integer.parseInt(price[1]);
+		}
+		
+		orderedVO.setCateMenuOptions(cateMenuOptions);
+		orderedVO.setAmount(amount);
+		
+		System.out.println("catemenuOptions : "+ cateMenuOptions);
+		System.out.println("amount : "+amount);
+		
+		int result = orderedService.orderedInsert(orderedVO);
+		if(result>0) {
+			System.out.println("장바구니 등록성공");
+		}else {
+			System.out.println("장바구니 등록실패");
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
 
 	//주문 전체 조회 - SelectList (판매자ID) (GET)
 	@GetMapping("orderedList")
 	public ModelAndView orderedList(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		List<OrderedVO> list = orderedService.orderedList(orderedVO);
-		//형꺼 옵션 값 줘~
+		System.out.println("orderList");
+		System.out.println("memberNum : "+orderedVO.getMemberNum());
 		
-		if(list != null) {
-			mv.addObject("orderedList", list);
-			//여기도 추가
-			mv.setViewName("");
+		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
+		
+		int totalAmount = 0;
+		for (OrderedVO vo : orderedList) {
+			totalAmount += vo.getAmount();
 		}
+		
+		int cartSize = orderedList.size();
+		
+		mv.addObject("orderedList", orderedList);
+		mv.addObject("totalAmount", totalAmount);
+		mv.addObject("cartSize", cartSize);
+		
+		mv.setViewName("templates/cartAjax");
 		
 		return mv;
 	}
@@ -38,14 +97,6 @@ public class OrderedController {
 	public ModelAndView orderedSelect(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		orderedVO = orderedService.orderedSelect(orderedVO);
-		//옵션 값 불러와야댐
-		
-		if(orderedVO != null) {
-			mv.addObject("orderedVO", orderedVO);
-			//여기도 추가
-			mv.setViewName("");
-		}
 		
 		return mv;
 	}
@@ -58,12 +109,6 @@ public class OrderedController {
 	public ModelAndView orderedInsert(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		int result = orderedService.orderedInsert(orderedVO);
-		
-		if(result > 0) {
-			mv.addObject("reseult", result);
-			mv.setViewName("");
-		}
 		
 		return mv;
 	}
@@ -77,11 +122,7 @@ public class OrderedController {
 	public ModelAndView orderedCancle(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		int result = orderedService.orderedCancle(orderedVO);
-		if(result > 0) {
-			mv.addObject("result", result);
-			mv.setViewName("");
-		}
+		
 		
 		return mv;
 	}
