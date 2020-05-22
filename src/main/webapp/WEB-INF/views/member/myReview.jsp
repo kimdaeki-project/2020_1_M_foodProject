@@ -143,7 +143,7 @@ a {
 							<img class="rev_item_img" alt="" src="${pageContext.request.contextPath}/resources/img/food2.png">
 							<div class="rev_item_div">
 								<strong class="rev_item_strong">${reviewVO.boardNum}</strong> 
-								<span class="rev_item_span">상품정보</span>
+								<span class="rev_item_span">${}</span>
 							</div>
 						</div>
 						<div class="rev_review">
@@ -180,7 +180,6 @@ a {
 
 	//수정하기 버튼 누르면 수정하기
 	$(".rev_mod").click(function() {
-		
 		location.href="../review/reviewUpdate?boardNum="+$(this).attr("title");
 	});
 	

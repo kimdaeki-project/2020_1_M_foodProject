@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>주문하기</title>
-<link rel="stylesheet" href="../resources/css/board/order.css">
+<link rel="stylesheet" href="../resources/css/market/order.css">
 </head>
 <body>
 <div class="boardOrder_order">
