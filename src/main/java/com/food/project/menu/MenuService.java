@@ -91,15 +91,11 @@ public class MenuService {
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
+		
 		System.out.println("path : "+path);
 		
-		
-		//1.회원정보 수정
-		int result = menuDAO.menuUpdate(menuVO);
-		System.out.println("menu SErvice Result : "+result);		
-		
-		
-		System.out.println("size: "+files.length);
+		int result = 0;
 		
 		//파일(이미지) 수정
 		if(files.length != 0) {
@@ -108,6 +104,8 @@ public class MenuService {
 				String fileName = fileSaver.saveByUtils(file, path);
 				//2.DB등록
 				FileInfoVO fileInfoVO = new FileInfoVO();
+				long num = fileInfoDAO.fileCount();
+				fileInfoVO.setNum(num);
 				fileInfoVO.setFileName(fileName);
 				fileInfoVO.setOriName(file.getOriginalFilename());
 				fileInfoVO.setKind(3); //menu
@@ -115,10 +113,16 @@ public class MenuService {
 				//reviewNum, marketNum은 입력안해서 null값 부여
 						
 				result = fileInfoDAO.fileInfoInsert(fileInfoVO);
-						
+				
+				System.out.println("파일 저장결과 : "+result);
 				if(result<1) {
 					throw new Exception();
 				}
+				
+				//1.회원정보 수정
+				menuVO.setThumbImg(fileName);
+				result = menuDAO.menuUpdate(menuVO);
+				System.out.println("menu SErvice Result : "+result);
 			}
 		}
 		

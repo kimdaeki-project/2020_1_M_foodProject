@@ -36,12 +36,12 @@ public class CategoryService {
 	// 카테고리 수정
 	public int categoryUpdate(CategoryVO categoryVO) {
 
-		return categoryUpdate(categoryVO);
+		return categoryDAO.categoryUpdate(categoryVO);
 	}
 
 	// 카테고리 삭제
-	public int categoryDelete(CategoryVO categoryVO) {
+	public int categoryDelete(long menuNum) {
 
-		return categoryDelete(categoryVO);
+		return categoryDAO.categoryDelete(menuNum);
 	}
 }

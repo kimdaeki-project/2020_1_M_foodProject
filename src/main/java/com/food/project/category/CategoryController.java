@@ -78,16 +78,16 @@ public class CategoryController {
 		return mv;
 	}
 
-	// 카테고리 삭제
-	@GetMapping("categoryDelete")
-	public ModelAndView categoryDelete(CategoryVO categoryVO) {
-
-		ModelAndView mv = new ModelAndView();
-		
-		int result = categoryService.categoryDelete(categoryVO);
-		
-		mv.setViewName("categoryList");
-		
-		return mv;
-	}
+//	// 카테고리 삭제
+//	@GetMapping("categoryDelete")
+//	public ModelAndView categoryDelete(CategoryVO categoryVO) {
+//
+//		ModelAndView mv = new ModelAndView();
+//		
+//		int result = categoryService.categoryDelete(categoryVO);
+//		
+//		mv.setViewName("categoryList");
+//		
+//		return mv;
+//	}
 }

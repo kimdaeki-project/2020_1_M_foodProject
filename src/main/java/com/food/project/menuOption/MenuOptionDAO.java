@@ -44,8 +44,8 @@ public class MenuOptionDAO {
 	}
 	
 	// 메뉴옵션 삭제
-	public int menuOptionDelete(MenuOptionVO menuOptionVO) {
+	public int menuOptionDelete(long categoryNum) {
 		
-		return sqlSession.delete(NAMESPACE+"menuOptionDelete", menuOptionVO);
+		return sqlSession.delete(NAMESPACE+"menuOptionDelete", categoryNum);
 	}
 }

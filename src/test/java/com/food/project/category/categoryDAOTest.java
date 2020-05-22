@@ -62,12 +62,12 @@ public class categoryDAOTest extends AbstractTestCase {
 //		assertEquals(1, result);
 //	}
 	
-	@Test
-	public void categoryDelete() {
-		
-		CategoryVO categoryVO = new CategoryVO();
-		categoryVO.setNum(2);
-		int result = categoryDAO.categoryDelete(categoryVO);
-		assertEquals(1, result);
-	}
+//	@Test
+//	public void categoryDelete() {
+//		
+//		CategoryVO categoryVO = new CategoryVO();
+//		categoryVO.setNum(2);
+//		int result = categoryDAO.categoryDelete(categoryVO);
+//		assertEquals(1, result);
+//	}
 }

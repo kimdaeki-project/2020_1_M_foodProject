@@ -46,7 +46,7 @@
 		UPDATE category SET name=#{name} WHERE num=#{num}
 	</update>
 	
-	<delete id="categoryDelete" parameterType="CategoryVO">
-		DELETE FROM category WHERE num = #{num}
+	<delete id="categoryDelete" parameterType="Long">
+		DELETE FROM category WHERE menuNum = #{menuNum}
 	</delete>
 </mapper>

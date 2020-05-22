@@ -22,4 +22,8 @@ public class MenuOptionService {
 	public long menuOptionCount() throws Exception{
 		return menuOptionDAO.menuOptionCount();
 	}
+	
+	public int menuOptionDelete(long categoryNum) throws Exception{
+		return menuOptionDAO.menuOptionDelete(categoryNum);
+	}
 }

@@ -42,8 +42,8 @@ public class CategoryDAO {
 	}
 	
 	// 카테고리 삭제
-	public int categoryDelete(CategoryVO categoryVO) {
+	public int categoryDelete(long menuNum) {
 		
-		return sqlSession.delete(NAMESPACE+"categoryDelete", categoryVO);
+		return sqlSession.delete(NAMESPACE+"categoryDelete", menuNum);
 	}
 }
