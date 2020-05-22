@@ -213,7 +213,7 @@ input[type="file" i]{
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
     <script type="text/javascript">
-        
+    
         //validate 유효성 검사
         $("#mj_join").validate({
             rules:{

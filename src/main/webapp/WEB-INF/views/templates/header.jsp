@@ -72,13 +72,18 @@
 	});
 
 	//전체 삭제 버튼 누르면 장바구니 내용 삭제
-	
 	$(".cart-body").on("click",".btn-delAll",function() {
 		$.get("${pageContext.request.contextPath}/ordered/cartDeleteAll?memberNum=${memberVO.num}",function(result){
 			$(".cart-body").html(result);
 			
 		});
 		
+	});
+	
+	//상품 더 담기 누르면 메뉴로 이동	
+	$(".cart-body").on("click",".nav-more", function() {
+		console.log('click');
+		location.href = '${pageContext.request.contextPath}/market/marketList';
 	});
 
 	//주문하기 창 누르면 이동

@@ -111,6 +111,7 @@ a {
 	position: absolute;
 	top: 13px;
 	right: 0;
+	cursor: pointer;
 }
 
 .rev_mod {
@@ -124,10 +125,10 @@ a {
 	line-height: 26px;
 	color: #555555;
 	text-align: center;
+	cursor: pointer;
 }
 </style>
 <title>나의 리뷰</title>
-</head>
 
 <body style="width: 100%">
 	<div style="margin-left: 50px;">

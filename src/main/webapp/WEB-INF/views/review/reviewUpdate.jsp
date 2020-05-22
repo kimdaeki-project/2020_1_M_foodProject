@@ -40,8 +40,8 @@
 					<!-- 기존 리뷰가 써있어야함 -->
 					<textarea id="reviewText" class="rl_ta" name="reviewText"></textarea>
 					<div class="rl_div">
-						<input class="rl_file" type="file" id="rl_file2"> 
-						<span class="rl_fileDel" id="rl_fileDel2">❌</span>
+						<input class="rl_file" type="file" id="rl_file2"> <span
+							class="rl_fileDel" id="rl_fileDel2">❌</span>
 					</div>
 				</div>
 				<div class="rl_send">

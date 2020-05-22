@@ -203,6 +203,21 @@ input[type="file" i] {
 	margin-left: 10px;
 }
 
+.del{
+	display: initial;
+	border: none;
+	height: 30px;
+	cursor: pointer;
+	text-align: center;
+	font-size: 15px;
+	outline: none;
+	width: 110px;
+	color: #ffffff;
+	background-color: #fbbc04;
+	margin-left: 10px;
+}
+
+
 #btn-sub {
 	display: block;
 	border: none;
@@ -300,7 +315,9 @@ input[type="file" i] {
 						var cateVal = $("#input").val();
 						var c_name = '<div class="cb" title="1">'
 								+ cateVal
-								+ '<input type="button" class="add" value="옵션 추가" id="cateName'+i+'" name="cate_name_'+i+'" title="'+i+'"></div>';
+								+ '<input type="button" class="add" value="옵션 추가" id="cateName'+i+'" name="cate_name_'+i+'" title="'+i+'">'
+								+ '<input type="button" class="del" value="카테고리 삭제">'
+								+ '</div>';
 						var c_hidden = '<input type="hidden" value="'+cateVal+'" name="cate_name_'+i+'">';
 
 						$("#category_box").append(c_name);
@@ -321,6 +338,11 @@ input[type="file" i] {
 
 	//옵션삭제 버튼을 누르면 옵션삭제 (O)
 	$("#category_box").on('click', '.delO', function() {
+		$(this).parent().remove();
+	});
+	
+	//카테고리 삭제 버튼 누르면 그 카테고리 박스 삭제
+	$("#category_box").on('click', '.del', function() {
 		$(this).parent().remove();
 	});
 
