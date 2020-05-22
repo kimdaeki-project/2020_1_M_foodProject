@@ -31,8 +31,7 @@ public class OrderedService {
 		//장바구니 기본값 설정
 		orderedVO.setNum(orderNum);
 		orderedVO.setImp_uid(null);
-		orderedVO.setMerchant_uid("Fusulan_Truck_"+orderNum);
-		System.out.println("Merchant_uid : "+orderNum);
+		orderedVO.setMerchant_uid(null);
 		orderedVO.setPg(null);
 		orderedVO.setPay_method(null);
 		orderedVO.setCancleType(2);

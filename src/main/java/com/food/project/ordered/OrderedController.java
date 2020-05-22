@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,8 @@ public class OrderedController {
 	@Autowired
 	private OrderedService orderedService;
 	
-	
+	@Value("${iamport_id}")
+	private String iamport_id;
 	
 	//장바구니에 값 추가
 	@PostMapping("cartAdd")
@@ -154,9 +156,9 @@ public class OrderedController {
 	@GetMapping("orderPage")
 	public ModelAndView orderPage(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
+
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
-		
+	
 		int totalAmount = 0;
 		for (OrderedVO vo : orderedList) {
 			totalAmount += vo.getAmount();
@@ -167,6 +169,7 @@ public class OrderedController {
 		mv.addObject("orderedList", orderedList);
 		mv.addObject("totalAmount", totalAmount);
 		mv.addObject("cartSize", cartSize);
+		mv.addObject("iamport_id", iamport_id);
 		
 		mv.setViewName("order/orderPage");
 		return mv;

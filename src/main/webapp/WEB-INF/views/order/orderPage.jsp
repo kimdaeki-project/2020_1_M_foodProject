@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>주문하기</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <link rel="stylesheet" href="../resources/css/order/orderPage.css">
 </head>
-<body>
-          	
+<body>        	
 	<%@ include file="../templates/header.jsp"%>
 	<div class="op_body">
 		<h2 class="op_body_name">주문/결제하기</h2>
@@ -40,9 +41,7 @@
 				</tbody>
 			</table>
 		</div>
-		
-<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-		
+			
 		<!-- 주문자 -->
 		<div class="op_orderInfo">
 			<div class="op_section">
@@ -51,30 +50,16 @@
 					<h3>주문자 정보</h3>
 					<dl class="op_op_dl">
 						<dt>결제자</dt>
-						<dd>이름</dd>
+						<dd>${sessionScope.memberVO.name}</dd>
 					</dl>
 					<dl class="op_op_dl">
 						<dt>이메일</dt>
-						<dd>ex@example.com</dd>
+						<dd>${sessionScope.memberVO.email}</dd>
 					</dl>
 					<dl class="op_op_dl">
 						<dt>연락처</dt>
-						<dd>01012345678</dd>
+						<dd>${sessionScope.memberVO.phone}</dd>
 					</dl>
-				</div>
-				<!-- 수령자 정보 -->
-				<div class="op_recePerson">
-					<header class="op_rp_header">
-						<h3>수령인 정보</h3>
-						<label for="agree">
-							<input type="checkbox" id="agree">
-							주문자 정보와 같습니다
-						</label>
-					</header>
-					<fieldset class="op_rp_field">
-						<input type="text" placeholder="수령인 이름을 입력해주세요."> 
-						<input type="text" placeholder="수령인 전화번호를 입력해주세요.">
-					</fieldset>
 				</div>
 			</div>
 		</div>
@@ -120,6 +105,9 @@
 	<%@ include file="../templates/footer.jsp"%>
 
 	<script type="text/javascript">
+		//========================
+		// 콤마 찍기
+		//========================
 		// 천단위로 숫자에 콤마 찍기
 		function moneyFormat(money) {
 			return money.toLocaleString();
@@ -134,8 +122,67 @@
 			// string to number
 			var amount = $(this).text() * 1;
 			$(this).text(moneyFormat(amount)+'원');
-		}) 
-			
-			
+		});
 		
+		//=========================
+		// 결제 모듈 관련
+		//=========================
+		// 핸드폰 번호 파싱해서 '-' 붙이기
+		function rebuildPhoneNum() {
+			
+			
+		}
+			
+		// 결제
+		function payment() {
+				$(function(){
+			
+		        var IMP = window.IMP; // 생략가능
+		        IMP.init(`imp87607408`); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		        var msg;
+		        
+		        IMP.request_pay({
+		            //pg : 'kakaopay',
+		            //pay_method : 'card',
+		            pg : 'html5_inicis',
+		            merchant_uid : 'Fusulan_Truck_' + new Date().getTime(),
+		            name : '결제테스트',
+		        	amount : 1,	// 최소 100원이상(이니시스 기준)
+		        	buyer_email : 'iamport@siot.do',
+		        	buyer_name : '구매자',
+		        	buyer_tel : '010-1234-5678',
+		        	buyer_addr : '서울특별시 강남구 삼성동',
+		        	buyer_postcode : '123-456'
+		        }, function(rsp) {
+		        	//console.log(rsp);
+		            if ( rsp.success ) {
+		                var msg = '결제가 완료되었습니다.';
+		                msg += '고유ID : ' + rsp.imp_uid;
+		                msg += '상점 거래ID : ' + rsp.merchant_uid;
+		                msg += '결제 금액 : ' + rsp.paid_amount;
+		                msg += '카드 승인번호 : ' + rsp.apply_num;
+		            } else {
+		                var msg = '결제에 실패하였습니다.';
+		                msg += '에러내용 : ' + rsp.error_msg;
+		            }
+					
+		            // return 받은 값들 백단으로 보내서 저장해야함 (get? post?)
+		            
+		            // redirect 마이페이지 페이지
+		        });
+		    });
+		}
+		
+		function paymentTest() {
+			
+			var iamport_id = `${iamport_id}`;
+			console.log(typeof iamport_id);
+			console.log(iamport_id);
+			
+			console.log();	// name(주문 고유 넘버?)
+			//amount : 1,	// 최소 100원이상(이니시스 기준)
+        	//buyer_tel : // 구매자 핸드폰 '010-1234-5678', (필수값)
+		}
+		
+		paymentTest();
 	</script>
