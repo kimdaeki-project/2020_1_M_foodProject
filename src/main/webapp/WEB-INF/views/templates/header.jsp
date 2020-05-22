@@ -48,7 +48,50 @@
 	<div class="modal-cart" style="display: none;">
 		<div class="modal-cart-body">
 			<div class="cart-body">
-
+				<article class="cart">
+					<header class="cart-header">
+						<nav class="ch-nav" id="m_close">
+							<button>✖</button>
+						</nav>
+						<h2>장바구니</h2>
+					</header>
+					<div class="cart-div1">
+						<span>프코스팟배송 | 무료배송</span>
+					</div>
+					<div class="cart-div2">
+						<div class="cart-selectAll">
+							<label></label>
+							<nav>
+								<button class="btn-delAll">
+									<span>전체 삭제</span>
+								</button>
+							</nav>
+						</div>
+						<hr>
+						<div class="cart-index">
+							
+						</div>
+					</div>
+					<nav class="cart-nav">
+						<div class="cart-result">
+							<hr>
+							<div class="cart-result-body">
+								<dl class="cart-dl">
+									<dt>갯수</dt>
+									<dd>0개</dd>
+								</dl>
+								<dl class="cart-dl">
+									<dt>가격</dt>
+									<dd>0원</dd>
+								</dl>
+							</div>
+							<div class="nav-button">
+								<button class="nav-more">상품 더 담기</button>
+								<button class="nav-order">주문하기</button>
+							</div>
+						</div>
+					</nav>
+				</article>
 			</div>
 		</div>
 	</div>
@@ -58,7 +101,6 @@
 <script type="text/javascript">
 	//장바구니 누르면 옆에 모달레이어로 뜨기 / X버튼 누르면 닫히기
 	$(".fa-shopping-cart").click(function() {
-		
 		$.get("${pageContext.request.contextPath}/ordered/orderedList?memberNum=${memberVO.num}",function(result){
 			$(".cart-body").html(result);
 		});
@@ -66,6 +108,8 @@
 		
 		$(".modal-cart").css('display', 'block');
 	});
+	
+	
 
 	$(".cart-body").on("click","#m_close",function() {
 		$(".modal-cart").css('display', 'none');

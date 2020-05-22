@@ -69,7 +69,6 @@ public class OrderedController {
 	public ModelAndView orderedList(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("orderList");
 		System.out.println("memberNum : "+orderedVO.getMemberNum());
 		
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
