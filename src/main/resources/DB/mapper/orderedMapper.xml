@@ -37,6 +37,10 @@
 		update ordered set cancleType=#{cancleType} where num=#{num}
 	</update>
 	
+	<delete id="cartDeleteAll" parameterType="OrderedVO">
+		delete from ordered where memberNum=#{memberNum}
+	</delete>
+	
 	<delete id="orderDelete" parameterType="OrderedVO">
 		DELETE FROM ordered WHERE num = #{num}
 	</delete>

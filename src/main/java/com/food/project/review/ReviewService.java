@@ -46,9 +46,13 @@ public class ReviewService implements BoardService{
 	
 	
 	//한 마켓의 총 평점 계산
-	public double marketAvg(long marketNum) throws Exception{
+	public Double marketAvg(long marketNum) throws Exception{
 		
-		double avg = reviewDAO.marketAvg(marketNum);
+		Double avg = reviewDAO.marketAvg(marketNum);
+		if(avg == null) {
+			avg = 0.0;
+		}
+		
 		System.out.println("avg: " +avg);
 		return avg;
 	}

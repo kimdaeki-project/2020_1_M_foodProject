@@ -118,28 +118,38 @@ public class MarketController {
 		//이미지가 존재하는 리뷰의 전체 목록 조회
 		List<ReviewVO> totalImageList = reviewService.imgTatalList(marketVO);
 		
+		
 		//리뷰																				/////////////
 		pager.setMarketNum(marketVO.getNum());
 		List<BoardVO> reviewList = reviewService.boardList(pager);
+		if(reviewList != null) {
+			System.out.println("not null");
+		}else {
+			System.out.println("null");
+		}
+		
 		
 		//마켓의 전체 평균 값 조회
+		System.out.println("market Num : "+marketVO.getNum());
 		double marketRate = reviewService.marketAvg(marketVO.getNum()); 
 		System.out.println(marketRate);
-		
+
 		//전체 리뷰개수
 		int totalReview = reviewService.marketReviewCount(marketVO.getNum());
+
+		mv.addObject("reviewList", reviewList);
+		mv.addObject("marketRate", marketRate);
+		mv.addObject("totalReview", totalReview);
+			
+		
 		
 		//파일(이미지)
 		mv.addObject("menuList", MemuList);
 		mv.addObject("marketVO", marketVO);
 		mv.addObject("memberVO", memberVO);
-		mv.addObject("reviewList", reviewList);
 		mv.addObject("pager", pager);
 		
-		mv.addObject("marketRate", marketRate);
-		mv.addObject("totalReview", totalReview);
 		mv.addObject("totalImageList",totalImageList);
-		
 		mv.setViewName("market/marketSelect");
 		return mv;
 	}

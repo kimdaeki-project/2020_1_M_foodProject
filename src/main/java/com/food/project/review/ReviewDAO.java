@@ -36,7 +36,7 @@ public class ReviewDAO implements BoardDAO{
 	}
 	
 	//한 마켓의 총 평점 계산
-	public double marketAvg(long marketNum) throws Exception{
+	public Double marketAvg(long marketNum) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"marketAvg", marketNum);
 	}
 	

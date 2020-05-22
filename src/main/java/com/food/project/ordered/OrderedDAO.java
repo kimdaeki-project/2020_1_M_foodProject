@@ -13,6 +13,7 @@ public class OrderedDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.food.project.ordered.OrderedDAO.";
 	
+	
 	//주문 시퀀스 증가
 	public long orderedCount() throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"orderedCount");
@@ -31,6 +32,11 @@ public class OrderedDAO {
 	//주문 등록 - 유저ID
 	public int orderedInsert(OrderedVO orderedVO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"orderedInsert", orderedVO);
+	}
+	
+	//장바구니 목록 전체 삭제(memberNum)
+	public int cartDeleteAll(OrderedVO orderedVO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"cartDeleteAll",orderedVO);
 	}
 	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)

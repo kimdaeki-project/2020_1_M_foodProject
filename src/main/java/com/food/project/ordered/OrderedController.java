@@ -63,8 +63,6 @@ public class OrderedController {
 	}
 	
 	
-	
-	
 
 	//주문 전체 조회 - SelectList (판매자ID) (GET)
 	@GetMapping("orderedList")
@@ -91,6 +89,28 @@ public class OrderedController {
 		
 		return mv;
 	}
+	
+	//장바구니 전체목록 삭제(memberNum)
+	@GetMapping("cartDeleteAll")
+	public ModelAndView cartDeleteAll(OrderedVO orderedVO) throws Exception{
+		System.out.println("cartDeleteAll");
+		
+		ModelAndView mv = new ModelAndView();
+		
+		int result = orderedService.cartDeleteAll(orderedVO);
+		if(result>0) {
+			mv.addObject("orderedList", null);
+			mv.addObject("totalAmount", 0);
+			mv.addObject("cartSize", 0);
+			
+			mv.setViewName("templates/cartAjax");
+		}
+		
+		return mv;
+	}
+	
+	
+	
 	
 	//주문 조회 - SelectOne (유저ID or 판매자ID) (GET)
 	@GetMapping("orderedSelect")
