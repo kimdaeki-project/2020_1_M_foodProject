@@ -78,7 +78,7 @@ input[type=radio].ml_radio{
 	border: 0;
 }
 
-#minus{
+.minus{
 	font-size: 15px;
 	background-color: #fff;
 	color: #3d3d3d;
@@ -91,7 +91,7 @@ input[type=radio].ml_radio{
 	z-index: 1;
 }
 
-#plus{
+.plus{
 	font-size: 15px;
 	color: #3d3d3d;
 	background-color: #fff;
@@ -102,7 +102,7 @@ input[type=radio].ml_radio{
 	margin: 0;
 }
 
-#quantity{
+.quantity{
 	margin: 0 -5px;
 	font-size: 15px;
 	color: #3d3d3d;
