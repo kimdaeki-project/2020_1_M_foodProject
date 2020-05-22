@@ -55,8 +55,11 @@
                
                <c:if test="${memberVO.isFoodTruck eq '1'}">
                <!-- 트럭 주문 들어온 내역 -->
-                  <li id="orderList" class="mp_myInfoNav_li">
+                  <li id="marketOrder" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">주문 리스트</a>
+               <!-- 테스트 -->
+                  <li id="marketMenu" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">테스트</a>
                </c:if>
                
                
@@ -170,8 +173,16 @@
 			});
 		});
 		
+		//테스트
+		$('#marketMenu').click(function() {
+			$.get("./marketMenu", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
 		//판매자에게 들어온 주문들
-		$('#orderList').click(function() {
+		$('#marketOrder').click(function() {
 			$.get("./marketOrder", function(result) {
 				
 				$('.mp_box').empty();
@@ -213,7 +224,7 @@
 				$('.mp_box').append(result);
 			});
 		});
-		
+
 		//메뉴 카테고리 추가
 		$('#menuAdd').click(function() {
 			$.get("../menu/menuAdd", function(result) {
@@ -221,7 +232,6 @@
 				$('.mp_box').append(result);
 			});
 		});
-		
 		
 		//메뉴 카테고리 수정
 		$('#menuUpdate').click(function() {

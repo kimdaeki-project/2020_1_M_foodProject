@@ -28,11 +28,18 @@
 						<c:forEach var="categoryVO" items="${cateList}" >
 							<dt style="color: #3d3d3d;">${categoryVO.name}</dt>
 								<c:forEach var="vo" items="${categoryVO.menuOptionVOs}">
-									<dd>
-										<label class="ml_opLabel">
-										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">${vo.name} ${vo.price}</label>
-									</dd>
-								</c:forEach>
+								<dd style="display: flex; justify-content: space-between; margin-top: 5px;">
+									<label class="ml_opLabel"> <input class="option_num"
+										type="checkbox" name="test1" value="${vo.name} ${vo.price}">${vo.name}
+										${vo.price}
+									</label>
+									<div style="padding-right: 30px;">
+										<input type="button" id="minus" value="ー">
+										<input type="text" value="1" id="quantity">
+										<input type="button" id="plus" value="+">
+									</div>
+								</dd>
+							</c:forEach>
 							<nav></nav>
 						</c:forEach>
 					</dl>
@@ -54,6 +61,25 @@
 
 	<script type="text/javascript">
 	
+		var quantity = $("#quantity").val();
+	
+		//수량조절
+		$("#plus").click(function() {
+			quantity++;	
+			$("#quantity").val(quantity);
+			console.log(quantity);
+		});
+		
+		$("#minus").click(function() {			
+			quantity--;
+			if (quantity <= 1) {
+				quantity=1;
+			}
+			$("#quantity").val(quantity);
+			console.log(quantity);
+		});
+
+		//로그인
 		$("#ml_order").click(function() {
 			location.href="${pageContext.request.contextPath}/ordered/orderPage";
 		});
@@ -66,8 +92,6 @@
 			});
 			
 		});
-		
-		
 			
 		//장바구니를 누르면 메뉴(옵션포함)추가
 		$("#ml_cart").click(function() {
@@ -105,9 +129,7 @@
 					success:function(result){
 						alert(result);
 					}
-				});
-				
-			
+				});			
 		});
 		
 		$("#ml_order").click(function() {
