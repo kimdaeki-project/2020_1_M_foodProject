@@ -1,0 +1,273 @@
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #ffffff;
+}
+
+.op_body {
+	padding-top: 50px;
+}
+
+.op_body_name {
+	box-sizing: border-box;
+	margin: 0 auto;
+	max-width: 1140px;
+	height: 90px;
+	border-bottom: 1px solid #e7e7e7;
+	padding: 30px 0 0 0;
+	font-weight: lighter;
+}
+
+.op_mycart {
+	box-sizing: border-box;
+	margin: 0 auto;
+	max-width: 1140px;
+}
+
+.op_mycart_h3 {
+	margin: 0;
+	font-size: 17px;
+	line-height: 19px;
+	font-weight: 500;
+	line-height: 62px;
+	color: #3d3d3d;
+}
+
+.op_mycart_table {
+	display: table;
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.op_table_tr>th {
+	padding: 10px;
+	text-align: center;
+	background: #f4f5f6;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: 300;
+	color: #6f7174;
+}
+
+.op_table_tr>td {
+	padding: 15px 10px;
+	text-align: center;
+	background: #fff;
+	font-size: 12px;
+	line-height: 12px;
+	font-weight: 300;
+	color: #3d3d3d;
+}
+
+.op_td_item {
+	display: grid;
+}
+
+.op_td_item>strong {
+	display: block;
+	font-size: 13px;
+	line-height: 16px;
+	font-weight: 500;
+}
+
+.op_td_item>span {
+	margin: 4px 0 0;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 300;
+	color: #9b9b9b;
+}
+
+.op_orderInfo {
+	background: #fbfbfb;
+	padding: 12px 0;
+}
+
+.op_section {
+	display: flex;
+	box-sizing: border-box;
+	margin: 0 auto;
+	max-width: 1140px;
+}
+
+.op_orderPerson {
+	flex: 1;
+	padding: 8px 26px 8px 0;
+}
+
+.op_orderPerson>h3 {
+	margin: 0;
+	margin-bottom: 8px;
+	font-size: 17px;
+	line-height: 19px;
+	font-weight: 600;
+	color: #3d3d3d;
+}
+
+.op_op_dl {
+	padding: 1px 0;
+	margin: 0; font-size : 15px;
+	display: flex;
+	font-size: 15px;
+}
+
+.op_op_dl>dt {
+	width: 98px;
+	margin: 0;
+}
+
+.op_op_dl>dd {
+	color: #6f7174;
+	flex: 1;
+	max-width: 100%;
+	margin: 0;
+}
+
+.op_recePerson {
+	flex: 1;
+	padding: 8px 0 8px 26px;
+	border-left: 1px solid #e7e7e7;
+}
+
+.op_rp_header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.op_rp_header>h3 {
+	margin: 0;
+	font-size: 17px;
+	line-height: 19px;
+	font-weight: 600;
+	color: #3d3d3d;
+}
+
+.op_rp_header>label {
+	display: block;
+	font-size: 15px;
+	line-height: 16px;
+	color: #9b9b9b;
+	font-weight: 300;
+	s
+}
+
+.op_rp_field {
+	padding: 0;
+	margin: 8px 0 0;
+	border: none;
+	display: grid;
+}
+
+.op_rp_field>input {
+	display: block;
+	padding: 0 15px;
+	margin-top: 4px;
+	width: 100%;
+	height: 38px;
+	box-sizing: border-box;
+	border: 1px solid #e7e7e7;
+	border-radius: 0;
+	box-shadow: 0 0 0;
+	background: #fff;
+	font-size: 15px;
+	line-height: normal;
+	font-weight: 300;
+	color: #3d3d3d;
+	transition: box-shadow .24s ease-out;
+}
+
+.op_payment {
+	box-sizing: border-box;
+	margin: 0 auto;
+	max-width: 1140px;
+	display: flex;
+	padding: 8px 0;
+}
+
+.op_paywhat {
+	margin: 0;
+	font-size: 17px;
+	line-height: 19px;
+	font-weight: 500;
+	color: #3d3d3d;
+	flex: 1;
+	padding: 8px 26px 8px 0;
+}
+
+.op_paywhat>label {
+	margin: 0;
+	height: 35px;
+	font-size: 16px;
+	line-height: 16px;
+	font-weight: 300;
+    align-items: center;
+    line-height: 35px;
+}
+
+.op_payCard{
+	display: grid;
+    flex: 1;
+    padding: 8px 0 8px 26px;
+    border-left: 1px solid #e7e7e7;
+}
+
+.op_payRecep{
+	padding: 16px;
+    border: 1px solid #e7e7e7;
+}
+
+.op_pr_dl{
+	height: 25px;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+}
+
+.agreePay{
+	height: 46px;
+    margin-top: 8px;
+    background: #f4f5f6;
+	display: flex;
+	justify-content: space-between;
+}
+
+.agreePay > label{
+	display: block;
+    margin: 0 0 0 3px;
+    font-size: 14px;
+    letter-spacing: -.5px;
+    line-height: 46px;
+    color: #6f7174;
+    font-weight: 300;
+    padding-left: 10px;
+    background: #f4f5f6;
+}
+
+.agreePay > a{
+	display: block;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 300;
+    color: #27b06e;
+}
+
+.op_finalPay{
+	display: block;
+	margin-top: 10px;
+    height: 38px;
+    box-sizing: border-box;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: #fff;
+    background: #27b06e;
+    border: 1px solid transparent;
+    transition: opacity .24s ease-out;
+    outline: none;
+    user-select: none;
+    cursor: pointer;
+}
