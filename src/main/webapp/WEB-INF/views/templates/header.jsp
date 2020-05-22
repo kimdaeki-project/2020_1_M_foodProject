@@ -117,12 +117,12 @@
 			
 		});
 	});
-	
-	//메뉴 더담기 클릭시 메뉴 페이지로 이동
-	$(".cart-body").on("click",".nav-more",function() {
-		location.href="${pageContext.request.contextPath}/market/marketList";
+
+	//상품 더 담기 누르면 메뉴로 이동	
+	$(".cart-body").on("click",".nav-more", function() {
+		location.href = '${pageContext.request.contextPath}/market/marketList';
 	});
-	
+
 	//주문하기 창 누르면 이동
 	$(".cart-body").on("click",".nav-order",function() {
 		location.href="${pageContext.request.contextPath}/ordered/orderPage";

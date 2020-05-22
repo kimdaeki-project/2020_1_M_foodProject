@@ -29,12 +29,13 @@
 		<!-- 추가된 카테고리 박스 -->
 		<div id="category_box">
 		
-			<%-- <!-- 기존 카테고리박스와 옵션값 -->
-			<c:forEach items="" var="">
+			<!-- 기존 카테고리박스와 옵션값 -->
+			<c:forEach items="${menuList}" var="op">
 				<div class="opDiv">
+					<span>${op.name}</span>
 					<input class="opName" type="text" id="" value="">
 				</div>
-			</c:forEach> --%>
+			</c:forEach>
 			
 		</div>
 		
