@@ -31,7 +31,10 @@
 											<div class="cart-row1">
 											<img alt=""	src="${pageContext.request.contextPath}/resources/upload/menu/${orderedVO.menuThumbImg}">
 												<div class="cart-col">
-													<strong>${orderedVO.marketName} ${orderedVO.menuName}</strong> 
+													<div style="display: flex; justify-content: space-between;">
+														<strong>${orderedVO.marketName} ${orderedVO.menuName}</strong> 
+														<span style="cursor: pointer; padding: 0 10px;">✖</span>
+													</div>
 													<span>${orderedVO.cateMenuOptions}</span>
 												</div>
 											</div>
