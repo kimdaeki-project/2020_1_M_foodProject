@@ -38,8 +38,16 @@
 							</c:forEach>
 					</dl>
 				</div>
-				<button id="ml_cart" type="button">장바구니</button>
-				<button id="ml_order" type="submit">주문하기</button>
+				<c:if test="${empty sessionScope.memberVO}">
+					<button class="none" type="button">장바구니</button>
+					<button class="none" type="submit">주문하기</button>
+				</c:if>
+				<c:if test="${not empty sessionScope.memberVO}">
+					<button id="ml_cart" type="button">장바구니</button>
+					<button id="ml_order" type="submit">주문하기</button>
+				</c:if>
+				
+				
 			</div>
 		</div>
 	</div>
@@ -47,57 +55,58 @@
 
 	<script type="text/javascript">
 	
+		$("#ml_order").click(function() {
+			location.href="${pageContext.request.contextPath}/ordered/orderPage";
+		});
+	
+	
+		$(".none").each(function() {
+			$(this).click(function() {
+				alert("로그인을 해야만 사용이 가능합니다.");
+			});
+			
+		});
 		
+		
+			
 		//장바구니를 누르면 메뉴(옵션포함)추가
 		$("#ml_cart").click(function() {
-			alert('장바구니에 추가되었습니다.');
-			//var name = $(".ms_menuInfo h2").text();
-			//var price = $(".ms_menuInfo p").text();
-			
-			var marketNum = $("#marekt_num").val();
-			var menuNum = $("#menu_num").val();
-			var memberNum = $("#member_num").val();
-			
-			var optionNum = [];
-			
-			//선택한 옵션 번호 구별 num값 추출
-			$(".option_num").each(function() {
-				if($(this).prop("checked") == true){
-					optionNum.push($(this).val());
+				var marketNum = $("#marekt_num").val();
+				var menuNum = $("#menu_num").val();
+				var memberNum = $("#member_num").val();
+				
+				var optionNum = [];
+				
+				//선택한 옵션 번호 구별 num값 추출
+				$(".option_num").each(function() {
+					if($(this).prop("checked") == true){
+						optionNum.push($(this).val());
+					}
+				});
+				
+				optionNum.push("null");
+				
+				var data = {
+						memberNum : memberNum,
+						marketNum : marketNum,
+						menuNum : menuNum,
+						optionNum : optionNum,
+						menuPrice : ${menuVO.price},
+						menuName: `${menuVO.name}`,
+						marketName: `${marketVO.marketName}`,
+						menuThumbImg: `${menuVO.thumbImg}`
 				}
-			});
-			
-			console.log(marketNum);
-			console.log(menuNum);
-			console.log(memberNum);
-			
-			console.log(optionNum);
-			
-			console.log(typeof num);
-			console.log(typeof optionNum);
-			
-			optionNum.push("null");
-			
-			var data = {
-					memberNum : memberNum,
-					marketNum : marketNum,
-					menuNum : menuNum,
-					optionNum : optionNum,
-					menuPrice : ${menuVO.price},
-					menuName: `${menuVO.name}`,
-					marketName: `${marketVO.marketName}`,
-					menuThumbImg: `${menuVO.thumbImg}`
-			}
-			
-			
-			$.ajax({
-				url:"../ordered/cartAdd",
-				type:"POST",
-				data: data,
-				success:function(result){
-					alert(result);
-				}
-			});
+				
+				
+				$.ajax({
+					url:"../ordered/cartAdd",
+					type:"POST",
+					data: data,
+					success:function(result){
+						alert(result);
+					}
+				});
+				
 			
 		});
 		

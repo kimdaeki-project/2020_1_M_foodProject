@@ -31,16 +31,12 @@
 		<c:if test="${empty sessionScope.memberVO}">
 			<button type="button" class="h_login"
 				onclick="location.href='${pageContext.request.contextPath}/member/memberLogin'">로그인</button>
-			<a><img
-				src="${pageContext.request.contextPath}/resources/img/header/cart.png"
-				class="fa-shopping-cart"></a>
+			<a><img src="${pageContext.request.contextPath}/resources/img/header/cart.png" class="fa-shopping-cart"></a>
 		</c:if>
 		<c:if test="${not empty sessionScope.memberVO}">
 			<button type="button" class="h_name"
-				onclick="location.href='${pageContext.request.contextPath}/member/memberPage'">${memberVO.name}</button>
-			<a><img
-				src="${pageContext.request.contextPath}/resources/img/header/cart.png"
-				class="fa-shopping-cart"></a>
+				onclick="location.href='${pageContext.request.contextPath}/member/memberPage'">${sessionScope.memberVO.name}</button>
+			<a><img	src="${pageContext.request.contextPath}/resources/img/header/cart.png" class="fa-shopping-cart"></a>
 		</c:if>
 	</div>
 
@@ -101,30 +97,38 @@
 <script type="text/javascript">
 	//장바구니 누르면 옆에 모달레이어로 뜨기 / X버튼 누르면 닫히기
 	$(".fa-shopping-cart").click(function() {
-		$.get("${pageContext.request.contextPath}/ordered/orderedList?memberNum=${memberVO.num}",function(result){
+		$.get("${pageContext.request.contextPath}/ordered/orderedList?memberNum=${sessionScope.memberVO.num}",function(result){
 			$(".cart-body").html(result);
 		});
-		
 		
 		$(".modal-cart").css('display', 'block');
 	});
 	
 	
-
+	//장바구니 창 숨기기
 	$(".cart-body").on("click","#m_close",function() {
 		$(".modal-cart").css('display', 'none');
 	});
 
 	//전체 삭제 버튼 누르면 장바구니 내용 삭제
-	
 	$(".cart-body").on("click",".btn-delAll",function() {
 		$.get("${pageContext.request.contextPath}/ordered/cartDeleteAll?memberNum=${memberVO.num}",function(result){
 			$(".cart-body").html(result);
 			
 		});
-		
 	});
-
+	
+	//메뉴 더담기 클릭시 메뉴 페이지로 이동
+	$(".cart-body").on("click",".nav-more",function() {
+		location.href="${pageContext.request.contextPath}/market/marketList";
+	});
+	
 	//주문하기 창 누르면 이동
+	$(".cart-body").on("click",".nav-order",function() {
+		location.href="${pageContext.request.contextPath}/ordered/orderPage";
+	});
+	
+	
+	
 </script>
 </html>

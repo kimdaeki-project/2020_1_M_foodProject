@@ -2,6 +2,8 @@ package com.food.project.ordered;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.food.project.member.MemberVO;
 
 @Controller
 @RequestMapping("/ordered/**")
@@ -62,7 +66,6 @@ public class OrderedController {
 		return result;
 	}
 	
-	
 
 	//주문 전체 조회 - SelectList (판매자ID) (GET)
 	@GetMapping("orderedList")
@@ -108,7 +111,52 @@ public class OrderedController {
 		return mv;
 	}
 	
+	//장바구니 낱개 삭제(ordered Num)
+	@GetMapping("cartDeleteSelect")
+	public ModelAndView cartDeleteSelect(OrderedVO orderedVO,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("orderedNum : "+orderedVO.getNum());
+		
+		int result = orderedService.orderDelete(orderedVO);
+		System.out.println("result: "+result);
+		
+		if(result > 0) {
+			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+			orderedVO.setMemberNum(memberVO.getNum());
+			System.out.println("memberVO.num : "+orderedVO.getMemberNum());
+			
+			List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
+			
+			int totalAmount = 0;
+			for (OrderedVO vo : orderedList) {
+				totalAmount += vo.getAmount();
+			}
+			
+			int cartSize = orderedList.size();
+			
+			mv.addObject("orderedList", orderedList);
+			mv.addObject("totalAmount", totalAmount);
+			mv.addObject("cartSize", cartSize);
+			
+			mv.setViewName("templates/cartAjax");
+		}else {
+			
+		}
+		
+		return mv;
+	}
 	
+	
+	//결제 페이지로 이동
+	@GetMapping("orderPage")
+	public ModelAndView orderPage() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("orderPage");
+		
+		
+		mv.setViewName("order/orderPage");
+		return mv;
+	}
 	
 	
 	//주문 조회 - SelectOne (유저ID or 판매자ID) (GET)

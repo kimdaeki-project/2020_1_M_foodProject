@@ -39,6 +39,11 @@ public class OrderedDAO {
 		return sqlSession.delete(NAMESPACE+"cartDeleteAll",orderedVO);
 	}
 	
+	//장바구니 낱개목록 삭제(ordered의 Num)
+	public int orderDelete(OrderedVO orderedVO) throws Exception{
+		return sqlSession.delete(NAMESPACE+"orderDelete", orderedVO);
+	}
+	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)
 	public int orderedCancle(OrderedVO orderedVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"orderedCancle", orderedVO);

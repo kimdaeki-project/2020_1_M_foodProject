@@ -50,6 +50,12 @@ public class OrderedService {
 		return orderedDAO.cartDeleteAll(orderedVO);
 	}
 	
+	//장바구니 낱개 목록 취소(ordered Num)
+	public int orderDelete(OrderedVO orderedVO) throws Exception{
+		return orderedDAO.orderDelete(orderedVO);
+	}
+	
+	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)
 	public int orderedCancle(OrderedVO orderedVO) throws Exception{
 		return orderedDAO.orderedCancle(orderedVO);

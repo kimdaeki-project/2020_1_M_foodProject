@@ -33,7 +33,7 @@
 												<div class="cart-col">
 													<div style="display: flex; justify-content: space-between;">
 														<strong>${orderedVO.marketName} ${orderedVO.menuName}</strong> 
-														<span style="cursor: pointer; padding: 0 10px;">✖</span>
+														<span class="btn-select-delete" style="cursor: pointer; padding: 0 10px;" title="${orderedVO.num}">✖</span>
 													</div>
 													<span>${orderedVO.cateMenuOptions}</span>
 												</div>
@@ -67,3 +67,17 @@
 						</div>
 					</nav>
 				</article>
+	<script type="text/javascript">
+	
+		$(".btn-select-delete").each(function() {
+			$(this).click(function(){
+				alert($(this).attr("title"));
+				var num = $(this).attr("title");
+				$.get("${pageContext.request.contextPath}/ordered/cartDeleteSelect?num="+num,function(result){
+					$(".cart-body").html(result);
+													
+				});
+			});
+		});
+														
+	</script>
