@@ -60,8 +60,6 @@
 	$(".fa-shopping-cart").click(function() {
 		
 		$.get("${pageContext.request.contextPath}/ordered/orderedList?memberNum=${memberVO.num}",function(result){
-			console.log(result);
-			
 			$(".cart-body").html(result);
 		});
 		
@@ -70,11 +68,18 @@
 	});
 
 	$(".cart-body").on("click","#m_close",function() {
-		console.log('click');
 		$(".modal-cart").css('display', 'none');
 	});
 
 	//전체 삭제 버튼 누르면 장바구니 내용 삭제
+	
+	$(".cart-body").on("click",".btn-delAll",function() {
+		$.get("${pageContext.request.contextPath}/ordered/cartDeleteAll?memberNum=${memberVO.num}",function(result){
+			$(".cart-body").html(result);
+			
+		});
+		
+	});
 
 	//주문하기 창 누르면 이동
 </script>

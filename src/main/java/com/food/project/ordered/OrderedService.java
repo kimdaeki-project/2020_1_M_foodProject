@@ -39,12 +39,15 @@ public class OrderedService {
 		orderedVO.setCancleDetail(null);
 		orderedVO.setIsOrderChecked(0);
 		
-		
-
 		//주문등록
 		int result = orderedDAO.orderedInsert(orderedVO);
 		
 		return result;
+	}
+	
+	//장바구니 목록 전체 삭제(memberNum)
+	public int cartDeleteAll(OrderedVO orderedVO) throws Exception{
+		return orderedDAO.cartDeleteAll(orderedVO);
 	}
 	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)
