@@ -26,16 +26,15 @@
 					<dl class="ml_opSel_dl">
 						
 						<c:forEach var="categoryVO" items="${cateList}" >
-
-								<dt style="color: #3d3d3d;">${categoryVO.name}</dt>
-									<c:forEach var="vo" items="${categoryVO.menuOptionVOs}">
-										<dd>
-											<label class="ml_opLabel">
-											<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">${vo.name} ${vo.price}</label>
-										</dd>
-									</c:forEach>
-								<nav></nav>
-							</c:forEach>
+							<dt style="color: #3d3d3d;">${categoryVO.name}</dt>
+								<c:forEach var="vo" items="${categoryVO.menuOptionVOs}">
+									<dd>
+										<label class="ml_opLabel">
+										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">${vo.name} ${vo.price}</label>
+									</dd>
+								</c:forEach>
+							<nav></nav>
+						</c:forEach>
 					</dl>
 				</div>
 				<c:if test="${empty sessionScope.memberVO}">

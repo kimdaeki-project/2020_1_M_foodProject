@@ -237,28 +237,26 @@ input[type="file" i] {
 </head>
 <body style="margin-top: 61px;">
 
-	<form action="../menu/menuAdd" method="post"
-		enctype="multipart/form-data" name="menuAdd" id="fileUpload"
-		class="file_upload" style="margin-left: 50px;">
+	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="fileUpload" class="file_upload" style="margin-left: 50px;">
 		<h2>트럭메뉴 추가</h2>
 
 		<div class="menuAdd_box" style="margin-top: 12px;">
-			<label for="title">메뉴명 : </label> <input type="text" id="name"
-				name="menu_name">
+			<label for="title">메뉴명 : </label> 
+			<input type="text" id="name" name="menu_name">
 		</div>
 		<div class="menuAdd_box">
-			<label for="price">가격 : </label> <input type="number" id="price"
-				name="menu_price">
+			<label for="price">가격 : </label> 
+			<input type="number" id="price" name="menu_price">
 		</div>
 		<div class="menuAdd_box">
-			<label for="detail">상세 :</label> <input type="text" id="detail"
-				name="menu_detail">
+			<label for="detail">상세 :</label> 
+			<input type="text" id="detail"	name="menu_detail">
 		</div>
 
 		<label>카테고리명 :</label>
 		<div class="menuAdd_box_cate">
-			<input type="text" id="input" name="name"> <input
-				id="addCategory" type="button" value="카테고리 추가">
+			<input type="text" id="input" name="name"> 
+			<input id="addCategory" type="button" value="카테고리 추가">
 		</div>
 		<div id="category_box"></div>
 
@@ -266,13 +264,11 @@ input[type="file" i] {
 		<div class="menuAdd_box">
 			<label for="thumbImg">메뉴 이미지: </label>
 			<div style="display: flex;">
-				<input type="file" id="thumbImg" name="files" class="thumbImg1"
-					accept="image/jpeg,image/png,image/jpg"> <span
-					id="ma_fileDel">✖</span>
+				<input type="file" id="thumbImg" name="files" class="thumbImg1"accept="image/jpeg,image/png,image/jpg"> 
+				<span id="ma_fileDel">✖</span>
 			</div>
 		</div>
-		<label class="error" for="thumbImg" generated="true"
-			style="display: none; padding-left: 5px;"></label>
+		<label class="error" for="thumbImg" generated="true" style="display: none; padding-left: 5px;"></label>
 		<div class="menuAdd_box">
 			<button type="submit" id="btn-sub">확인</button>
 		</div>
@@ -355,64 +351,7 @@ input[type="file" i] {
 		$(".thumbImg2").val("");
 	});
 
-	//전송
-	// 	$("#btn-sub").click(function() {
-
-	// 		var categorys = [];
-	// 		$('.cb').each(function() {
-	// 			caNum = $(this).prop("title");
-
-	// 			ep = opIndex[caNum];
-
-	// 			var options = [];
-
-	// 			for(i=0; i<ep; i++) {
-	// 				var opName = $("#opName"+caNum+i).val();
-	// 				var opPrice = $("#opPrice"+caNum+i).val();
-
-	// 				var option = {
-	// 						opName: opName,
-	// 						opPrice: opPrice				
-	// 				}
-
-	// 				options.push(option);
-	// 			}
-
-	// 			var categoryName = $(this).text();
-	// 			category = {
-	// 					categoryName: categoryName,
-	// 					options : options}
-
-	// 			categorys.push(category);
-	// 		});
-
-	// 		console.log(categorys);
-
-	// 		//ajax 전송
-	// 		var objParams = {
-	// 			categorys : categorys,
-	// 		};
-
-	// 		//폼 읽어오기
-	// 		var formData = new FormData($('#file_upload')[0]);
-	// 		formData.append("objParams",JSON.stringify(objParams));
-
-	// 		console.log(formData);
-
-	// 		$.ajax({
-	//             url : "../menu/menuAdd",
-	//             type : "POST",
-	//             dataType : "json", // ajax 통신으로 받는 타입
-	// 			contentType: false,
-	// 			processData: false,
-	//             data : formData,
-	//             success : function(result) {
-
-	//                console.log(result);
-	//             }
-	//          });
-
-	// 	});
+	
 
 	//유효성 검사
 	$("#fileUpload").validate({

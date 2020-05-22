@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
 <link rel="stylesheet" href="../resources/css/order/orderPage.css">
 </head>
 <body>
+
 	<%@ include file="../templates/header.jsp"%>
 	<div class="op_body">
 		<h2 class="op_body_name">주문/결제하기</h2>
@@ -112,5 +114,54 @@
 		</div>
 	</div>
 	<%@ include file="../templates/footer.jsp"%>
+
+
+//////taemin 아래쪽
+
+
+<div class="boardOrder_order">
+        <button class="orderbox">주문서</button>
+        <div class="method boardOrder_box">
+            <p class="boardOrder_div_title">결제방법 선택</p>
+            <div class="method_body">
+                <div class="method_body_radio">
+                    <input type="radio" value="online" name="payment" id="online" checked="checked">
+                    <label for="online">온라인 결제</label>
+                </div>
+                <div class="method_body_radio">
+                    <input type="radio" value="offline" name="payment" id="offline">
+                    <label for="offline">현장 결제</label>
+                </div>
+            </div>
+        </div>
+        <div class="cart boardOrder_box">
+            <p class="boardOrder_div_title">장바구니</p>
+            <ul class="cart_list">
+            	<c:forEach var="orderedVO" items="${orderedList}">
+            		<li class="cart_lists">
+	                    <img alt="" src="../resources/upload/menu/${orderedVO.menuThumbImg}">
+	                </li>
+              	  	<span>${orderedVO.menuName}</span>
+            	</c:forEach>
+                
+               
+            </ul>
+        </div>
+        <div class="bill boardOrder_box">
+            <p class="boardOrder_div_title">결제예상금액</p>
+            <div class="bill_body">
+                <div class="bill_body_box">
+                    <div class="bill_body_title">상품 수 </div>
+                    <div class="bill_body_title right">${cartSize}개</div>
+                </div>
+                <div class="bill_body_box boardOrder_all">
+                    <div class="bill_body_title">총 금액</div>
+                    <div class="bill_body_title right">${totalAmount}원</div>
+                </div>
+            </div>
+        </div>
+        <button class="payment">결제하기</button>
+    </div>
+
 </body>
 </html>

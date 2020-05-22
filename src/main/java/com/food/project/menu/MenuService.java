@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.food.project.fileInfo.FileInfoDAO;
@@ -13,6 +14,7 @@ import com.food.project.fileInfo.FileInfoVO;
 import com.food.project.util.FileSaver;
 
 @Service
+@Transactional
 public class MenuService {
 
 	@Autowired
@@ -88,29 +90,41 @@ public class MenuService {
 	public int menuUpdate(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
-				
+		
+		System.out.println("path : "+path);
+		
+		
 		//1.회원정보 수정
 		int result = menuDAO.menuUpdate(menuVO);
-				
+		System.out.println("menu SErvice Result : "+result);		
+		
+		
+		System.out.println("size: "+files.length);
+		
 		//파일(이미지) 수정
-		for (MultipartFile file : files) {
-			//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
-			String fileName = fileSaver.saveByUtils(file, path);
-			//2.DB등록
-			FileInfoVO fileInfoVO = new FileInfoVO();
-			fileInfoVO.setFileName(fileName);
-			fileInfoVO.setOriName(file.getOriginalFilename());
-			fileInfoVO.setKind(3); //menu
-			fileInfoVO.setRefNum(menuVO.getNum());
-			//reviewNum, marketNum은 입력안해서 null값 부여
-					
-			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
-					
-			if(result<1) {
-				throw new Exception();
+		if(files.length != 0) {
+			for (MultipartFile file : files) {
+				//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
+				String fileName = fileSaver.saveByUtils(file, path);
+				//2.DB등록
+				FileInfoVO fileInfoVO = new FileInfoVO();
+				fileInfoVO.setFileName(fileName);
+				fileInfoVO.setOriName(file.getOriginalFilename());
+				fileInfoVO.setKind(3); //menu
+				fileInfoVO.setRefNum(menuVO.getNum());
+				//reviewNum, marketNum은 입력안해서 null값 부여
+						
+				result = fileInfoDAO.fileInfoInsert(fileInfoVO);
+						
+				if(result<1) {
+					throw new Exception();
+				}
 			}
 		}
-		return menuDAO.menuUpdate(menuVO);
+		
+		
+		
+		return result;
 	}
 
 	// Transaction
