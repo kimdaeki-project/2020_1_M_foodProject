@@ -2,28 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
-<title>menuUpdate</title>
+<!-- <!DOCTYPE html> -->
+<!-- <html> -->
+<!-- <head> -->
+<!-- <meta charset="UTF-8"> -->
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script> -->
+<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script> --%>
+<!-- <title>menuUpdate</title> -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menuUpdate.css">
-</head>
-<body>
-    <form action="./menuUpdate" method="post" enctype="multipart/form-data" name="menuUpdate" id="manuUpdate">
+<!-- </head> -->
+<!-- <body> -->
+    <form action="../menu/menuUpdate" method="post" enctype="multipart/form-data" name="menuUpdate" id="manuUpdate">
 		<h2>메뉴 추가</h2>
 		<input type="hidden" name="num" value="${menuVO.num}">
 		<div class="menuAdd_box">
-			<label for="title">메뉴명 : </label> <input type="text" id="title" name="name" value="${menuVO.name}">
+			<label for="title">메뉴명 : </label> 
+			<input type="text" id="title" name="name" value="${menuVO.name}">
 		</div>
 		<div class="menuAdd_box">
-			<label for="price">가격 : </label> <input type="text" id="price" name="price" value="${menuVO.price}">
+			<label for="price">가격 : </label> 
+			<input type="text" id="price" name="price" value="${menuVO.price}">
 		</div>
 		<div class="menuAdd_box">
-			<label for="detail">상세 :</label> <input type="text" id="detail" name="detail" value="${menuVO.detail}">
+			<label for="detail">상세 :</label> 
+			<input type="text" id="detail" name="detail" value="${menuVO.detail}">
 		</div>
 		<label>카테고리명:</label>
 		<div class="menuAdd_box_cate">
@@ -35,16 +38,7 @@
 		<!-- 추가된 카테고리 박스 -->
 		<div id="category_box">
 
-			<!-- 기존 카테고리박스와 옵션값 -->
-<%-- 			<c:forEach var="categoryVO" items="${cateList}" varStatus="i"> --%>
-<%-- 				${categoryVO.name} --%>
-<%-- 				<c:forEach var="vo" items="${categoryVO.menuOptionVOs}"> --%>
-<!-- 					<div class="opDiv"> -->
-<%-- 					<input class="opName" type="text" id="cateName${i}" value="${vo.name}"> --%>
-<%-- 					<input class="opPrice" type="text" id="" value="${vo.price}"> --%>
-<!-- 				</div> -->
-<%-- 				</c:forEach> --%>
-<%-- 			</c:forEach>  --%>
+
 			
 			<c:forEach var="categoryVO" items="${cateList}" varStatus="i">
 				<div class="cb" title="1">${categoryVO.name.trim()}
@@ -175,5 +169,5 @@
     });
 
 </script>
-</body>
-</html>
+<!-- </body> -->
+<!-- </html> -->

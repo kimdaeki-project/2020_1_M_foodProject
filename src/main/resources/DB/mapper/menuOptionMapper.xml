@@ -27,8 +27,9 @@
 		UPDATE menuOption SET name=#{name}, price=#{price} WHERE num=#{num}
 	</update>
 	
-	<delete id="menuOptionDelete" parameterType="MenuOptionVO">
-		DELETE FROM menuOption WHERE num = #{num}
+	<delete id="menuOptionDelete" parameterType="Long">
+		DELETE FROM menuOption WHERE categoryNum = #{categoryNum}
 	</delete>
+	
 	
 </mapper>

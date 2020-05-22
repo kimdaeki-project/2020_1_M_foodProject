@@ -204,11 +204,11 @@
 		
 		//메뉴 카테고리 수정
 		$('#menuUpdate').click(function() {
-			location.href="../menu/menuUpdate?num=168";
-// 			$.get("../menu/menuUpdate", function(result) {
-// 				$('.mp_box').empty();
-// 				$('.mp_box').append(result);
-// 			});
+// 			location.href="../menu/menuUpdate?num=142";
+			$.get("../menu/menuUpdate?num=142", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
 		});
 
 		//탈퇴하기
