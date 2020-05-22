@@ -94,7 +94,8 @@
 						menuPrice : ${menuVO.price},
 						menuName: `${menuVO.name}`,
 						marketName: `${marketVO.marketName}`,
-						menuThumbImg: `${menuVO.thumbImg}`
+						menuThumbImg: `${menuVO.thumbImg}`,
+						pcs: 2 // test 값
 				}
 				
 				
@@ -103,7 +104,16 @@
 					type:"POST",
 					data: data,
 					success:function(result){
-						alert(result);
+						if(result > 0) {
+							alert("장바구니에 담겼어요!");						
+						} else {
+							alert("장바구니에 담을 수가 없네요ㅠㅠ");
+						}
+						
+						// 모든 옵션 체크 풀기
+						$(".option_num").each(function() {
+							$(this).attr("checked", false);
+						});
 					}
 				});
 				

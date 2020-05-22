@@ -12,6 +12,7 @@ public class OrderedVO {
 	private String menuName;
 	private String menuThumbImg;
 	private String cateMenuOptions;
+	private int pcs;
 	private int	amount;
     private String imp_uid;
     private String merchant_uid; 
@@ -23,8 +24,6 @@ public class OrderedVO {
     private int timeLag;   
     private Date createAt;
     private Date deleteAt;
-    
-    
     
 	public int getTimeLag() {
 		return timeLag;
@@ -97,6 +96,12 @@ public class OrderedVO {
 	}
 	public void setCateMenuOptions(String cateMenuOptions) {
 		this.cateMenuOptions = cateMenuOptions;
+	}
+	public int getPcs() {
+		return pcs;
+	}
+	public void setPcs(int pcs) {
+		this.pcs = pcs;
 	}
 	public int getAmount() {
 		return amount;

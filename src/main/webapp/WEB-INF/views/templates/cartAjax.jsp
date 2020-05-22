@@ -39,6 +39,7 @@
 												</div>
 											</div>
 											<div class="cart-row2">
+												<div>주문 수량 ${orderedVO.pcs}개</div>
 												<div>가격 ${orderedVO.amount}원</div>
 											</div>
 										</div>
@@ -52,11 +53,11 @@
 							<hr>
 							<div class="cart-result-body">
 								<dl class="cart-dl">
-									<dt>갯수</dt>
+									<dt>총 주문 갯수</dt>
 									<dd>${cartSize}개</dd>
 								</dl>
 								<dl class="cart-dl">
-									<dt>가격</dt>
+									<dt>총 상품 금액</dt>
 									<dd>${totalAmount}원</dd>
 								</dl>
 							</div>

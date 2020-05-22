@@ -31,6 +31,7 @@ public class OrderedController {
 		System.out.println("memberNum : "+orderedVO.getMemberNum());
 		System.out.println("marketNum : "+orderedVO.getMarketNum());
 		System.out.println("menuNum : "+orderedVO.getMenuNum());
+		System.out.println("orderedPcs : "+orderedVO.getPcs());
 		System.out.println("menuPrice : "+menuPrice);
 		
 		String cateMenuOptions = "";
@@ -49,6 +50,7 @@ public class OrderedController {
 			String[] price = str.split(" ");
 			amount += Integer.parseInt(price[1]);
 		}
+		amount *= orderedVO.getPcs(); 
 		
 		orderedVO.setCateMenuOptions(cateMenuOptions);
 		orderedVO.setAmount(amount);
@@ -66,12 +68,12 @@ public class OrderedController {
 		return result;
 	}
 	
-
+	//장바구니/주문창
 	//주문 전체 조회 - SelectList (판매자ID) (GET)
 	@GetMapping("orderedList")
 	public ModelAndView orderedList(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
+		System.out.println("orderedList");
 		System.out.println("memberNum : "+orderedVO.getMemberNum());
 		
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
@@ -79,6 +81,7 @@ public class OrderedController {
 		int totalAmount = 0;
 		for (OrderedVO vo : orderedList) {
 			totalAmount += vo.getAmount();
+			System.out.println(vo.getPcs());
 		}
 		
 		int cartSize = orderedList.size();
@@ -151,9 +154,6 @@ public class OrderedController {
 	@GetMapping("orderPage")
 	public ModelAndView orderPage(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("orderPage");
-		
-		System.out.println("memberNum : "+orderedVO.getMemberNum());
 		
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
 		

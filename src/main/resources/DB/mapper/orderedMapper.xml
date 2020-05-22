@@ -8,12 +8,11 @@
 	<select id="orderedCount" resultType="Long">
 		select ordered_seq.nextval from dual
 	</select>
-	
 
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
 		select j.*,m2.thumbImg as menuThumbImg, m2.name as menuName
 		from
-		(select o.num,o.menunum,o.memberNum,o.catemenuoptions, o.amount,m.marketname
+		(select o.num,o.menunum,o.memberNum, o.catemenuoptions, o.pcs, o.amount, o.timeLag, m.marketname
 		from ordered o join market m
 		on(o.marketNum = m.num))j 
 		join menu m2
@@ -27,9 +26,9 @@
 	
 	<insert id="orderedInsert" parameterType="OrderedVO">
 		INSERT INTO ordered VALUES(
-			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, #{amount}, #{imp_uid, jdbcType=VARCHAR},
-			#{merchant_uid}, #{pg, jdbcType=VARCHAR}, #{pay_method, jdbcType=VARCHAR}, #{cancleType}, 
-			#{cancleDetail, jdbcType=VARCHAR},#{isOrderChecked}, #{timeLag},sysdate, null
+			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 
+			#{pcs}, #{amount}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid}, #{pg, jdbcType=VARCHAR}, #{pay_method, jdbcType=VARCHAR}, 
+			#{cancleType}, #{cancleDetail, jdbcType=VARCHAR},#{isOrderChecked}, #{timeLag}, sysdate, null
 		)
 	</insert>
 	
