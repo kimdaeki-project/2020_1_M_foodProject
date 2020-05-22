@@ -12,6 +12,12 @@ public class OrderedService {
 	@Autowired
 	private OrderedDAO orderedDAO;
 	
+	
+	//리뷰번호로 주문정보 조회
+	public OrderedVO orderReviewSelect(OrderedVO orderedVO) throws Exception{
+		return orderedDAO.orderReviewSelect(orderedVO);
+	}
+	
 	//주문 전체 조회 - SelectList (판매자ID)
 	public List<OrderedVO> orderedList(OrderedVO orderedVO) throws Exception{
 		return orderedDAO.orderedList(orderedVO);

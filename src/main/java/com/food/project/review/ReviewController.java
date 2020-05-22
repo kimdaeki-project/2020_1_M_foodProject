@@ -18,6 +18,8 @@ import com.food.project.board.BoardVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
 import com.food.project.member.MemberVO;
+import com.food.project.ordered.OrderedService;
+import com.food.project.ordered.OrderedVO;
 import com.food.project.util.Pager;
 
 @Controller
@@ -28,6 +30,8 @@ public class ReviewController {
 	private ReviewService reviewService;
 	@Autowired
 	private MarketService marketService;
+	@Autowired
+	private OrderedService orderedService;
 	
 	//한 멤버가 작성한 리뷰목록 출력
 	@GetMapping("myReviewList")
@@ -132,10 +136,38 @@ public class ReviewController {
 	}
 	
 	//리뷰수정(POST)
+	@GetMapping("reviewUpdate")
+	public ModelAndView getReviewUpdate(ReviewVO reviewVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("input num : "+reviewVO.getBoardNum());
+		
+		// reviewVO 보내기
+		reviewVO = reviewService.reviewSelect(reviewVO);
+		
+		OrderedVO orderedVO = new OrderedVO();
+		orderedVO.setMemberNum(reviewVO.getMemberNum());
+		orderedVO.setMarketNum(reviewVO.getMarketNum());
+		orderedVO = orderedService.orderReviewSelect(orderedVO);
+		
+	
+		
+		
+		mv.addObject("orderedVO", orderedVO);
+		mv.addObject("reviewVO", reviewVO);
+		
+		// reviewUpdate.jsp로 전달
+		mv.setViewName("review/reviewUpdate");
+		
+		return mv;
+	}
+	
 	@PostMapping("reviewUpdate")
 	@ResponseBody
 	public int reviewUpdate(ReviewVO reviewVO) throws Exception{
+		
 		int result = reviewService.boardUpdate(reviewVO);
+		
+		
 		if(result > 0) {
 			System.out.println("삭제 성공");
 		}else {
@@ -145,21 +177,6 @@ public class ReviewController {
 		return result;
 	}
 	
-	@GetMapping("reviewUpdate")
-	public ModelAndView getReviewUpdate(ReviewVO reviewVO) throws Exception{
-	 
-		System.out.println("input num : "+reviewVO.getBoardNum());
-		
-		ModelAndView mv = new ModelAndView();
-		
-		// reviewVO 보내기
-		reviewVO = reviewService.reviewSelect(reviewVO);
-		mv.addObject("reviewVO", reviewVO);
-		
-		// reviewUpdate.jsp로 전달
-		mv.setViewName("review/reviewUpdate");
-		
-		return mv;
-	}
+	
 
 }

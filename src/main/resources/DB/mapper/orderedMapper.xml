@@ -24,6 +24,10 @@
 		SELECT * FROM ordered WHERE num=#{num}
 	</select>
 	
+	<select id="orderReviewSelect" parameterType="OrderedVO" resultType="OrderedVO">
+		select * from ordered where memberNum=#{memberNum} and marketNum=#{marketNum}
+	</select>
+	
 	<insert id="orderedInsert" parameterType="OrderedVO">
 		INSERT INTO ordered VALUES(
 			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 

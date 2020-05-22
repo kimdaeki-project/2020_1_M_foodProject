@@ -19,9 +19,9 @@
 							src="${pageContext.request.contextPath}/resources/img/food2.png">
 					</div>
 					<div class="rl_item_info">
-						<p class="rl_item_p">기존상점명</p>
-						<h2 class="rl_item_h2">기존메뉴명</h2>
-						<p class="rl_item_p">기존옵션명</p>
+						<p class="rl_item_p">${orderedVO.marketName}</p>
+						<h2 class="rl_item_h2">${orderedVO.menuName}</h2>
+						<p class="rl_item_p">${orderedVO.cateMenuOptions}</p>
 					</div>
 				</div>
 				<div class="rl_rate">
@@ -40,8 +40,8 @@
 					<!-- 기존 리뷰가 써있어야함 -->
 					<textarea id="reviewText" class="rl_ta" name="reviewText"></textarea>
 					<div class="rl_div">
-						<input class="rl_file" type="file" id="rl_file2"> <span
-							class="rl_fileDel" id="rl_fileDel2">❌</span>
+						<input class="rl_file" type="file" id="rl_file2"> 
+						<span class="rl_fileDel" id="rl_fileDel2">❌</span>
 					</div>
 				</div>
 				<div class="rl_send">

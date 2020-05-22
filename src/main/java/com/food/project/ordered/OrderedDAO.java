@@ -19,6 +19,11 @@ public class OrderedDAO {
 		return sqlSession.selectOne(NAMESPACE+"orderedCount");
 	}
 	
+	//리뷰번호로 주문정보 조회
+	public OrderedVO orderReviewSelect(OrderedVO orderedVO) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"orderReviewSelect", orderedVO);
+	}
+	
 	//주문 전체 조회 - SelectList (판매자ID)
 	public List<OrderedVO> orderedList(OrderedVO orderedVO) throws Exception{
 		return sqlSession.selectList(NAMESPACE+"orderedList",orderedVO);

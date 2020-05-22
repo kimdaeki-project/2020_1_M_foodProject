@@ -39,8 +39,8 @@
 												</div>
 											</div>
 											<div class="cart-row2">
-												<div>주문 수량 ${orderedVO.pcs}개</div>
-												<div>가격 ${orderedVO.amount}원</div>
+												<div>수량 ${orderedVO.pcs}개 </div>
+												<div> / 가격 </div><div class="amount"> ${orderedVO.amount}</div>
 											</div>
 										</div>
 									</li>
@@ -58,7 +58,7 @@
 								</dl>
 								<dl class="cart-dl">
 									<dt>총 상품 금액</dt>
-									<dd>${totalAmount}원</dd>
+									<dd id="totalAmount">${totalAmount}</dd>
 								</dl>
 							</div>
 							<div class="nav-button">
@@ -68,7 +68,28 @@
 						</div>
 					</nav>
 				</article>
-	<script type="text/javascript">
+				
+				
+<script type="text/javascript">
+		
+		// 천단위로 숫자에 콤마 찍기
+		function moneyFormat(money) {
+			return money.toLocaleString();
+		}
+		
+		var totalAmount = $("#totalAmount").text()*1;
+		totalAmount = moneyFormat(totalAmount);
+		$("#totalAmount").text(totalAmount+"원");
+		
+		
+		$(".amount").each(function() {
+			var amount = $(this).text()*1;
+			amount = moneyFormat(amount);
+			$(this).text(amount+"원");
+		});
+		
+		
+	
 	
 		$(".btn-select-delete").each(function() {
 			$(this).click(function(){
