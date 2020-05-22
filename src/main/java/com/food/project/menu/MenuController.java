@@ -8,12 +8,14 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Marker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -43,7 +45,6 @@ public class MenuController {
 	public void menuAdd() throws Exception {
 
 	}
-	
 	
 	// transaction 필요
 	@PostMapping("menuAdd")
@@ -141,39 +142,36 @@ public class MenuController {
 		menuVO.setMarketNum(marketNum);
 		int result = menuService.menuAdd(menuVO, files, session);
 		
-		
-		
 		if(result > 0) {
 			System.out.println("메뉴는 등록 완료");
 			
-			
 			//카테고리 등록
 			CategoryVO categoryVO = new  CategoryVO();
-			System.out.println("menuVO의 getnum : "+menuVO.getNum());
+//			System.out.println("menuVO의 getnum : "+menuVO.getNum());
 			categoryVO.setMenuNum(menuVO.getNum());
-			System.out.println("category의 넣은  MenuNum : "+categoryVO.getMenuNum());
+//			System.out.println("category의 넣은  MenuNum : "+categoryVO.getMenuNum());
 			
 			for (Map.Entry<Integer, CategoryVO> vo : cMap.entrySet()) {
 				int key2   = vo.getKey();
 				CategoryVO vo2 =  vo.getValue();
 				
 				categoryVO.setName(vo2.getName());
-				System.out.println("categoryVO Name:"+categoryVO.getName());
+//				System.out.println("categoryVO Name:"+categoryVO.getName());
 				
 				result = categoryService.categoryInsert(categoryVO);
-				System.out.println("카테고리 등록완료는 등록 완료 : "+categoryVO.getName());
+//				System.out.println("카테고리 등록완료는 등록 완료 : "+categoryVO.getName());
 				
 				//메뉴 옵션 등록
 				for (Map.Entry<String, MenuOptionVO> moVO : moMap.entrySet()) {
 					String menuOptionKey   = moVO.getKey(); //1,1
 					MenuOptionVO menuOption =  moVO.getValue(); //입력된 값(name, price)
 					
-					System.out.println(menuOptionKey);
-					System.out.println(menuOption.getName());
-					System.out.println(menuOption.getPrice());
+//					System.out.println(menuOptionKey);
+//					System.out.println(menuOption.getName());
+//					System.out.println(menuOption.getPrice());
 					
 					int menuOptionkeyNum = Integer.parseInt(menuOptionKey.substring(0, 1)+"");
-					System.out.println("keyNum : "+menuOptionkeyNum);
+//					System.out.println("keyNum : "+menuOptionkeyNum);
 					
 					//카테고리의 키번호와 메뉴 옵션의 키번호가 일치할 경우에만  DB에 메뉴 옵션 등록
 					if(key2 == menuOptionkeyNum) {
@@ -185,7 +183,7 @@ public class MenuController {
 						
 						result = menuOptionSerice.menuOptionInsert(menuOptionVO);
 						
-						System.out.println("메뉴 등록완료 : "+menuOptionVO.getName());
+//						System.out.println("메뉴 등록완료 : "+menuOptionVO.getName());
 					}
 					
 				}
@@ -219,12 +217,12 @@ public class MenuController {
 		
 		
 		ModelAndView mv = new ModelAndView();
-		CategoryVO categoryVO = new CategoryVO();
 		
 		//해당 메뉴의 대한  정보가져오기(MenuVO)
 		menuVO = menuService.menuSelect(menuVO);
 		
 		//menu의 num값을 이용해 categrory목록 조회
+		CategoryVO categoryVO = new CategoryVO();
 		categoryVO.setMenuNum(menuVO.getNum());
 		
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
@@ -252,29 +250,67 @@ public class MenuController {
 	}
 	
 	@GetMapping("menuUpdate")
-	public ModelAndView menuUpdate(MenuVO menuVO) throws Exception {
-		
+	public ModelAndView menuUpdate(MenuVO menuVO,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		System.out.println("menuVO.num : "+menuVO.getNum());
 		
-		menuVO = (MenuVO)menuService.menuSelect(menuVO);
-		mv.addObject("menuVO",menuVO);
+		menuVO = menuService.menuSelect(menuVO);
+		
+		//menu의 num값을 이용해 categrory목록 조회
+		CategoryVO categoryVO = new CategoryVO();
+		categoryVO.setMenuNum(menuVO.getNum());
+		
+		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
+
+		MarketVO marketVO = (MarketVO)session.getAttribute("marketVO");
+		marketVO.setNum(marketVO.getNum());
+		
+		marketVO = marketService.marketSelect(marketVO);
+				
+		mv.addObject("menuVO", menuVO);
+		mv.addObject("marketVO", marketVO);
+		mv.addObject("cateList", cateList);
+		
 		mv.setViewName("menu/menuUpdate");
 		
 		return mv;
 	}
 	
 	@PostMapping("menuUpdate")
-	public ModelAndView menuUpdate(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
-		
+	public ModelAndView menuUpdate(MenuVO menuVO, MultipartFile[] files,HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("num : "+menuVO.getNum());
+		
+		System.out.println("menuVO.getName : "+menuVO.getName());
+		
 		
 		// 대표 이미지 변경
 		int result = menuService.menuUpdate(menuVO, files, session);
+		
+		//메뉴 옵션 지우고
+		
+		//카테고리 지우고
+		
+		//카테고리 & 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		String msg = "메뉴 수정 실패";
-		String url = "./menuSelect?num="+menuVO.getNum();
+		String url = "./menuUpdate?num=168";
+		
 		if(result > 0) {
 			msg = "메뉴가 수정 되었습니다";
-			url = "./menuList";
+			url = "../member/memberPage";
 		}
 		
 		// 이미지 테이블에 insert

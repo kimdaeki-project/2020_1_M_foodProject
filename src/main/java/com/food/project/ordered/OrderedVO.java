@@ -20,11 +20,18 @@ public class OrderedVO {
     private int cancleType;
     private String cancleDetail;
     private int isOrderChecked;
+    private int timeLag;   
     private Date createAt;
     private Date deleteAt;
     
     
     
+	public int getTimeLag() {
+		return timeLag;
+	}
+	public void setTimeLag(int timeLag) {
+		this.timeLag = timeLag;
+	}
 	public String getMarketName() {
 		return marketName;
 	}

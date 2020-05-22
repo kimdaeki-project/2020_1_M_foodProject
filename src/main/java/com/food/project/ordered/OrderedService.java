@@ -37,6 +37,7 @@ public class OrderedService {
 		orderedVO.setPay_method(null);
 		orderedVO.setCancleType(2);
 		orderedVO.setCancleDetail(null);
+		orderedVO.setTimeLag(30);
 		orderedVO.setIsOrderChecked(0);
 		
 		//주문등록

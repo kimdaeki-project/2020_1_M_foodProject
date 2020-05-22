@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,31 +27,26 @@
         <div class="cart boardOrder_box">
             <p class="boardOrder_div_title">장바구니</p>
             <ul class="cart_list">
-                <li class="cart_lists">
-                    <img alt="" src="../resources/img/food.jpg">
-                </li>
-                <li class="cart_lists">
-                    <img alt="" src="../resources/img/food.jpg">
-                </li>
-                <li class="cart_lists">
-                    <img alt="" src="../resources/img/food.jpg">
-                </li>
+            	<c:forEach var="orderedVO" items="${orderedList}">
+            		<li class="cart_lists">
+	                    <img alt="" src="../resources/upload/menu/${orderedVO.menuThumbImg}">
+	                </li>
+              	  	<span>${orderedVO.menuName}</span>
+            	</c:forEach>
+                
+               
             </ul>
         </div>
         <div class="bill boardOrder_box">
             <p class="boardOrder_div_title">결제예상금액</p>
             <div class="bill_body">
                 <div class="bill_body_box">
-                    <div class="bill_body_title">상품 수 / 금액</div>
-                    <div class="bill_body_title right">0개 / 0원</div>
-                </div>
-                <div class="bill_body_box">
-                    <div class="bill_body_title">할인금액</div>
-                    <div class="bill_body_title right">0원</div>
+                    <div class="bill_body_title">상품 수 </div>
+                    <div class="bill_body_title right">${cartSize}개</div>
                 </div>
                 <div class="bill_body_box boardOrder_all">
                     <div class="bill_body_title">총 금액</div>
-                    <div class="bill_body_title right">0원</div>
+                    <div class="bill_body_title right">${totalAmount}원</div>
                 </div>
             </div>
         </div>

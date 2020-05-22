@@ -40,7 +40,6 @@ public class MenuDAO {
 	
 	// 메뉴 수정
 	public int menuUpdate(MenuVO menuVO) throws Exception {
-	
 		return sqlSession.update(NAMESPACE+"menuUpdate", menuVO);
 	}
 	

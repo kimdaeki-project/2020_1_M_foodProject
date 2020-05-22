@@ -149,10 +149,24 @@ public class OrderedController {
 	
 	//결제 페이지로 이동
 	@GetMapping("orderPage")
-	public ModelAndView orderPage() throws Exception{
+	public ModelAndView orderPage(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		System.out.println("orderPage");
 		
+		System.out.println("memberNum : "+orderedVO.getMemberNum());
+		
+		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
+		
+		int totalAmount = 0;
+		for (OrderedVO vo : orderedList) {
+			totalAmount += vo.getAmount();
+		}
+		
+		int cartSize = orderedList.size();
+		
+		mv.addObject("orderedList", orderedList);
+		mv.addObject("totalAmount", totalAmount);
+		mv.addObject("cartSize", cartSize);
 		
 		mv.setViewName("order/orderPage");
 		return mv;
@@ -163,7 +177,6 @@ public class OrderedController {
 	@GetMapping("orderedSelect")
 	public ModelAndView orderedSelect(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
 		
 		return mv;
 	}
@@ -176,7 +189,6 @@ public class OrderedController {
 	public ModelAndView orderedInsert(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		
 		return mv;
 	}
 	
@@ -188,6 +200,7 @@ public class OrderedController {
 	@PostMapping("orderedCancle")
 	public ModelAndView orderedCancle(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
 		
 		
 		
