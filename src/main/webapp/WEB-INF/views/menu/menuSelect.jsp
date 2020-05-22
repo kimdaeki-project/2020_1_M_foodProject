@@ -62,6 +62,7 @@
 		$(".none").each(function() {
 			$(this).click(function() {
 				alert("로그인을 해야만 사용이 가능합니다.");
+				location.href="../member/memberLogin";
 			});
 			
 		});
