@@ -175,5 +175,8 @@ public class MemberController {
 	//판매자 신청 페이지
 	@GetMapping("sellerApply") public void sellerApply() throws Exception{
 	}
+	//판매자주문리스트
+	@GetMapping("marketOrder") public void marketOrder() throws Exception{
+	}
 	 
 }

@@ -51,16 +51,30 @@
             <ul class="mp_myInfoNav_ul">
                <li id="default" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a" href="#">주문/결제 내역</a></li>
+               
+               
+               <c:if test="${memberVO.isFoodTruck eq '1'}">
+               <!-- 트럭 주문 들어온 내역 -->
+                  <li id="marketOrder" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">주문 리스트</a>
+               <!-- 테스트 -->
+                  <li id="marketMenu" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">테스트</a>
+               </c:if>
+               
+               
                <li id="myReview" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a" href="#">나의 후기</a></li>
                <li id="memberUpdate" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a" href="#">회원정보 수정</a></li>
+
 
 				<!-- 판매자가 아닐때 -->
                <c:if test="${memberVO.isFoodTruck eq '0'}">
                   <li id="marketJoin" class="mp_myInfoNav_li">
                   <a class="mp_myInfoNav_a">판매자 신청</a></li>
                </c:if>
+               
                
 				<!-- 판매자 일 때 -->
                <c:if test="${memberVO.isFoodTruck eq '1'}">
@@ -74,6 +88,7 @@
                   	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 수정</a>
                   </li> 
                  </c:if>
+
 
                <li id="member_delete" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a">탈퇴하기</a></li>
@@ -158,6 +173,23 @@
 			});
 		});
 		
+		//테스트
+		$('#marketMenu').click(function() {
+			$.get("./marketMenu", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
+		//판매자에게 들어온 주문들
+		$('#marketOrder').click(function() {
+			$.get("./marketOrder", function(result) {
+				
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
 		//나의 리뷰 목록
 		$('#myReview').click(function() {
 			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
@@ -192,7 +224,7 @@
 				$('.mp_box').append(result);
 			});
 		});
-		
+
 		//메뉴 카테고리 추가
 		$('#menuAdd').click(function() {
 			$.get("../menu/menuAdd", function(result) {
@@ -200,7 +232,6 @@
 				$('.mp_box').append(result);
 			});
 		});
-		
 		
 		//메뉴 카테고리 수정
 		$('#menuUpdate').click(function() {
