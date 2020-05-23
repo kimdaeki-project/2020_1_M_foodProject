@@ -27,7 +27,8 @@
 	
 	<insert id="orderedInsert" parameterType="OrderedVO">
 		INSERT INTO ordered VALUES(
-			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, #{amount}, #{imp_uid, jdbcType=VARCHAR},
+			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 
+			#{amount}, 2, #{imp_uid, jdbcType=VARCHAR},
 			#{merchant_uid}, #{pg, jdbcType=VARCHAR}, #{pay_method, jdbcType=VARCHAR}, #{cancleType}, 
 			#{cancleDetail, jdbcType=VARCHAR},#{isOrderChecked}, #{timeLag},sysdate, null
 		)
