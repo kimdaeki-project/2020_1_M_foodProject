@@ -171,7 +171,7 @@ hr{
 				<!-- 구매관련 정보 div -->
 				<div class="oap_payInfo">
 					<div>구매취소</div>
-					<div style="margin-top: 10px;">후기쓰기</div>
+					<div id="reviewInsert" style="margin-top: 10px;">후기쓰기</div>
 				</div>
 				
 			</div>
@@ -179,4 +179,14 @@ hr{
 			
 		</div>
 	</div>
+	<script type="text/javascript">
+		$("#reviewInsert").click(function() {
+			alert("click");
+			
+			location.href="../review/reviewInsert?num=113";
+		});
+	</script>
+	
 </body>
+
+

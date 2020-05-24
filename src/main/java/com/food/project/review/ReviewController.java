@@ -18,6 +18,8 @@ import com.food.project.board.BoardVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
 import com.food.project.member.MemberVO;
+import com.food.project.ordered.OrderedService;
+import com.food.project.ordered.OrderedVO;
 import com.food.project.util.Pager;
 
 @Controller
@@ -28,6 +30,8 @@ public class ReviewController {
 	private ReviewService reviewService;
 	@Autowired
 	private MarketService marketService;
+	@Autowired
+	private OrderedService orderedService;
 	
 	//한 멤버가 작성한 리뷰목록 출력
 	@GetMapping("myReviewList")
@@ -94,8 +98,17 @@ public class ReviewController {
 	
 	
 	@GetMapping("reviewInsert")
-	public void reviewInsert() throws Exception{
+	public ModelAndView reviewInsert(OrderedVO orderedVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
 		
+		//orderedVO의 num값으로 orderedVO 조회
+		orderedVO = orderedService.orderedSelect(orderedVO);
+		
+		//reviewInsert 페이지로 orderedVO 객체 전달
+		mv.addObject("orderedVO", orderedVO);
+		mv.setViewName("review/reviewInsert");
+		
+		return mv;
 	}
 	
 	

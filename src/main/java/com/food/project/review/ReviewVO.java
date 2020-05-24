@@ -10,6 +10,7 @@ public class ReviewVO extends BoardVO{
 	private long ref;
 	private long step;
 	private long depth;
+	private long orderNum;
 	
 	private MemberVO memberVO;
 	
@@ -24,6 +25,12 @@ public class ReviewVO extends BoardVO{
 	
 	
 
+	public long getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(long orderNum) {
+		this.orderNum = orderNum;
+	}
 	public int getRating() {
 		return rating;
 	}

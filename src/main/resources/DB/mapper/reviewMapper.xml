@@ -16,6 +16,7 @@
 		<result column="ref" property="ref"/>
 		<result column="step" property="step"/>
 		<result column="depth" property="depth"/>
+		<result column="orderNum" property="orderNum"/>
 		
 		<association property="memberVO" javaType="MemberVO">
 			<result column="nickName" property="nickName"/>
@@ -67,7 +68,7 @@
 	
 	<insert id="boardInsert" parameterType="ReviewVO">
 		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{fileName},#{rating},#{contents},sysdate,
-		#{boardNum},0,0)
+		#{boardNum},0,0,#{orderNum})
 	</insert>
 	
 	
