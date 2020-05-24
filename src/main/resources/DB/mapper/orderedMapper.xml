@@ -24,14 +24,25 @@
 		SELECT * FROM ordered WHERE num=#{num}
 	</select>
 	
+	<!-- isOrderChecked 다음에 isReview 필드 추가(Default = 0) -->
 	<insert id="orderedInsert" parameterType="OrderedVO">
 		INSERT INTO ordered VALUES(
 			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 
 			#{pcs}, #{amount}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid, jdbcType=VARCHAR}, #{pg, jdbcType=VARCHAR}, 
-			#{pay_method, jdbcType=VARCHAR}, #{cancleType}, #{cancleDetail, jdbcType=VARCHAR},#{isOrderChecked}, #{timeLag}, 
+			#{pay_method, jdbcType=VARCHAR}, #{cancleType}, #{cancleDetail, jdbcType=VARCHAR},#{isOrderChecked}, 0, #{timeLag}, 
 			sysdate, null
 		)
 	</insert>
+	
+	<!-- 결제 완료 없데이트 -->
+	<update id="orderedDoen" parameterType="OrderedVO">
+		UPDATE ordered SET imp_uid=#{imp_uid}, merchant_uid=#{merchant_uid}, pg=#{pg}, pay_method=#{pay_method},
+	</update>
+	
+	<!-- isReview 없데이트 -->
+	<update id="orderedIsReviewUpdate" parameterType="OrderedVO">
+		UPDATE ordered SET isReview = 1 WHERE num=#{num}
+	</update>
 	
 	<update id="orderedCancle" parameterType="OrderedVO">
 		update ordered set cancleType=#{cancleType} where num=#{num}

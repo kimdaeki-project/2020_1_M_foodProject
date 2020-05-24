@@ -70,6 +70,15 @@ public class OrderedController {
 		return result;
 	}
 	
+	// 결제 완료
+	@PostMapping("orderedDoen")
+	@ResponseBody
+	public int orderedDoen(OrderedVO orderedVO) throws Exception {
+		
+		// 데이터 들어오는거 확인해야함
+		return orderedService.orderedDoen(orderedVO);
+	}
+	
 	//장바구니/주문창
 	//주문 전체 조회 - SelectList (판매자ID) (GET)
 	@GetMapping("orderedList")
@@ -187,12 +196,22 @@ public class OrderedController {
 	//주문 등록 - 유저ID (GET/POST)
 	@GetMapping("orderedInsert")
 	public void orderedInsert() throws Exception{
+	
 	}
+	
 	@PostMapping("orderedInsert")
 	public ModelAndView orderedInsert(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		return mv;
+	}
+	
+	// isReview 업데이트(isReview : 0. 리뷰등록 X / 1. 리뷰 등록)
+	@PostMapping("orderedIsReview")
+	@ResponseBody
+	public int orderedIsReviewUpdate(OrderedVO orderedVO) throws Exception {
+		
+		return orderedService.orderedIsReviewUpdate(orderedVO); 
 	}
 	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제) (GET/POST)

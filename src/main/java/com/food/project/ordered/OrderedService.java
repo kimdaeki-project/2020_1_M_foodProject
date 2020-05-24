@@ -56,6 +56,16 @@ public class OrderedService {
 	}
 	
 	
+	// 결제 완료
+	public int orderedDoen(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedDoen(orderedVO);
+	}
+	
+	// isReview 업데이트(isReview : 0. 리뷰등록 X / 1. 리뷰 등록)
+	public int orderedIsReviewUpdate(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedIsReviewUpdate(orderedVO);
+	}
+	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)
 	public int orderedCancle(OrderedVO orderedVO) throws Exception{
 		return orderedDAO.orderedCancle(orderedVO);

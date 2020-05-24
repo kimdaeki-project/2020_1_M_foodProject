@@ -57,6 +57,7 @@
 						<dd>${sessionScope.memberVO.email}</dd>
 					</dl>
 					<dl class="op_op_dl">
+						<!-- 함수 적용해야함 -->
 						<dt>연락처</dt>
 						<dd>${sessionScope.memberVO.phone}</dd>
 					</dl>
@@ -128,17 +129,55 @@
 		// 결제 모듈 관련
 		//=========================
 		// 핸드폰 번호 파싱해서 '-' 붙이기
-		function rebuildPhoneNum() {
+		function phoneFomatter(num,type){
 			
-			
+			var formatNum = '';
+		
+			if(num.length==11){
+	
+	        	if(type==0){
+	            	formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-****-$3');
+	        	}else{
+	            	formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+		        }
+		
+			}else if(num.length==8){
+				formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+		    }else{
+		        if(num.indexOf('02')==0){
+	    	        if(type==0){
+	     	           formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-****-$3');
+		            }else{
+		                formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+		            }
+	        	}else{
+		            if(type==0){
+		                formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-***-$3');
+		            }else{
+		                formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+		            }
+		        }
+		    }
+	
+	   		return formatNum;
+	   	
+	   		/* phoneFomatter('01000000000');   //010-0000-0000
+	   		phoneFomatter('01000000000',0); //010-****-0000
+	   		phoneFomatter('0100000000');    //010-000-0000
+	   		phoneFomatter('0100000000',0);  //010-***-0000
+	   		phoneFomatter('0200000000');    //02-0000-0000
+	   		phoneFomatter('0200000000',0);  //02-****-0000
+	   		phoneFomatter('0310000000');    //031-000-0000
+	   		phoneFomatter('0310000000',0);  //031-***-0000
+	   		phoneFomatter('16880000');      //1688-0000 */
 		}
-			
+				
 		// 결제
 		function payment() {
 				$(function(){
 			
 		        var IMP = window.IMP; // 생략가능
-		        IMP.init(`imp87607408`); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		        IMP.init(`${iamport_id}`); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 		        var msg;
 		        
 		        IMP.request_pay({
@@ -147,12 +186,12 @@
 		            pg : 'html5_inicis',
 		            merchant_uid : 'Fusulan_Truck_' + new Date().getTime(),
 		            name : '결제테스트',
-		        	amount : 1,	// 최소 100원이상(이니시스 기준)
-		        	buyer_email : 'iamport@siot.do',
-		        	buyer_name : '구매자',
-		        	buyer_tel : '010-1234-5678',
-		        	buyer_addr : '서울특별시 강남구 삼성동',
-		        	buyer_postcode : '123-456'
+		        	amount : ${orderedVO.amount},	// 최소 100원이상(이니시스 기준)
+		        	//buyer_email : 'iamport@siot.do',
+		        	buyer_name : ${sessionScope.memberVO.name},
+		        	buyer_tel : phoneFomatter(${sessionScope.memberVO.phone}),
+		        	//buyer_addr : '서울특별시 강남구 삼성동',
+		        	//buyer_postcode : '123-456'
 		        }, function(rsp) {
 		        	//console.log(rsp);
 		            if ( rsp.success ) {
@@ -161,15 +200,37 @@
 		                msg += '상점 거래ID : ' + rsp.merchant_uid;
 		                msg += '결제 금액 : ' + rsp.paid_amount;
 		                msg += '카드 승인번호 : ' + rsp.apply_num;
+		            
+		                var data = {
+		                		
+		                	imp_uid : rsp.imp_uid,
+		                	merchant_uid : rsp.merchant_uid,
+		                	paid_amount : rsp.paid_amount,
+		                	apply_num : rsp.apply_num
+		                }
+		                
+		                // return 받은 값들 백단으로 보내서 저장해야함 (get? post?)
+			            $.ajax({
+							url:"../ordered/orderedDoen",
+							type:"POST",
+							data: data,
+							success:function(result){
+								if(result > 0) {
+									alert("결제 완료!");
+									
+									// redirect 마이페이지 페이지
+						            location.href = "../member/memberPage";
+								
+								} else {
+									alert("결제 실패");
+								}
+							}
+						});
+			            
 		            } else {
 		                var msg = '결제에 실패하였습니다.';
 		                msg += '에러내용 : ' + rsp.error_msg;
 		            }
-					
-		            // return 받은 값들 백단으로 보내서 저장해야함 (get? post?)
-		            
-		            // redirect 마이페이지 페이지
-		        });
 		    });
 		}
 		
@@ -182,7 +243,17 @@
 			console.log();	// name(주문 고유 넘버?)
 			//amount : 1,	// 최소 100원이상(이니시스 기준)
         	//buyer_tel : // 구매자 핸드폰 '010-1234-5678', (필수값)
+			phoneFomatter('01000000000');
 		}
 		
-		paymentTest();
+		function main() {
+		
+			$('.op_finalPay').click(function() {
+				
+				payment();
+			});
+		}
+		
+		main();
+		
 	</script>

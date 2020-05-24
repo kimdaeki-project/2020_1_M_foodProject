@@ -44,10 +44,18 @@ public class OrderedDAO {
 		return sqlSession.delete(NAMESPACE+"orderDelete", orderedVO);
 	}
 	
+	// 결제 완료
+	public int orderedDoen(OrderedVO orderedVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"orderedDoen", orderedVO);
+	}
+	
+	// isReview 업데이트
+	public int orderedIsReviewUpdate(OrderedVO orderedVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"orderedIsReviewUpdate", orderedVO);
+	}
+	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)
 	public int orderedCancle(OrderedVO orderedVO) throws Exception{
 		return sqlSession.update(NAMESPACE+"orderedCancle", orderedVO);
 	}
-	
-	
 }
