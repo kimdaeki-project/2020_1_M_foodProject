@@ -706,3 +706,31 @@ a{
 	padding: 10px;
 	border-bottom: 1px solid #e7e7e7;
 }
+
+@media screen and (max-width: 1140px) {
+	.menu-tab > ol{
+		display: flex;
+		width: 100%;
+		justify-content: space-around;
+	}
+
+	.mt_a{
+		display: contents;
+	}
+}
+
+@media screen and (max-width: 650px) {
+	.ml_truck{
+		display: grid;
+	}
+
+	.ml_truckInfo{
+		padding: 0;
+	}
+
+	.ml_menuList > ul{
+		width: 570px;
+		min-width: 570px;
+		box-sizing: border-box;
+	}
+}

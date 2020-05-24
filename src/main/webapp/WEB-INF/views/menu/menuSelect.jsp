@@ -31,7 +31,7 @@
 							<dt style="color: #3d3d3d;">${categoryVO.name}</dt>
 								<c:forEach var="vo" items="${categoryVO.menuOptionVOs}" varStatus="status">
 								<dd style="display: flex; justify-content: space-between; margin-top: 5px;">
-									<label class="ml_opLabel"> 
+									<label class="ml_opLabel" style="max-width: 300px;"> 
 										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">
 										${vo.name} ${vo.price}
 									</label>
