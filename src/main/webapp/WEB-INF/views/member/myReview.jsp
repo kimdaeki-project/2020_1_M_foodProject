@@ -165,7 +165,7 @@ a {
 									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
 								</div>
 								<div class="rev_review5">
-									<button class="rev_mod" title="${reviewVO.boardNum}">수정하기</button>
+									<input type="button" class="rev_mod" title="${reviewVO.boardNum}" value="수정하기">
 									<img class="rev_del" alt="delete" title="${reviewVO.boardNum}" src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
 								</div>
 							</div>

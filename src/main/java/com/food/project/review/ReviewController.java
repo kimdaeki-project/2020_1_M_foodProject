@@ -114,16 +114,26 @@ public class ReviewController {
 	
 	//리뷰등록(POST)
 	@PostMapping("reviewInsert")
-	@ResponseBody
-	public int reviewInsert(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
+	public ModelAndView reviewInsert(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println("marketNum : "+reviewVO.getMarketNum());
+		System.out.println("memberNum : "+reviewVO.getMemberNum());
+		System.out.println("contents : "+reviewVO.getContents());
+		System.out.println("rating : "+reviewVO.getRating());
+		
+		
+		
 		int result = reviewService.boardInsert(reviewVO,files,session);
+		
 		if(result > 0) {
 			System.out.println("리뷰등록 성공");
+			mv.setViewName("redirect:../member/memberPage");
 		}else {
 			System.out.println("리뷰 등록 실패");
 		}
 		
-		return result;
+		return mv;
 	}
 	
 	//리뷰삭제(GET)
@@ -144,35 +154,52 @@ public class ReviewController {
 		return mv;
 	}
 	
-	//리뷰수정(POST)
+	//리뷰수정(GET/POST)
+	@GetMapping("reviewUpdate")
+	public ModelAndView getReviewUpdate(ReviewVO reviewVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//reviewVO조회 
+		reviewVO = reviewService.reviewSelect(reviewVO);
+		
+		//orderNum으로 orderedVO조회
+		OrderedVO orderedVO = new OrderedVO();
+		orderedVO.setNum(reviewVO.getOrderNum());
+		orderedVO = orderedService.orderedSelect(orderedVO);
+		
+		
+		mv.addObject("reviewVO", reviewVO);
+		mv.addObject("orderedVO", orderedVO);
+		
+		mv.setViewName("review/reviewUpdate");
+		
+		return mv;
+	}
+	
 	@PostMapping("reviewUpdate")
-	@ResponseBody
-	public int reviewUpdate(ReviewVO reviewVO) throws Exception{
-		int result = reviewService.boardUpdate(reviewVO);
+	public ModelAndView reviewUpdate(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("contents : "+reviewVO.getContents());
+		System.out.println("rating : "+reviewVO.getRating());
+		System.out.println("fileName : "+reviewVO.getFileName());
+		System.out.println("boardNum : "+reviewVO.getBoardNum());
+		
+		
+		
+		int result = reviewService.boardUpdate(reviewVO,files,session);
+		
+		
 		if(result > 0) {
 			System.out.println("삭제 성공");
 		}else {
 			System.out.println("삭제실패");
 		}
 		
-		return result;
-	}
-	
-	@GetMapping("reviewUpdate")
-	public ModelAndView getReviewUpdate(ReviewVO reviewVO) throws Exception{
-	 
-		System.out.println("input num : "+reviewVO.getBoardNum());
-		
-		ModelAndView mv = new ModelAndView();
-		
-		// reviewVO 보내기
-		reviewVO = reviewService.reviewSelect(reviewVO);
-		mv.addObject("reviewVO", reviewVO);
-		
-		// reviewUpdate.jsp로 전달
-		mv.setViewName("review/reviewUpdate");
+		mv.setViewName("redirect:../member/memberPage");
 		
 		return mv;
 	}
+	
+	
 
 }

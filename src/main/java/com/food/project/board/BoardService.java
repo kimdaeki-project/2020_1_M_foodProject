@@ -14,12 +14,12 @@ public interface BoardService {
 	public List<BoardVO> boardList(Pager pager) throws Exception;
 	
 	//등록
-	public int boardInsert(BoardVO boardVO,MultipartFile[] files,HttpSession session) throws Exception;
+	//public int boardInsert(BoardVO boardVO,MultipartFile[] files,HttpSession session) throws Exception;
 	
 	//삭제
-	public int boardDelete(BoardVO boardVO) throws Exception;
+//	public int boardDelete(BoardVO boardVO) throws Exception;
 	
 	//수정
-	public int boardUpdate(BoardVO boardVO) throws Exception;
+//	public int boardUpdate(BoardVO boardVO) throws Exception;
 	
 }

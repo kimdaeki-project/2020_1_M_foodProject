@@ -67,7 +67,7 @@
 	</select>
 	
 	<insert id="boardInsert" parameterType="ReviewVO">
-		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{fileName},#{rating},#{contents},sysdate,
+		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{fileName,jdbcType=VARCHAR},#{rating},#{contents},sysdate,
 		#{boardNum},0,0,#{orderNum})
 	</insert>
 	
@@ -81,7 +81,7 @@
 	</update>
 	
 	<insert id="boardReply" parameterType="ReviewVO">
-		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},#{fileName},#{rating},#{contents},sysdate,
+		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},#{fileName,jdbcType=VARCHAR},#{rating},#{contents},sysdate,
 		(select ref from review where boardNum=#{boardNum}),
 		(select step from review where boardNum=#{boardNum})+1,
 		(select depth from review where boardNum=#{boardNum})+1
@@ -93,9 +93,9 @@
 	</delete>
 	
 	<update id="boardUpdate" parameterType="ReviewVO">
-		update review set contents=#{contents},regDate=sysdate where boardNum=#{boardNum}
+		update review set contents=#{contents},rating=#{rating},fileName=#{fileName},regDate=sysdate where boardNum=#{boardNum}
 	</update>
-	
+		
 </mapper>
 
 

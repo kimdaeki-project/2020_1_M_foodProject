@@ -87,7 +87,10 @@ public class ReviewDAO implements BoardDAO{
 	//리뷰 갱신
 	@Override
 	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
+		
+		int result = sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
+		System.out.println("DAO result : "+result);
+		return result;
 	}
 
 	

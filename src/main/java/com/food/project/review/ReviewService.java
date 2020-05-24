@@ -90,14 +90,15 @@ public class ReviewService implements BoardService{
 	}
 
 	//리뷰 등록
-	@Override
-	public int boardInsert(BoardVO boardVO,MultipartFile[] files,HttpSession session) throws Exception {
+	//@Override
+	public int boardInsert(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception {
 		String path = session.getServletContext().getRealPath("/resources/upload/review");
+		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";  //집
 		
 		int result = 0;
 		
-		//refNum값 구하기
-		long refNum = reviewDAO.boardSeq();
+		//review의 Num 값 구하기(시퀀스 사용)
+		long num = reviewDAO.boardSeq();
 		
 		//HDD파일 등록
 		//DB파일 등록
@@ -109,15 +110,16 @@ public class ReviewService implements BoardService{
 			//2.DB등록
 			
 			//파일 시퀀스 값 증가
-			long num = fileInfoDAO.fileCount();
+			long fileNum = fileInfoDAO.fileCount();
+			reviewVO.setFileName(fileName);
+			
 
 			FileInfoVO fileInfoVO = new FileInfoVO();
-			fileInfoVO.setNum(num);
+			fileInfoVO.setNum(fileNum);
 			fileInfoVO.setFileName(fileName);
-			
 			fileInfoVO.setOriName(file.getOriginalFilename());
 			fileInfoVO.setKind(2); //review
-			fileInfoVO.setRefNum(refNum);
+			fileInfoVO.setRefNum(num);
 			
 			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
 			
@@ -126,22 +128,62 @@ public class ReviewService implements BoardService{
 			}
 		}
 		
-		result = reviewDAO.boardInsert(boardVO);
+		reviewVO.setBoardNum(num);
+		reviewVO.setRef(num);
+		
+		result = reviewDAO.boardInsert(reviewVO);
+		
+		return result;
+	}
+	
+	//리뷰 수정
+	public int boardUpdate(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception {
+		String path = session.getServletContext().getRealPath("/resources/upload/review");
+		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";  //집
+		
+		int result = 0;
+		
+		if(files.length != 0) {
+			System.out.println("fileIN");
+			for (MultipartFile file : files) {
+				//1.HDD등록
+				String fileName = fileSaver.saveByUtils(file, path);
+				reviewVO.setFileName(fileName);
+				
+				//2.DB등록
+				//파일 시퀀스 값 증가
+				long fileNum = fileInfoDAO.fileCount();
+
+				FileInfoVO fileInfoVO = new FileInfoVO();
+				fileInfoVO.setNum(fileNum);
+				fileInfoVO.setFileName(fileName);
+				fileInfoVO.setOriName(file.getOriginalFilename());
+				fileInfoVO.setKind(2); //review
+				fileInfoVO.setRefNum(reviewVO.getBoardNum());
+				
+				result = fileInfoDAO.fileInfoInsert(fileInfoVO);
+				System.out.println("fileUpdate result : "+ result);
+				
+				if(result<1) {
+					throw new Exception();
+				}
+			}
+		}
+		
+		result = reviewDAO.boardUpdate(reviewVO);
+		System.out.println("리뷰 업로드 결과 : "+result);
+		
 		
 		return result;
 	}
 
 	//리뷰 삭제
-	@Override
+//	@Override
 	public int boardDelete(BoardVO boardVO) throws Exception {
 		return reviewDAO.boardDelete(boardVO);
 	}
 
-	//리뷰 수정
-	@Override
-	public int boardUpdate(BoardVO boardVO) throws Exception {
-		return reviewDAO.boardUpdate(boardVO);
-	}
+	
 
 	
 }

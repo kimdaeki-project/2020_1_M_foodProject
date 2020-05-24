@@ -19,6 +19,19 @@ public class ReviewDAOTest extends AbstractTestCase{
 	
 	
 	@Test
+	public void reviewUpdate() throws Exception{
+		
+		ReviewVO reviewVO = new ReviewVO();
+		reviewVO.setBoardNum(111);
+		reviewVO.setContents("돈끼스 맛있엉3");
+		reviewVO.setRating(3);
+		reviewVO.setFileName("d4d71b01-76f5-443c-b057-de4c0b06b1b6_슬기.png");
+		
+		int result = reviewDAO.boardUpdate(reviewVO);
+		assertEquals(1, result);
+	}
+	
+//	@Test
 	public void myReviewList() throws Exception{
 		
 		List<ReviewVO> list = reviewDAO.myReviewList(29);
