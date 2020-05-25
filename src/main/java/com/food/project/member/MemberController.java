@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.food.project.mail.MailService;
+import com.food.project.mail.MailVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
 
@@ -25,7 +27,33 @@ public class MemberController {
 	@Autowired
 	private MarketService marketService;
 	
-
+	@Autowired
+	private MailService mailService;
+	
+	
+	@GetMapping("idSearch")
+	@ResponseBody
+	public int idSearch(String email) throws Exception{
+		
+		System.out.println(email);
+		
+		int result=1;
+		
+		MailVO mailVO = new MailVO();
+		
+		mailVO.setSubject("AnimalC 아이디/비밀번호 찾기 메일입니다!");
+		mailVO.setSenderMail("gotaem17@gmail.com");
+		mailVO.setSenderName("AnimalC");
+		mailVO.setReceiveMail(email);
+		mailVO.setMessage("찾으시는 아이디는  admin 입니다.");
+		
+		mailService.sendMail(mailVO);
+		
+		return result;
+	}
+	
+	
+	
 	// 로그인(GET/POST)
 	@GetMapping("memberLogin")
 	public void memberLogin(@CookieValue(value = "cId", required = false) String cId) throws Exception {
