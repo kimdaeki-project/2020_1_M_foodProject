@@ -11,6 +11,7 @@
 	display: table;
     width: 100%;
     min-height: 161px;
+    min-width: 700px;
     padding: 23px 0 0 0;
     table-layout: fixed;
 }
@@ -73,12 +74,14 @@
     box-sizing: border-box;
     height: 100%;
     font-size: 14px;
+    min-width: 200px;
 }
 
 .oap_storeInfo{
 	display: table-cell;
 	vertical-align: middle;
     width: 200px;
+    background-color: #fff;
 }
 
 .oap_siDiv{
@@ -170,6 +173,7 @@ hr{
 						<div style="margin-top: 10px;">삭제하기</div>
 					</div>
 				</div>
+
 				<hr>
 			</c:forEach>
 			
@@ -185,5 +189,5 @@ hr{
 			});
 		});
 	</script>
-	
+
 </body>

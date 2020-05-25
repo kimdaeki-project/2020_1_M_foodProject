@@ -134,7 +134,24 @@
 			// string to number
 			var amount = $(this).text() * 1;
 			$(this).text(moneyFormat(amount)+'원');
-		}) 
+		});
+		
+		//주문자 정보와 같다고 하면 불러오기
+		$("#agree").click(function () {
+			$("#rp_name").val(이름);
+			$("#rp_number").val(번호);
+		});
+
+		//결제 수단에 따라 결과 나뉨
+
+
+		//개인정보 수집동의 체크안하면 결제하기X
+		$(".op_finalPay").click(function () {
+			if ( $("#agreePay").is(":checked") == false ) {
+				alert('개인정보 수집·이용에 동의해주세요!');
+				preventDefault();
+			}
+		});
 			
 			
 		

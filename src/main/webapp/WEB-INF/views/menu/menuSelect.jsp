@@ -25,23 +25,26 @@
 				<div class="ml_opSel">
 					<dl class="ml_opSel_dl">
 						
-						<c:forEach var="categoryVO" items="${cateList}" >
+						<c:set var="num" value="0" />
+						
+						<c:forEach var="categoryVO" items="${cateList}" varStatus="set">
 							<dt style="color: #3d3d3d;">${categoryVO.name}</dt>
-								<c:forEach var="vo" items="${categoryVO.menuOptionVOs}">
+								<c:forEach var="vo" items="${categoryVO.menuOptionVOs}" varStatus="status">
 								<dd style="display: flex; justify-content: space-between; margin-top: 5px;">
-									<label class="ml_opLabel"> <input class="option_num"
-										type="checkbox" name="test1" value="${vo.name} ${vo.price}">${vo.name}
-										${vo.price}
+									<label class="ml_opLabel" style="max-width: 300px;"> 
+										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">
+										${vo.name} ${vo.price}
 									</label>
 									<div style="padding-right: 30px;">
-										<input type="button" id="minus" value="ー">
-										<input type="text" value="1" id="quantity">
-										<input type="button" id="plus" value="+">
+										<input type="button" class="minus" value="ー">
+										<input type="text" value="0" class="quantity">
+										<input type="button" class="plus" value="+">
 									</div>
 								</dd>
 							</c:forEach>
 							<nav></nav>
 						</c:forEach>
+						
 					</dl>
 				</div>
 				<c:if test="${empty sessionScope.memberVO}">
@@ -61,21 +64,22 @@
 
 	<script type="text/javascript">
 	
-		var quantity = $("#quantity").val();
+		var quantity = $(".quantity").val();
 	
 		//수량조절
-		$("#plus").click(function() {
+		$(".plus").click(function() {
 			quantity++;	
-			$("#quantity").val(quantity);
+
+			$(this).prev().val(quantity);
 			console.log(quantity);
 		});
 		
-		$("#minus").click(function() {			
+		$(".minus").click(function() {			
 			quantity--;
 			if (quantity <= 1) {
 				quantity=1;
 			}
-			$("#quantity").val(quantity);
+			$(".quantity").val(quantity);
 			console.log(quantity);
 		});
 

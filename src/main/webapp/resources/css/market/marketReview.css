@@ -1,151 +1,8 @@
+@charset "UTF-8";
 body {
 	padding: 0;
 	margin: 0;
 	font-family: 'Noto Sans KR', sans-serif;
-}
-
-.container {
-	padding: 100px 30px;
-	margin: 0 auto;
-}
-
-.container h3 {
-	max-width: 1140px;
-	margin: 0 auto;
-	margin-top: 30px;
-}
-
-.ml_truck, .ml_menuList {
-	margin: 0 auto;
-	display: flex;
-	background-origin: border-box;
-	max-width: 1140px;
-	box-sizing: border-box;
-}
-
-.ml_truck img {
-	width: 400px;
-	height: 400px;
-}
-
-.ml_truckInfo {
-	padding-left: 108px;
-	width: 630px;
-}
-
-.ml_truckInfo h2 {
-	font-size: 24px;
-	line-height: 28px;
-}
-
-.ml_truckInfo p {
-	margin: 7px 0 0;
-	font-size: 14px;
-	line-height: 20px;
-	color: #6f7174;
-	font-weight: 300;
-}
-
-.ml_truckInfo nav{
-display: flex;
-flex-wrap: wrap;
-margin-top: 16px;
-padding-top: 16px;
-border-top: 1px solid #e7e7e7;
-}
-
-.ml_truckInfo button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	box-sizing: border-box;
-	width: 260px;
-	height: 53px;
-	color: #fff;
-	background: #27b06e;
-	border: transparent;
-	outline: transparent;
-	margin: 5px 0;
-	font-size: 14px;
-	font-weight: 500;
-}
-
-.ml_menuList ul {
-	display: flex;
-	list-style: none;
-	margin: 30px 0;
-	padding: 0;
-	box-sizing: border-box;
-	max-width: 1140px;
-	flex-wrap: wrap;
-	margin-bottom: 30px;
-}
-
-.ml_menuList li {
-	padding: 10px;
-	width: 264px;
-}
-
-.ml_menuList img {
-	width: 264px;
-	height: 264px;
-}
-
-.ml_menuList strong {
-	color: black; font-size : 15px;
-	display: block;
-	font-size: 15px;
-}
-
-.ml_menuList em {
-	font-size: 15px;
-	margin-top: 10px;
-	display: block;
-	font-style: normal;
-	color: #27b06e;
-}
-
-.ml_menuList a {
-	text-decoration: none;
-}
-
-
-/****** tm *************/
-
-.menu-tab{
-	display: flex;
-    background-origin: border-box;
-	background-color: white;
-	position: sticky;
-    top: 52px;
-    z-index: 60;
-    justify-content: center;
-    height: 46px;
-    margin: 0 -30px;
-}
-
-.menu-tab ol{
-	padding: 0;
-	list-style: none;
-	border-bottom: 1px solid #e7e7e7;
-	margin: 0;
-}
-
-.mt_a > li{
-	color: #8a8d8b;
-	display: inline-block;
-	width: 372px;
-	text-align: center;
-	padding: 10px 0;
-	cursor: pointer;
-	font-weight: 600;
-	background-color: white;
-}
-
-.mt_a > li.on{
-	font-weight: 600;
-	color: black;
-	border-bottom: 2px solid black;
 }
 
 
@@ -335,7 +192,6 @@ dd, dl {
 
 .menu-review__album {
     max-width: 1080px;
-    margin: 24px auto 0;
 }
 
 .menu-review h3 {
@@ -373,22 +229,18 @@ dd, dl {
 .owl-carousel .owl-stage-outer {
     position: relative;
     overflow: hidden;
-    -webkit-transform: translate3d(0px, 0px, 0px);
 }
 
 .owl-carousel .owl-stage {
     position: relative;
     -ms-touch-action: pan-Y;
     touch-action: manipulation;
-    -moz-backface-visibility: hidden;
 }
 
 .owl-carousel .owl-item {
     position: relative;
     min-height: 1px;
     float: left;
-    -webkit-backface-visibility: hidden;
-    -webkit-tap-highlight-color: transparent;
 }
 
 .menu-review__album .images__image {
@@ -469,11 +321,19 @@ a{
 	background-image: url("../../img/marketSelect/ico-arrow-box-right.svg");
 }
 
-
+.col_reply{
+    max-width: 128px;
+    background-color: #27b06e;
+    color: #fff;
+    border: transparent;
+    outline: transparent;
+    padding: 5px 0;
+    cursor: pointer;
+}
 
 .menu-review__index {
     max-width: 1080px;
-    margin: 24px auto 0;
+    margin-left: 50px;
 }
 
 .menu-review h3 {
@@ -733,4 +593,11 @@ a{
 		min-width: 570px;
 		box-sizing: border-box;
 	}
+}
+
+.headerH2{
+    margin: 0;
+    font-size: 22px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e7e7e7;
 }

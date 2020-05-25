@@ -15,8 +15,6 @@
 			<td>가격</td>
 			<td>상세설명</td>
 			<td>대표이미지</td>
-			<td><input type="checkbox" id="checkAll">
-				<button id="delBtn" class="btn btn-danger">Delete</button></td>
 		</tr>
 		<c:forEach items="${list}" var="vo" varStatus="i">
 			<tr>
