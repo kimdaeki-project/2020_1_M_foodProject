@@ -94,15 +94,6 @@ body {
    cursor: pointer;
 }
 
-@media screen and (max-width: 1000px) {
-   body {
-      margin: 0 30px;
-   }
-   .mp_myInfoBox {
-      display: none;
-   }
-}
-
 div.toggleWrap {
    position: relative;
    width: 100px;
@@ -169,6 +160,9 @@ div.toggleWrap>span {
    left: 18px;
 }
 
+.divBody{
+	padding: 103px 10%;
+}
 
 /* .toggleWrap input:active+div label, .toggleWrap input:checked+div label */
 /*    { */
@@ -180,3 +174,32 @@ div.toggleWrap>span {
 /*    { */
 /*    left: 18px; */
 /* } */
+
+
+
+
+@media screen and (max-width: 1000px) {
+   body {
+      margin: 0 30px;
+   }
+   .mp_myInfoBox {
+      display: none;
+   }
+   
+   .mp_myInfoNav{
+   		display: grid;
+   }
+   
+   .mp_myInfoNav_ul{
+   	display: flex;
+   }
+   
+   .mp_myInfoNav_aside{
+   	width: 100%;
+   	margin-bottom: 15px;
+   }
+   
+   .divBody{
+   	padding: 103px 5%;
+   }
+}

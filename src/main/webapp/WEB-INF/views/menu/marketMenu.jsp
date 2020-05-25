@@ -11,7 +11,6 @@
 	display: table;
     width: 100%;
     min-height: 161px;
-    min-width: 700px;
     padding: 23px 0 0 0;
     table-layout: fixed;
 }
