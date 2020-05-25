@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.transform.impl.AddDelegateTransformer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,28 +32,19 @@ public class ReviewController {
 	@Autowired
 	private OrderedService orderedService;
 	
-	//한 멤버가 작성한 리뷰목록 출력
-	@GetMapping("myReviewList")
-	public ModelAndView myReviewList(MemberVO memberVO) throws Exception{
+	
+	//마켓 리뷰 리스트 조회
+	@GetMapping("marketReview")
+	public ModelAndView marketReview(MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("나의 후기목록");
-		
-		long memberNum = memberVO.getNum();
-		System.out.println("memberNum: "+memberNum);
-		
-		List<ReviewVO> myReviewList = reviewService.myReviewList(memberNum); 
+		System.out.println("marketReview Controller IN");
 		
 		
-		if(myReviewList != null) {
-			mv.addObject("myReviewList", myReviewList);
-			mv.setViewName("member/myReview");
-		}
-		
+		mv.setViewName("review/marketReview");
 		return mv;
 	}
 	
-	
-	//덧글달기(GET)
+	//덧글(reply)달기(GET)
 	@GetMapping("reviewReply")
 	@ResponseBody
 	public int reviewReply(ReviewVO reviewVO) throws Exception{
@@ -69,14 +59,37 @@ public class ReviewController {
 	}
 	
 	
+	//한 멤버가 작성한 리뷰목록 출력
+	@GetMapping("myReviewList")
+	public ModelAndView myReviewList(MemberVO memberVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+//		System.out.println("나의 후기목록");
+		
+		long memberNum = memberVO.getNum();
+//		System.out.println("memberNum: "+memberNum);
+		
+		List<ReviewVO> myReviewList = reviewService.myReviewList(memberNum); 
+		
+		
+		if(myReviewList != null) {
+			mv.addObject("myReviewList", myReviewList);
+			mv.setViewName("member/myReview");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
 	//리뷰리스트 출력(GET)
 	@GetMapping("reviewList")
 	public ModelAndView reviewList(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		
-		System.out.println("reviewController curPage : "+pager.getCurPage());
-		System.out.println("유저번호 : "+marketVO.getUserNum());
+//		System.out.println("reviewController curPage : "+pager.getCurPage());
+//		System.out.println("유저번호 : "+marketVO.getUserNum());
 		
 		//넘겨받은 userNum으로 해당 마켓의 전체 정보 조회
 		marketVO = marketService.marketSelect(marketVO);

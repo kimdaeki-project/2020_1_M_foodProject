@@ -225,12 +225,14 @@
 			});
 		});
 		
-		//마켓 리뷰 리스트 조
+		//마켓 리뷰 리스트 조회
 		$('#marketReview').click(function() {
-			$.get("../review/marketReview?marketNum=${sessionScope.marketVO.num}", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
+			
+			location.href="../review/marketReview";
+// 			$.get("../review/marketReview?marketNum=${sessionScope.marketVO.num}", function(result) {
+// 				$('.mp_box').empty();
+// 				$('.mp_box').append(result);
+// 			});
 		});
 		
 		
