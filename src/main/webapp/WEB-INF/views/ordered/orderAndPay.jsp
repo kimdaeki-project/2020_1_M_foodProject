@@ -154,6 +154,18 @@ hr{
 
 .cr_select{
     padding: 10px 20px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-family: inherit;
+    color: #3d3d3d;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cr_select > option{
+    border: 1px solid #dedede;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-family: inherit;
+    color: #3d3d3d;
 }
 
 .cancleTextArea{
@@ -161,6 +173,9 @@ hr{
     width: 95%;
     margin: 0 20px;
     height: 70px;
+    border: 1px solid #dedede;
+    padding: 5px;
+	font-family: 'Noto Sans KR', sans-serif;
 }
 
 </style>

@@ -19,7 +19,14 @@
 			<img src="${pageContext.request.contextPath}/resources/upload/menu/${menuVO.thumbImg}">
 			<div class="ms_menuInfo">
 				<h2>${menuVO.name}</h2>
-				<p>${menuVO.price}</p>
+				<div style="display: flex; justify-content: space-between;">
+					<p style="margin: 0">${menuVO.price}</p>
+					<div class="quanClass">
+						<input type="button" class="minus" value="ー"> 
+						<input type="text" value="1" class="quantity ${vo.num}" readonly="readonly"> 
+						<input type="button" class="plus" value="+">
+					</div>
+				</div>
 				<nav></nav>
 				<!-- 옵션 선택 페이지 -->
 				<div class="ml_opSel">
@@ -35,11 +42,6 @@
 										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">
 										${vo.name} ${vo.price}
 									</label>
-									<div class="quanClass" style="padding-right: 30px;">
-										<input type="button" class="minus" value="ー">
-										<input type="text" value="0" class="quantity ${vo.num}" title="0" readonly="readonly">
-										<input type="button" class="plus" value="+">
-									</div>
 								</dd>
 							</c:forEach>
 							<nav></nav>
@@ -65,47 +67,29 @@
 	<script type="text/javascript">
 	
 		var title = $(".quantity").attr('title');  
-	
-		//수량조절
-		$(".ml_opLabel").change(function() {
+		
+		//수량조절 +
+		$(".plus").click(function() {
+
+			var quantity = $(this).prev();
+			var quan = $(this).prev().val();
 			
-			var quantity = $(this).siblings().find('.quantity');
-			var quan = $(this).siblings().find('.quantity').val();
-			var plus = $(this).siblings().find('.plus');
-			var minus = $(this).siblings().find('.minus');
+			quan++;
+			quantity.val(quan);
 			
-			if ($(".option_num").is(":checked")) {
-				 
-				quan++;
-				quantity.val(quan);
-				
-				//플러스
-				plus.click(function() { 
-					quan++;
-					quantity.val(quan);
-				});
-				
-				//마이너스
-				minus.click(function() {
-					quan--;
-					if (quan <= 1) {
-						quan=1;
-					}
-					quantity.val(quan);
-					
-				});	
-				
-			} else{
-				quantity.val(0);
-				plus.click(function() { 
-					quantity.val(0);
-				});
-				
-				//마이너스
-				minus.click(function() {
-					quantity.val(0);
-				});	
+		});
+		
+		//수량조절 -
+		$('.minus').click(function() {
+
+			var quantity = $(this).next();
+			var quan = $(this).next().val();
+			
+			quan--;
+			if (quan <= 1) {
+				quan=1;
 			}
+			quantity.val(quan);
 			
 		});
 		
