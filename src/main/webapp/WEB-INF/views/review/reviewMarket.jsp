@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+
 <style type="text/css">
 .oap_item{
 	display: table;
@@ -128,49 +127,71 @@
     text-decoration: none;
     text-align: center;
     border: 1px solid #dedede;
+    cursor: pointer;
 }
 </style>
 </head>
 <body>
 	<div>
 		<div style="margin-left: 50px;">
-			<h2>주문/결제 내역</h2>
+			<h2>마켓에 등록된 리뷰 목록</h2>
+			
+			
 			<!-- 하단의 div가 반복 -->
-			<div class="oap_item">
-				
-				<!-- 아이템 정보 div -->
-				<div class="oap_itemInfo">
-					<a class="oap_ii_storePic">
-						<img alt="후기사진" src="${pageContext.request.contextPath}/resources/img/food2.png">
-					</a>
-					<div class="oap_ii_info">
-						<a class="oap_items">
-							<strong>메뉴명 - 옵션명</strong>
-							<em>가격 | 구매일</em>
+			<c:forEach var="reviewVO" items="${reviewList}"> 
+				<div class="oap_item">
+					<!-- 아이템 정보 div -->
+					<div class="oap_itemInfo">
+						<a class="oap_ii_storePic">
+							<img alt="후기사진" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
 						</a>
-						<span>별점</span>
-						<p>리뷰내용</p>
+						<div class="oap_ii_info">
+							<a class="oap_items">
+								<strong>${reviewVO.orderedVO.menuName} - ${reviewVO.orderedVO.cateMenuOptions}</strong>
+								<em>총액 : ${reviewVO.orderedVO.amount}원 | 구매일 : ${reviewVO.orderedVO.createAt}</em>
+							</a>
+							<c:forEach begin="1" end="${reviewVO.rating}">
+								<img alt="rating" src="../resources/img/review/green-star.png" style="width: 15xp; height: 15px;">
+							</c:forEach>
+							<p>${reviewVO.contents}</p>
+							작성일 : ${reviewVO.regDate}
+						</div>
 					</div>
-				</div>
-				
-				<!-- 상점 정보 div -->
-				<div class="oap_storeInfo">
-					<div class="oap_siDiv">
-						<span class="storename">구매자</span>
-						<span class="storecrn">구매자정보</span>
-						<span class="storego">바로가기</span>
+					
+					<!-- 상점 정보 div -->
+					<div class="oap_storeInfo">
+						<div class="oap_siDiv">
+							<span class="storename">${reviewVO.memberVO.nickName}</span>
+							<span class="storecrn">${reviewVO.memberVO.email}</span>
+							<!-- <span class="storego">바로가기</span> -->
+						</div>
 					</div>
+					
+					<!-- 구매관련 정보 div -->
+					<div class="oap_payInfo">
+						<c:if test="${reviewVO.isReply eq 0}">
+							<div class="btn-reply" title="${reviewVO.boardNum}">답글작성</div>
+						</c:if>
+						<c:if test="${reviewVO.isReply eq 1}">
+							<div class="" title="${reviewVO.boardNum}">작성완료</div>
+							<div style="margin-top: 10px;" class="btn-reply-update" title="${reviewVO.boardNum}">답글수정</div>
+						</c:if>
+						
+					</div>
+					
 				</div>
-				
-				<!-- 구매관련 정보 div -->
-				<div class="oap_payInfo">
-					<div>답글작성</div>
-				</div>
-				
-			</div>
-			<hr>
+				<hr>
+			</c:forEach>
+			
+			
+			
 			
 		</div>
 	</div>
+	<script type="text/javascript">
+		$(".btn-reply").click(function() {
+			location.href="../review/reviewReply?boardNum="+$(this).attr("title");
+		});
+	</script>
+	
 </body>
-</html>

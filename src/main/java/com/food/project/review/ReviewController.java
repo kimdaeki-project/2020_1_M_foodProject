@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cglib.transform.impl.AddDelegateTransformer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.food.project.board.BoardVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
+import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
 import com.food.project.ordered.OrderedService;
 import com.food.project.ordered.OrderedVO;
@@ -32,15 +32,88 @@ public class ReviewController {
 	private MarketService marketService;
 	@Autowired
 	private OrderedService orderedService;
+	@Autowired
+	private MemberService memberService;
+	
+	
+	//마켓 리뷰 리스트 조회
+	@GetMapping("reviewMarket")
+	public ModelAndView marketReview(Pager pager,MarketVO marketVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("marketReview Controller IN");
+		System.out.println("marketNum  : "+marketVO.getNum());
+
+		pager.setMarketNum(marketVO.getNum());
+		
+		
+		List<ReviewVO> reviewList = reviewService.reviewMarketList(pager);
+		
+		
+		for (ReviewVO reviewVO : reviewList) {
+			System.out.println(reviewVO.getIsReply());
+		}
+		
+		mv.addObject("reviewList", reviewList);
+		
+		mv.setViewName("review/reviewMarket");
+		return mv;
+	}
+	
+	//덧글(reply)달기(GET/POST)
+	@GetMapping("reviewReply")
+	public ModelAndView reviewReply(ReviewVO reviewVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("부모의 boardNum : "+reviewVO.getBoardNum());
+		
+		//리뷰 작성자의 정보
+		reviewVO = reviewService.reviewSelect(reviewVO);
+		
+		//멤버 정보 조회(memberVO.nickName)
+		MemberVO memberVO = new MemberVO();
+		memberVO.setNum(reviewVO.getMemberNum());
+		memberVO = memberService.memberSelect(memberVO);
+		
+		//메뉴명 조회(orderedVO.menuName)
+		OrderedVO orderedVO = new OrderedVO();
+		orderedVO.setNum(reviewVO.getOrderNum());
+		orderedVO = orderedService.orderedSelect(orderedVO);
+		
+		
+		mv.addObject("reviewVO", reviewVO);
+		mv.addObject("memberVO", memberVO);
+		mv.addObject("orderedVO", orderedVO);
+		
+		mv.setViewName("review/reviewReply");
+		
+		return mv;
+	}
+	@PostMapping("reviewReply")
+	public ModelAndView reviewReply2(ReviewVO reviewVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//리뷰에 덧글 등록
+		int result = reviewService.boardReply(reviewVO);
+		
+		if(result > 0) {
+			System.out.println("덧글 등록 성공");
+			mv.setViewName("redirect:member/memberPage");
+		}else {
+			System.out.println("덧글 등록 실패");
+		}
+		
+		
+		return mv;
+	}
+	
 	
 	//한 멤버가 작성한 리뷰목록 출력
 	@GetMapping("myReviewList")
 	public ModelAndView myReviewList(MemberVO memberVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("나의 후기목록");
+//		System.out.println("나의 후기목록");
 		
 		long memberNum = memberVO.getNum();
-		System.out.println("memberNum: "+memberNum);
+//		System.out.println("memberNum: "+memberNum);
 		
 		List<ReviewVO> myReviewList = reviewService.myReviewList(memberNum); 
 		
@@ -54,29 +127,13 @@ public class ReviewController {
 	}
 	
 	
-	//덧글달기(GET)
-	@GetMapping("reviewReply")
-	@ResponseBody
-	public int reviewReply(ReviewVO reviewVO) throws Exception{
-		
-		int result = reviewService.boardReply(reviewVO);
-		if(result > 0) {
-			System.out.println("덧글 등록 성공");
-		}else {
-			System.out.println("덧글 등록 실패");
-		}
-		return result;
-	}
+	
 	
 	
 	//리뷰리스트 출력(GET)
 	@GetMapping("reviewList")
 	public ModelAndView reviewList(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-		
-		System.out.println("reviewController curPage : "+pager.getCurPage());
-		System.out.println("유저번호 : "+marketVO.getUserNum());
 		
 		//넘겨받은 userNum으로 해당 마켓의 전체 정보 조회
 		marketVO = marketService.marketSelect(marketVO);

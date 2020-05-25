@@ -29,6 +29,17 @@ public class ReviewService implements BoardService{
 	private FileSaver fileSaver;
 	
 	
+	//마켓의 전체 리뷰 목록 출력
+	public List<ReviewVO> reviewMarketList(Pager pager) throws Exception{
+		pager.makeRow();
+		long marketNum = pager.getMarketNum();
+		long totalCount = reviewDAO.marketReviewCount(marketNum);
+		
+		pager.makePage(totalCount);
+		
+		return reviewDAO.reviewMarketList(pager);
+	}
+	
 	//이미지가 존재하는 리뷰의 전체 목록 조회
 	public List<ReviewVO> imgTatalList(MarketVO marketVO) throws Exception{
 		return reviewDAO.imgTatalList(marketVO);
@@ -47,13 +58,11 @@ public class ReviewService implements BoardService{
 	
 	//한 마켓의 총 평점 계산
 	public Double marketAvg(long marketNum) throws Exception{
-		
 		Double avg = reviewDAO.marketAvg(marketNum);
 		if(avg == null) {
 			avg = 0.0;
 		}
 		
-		System.out.println("avg: " +avg);
 		return avg;
 	}
 	
@@ -64,9 +73,16 @@ public class ReviewService implements BoardService{
 	
 	
 	//덧글달기
-	public int boardReply(BoardVO boardVO) throws Exception{
-		int result = reviewDAO.boardReplyUpdate(boardVO);
-		result = reviewDAO.boardReply(boardVO);
+	public int boardReply(ReviewVO reviewVO) throws Exception{
+		int result = reviewDAO.boardReply(reviewVO);
+		
+		if(result < 1) {
+			throw new Exception();
+		}
+		
+		//부모의 reviewVO에 값을 0에서 1로 변환
+		result = reviewDAO.isReplyUpdate(reviewVO.getBoardNum());
+		
 		
 		return result;
 	}

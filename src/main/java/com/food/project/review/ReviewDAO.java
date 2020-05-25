@@ -18,7 +18,15 @@ public class ReviewDAO implements BoardDAO{
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.food.project.review.ReviewDAO.";
 	
+	//리뷰의 마켓 리스트 조회
+	public List<ReviewVO> reviewMarketList(Pager pager) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"reviewMarketList", pager);
+	}
 	
+	//덧글 작성시 IsReply값 변경
+	public int isReplyUpdate(long boardNum) throws Exception{
+		return sqlSession.update(NAMESPACE+"isReplyUpdate", boardNum);
+	}
 	
 	//이미지가 존재하는 리뷰의 전체 목록 조회
 	public List<ReviewVO> imgTatalList(MarketVO marketVO) throws Exception{
