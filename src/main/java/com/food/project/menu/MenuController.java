@@ -326,11 +326,8 @@ public class MenuController {
 				if(result < 1) {
 					throw new Exception();
 				}
-				
 			}
-			
 			result = categoryService.categoryDelete(menuVO.getNum());
-			
 //			System.out.println("카테고리 삭제 완료");
 		}
 		

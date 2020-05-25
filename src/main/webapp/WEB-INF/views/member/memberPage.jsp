@@ -70,15 +70,9 @@
                <c:if test="${memberVO.isFoodTruck eq '1'}">
                	  <!-- 트럭 주문 들어온 내역 -->
                   <li id="marketOrder" class="mp_myInfoNav_li">
-                  	<a class="mp_myInfoNav_a" href="#">주문 리스트</a>
+                  	<a class="mp_myInfoNav_a" href="#">[마켓] 주문 리스트</a>
                   <li id="marketPage" class="mp_myInfoNav_li">
-                  	<a class="mp_myInfoNav_a" href="#">마켓 정보 수정</a>
-                  </li>
-                  <li id="menuAdd" class="mp_myInfoNav_li">
-                  	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 추가</a>
-                  </li>
-                  <li id="menuUpdate" class="mp_myInfoNav_li">
-                  	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 수정</a>
+                  	<a class="mp_myInfoNav_a" href="#">[마켓] 정보 수정</a>
                   </li>
                   <li id="marketMenu" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">[마켓] 메뉴리스트</a>
@@ -214,14 +208,6 @@
 			});
 		});
 
-		//메뉴 카테고리 추가
-		$('#menuAdd').click(function() {
-			$.get("../menu/menuAdd", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		
 		
 		//메뉴리스트 조회
 		$('#marketMenu').click(function() {
