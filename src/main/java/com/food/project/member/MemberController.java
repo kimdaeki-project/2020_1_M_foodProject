@@ -31,23 +31,23 @@ public class MemberController {
 	private MailService mailService;
 	
 	
-	@GetMapping("idSearch")
+	@GetMapping("mailCertification")
 	@ResponseBody
 	public int idSearch(String email) throws Exception{
-		
-		System.out.println(email);
-		
 		int result=1;
 		
 		MailVO mailVO = new MailVO();
 		
-		mailVO.setSubject("AnimalC 아이디/비밀번호 찾기 메일입니다!");
-		mailVO.setSenderMail("gotaem17@gmail.com");
-		mailVO.setSenderName("AnimalC");
-		mailVO.setReceiveMail(email);
-		mailVO.setMessage("찾으시는 아이디는  admin 입니다.");
+		int rnd = (int)Math.random()*1000;
+		System.out.println(rnd);
 		
-		mailService.sendMail(mailVO);
+		mailVO.setSubject("Fusulian 아이디/비밀번호 찾기 메일입니다!");
+		mailVO.setSenderMail("gotaem17@gmail.com");
+		mailVO.setSenderName("Fusulian");
+		mailVO.setReceiveMail(email);
+		mailVO.setMessage("인증 번호는 "+ rnd +" 입니다.");
+		
+		//mailService.sendMail(mailVO);
 		
 		return result;
 	}
