@@ -134,8 +134,17 @@
     border: 1px solid #dedede;
 }
 
-hr{
-	
+.addMenu{
+    color: #6f7174;
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    margin: 5px;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #dedede;
+    background-color: #fff;
+    cursor: pointer;
 }
 </style>
 
@@ -144,10 +153,13 @@ hr{
 <body style="width: 100%;">
 	<div>
 		<div style="margin-left: 50px;">
-			<h2>마켓 메뉴 리스트</h2>
+			<div style="display: flex; justify-content: space-between;
+    				border-bottom: 1px solid #e7e7e7;">
+				<h2 style="border: none;">마켓 메뉴 리스트</h2>
+				<input type="button" value="+" class="addMenu">
+			</div>
+			
 			<!-- 하단의 div가 반복 -->
-			
-			
 			<c:forEach var="menuVO" items="${menuList}">
 				<div class="oap_item">
 					<div class="oap_itemInfo">
