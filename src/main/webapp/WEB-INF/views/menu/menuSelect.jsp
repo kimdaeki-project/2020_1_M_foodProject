@@ -37,7 +37,7 @@
 									</label>
 									<div style="padding-right: 30px;">
 										<input type="button" class="minus" value="ー">
-										<input type="text" value="0" class="quantity" id="${num}">
+										<input type="text" value="0" class="quantity">
 										<input type="button" class="plus" value="+">
 									</div>
 								</dd>
@@ -69,7 +69,8 @@
 		//수량조절
 		$(".plus").click(function() {
 			quantity++;	
-			$(".quantity").val(quantity);
+
+			$(this).prev().val(quantity);
 			console.log(quantity);
 		});
 		

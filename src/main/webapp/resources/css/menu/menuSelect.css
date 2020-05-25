@@ -83,6 +83,7 @@ input[type=radio].ml_radio{
 	background-color: #fff;
 	color: #3d3d3d;
 	border: 1px solid #c0c0c0;
+	border-right: none;
 	border-radius: 5px 0 0 5px;
 	height: 27px;
 	width: 30px;
@@ -110,6 +111,7 @@ input[type=radio].ml_radio{
 	height: 23px;
 	width: 30px;
 	border: none;
+	border-left: 1px solid #c0c0c0;
 	border-top: 1px solid #c0c0c0;
 	border-bottom: 1px solid #c0c0c0;
 	text-align: center;
