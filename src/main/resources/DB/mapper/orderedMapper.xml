@@ -10,15 +10,11 @@
 	</select>
 
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
-		select j.*,m2.thumbImg as menuThumbImg, m2.name as menuName
-		from
-		(select o.num,o.menunum,o.memberNum, o.catemenuoptions, o.pcs, o.amount, o.timeLag, o.isReview, m.marketname
-		from ordered o join market m
-		on(o.marketNum = m.num)
-		WHERE o.isOrderChecked = 0)j 
-		join menu m2
-		on(j.menuNum = m2.num)
-		where j.memberNum = #{memberNum} 
+		SELECT * FROM ordered where memberNum=#{memberNum} AND isOrderChecked=#{isOrderChecked}
+	</select>
+	
+	<select id="orderedListNot" parameterType="OrderedVO" resultType="OrderedVO">
+		SELECT * FROM ordered where memberNum=#{memberNum} AND isOrderChecked!=#{isOrderChecked}
 	</select>
 	
 	<select id="orderedSelect" parameterType="OrderedVO" resultType="OrderedVO">

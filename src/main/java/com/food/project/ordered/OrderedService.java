@@ -17,6 +17,11 @@ public class OrderedService {
 		return orderedDAO.orderedList(orderedVO);
 	}
 	
+	// 주문 전체 조회 2 
+	public List<OrderedVO> orderedListNot(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedListNot(orderedVO);
+	}
+	
 	//주문 조회 - SelectOne (유저ID or 판매자ID)
 	public OrderedVO orderedSelect(OrderedVO orderedVO) throws Exception{
 		return orderedDAO.orderedSelect(orderedVO);
