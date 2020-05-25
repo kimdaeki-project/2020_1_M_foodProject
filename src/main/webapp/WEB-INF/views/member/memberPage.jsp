@@ -77,7 +77,7 @@
                   <li id="marketMenu" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">[마켓] 메뉴 리스트</a>
                   </li>
-                  <li id="marketReview" class="mp_myInfoNav_li">
+                  <li id="reviewMarket" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">[마켓] 리뷰 리스트</a>
                   </li>
                  
@@ -226,13 +226,13 @@
 		});
 		
 		//마켓 리뷰 리스트 조회
-		$('#marketReview').click(function() {
+		$('#reviewMarket').click(function() {
 			
-			location.href="../review/marketReview";
-// 			$.get("../review/marketReview?marketNum=${sessionScope.marketVO.num}", function(result) {
-// 				$('.mp_box').empty();
-// 				$('.mp_box').append(result);
-// 			});
+			//location.href="../review/reviewMarket?num=${sessionScope.marketVO.num}";
+			$.get("../review/reviewMarket?num=${sessionScope.marketVO.num}", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
 		});
 		
 		

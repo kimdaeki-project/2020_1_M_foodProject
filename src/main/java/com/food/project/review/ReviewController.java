@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.food.project.board.BoardVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
+import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
 import com.food.project.ordered.OrderedService;
 import com.food.project.ordered.OrderedVO;
@@ -31,31 +32,77 @@ public class ReviewController {
 	private MarketService marketService;
 	@Autowired
 	private OrderedService orderedService;
+	@Autowired
+	private MemberService memberService;
 	
 	
 	//마켓 리뷰 리스트 조회
-	@GetMapping("marketReview")
-	public ModelAndView marketReview(MarketVO marketVO) throws Exception{
+	@GetMapping("reviewMarket")
+	public ModelAndView marketReview(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		System.out.println("marketReview Controller IN");
+		System.out.println("marketNum  : "+marketVO.getNum());
+
+		pager.setMarketNum(marketVO.getNum());
 		
 		
-		mv.setViewName("review/marketReview");
+		List<ReviewVO> reviewList = reviewService.reviewMarketList(pager);
+		
+		
+		for (ReviewVO reviewVO : reviewList) {
+			System.out.println(reviewVO.getIsReply());
+		}
+		
+		mv.addObject("reviewList", reviewList);
+		
+		mv.setViewName("review/reviewMarket");
 		return mv;
 	}
 	
-	//덧글(reply)달기(GET)
+	//덧글(reply)달기(GET/POST)
 	@GetMapping("reviewReply")
-	@ResponseBody
-	public int reviewReply(ReviewVO reviewVO) throws Exception{
+	public ModelAndView reviewReply(ReviewVO reviewVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("부모의 boardNum : "+reviewVO.getBoardNum());
 		
+		//리뷰 작성자의 정보
+		reviewVO = reviewService.reviewSelect(reviewVO);
+		
+		//멤버 정보 조회(memberVO.nickName)
+		MemberVO memberVO = new MemberVO();
+		memberVO.setNum(reviewVO.getMemberNum());
+		memberVO = memberService.memberSelect(memberVO);
+		
+		//메뉴명 조회(orderedVO.menuName)
+		OrderedVO orderedVO = new OrderedVO();
+		orderedVO.setNum(reviewVO.getOrderNum());
+		orderedVO = orderedService.orderedSelect(orderedVO);
+		
+		
+		mv.addObject("reviewVO", reviewVO);
+		mv.addObject("memberVO", memberVO);
+		mv.addObject("orderedVO", orderedVO);
+		
+		mv.setViewName("review/reviewReply");
+		
+		return mv;
+	}
+	@PostMapping("reviewReply")
+	public ModelAndView reviewReply2(ReviewVO reviewVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		//리뷰에 덧글 등록
 		int result = reviewService.boardReply(reviewVO);
+		
 		if(result > 0) {
 			System.out.println("덧글 등록 성공");
+			mv.setViewName("redirect:member/memberPage");
 		}else {
 			System.out.println("덧글 등록 실패");
 		}
-		return result;
+		
+		
+		return mv;
 	}
 	
 	
@@ -87,9 +134,6 @@ public class ReviewController {
 	@GetMapping("reviewList")
 	public ModelAndView reviewList(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
-//		System.out.println("reviewController curPage : "+pager.getCurPage());
-//		System.out.println("유저번호 : "+marketVO.getUserNum());
 		
 		//넘겨받은 userNum으로 해당 마켓의 전체 정보 조회
 		marketVO = marketService.marketSelect(marketVO);

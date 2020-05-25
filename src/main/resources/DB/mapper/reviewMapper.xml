@@ -24,6 +24,50 @@
 		</association>
 	</resultMap>
 	
+	<resultMap type="ReviewVO" id="reviewMarketResult">
+		<id column="boardNum" property="boardNum"/> 
+		<result column="memberNum" property="memberNum"/>
+		<result column="marketNum" property="marketNum"/>
+		<result column="fileName" property="fileName"/>
+		<result column="rating" property="rating"/>
+		<result column="contents" property="contents"/>
+		<result column="regDate" property="regDate"/>
+		<result column="ref" property="ref"/>
+		<result column="step" property="step"/>
+		<result column="depth" property="depth"/>
+		<result column="orderNum" property="orderNum"/>
+		<result column="isReply" property="isReply"/>
+		
+		<association property="memberVO" javaType="MemberVO">
+			<result column="nickName" property="nickName"/>
+			<result column="email" property="email"/>
+		</association>
+		
+		<association property="orderedVO" javaType="OrderedVO">
+			<result column="menuName" property="menuName"/>
+			<result column="amount" property="amount"/>
+			<result column="cateMenuOptions" property="cateMenuOptions"/>
+			<result column="createAt" property="createAt"/>
+			
+		</association>
+	</resultMap>
+	
+	
+	<select id="reviewMarketList" parameterType="Pager" resultMap="reviewMarketResult">
+		select E.*,O.menuName,O.amount,O.createAt,O.cateMenuOptions from
+		(select * from ordered where isorderchecked = 2) O  join
+		(select A.*,B.nickName,B.email from 
+		(select * from
+		(select Q.*,rownum R from
+		(select * from review
+		where marketNum=#{marketNum} and step=0
+		order by ref desc, step asc) Q)
+		where R between #{startRow} and #{lastRow})A
+		join (select num,nickname,email from member)B
+		on(a.membernum = B.num))E
+		on(O.num = E.orderNum)
+	</select>
+		
 	<select id="reviewSelect" parameterType="ReviewVO" resultType="ReviewVO">
 		select * from review where boardNum = #{boardNum}
 	</select>
@@ -68,7 +112,7 @@
 	
 	<insert id="boardInsert" parameterType="ReviewVO">
 		insert into review values(#{boardNum},#{memberNum},#{marketNum},#{fileName,jdbcType=VARCHAR},#{rating},#{contents},sysdate,
-		#{boardNum},0,0,#{orderNum})
+		#{boardNum},0,0,#{orderNum},0)
 	</insert>
 	
 	
@@ -80,21 +124,26 @@
 		
 	</update>
 	
+	<update id="boardUpdate" parameterType="ReviewVO">
+		update review set contents=#{contents},rating=#{rating},fileName=#{fileName},regDate=sysdate where boardNum=#{boardNum}
+	</update>
+	
 	<insert id="boardReply" parameterType="ReviewVO">
-		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},#{fileName,jdbcType=VARCHAR},#{rating},#{contents},sysdate,
+		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},null,0,#{contents},sysdate,
 		(select ref from review where boardNum=#{boardNum}),
 		(select step from review where boardNum=#{boardNum})+1,
-		(select depth from review where boardNum=#{boardNum})+1
-		)
+		(select depth from review where boardNum=#{boardNum})+1,#{orderNum},0)
 	</insert>
+	
+	<update id="isReplyUpdate" parameterType="Long">
+		update review set isreply = 1 where boardNum = #{boardNum};
+	</update>
 	
 	<delete id="boardDelete" parameterType="ReviewVO">
 		delete from review where boardNum=#{boardNum}
 	</delete>
 	
-	<update id="boardUpdate" parameterType="ReviewVO">
-		update review set contents=#{contents},rating=#{rating},fileName=#{fileName},regDate=sysdate where boardNum=#{boardNum}
-	</update>
+	
 		
 </mapper>
 
