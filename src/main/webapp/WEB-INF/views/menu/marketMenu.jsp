@@ -132,6 +132,7 @@
     text-decoration: none;
     text-align: center;
     border: 1px solid #dedede;
+    cursor: pointer;
 }
 
 .addMenu{
@@ -156,7 +157,7 @@
 			<div style="display: flex; justify-content: space-between;
     				border-bottom: 1px solid #e7e7e7;">
 				<h2 style="border: none;">마켓 메뉴 리스트</h2>
-				<input type="button" value="+" class="addMenu">
+				<input type="button" value="+" class="addMenu" id="menuAdd">
 			</div>
 			
 			<!-- 하단의 div가 반복 -->
@@ -182,7 +183,7 @@
 					<!-- 구매관련 정보 div -->
 					<div class="oap_payInfo">
 						<div class="menuUpdate" title="${menuVO.num}">수정하기</div>
-						<div style="margin-top: 10px;">삭제하기</div>
+						<div class="menuDelete" title="${menuVO.num}" style="margin-top: 10px;">삭제하기</div>
 					</div>
 				</div>
 
@@ -210,6 +211,16 @@
 				$('.mp_box').append(result);
 			});
 		});
+		//메뉴 카테고리 수정
+		$('.menuDelete').click(function() {
+			$.get("../menu/menuDelete?num="+$(this).attr("title"), function(result) {
+				
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
+		
 	</script>
 
 </body>

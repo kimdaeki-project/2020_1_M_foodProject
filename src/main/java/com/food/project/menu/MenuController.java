@@ -207,7 +207,7 @@ public class MenuController {
 				
 			}
 			
-			mv.setViewName("member/memberPage");
+			mv.setViewName("redirect:../member/memberPage");
 		}
 		
 		
@@ -482,18 +482,12 @@ public class MenuController {
 
 		}		
 		
-		
-		
-		
-		
-		
-		
 		String msg = "메뉴 수정 실패";
 		String url = "./menuUpdate?num=142";
 		
 		if(result > 0) {
 			msg = "메뉴가 수정 되었습니다";
-			url = "../member/memberPage";
+			url = "redirect:../member/memberPage";
 		}
 		
 		// 이미지 테이블에 insert
@@ -505,21 +499,24 @@ public class MenuController {
 	
 	@GetMapping("menuDelete")
 	public ModelAndView menuDelete(MenuVO menuVO, HttpSession session) throws Exception {
-		
 		ModelAndView mv = new ModelAndView();
 		
 		int result = menuService.menuDelete(menuVO, session);
+		
+		
 		String msg = "메뉴 삭제 실패";
-		String url = "./menuSelect?num="+menuVO.getNum();
+		String url = "member/memberPage";
+		
 		if(result > 0) {
 			msg = "메뉴가 삭제 되었습니다";
-			url = "./menuList";
+			url = "redirect:../member/memberPage";
 		}
 		
-		// 이미지 테이블에 insert
 		mv.addObject("msg", msg);
 		mv.addObject("path", url);
 		mv.setViewName("common/result");
+		
+		
 		return mv;
 	}
 }
