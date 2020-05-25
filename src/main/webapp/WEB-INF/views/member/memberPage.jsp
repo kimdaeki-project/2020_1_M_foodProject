@@ -13,7 +13,7 @@
 </head>
 <body>
    <%@ include file="../templates/header.jsp"%>
-   <div style="padding: 103px 10%">
+   <div class="divBody">
       <div class="mp_myInfoBox">
          <div class="mp_pic">
             <img src="${pageContext.request.contextPath}/resources/img/ico-leaf.svg">

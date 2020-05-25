@@ -109,6 +109,19 @@ border-top: 1px solid #e7e7e7;
 	text-decoration: none;
 }
 
+#btn-map{
+	border-radius: 3px;
+    background-color: #258fff;
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 50px;
+    font-weight: 600;
+}
+
 
 /****** tm *************/
 

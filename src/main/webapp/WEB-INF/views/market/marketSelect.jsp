@@ -54,9 +54,9 @@
 		</div>
 		<a name="map2"></a>
 
-		<div id="map" style="width: 800px; height: 400px; margin: 50px auto;"></div>
+		<div id="map" style="width: 800px; height: 400px; margin: 20px auto;"></div>
 		<div style="margin: 0 auto; text-align: center;">
-			<input type="button" value="길찾기" id="btn-map"> 
+			<input type="button" value="카카오 맵으로 길찾기" id="btn-map"> 
 			<a name="review"></a>
 		</div>
 
