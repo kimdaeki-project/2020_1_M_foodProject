@@ -147,7 +147,7 @@ hr{
 	cursor: pointer;
 }
 
-.cancelReason{
+.cancleReason{
 	display: none;
 	margin-bottom: 23px;
 }
@@ -156,7 +156,7 @@ hr{
     padding: 10px 20px;
 }
 
-.cr_ta{
+.cancleTextArea{
 	resize: none;
     width: 95%;
     margin: 0 20px;
@@ -217,17 +217,19 @@ hr{
 					</div>
 				</div>
 				<c:if test="${orderedVO.isOrderChecked eq 1}">
-					<div class="cancelReason">
+					<div class="cancleReason" data-num="${orderedVO.num}" data-show="0">
 						<div class="cr_select">
-						주문 취소 사유<select style="padding: 2px 5px; margin-left: 10px;">
-							<option>이유1</option>
-							<option>이유2</option>
-							<option>이유3</option>
-							<option>이유4</option>
-						</select>
-						<button>?</button>
+							주문 취소 사유
+							<!-- (0:기타, 1:마켓의 요청으로 취소(취소 사유에 뜨지않음) 2:재주문을 위한 취소(default), 3:너무 먼 거리로 인한 취소, 4: 단순변심 -->
+							<select class="cancleReasonSelect" style="padding: 2px 5px; margin-left: 10px;" data-num="${orderedVO.num}">
+								<option value="2">재주문을 위한 취소</option>
+								<option value="3">너무 먼 거리로 인한 취소</option>
+								<option value="4">단순변심으로 인한 취소</option>
+								<option value="0">기타 사유</option>
+							</select>
+							<button class="orderCancleBtn" data-num="${orderedVO.num}">취소 요청</button>
 						</div>
-						<textarea rows="" cols="" placeholder="주문 취소 이유를 적어주세요!" class="cr_ta"></textarea>
+						<textarea rows="" cols="" placeholder="주문 취소 이유를 적어주세요!" class="cancleTextArea" data-num="${orderedVO.num}"></textarea>
 					</div>
 				</c:if>
 				<hr class="orderHr" style="border-bottom : 1px solid; border-color : #e7e7e7;" data-num="${orderedVO.num}">
@@ -247,18 +249,39 @@ hr{
 			});
 		});
 	
-		/* // 구매 취소
-		$(".orderCancle").each(function() {
+		// 구매 취소
+		$(".orderCancleBtn").each(function() {
 			
 			var thisObj = $(this);
 			$(this).click(function() {
 				
 				var num = $(this).data("num");
 				var result = confirm("정말 취소하시겠습니까?");
+				var cancleDetail; 
+				var cancleType;
+				
+				$('.cancleTextArea').each(function() {
+					if($(this).data("num") === num)
+						cancleDetail = $(this).val();
+				});
+				
+				$('.cancleReasonSelect').each(function() {
+					if($(this).data("num") === num) {
+						cancleType = $(this).val();
+					}
+				});
+				
+				console.log(cancleDetail);
+				console.log(cancleType);
+				
 				if(result) {
 					// post로 삭제
 					url = "../ordered/orderCancle";
-					data = { num: num };
+					data = { 
+						num: num, 
+						cancleType : cancleType, 
+						cancleDetail : cancleDetail
+					};
 					$.post(url, data, function(result) {
                     	
 						// 원래 환불 절차를 진행해야 하지만 현재 어려운 상태,
@@ -266,17 +289,26 @@ hr{
 						if(result > 0) {
 							
 							// div 내용 지우기
-							console.log(thisObj);
-							var parent = thisObj.parent().parent();
-							console.log(parent);
-							parent.remove();
+							$('.oap_item').each(function() {
+								var oap_itemNum = $(this).data("num");
+								if(num === oap_itemNum) {
+									$(this).remove();
+								}
+							});
+							
+							// 취소 요청 창 지우기
+							$('.cancleReason').each(function() {
+								var cancleReasonNum = $(this).data("num");
+								if(num === cancleReasonNum) {
+									$(this).remove();
+								}
+							});
 							
 							// hr지우기
 							$('.orderHr').each(function() {
 								
 								var orderHrNum = $(this).data("num");
 								if(num === orderHrNum) {
-									console.log($(this));
 									$(this).remove();
 								}
 							});
@@ -284,11 +316,35 @@ hr{
                		});
 				}
 			});
-		}); */
+		});
 		
-		//
-		$(".orderCancle").click(function() {
-			$('.cancelReason').css('display','grid');
+		// 취소 요청란 열기/접기
+		function showCancleReason(num) {
+			
+			$('.cancleReason').each(function() {
+				
+				var thisNum = $(this).data("num");
+				var thisShow = $(this).data("show");
+				
+				if(thisNum === num && thisShow == 0) {
+					$(this).css('display','grid');
+					$(this).data("show","1");
+				} else if(thisNum === num && thisShow == 1) {
+					$(this).css('display','none');
+					$(this).data("show","0");
+				}
+			});
+		}
+		
+		// 취소 요청 이벤트 핸들러
+		$(".orderCancle").each(function() {
+			
+			$(this).click(function() {
+				
+				var num = $(this).data("num");
+				
+				showCancleReason(num);
+			});
 		});
 		
 		// 후기 쓰기

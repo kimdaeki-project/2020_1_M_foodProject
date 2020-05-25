@@ -10,11 +10,11 @@
 	</select>
 
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
-		SELECT * FROM ordered where memberNum=#{memberNum} AND isOrderChecked=#{isOrderChecked}
+		SELECT * FROM ordered WHERE memberNum=#{memberNum} AND isOrderChecked=#{isOrderChecked} AND deleteAt IS NULL
 	</select>
 	
 	<select id="orderedListNot" parameterType="OrderedVO" resultType="OrderedVO">
-		SELECT * FROM ordered where memberNum=#{memberNum} AND isOrderChecked!=#{isOrderChecked}
+		SELECT * FROM ordered where memberNum=#{memberNum} AND isOrderChecked!=#{isOrderChecked} AND deleteAt IS NULL
 	</select>
 	
 	<select id="orderedSelect" parameterType="OrderedVO" resultType="OrderedVO">
@@ -35,7 +35,8 @@
 	<update id="orderedDone" parameterType="OrderedVO">
 		UPDATE ordered SET 
 		imp_uid=#{imp_uid, jdbcType=VARCHAR}, merchant_uid=#{merchant_uid, jdbcType=VARCHAR}, 
-		pg=#{pg, jdbcType=VARCHAR}, pay_method=#{pay_method}, apply_num=#{apply_num}, isOrderChecked=1 WHERE num=#{num}
+		pg=#{pg, jdbcType=VARCHAR}, pay_method=#{pay_method}, apply_num=#{apply_num, jdbcType=VARCHAR}, 
+		isOrderChecked=1 WHERE num=#{num}
 	</update>
 	
 	<!-- isReview 없데이트 -->
@@ -43,14 +44,16 @@
 		UPDATE ordered SET isReview = 1 WHERE num=#{num}
 	</update>
 	
+	<!-- 결제 후, 지우기(UPDATE deleteAt) -->
 	<update id="orderedCancle" parameterType="OrderedVO">
-		update ordered set cancleType=#{cancleType} where num=#{num}
+		UPDATE ordered SET cancleType=#{cancleType}, cancleDetail=#{cancleDetail, jdbcType=VARCHAR}, deleteAt=sysdate WHERE num=#{num}
 	</update>
 	
 	<delete id="cartDeleteAll" parameterType="OrderedVO">
 		delete from ordered where memberNum=#{memberNum}
 	</delete>
 	
+	<!-- 장바구니에서 지우기(DELETE) -->
 	<delete id="orderDelete" parameterType="OrderedVO">
 		DELETE FROM ordered WHERE num = #{num}
 	</delete>

@@ -74,6 +74,7 @@ public class OrderedService {
 	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)
 	public int orderedCancle(OrderedVO orderedVO) throws Exception{
+		
 		return orderedDAO.orderedCancle(orderedVO);
 	}
 	

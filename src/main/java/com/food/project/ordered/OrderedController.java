@@ -85,23 +85,13 @@ public class OrderedController {
 	@Transactional
 	public int orderedDone(OrderedVO orderedVO, @RequestParam(value = "orderedNum[]")List<String> orderedNum) throws Exception {
 		
-		// 데이터 들어오는거 확인해야함
-		System.out.println("orderedDone post");
-		System.out.println(orderedVO.getImp_uid());
-		System.out.println(orderedVO.getMerchant_uid());
-		System.out.println(orderedVO.getPg());
-		System.out.println(orderedVO.getPay_method());
-		
 		int result = 0;
 		for (String num : orderedNum) {
 			if(num.equals("null"))
 				break;
 			
-			System.out.println(num);
 			orderedVO.setNum(Integer.parseInt(num));
-			
 			result = orderedService.orderedDone(orderedVO);
-			System.out.println("result : "+result);
 		}
 		
 		return result;
@@ -233,8 +223,6 @@ public class OrderedController {
 	@PostMapping("orderCancle")
 	@ResponseBody
 	public int orderCancle(OrderedVO orderedVO) throws Exception{
-		
-		System.out.println("orderCancle num : " + orderedVO.getNum());
 		
 		int result = orderedService.orderedCancle(orderedVO);
 		
