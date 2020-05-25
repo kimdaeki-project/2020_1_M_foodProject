@@ -65,6 +65,7 @@ public class MarketService {
 	public int marketInsert(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		System.out.println("path : "+path);
 		
 		//marketCount값 증가

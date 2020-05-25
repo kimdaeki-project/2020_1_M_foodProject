@@ -53,16 +53,6 @@
                <a class="mp_myInfoNav_a" href="#">주문/결제 내역</a></li>
                
                
-               <c:if test="${memberVO.isFoodTruck eq '1'}">
-               <!-- 트럭 주문 들어온 내역 -->
-                  <li id="marketOrder" class="mp_myInfoNav_li">
-                  	<a class="mp_myInfoNav_a" href="#">주문 리스트</a>
-               <!-- 테스트 -->
-                  <li id="marketMenu" class="mp_myInfoNav_li">
-                  	<a class="mp_myInfoNav_a" href="#">테스트</a>
-               </c:if>
-               
-               
                <li id="myReview" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a" href="#">나의 후기</a></li>
                <li id="memberUpdate" class="mp_myInfoNav_li">
@@ -78,6 +68,9 @@
                
 				<!-- 판매자 일 때 -->
                <c:if test="${memberVO.isFoodTruck eq '1'}">
+               	  <!-- 트럭 주문 들어온 내역 -->
+                  <li id="marketOrder" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">주문 리스트</a>
                   <li id="marketPage" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">마켓 정보 수정</a>
                   </li>
@@ -86,7 +79,11 @@
                   </li>
                   <li id="menuUpdate" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">메뉴 & 카테고리 수정</a>
+                  </li>
+                  <li id="marketMenu" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">[마켓] 메뉴리스트</a>
                   </li> 
+                 
                  </c:if>
 
 
@@ -173,14 +170,6 @@
 			});
 		});
 		
-		//테스트
-		$('#marketMenu').click(function() {
-			$.get("./marketMenu", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		
 		//판매자에게 들어온 주문들
 		$('#marketOrder').click(function() {
 			$.get("./marketOrder", function(result) {
@@ -233,10 +222,10 @@
 			});
 		});
 		
-		//메뉴 카테고리 수정
-		$('#menuUpdate').click(function() {
-// 			location.href="../menu/menuUpdate?num=142";
-			$.get("../menu/menuUpdate?num=142", function(result) {
+		
+		//메뉴리스트 조회
+		$('#marketMenu').click(function() {
+			$.get("../menu/marketMenu?marketNum=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});

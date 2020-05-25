@@ -1,6 +1,9 @@
 package com.food.project.menu;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.food.project.category.CategoryVO;
 
 public class MenuVO {
 	
@@ -11,6 +14,18 @@ public class MenuVO {
     private String detail;
     private String thumbImg;
     private Date deleteAt;
+    
+    
+    private List<CategoryVO> categoryVOs;
+    
+    public List<CategoryVO> getCategoryVOs() {
+		return categoryVOs;
+	}
+	public void setCategoryVOs(List<CategoryVO> categoryVOs) {
+		this.categoryVOs = categoryVOs;
+	}
+    
+    
 	public long getNum() {
 		return num;
 	}

@@ -24,14 +24,18 @@ public class MenuService {
 	@Autowired
 	private FileInfoDAO fileInfoDAO;
 	
-	// Transaction
+
+	//마켓 메뉴 리스트 조회
+	public List<MenuVO> marketMenuList(MenuVO menuVO) throws Exception{
+		return menuDAO.marketMenuList(menuVO);
+	}
+	
 	// 메뉴 추가
 	public int menuAdd(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
 		// 저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
-		System.out.println("path : " + path);
-		
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
+		System.out.println("path : " + path);
 		
 		int result = 0;
 		
@@ -90,7 +94,6 @@ public class MenuService {
 	public int menuUpdate(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
-		
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
 		
 		System.out.println("path : "+path);
@@ -134,9 +137,10 @@ public class MenuService {
 	// Transaction
 	// 메뉴 삭제
 	public int menuDelete(MenuVO menuVO, HttpSession session) throws Exception {
-
 		// 경로 읽어오기
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
+		
 		
 		// 기존 계정에 관련된 파일들을 읽어옴
 		FileInfoVO fileInfoVO = new FileInfoVO();

@@ -5,13 +5,28 @@
   
 <mapper namespace="com.food.project.menu.MenuDAO">
 
-	<insert id="menuAdd" parameterType="MenuVO">
-		INSERT INTO menu VALUES(
-		    #{num}, #{marketNum}, #{name}, #{price}, #{detail}, #{thumbImg}, null
-		)
-	</insert>
+	<resultMap type="MenuVO" id="marketMenuResult">
+		<id column="num" property="num"/>
+		<result column="marketNum" property="marketNum"/>
+		<result column="name" property="name"/>
+		<result column="price" property="price"/>
+		<result column="detail" property="detail"/>
+		<result column="thumbImg" property="thumbImg"/>
+		<result column="deleteAt" property="deleteAt"/>
+
+		<collection property="categoryVOs" javaType="List" ofType="CategoryVO">
+			<result column="cateName" property="name"/>
+		</collection>	
+	</resultMap>
+
+	<select id="marketMenuList" parameterType="MenuVO" resultMap="marketMenuResult">
+		select m.*,c.name cateName from
+		(SELECT * FROM menu WHERE marketNum=#{marketNum} AND deleteAt IS NULL ) m 
+		join category c
+		on(m.num = c.menuNum)
+	</select>
 	
-	<select id="menuList" resultType="MenuVO">
+	<select id="menuList" parameterType="MenuVO" resultType="MenuVO">
 		SELECT * FROM menu WHERE marketNum=#{marketNum} AND deleteAt IS NULL
 	</select>
 	
@@ -22,6 +37,12 @@
 	<select id="menuCount" resultType="Long">
 		select menu_seq.nextval from dual
 	</select>
+	
+	<insert id="menuAdd" parameterType="MenuVO">
+		INSERT INTO menu VALUES(
+		    #{num}, #{marketNum}, #{name}, #{price}, #{detail}, #{thumbImg}, null
+		)
+	</insert>
 	
 	<update id="menuUpdate" parameterType="MenuVO">
 		UPDATE menu SET name=#{name}, price=#{price}, detail=#{detail}, thumbImg=#{thumbImg, jdbcType=VARCHAR} WHERE num=#{num} AND deleteAt IS NULL

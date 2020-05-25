@@ -1,7 +1,9 @@
 package com.food.project.market;
 
 import java.sql.Date;
+import java.util.List;
 
+import com.food.project.category.CategoryVO;
 import com.food.project.review.ReviewVO;
 
 public class MarketVO {
@@ -21,7 +23,11 @@ public class MarketVO {
 	private Date updateAt;
 	private Date deleteAt;
 	
+	
 	private ReviewVO reviewVO;
+	
+	
+	
 	
 	public ReviewVO getReviewVO() {
 		return reviewVO;

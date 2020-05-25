@@ -13,28 +13,29 @@ public class MenuDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "com.food.project.menu.MenuDAO.";
 	
+	
+	//마켓 리스트 출력
+	public List<MenuVO> marketMenuList(MenuVO menuVO) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"marketMenuList", menuVO);
+	}
+	
 	// 메뉴 추가
 	public int menuAdd(MenuVO menuVO) throws Exception {
-				
 		return sqlSession.insert(NAMESPACE+"menuAdd", menuVO);
 	}
 	
 	// 메뉴 리스트 읽어오기
 	public List<MenuVO> menuList(MenuVO menuVO) throws Exception {
-		
-		System.out.println("asdasdas");
 		return sqlSession.selectList(NAMESPACE+"menuList", menuVO);
 	}
 	
 	// 메뉴 단일 읽어오기
 	public MenuVO menuSelect(MenuVO menuVO) throws Exception {
-		
 		return sqlSession.selectOne(NAMESPACE+"menuSelect", menuVO);
 	}
 	
 	// 메뉴 seq 값 가져오기
 	public Long menuCount() throws Exception {
-
 		return sqlSession.selectOne(NAMESPACE + "menuCount");
 	}
 	

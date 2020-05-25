@@ -1,16 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html><%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <head>
 <meta charset="UTF-8">
@@ -66,7 +55,7 @@
 
 .oap_ii_info{
 	margin-left: 10px;
-	width: 100%;
+	width: 70%;
 }
 
 .oap_ii_info > span{
@@ -146,48 +135,55 @@ hr{
 	
 }
 </style>
+
 <title>판매자 주문내역 페이지</title>
 </head>
-<body style="width: 100%">
+<body style="width: 100%;">
 	<div>
 		<div style="margin-left: 50px;">
-			<h2>테스트</h2>
+			<h2>마켓 메뉴 리스트</h2>
 			<!-- 하단의 div가 반복 -->
-			<div class="oap_item">
-				
-				<!-- 아이템 정보 div -->
-				<div class="oap_itemInfo">
-					<a class="oap_ii_storePic">
-						<img alt="메뉴대표사진" src="${pageContext.request.contextPath}/resources/img/food2.png">
-					</a>
-					<div class="oap_ii_info">
-						<div class="oap_items">
-							<strong>메뉴이름</strong>
-							<em>메뉴설명</em>
+			
+			
+			<c:forEach var="menuVO" items="${menuList}">
+				<div class="oap_item">
+					<div class="oap_itemInfo">
+						<a class="oap_ii_storePic">
+							<img alt="메뉴대표사진" src="${pageContext.request.contextPath}/resources/upload/menu/${menuVO.thumbImg}">
+						</a>
+						<div class="oap_ii_info">
+							<div class="oap_items">
+								<strong>${menuVO.name}</strong>
+								<em>${menuVO.detail}</em>
+							</div>
+							<p>
+							<c:forEach var="categoryVO" items="${menuVO.categoryVOs}">
+								${categoryVO.name} / 
+							</c:forEach>
+							</p> 
 						</div>
-						<p>
-						옵션1 - 가격<br>
-						옵션2 - 가격
-						</p>
+					</div>
+					
+					<!-- 구매관련 정보 div -->
+					<div class="oap_payInfo">
+						<div>수정하기</div>
+						<div style="margin-top: 10px;">삭제하기</div>
 					</div>
 				</div>
-				
-				<!-- 상점 정보 div -->
-				<div class="oap_storeInfo">
-					<div class="oap_siDiv">
-						<span class="storename">총 주문횟수</span>
-					</div>
-				</div>
-				
-				<!-- 구매관련 정보 div -->
-				<div class="oap_payInfo">
-					<div>확인하기</div>
-					<div style="margin-top: 10px;">수정하기</div>
-				</div>
-				
-			</div>
-			<hr>
+				<hr>
+			</c:forEach>
+			
 			
 		</div>
 	</div>
+	<script type="text/javascript">
+		//메뉴 카테고리 수정
+		$('#menuUpdate').click(function() {
+			$.get("../menu/menuUpdate?num=", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+	</script>
+	
 </body>

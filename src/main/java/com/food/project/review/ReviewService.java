@@ -93,7 +93,8 @@ public class ReviewService implements BoardService{
 	//@Override
 	public int boardInsert(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception {
 		String path = session.getServletContext().getRealPath("/resources/upload/review");
-		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";  //집
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
+		//path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";  //집
 		
 		int result = 0;
 		
@@ -139,7 +140,8 @@ public class ReviewService implements BoardService{
 	//리뷰 수정
 	public int boardUpdate(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception {
 		String path = session.getServletContext().getRealPath("/resources/upload/review");
-		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";  //집
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
+		//path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";  //집
 		
 		int result = 0;
 		

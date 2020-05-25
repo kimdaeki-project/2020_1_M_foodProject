@@ -38,6 +38,24 @@ public class MenuController {
 	private MarketService marketService;
 	
 	
+	//해당 마켓의 메뉴 리스트 출력
+	@GetMapping("marketMenu")
+	public ModelAndView marketMenu(MenuVO menuVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println("marketMenu Controller IN");
+		System.out.println("marketNum : "+menuVO.getMarketNum());
+		
+		//메뉴 리스트 조회 (카테고리  collection값으로 추가되어있음)
+		List<MenuVO> menuList = menuService.marketMenuList(menuVO);
+		
+		if(menuList != null) {
+			mv.addObject("menuList", menuList);
+		}
+		
+		return mv;
+	}
+	
+	
 	
 	@GetMapping("menuAdd")
 	public void menuAdd() throws Exception {
