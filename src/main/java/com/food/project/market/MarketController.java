@@ -242,9 +242,6 @@ public class MarketController {
 		
 		return mv;
 	}
-	
-	
-
 }
 
 

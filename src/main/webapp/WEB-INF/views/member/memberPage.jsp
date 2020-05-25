@@ -49,7 +49,7 @@
          <aside class="mp_myInfoNav_aside">
             <h2>마이 페이지</h2>
             <ul class="mp_myInfoNav_ul">
-               <li id="default" class="mp_myInfoNav_li">
+               <li id="orderAndPay" class="mp_myInfoNav_li" title="${memberVO.num}">
                <a class="mp_myInfoNav_a" href="#">주문/결제 내역</a></li>
                
                
@@ -138,7 +138,7 @@
                       if (status === kakao.maps.services.Status.OK) {
                            console.log(result[0].address.address_name);
                            $.post("../market/marketGeoUpdate", {userNum:'${memberVO.num}', address: result[0].address.address_name },function(result) {
-                                    console.log("GeoUpdate : "+result);
+                           		console.log("GeoUpdate : "+result);
                            });
                       }
                   });
@@ -159,24 +159,21 @@
  
  
  
-		//탭 메뉴
-		$('#default').click(function() {
-			$.get("./orderAndPay", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
+		
+	
 		
 		
 		//사용자 ===================================
-		//판매자에게 들어온 주문들
-		$('#marketOrder').click(function() {
-			$.get("./marketOrder", function(result) {
-				
+		// 주문/결제 내역
+		$('#orderAndPay').click(function() {
+			var num = $(this).prop("title");
+			var url = "../ordered/orderAndPay?num="+num;
+			$.get(url, function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
+		
 		
 		//나의 리뷰 목록
 		$('#myReview').click(function() {

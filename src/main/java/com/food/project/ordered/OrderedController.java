@@ -39,6 +39,7 @@ public class OrderedController {
 		
 		int amount = Integer.parseInt(menuPrice);
 		
+		// cateMenuOptions 만들기
 		for (String str : optionNum) {
 			if(str.equals("null"))
 				break;
@@ -48,6 +49,9 @@ public class OrderedController {
 			String[] price = str.split(" ");
 			amount += Integer.parseInt(price[1]);
 		}
+		cateMenuOptions = cateMenuOptions.substring(1, cateMenuOptions.length()-1 );
+		
+		// amount 만들기
 		amount *= orderedVO.getPcs(); 
 		
 		orderedVO.setCateMenuOptions(cateMenuOptions);
@@ -71,7 +75,7 @@ public class OrderedController {
 		
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("order/orderDone");
+		mv.setViewName("ordered/orderDone");
 		return mv;
 	}
 	
@@ -108,6 +112,8 @@ public class OrderedController {
 	@GetMapping("orderedList")
 	public ModelAndView orderedList(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		
+		orderedVO.setIsOrderChecked(0);		// 0 : 장바구니에 담긴 것만 긁어오기
 		
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
 		
@@ -197,7 +203,7 @@ public class OrderedController {
 		mv.addObject("cartSize", cartSize);
 		mv.addObject("iamport_id", iamport_id);
 		
-		mv.setViewName("order/orderPage");
+		mv.setViewName("ordered/orderPage");
 		return mv;
 	}
 	
@@ -223,22 +229,38 @@ public class OrderedController {
 		return mv;
 	}
 	
-	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제) (GET/POST)
-	@GetMapping("orderedCancle")
-	public void orderedCancle() throws Exception{
+	// 주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제) (GET/POST)
+	@PostMapping("orderCancle")
+	@ResponseBody
+	public int orderCancle(OrderedVO orderedVO) throws Exception{
 		
+		System.out.println("orderCancle num : " + orderedVO.getNum());
+		
+		int result = orderedService.orderedCancle(orderedVO);
+		
+		return result;
 	}
-	@PostMapping("orderedCancle")
-	public ModelAndView orderedCancle(OrderedVO orderedVO) throws Exception{
+	
+	// 주문/결제 내역
+	@GetMapping("orderAndPay") 
+	public ModelAndView orderAndPay(MemberVO memberVO) throws Exception{
+	
 		ModelAndView mv = new ModelAndView();
 		
+		OrderedVO orderedVO = new OrderedVO();
+		orderedVO.setMemberNum(memberVO.getNum());
+		orderedVO.setIsOrderChecked(0);
 		
-		
+		List<OrderedVO> list = orderedService.orderedListNot(orderedVO);
+		for (OrderedVO vo : list) {
+			
+			System.out.println(vo.getNum());
+		}
+		mv.addObject("orderedList", list);
+		mv.setViewName("ordered/orderAndPay");
 		
 		return mv;
 	}
-	
-	
 }
 
 
