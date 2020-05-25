@@ -105,6 +105,7 @@ public class MenuService {
 			for (MultipartFile file : files) {
 				//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
 				String fileName = fileSaver.saveByUtils(file, path);
+				menuVO.setThumbImg(fileName);
 				//2.DB등록
 				FileInfoVO fileInfoVO = new FileInfoVO();
 				long num = fileInfoDAO.fileCount();
@@ -122,14 +123,10 @@ public class MenuService {
 					throw new Exception();
 				}
 				
-				//1.회원정보 수정
-				menuVO.setThumbImg(fileName);
-				result = menuDAO.menuUpdate(menuVO);
-				System.out.println("menu SErvice Result : "+result);
 			}
 		}
-		
-		
+		result = menuDAO.menuUpdate(menuVO);
+		System.out.println("menu Service Result : "+result);
 		
 		return result;
 	}

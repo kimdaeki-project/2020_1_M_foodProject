@@ -166,7 +166,7 @@ hr{
 					
 					<!-- 구매관련 정보 div -->
 					<div class="oap_payInfo">
-						<div>수정하기</div>
+						<div class="menuUpdate" title="${menuVO.num}">수정하기</div>
 						<div style="margin-top: 10px;">삭제하기</div>
 					</div>
 				</div>
@@ -177,9 +177,19 @@ hr{
 		</div>
 	</div>
 	<script type="text/javascript">
+		//메뉴 카테고리 추가
+		$('#menuAdd').click(function() {
+			$.get("../menu/menuAdd", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
+	
 		//메뉴 카테고리 수정
-		$('#menuUpdate').click(function() {
-			$.get("../menu/menuUpdate?num=", function(result) {
+		$('.menuUpdate').click(function() {
+			$.get("../menu/menuUpdate?num="+$(this).attr("title"), function(result) {
+				
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
