@@ -32,7 +32,7 @@
 			<div class="rl_send">
 				<div class="rl_send2">
 					<div class="rl_send_div">
-                        <input type="button" class="rl_sbtn1 rl_cbtn" value="취소하기">
+                        <input type="button" id="btn-cancle" class="rl_sbtn1 rl_cbtn" value="취소하기">
 					</div>
 					<div class="rl_send_div">
 						<button type="submit" class="rl_sbtn1 rl_sbtn">작성하기</button>
@@ -42,5 +42,12 @@
         </form>
 		</section>
     </div>
+    <script type="text/javascript">
+    	$("#btn-cancle").click(function() {
+    		location.href="history.back()";
+		});
+    	
+    </script>
+    
 </body>
 </html>

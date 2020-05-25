@@ -74,15 +74,14 @@ public class ReviewService implements BoardService{
 	
 	//덧글달기
 	public int boardReply(ReviewVO reviewVO) throws Exception{
+		long isReply = reviewDAO.boardSeq();
+		
+		System.out.println(isReply);
+		
+		reviewVO.setIsReply(isReply);
 		int result = reviewDAO.boardReply(reviewVO);
 		
-		if(result < 1) {
-			throw new Exception();
-		}
-		
-		//부모의 reviewVO에 값을 0에서 1로 변환
-		result = reviewDAO.isReplyUpdate(reviewVO.getBoardNum());
-		
+		result = reviewDAO.isReplyUpdate(reviewVO);
 		
 		return result;
 	}
@@ -192,6 +191,14 @@ public class ReviewService implements BoardService{
 		System.out.println("리뷰 업로드 결과 : "+result);
 		
 		
+		return result;
+	}
+	//덧글 수정
+	public int boardUpdate(ReviewVO reviewVO) throws Exception {
+		reviewVO.setRating(0);
+		reviewVO.setFileName(null);		
+		
+		int result = reviewDAO.boardUpdate(reviewVO);
 		return result;
 	}
 
