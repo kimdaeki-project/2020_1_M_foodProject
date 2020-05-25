@@ -12,25 +12,40 @@
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
 		select j.*,m2.thumbImg as menuThumbImg, m2.name as menuName
 		from
-		(select o.num,o.menunum,o.memberNum, o.catemenuoptions, o.pcs, o.amount, o.timeLag, m.marketname
+		(select o.num,o.menunum,o.memberNum, o.catemenuoptions, o.pcs, o.amount, o.timeLag, o.isReview, m.marketname
 		from ordered o join market m
-		on(o.marketNum = m.num))j 
+		on(o.marketNum = m.num)
+		WHERE o.isOrderChecked = 0)j 
 		join menu m2
 		on(j.menuNum = m2.num)
-		where j.memberNum = #{memberNum}
+		where j.memberNum = #{memberNum} 
 	</select>
 	
 	<select id="orderedSelect" parameterType="OrderedVO" resultType="OrderedVO">
 		SELECT * FROM ordered WHERE num=#{num}
 	</select>
 	
+	<!-- isOrderChecked 다음에 isReview 필드 추가(Default = 0) -->
 	<insert id="orderedInsert" parameterType="OrderedVO">
 		INSERT INTO ordered VALUES(
 			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 
-			#{pcs}, #{amount}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid}, #{pg, jdbcType=VARCHAR}, #{pay_method, jdbcType=VARCHAR}, 
-			#{cancleType}, #{cancleDetail, jdbcType=VARCHAR},#{isOrderChecked},0,#{timeLag}, sysdate, null
+			#{pcs}, #{amount}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid, jdbcType=VARCHAR}, #{pg, jdbcType=VARCHAR}, 
+			#{pay_method, jdbcType=VARCHAR}, #{apply_num, jdbcType=VARCHAR}, #{cancleType}, #{cancleDetail, jdbcType=VARCHAR}, 
+			#{isOrderChecked}, #{isReview}, #{timeLag}, sysdate, null
 		)
 	</insert>
+	
+	<!-- 결제 완료 없데이트 -->
+	<update id="orderedDone" parameterType="OrderedVO">
+		UPDATE ordered SET 
+		imp_uid=#{imp_uid, jdbcType=VARCHAR}, merchant_uid=#{merchant_uid, jdbcType=VARCHAR}, 
+		pg=#{pg, jdbcType=VARCHAR}, pay_method=#{pay_method}, apply_num=#{apply_num}, isOrderChecked=1 WHERE num=#{num}
+	</update>
+	
+	<!-- isReview 없데이트 -->
+	<update id="orderedIsReviewUpdate" parameterType="OrderedVO">
+		UPDATE ordered SET isReview = 1 WHERE num=#{num}
+	</update>
 	
 	<update id="orderedCancle" parameterType="OrderedVO">
 		update ordered set cancleType=#{cancleType} where num=#{num}

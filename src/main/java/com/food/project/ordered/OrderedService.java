@@ -31,14 +31,14 @@ public class OrderedService {
 		//장바구니 기본값 설정
 		orderedVO.setNum(orderNum);
 		orderedVO.setImp_uid(null);
-		orderedVO.setMerchant_uid("Fusulan_Truck_"+orderNum);
-		System.out.println("Merchant_uid : "+orderNum);
+		orderedVO.setMerchant_uid(null);
 		orderedVO.setPg(null);
 		orderedVO.setPay_method(null);
 		orderedVO.setCancleType(2);
 		orderedVO.setCancleDetail(null);
 		orderedVO.setTimeLag(30);
 		orderedVO.setIsOrderChecked(0);
+		orderedVO.setIsReview(0);
 		
 		//주문등록
 		int result = orderedDAO.orderedInsert(orderedVO);
@@ -56,6 +56,16 @@ public class OrderedService {
 		return orderedDAO.orderDelete(orderedVO);
 	}
 	
+	
+	// 결제 완료
+	public int orderedDone(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedDone(orderedVO);
+	}
+	
+	// isReview 업데이트(isReview : 0. 리뷰등록 X / 1. 리뷰 등록)
+	public int orderedIsReviewUpdate(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedIsReviewUpdate(orderedVO);
+	}
 	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제)
 	public int orderedCancle(OrderedVO orderedVO) throws Exception{
