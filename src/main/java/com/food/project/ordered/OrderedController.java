@@ -67,11 +67,17 @@ public class OrderedController {
 		return result;
 	}
 	
+	// 마켓 주문 확인 요청
+	@PostMapping("orderConfirm")
+	@ResponseBody
+	public int orderedConfirm(OrderedVO orderedVO) throws Exception {
+		
+		return orderedService.orderedConfirm(orderedVO);
+	}
+	
 	// 결제 완료 창
 	@GetMapping("orderDone")
 	public ModelAndView orderedDone() throws Exception {
-		
-		System.out.println("is come in?");
 		
 		ModelAndView mv = new ModelAndView();
 		

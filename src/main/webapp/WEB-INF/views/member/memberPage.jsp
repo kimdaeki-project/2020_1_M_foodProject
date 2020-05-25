@@ -225,16 +225,20 @@
 		//마켓 리뷰 리스트 조회
 		$('#reviewMarket').click(function() {
 			
-			//location.href="../review/reviewMarket?num=${sessionScope.marketVO.num}";
 			$.get("../review/reviewMarket?num=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
 		
-		
-		
-		
+		// 마켓 주문 리스트 조회
+		$('#marketOrder').click(function() {
+			console.log("save");
+			$.get("../market/marketOrder?num=${sessionScope.marketVO.num}", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
 		
 		//공통 ===================================
 		//탈퇴하기

@@ -61,6 +61,10 @@ public class OrderedService {
 		return orderedDAO.orderDelete(orderedVO);
 	}
 	
+	// 마켓에서 주문 확인
+	public int orderedConfirm(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedConfirm(orderedVO);
+	}
 	
 	// 결제 완료
 	public int orderedDone(OrderedVO orderedVO) throws Exception {

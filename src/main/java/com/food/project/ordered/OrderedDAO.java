@@ -49,6 +49,11 @@ public class OrderedDAO {
 		return sqlSession.delete(NAMESPACE+"orderDelete", orderedVO);
 	}
 	
+	// 마켓에서 주문 확인
+	public int orderedConfirm(OrderedVO orderedVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"orderedConfirm", orderedVO);
+	}
+	
 	// 결제 완료
 	public int orderedDone(OrderedVO orderedVO) throws Exception {
 		return sqlSession.update(NAMESPACE+"orderedDone", orderedVO);

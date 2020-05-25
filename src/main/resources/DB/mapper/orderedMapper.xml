@@ -27,16 +27,21 @@
 			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 
 			#{pcs}, #{amount}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid, jdbcType=VARCHAR}, #{pg, jdbcType=VARCHAR}, 
 			#{pay_method, jdbcType=VARCHAR}, #{apply_num, jdbcType=VARCHAR}, #{cancleType}, #{cancleDetail, jdbcType=VARCHAR}, 
-			#{isOrderChecked}, #{isReview}, #{timeLag}, sysdate, null
+			#{isOrderChecked}, #{isReview}, #{timeLag}, sysdate, sysdate, null
 		)
 	</insert>
+	
+	<!-- 마켓에서 주문 확인 -->
+	<update id="orderedConfirm" parameterType="OrderedVO">
+		UPDATE ordered SET isOrderChecked=2, updateAt=sysdate WHERE num=#{num} AND deleteAt IS NOT NULL
+	</update>
 	
 	<!-- 결제 완료 없데이트 -->
 	<update id="orderedDone" parameterType="OrderedVO">
 		UPDATE ordered SET 
 		imp_uid=#{imp_uid, jdbcType=VARCHAR}, merchant_uid=#{merchant_uid, jdbcType=VARCHAR}, 
 		pg=#{pg, jdbcType=VARCHAR}, pay_method=#{pay_method}, apply_num=#{apply_num, jdbcType=VARCHAR}, 
-		isOrderChecked=1 WHERE num=#{num}
+		isOrderChecked=1, updateAt=sysdate WHERE num=#{num}
 	</update>
 	
 	<!-- isReview 없데이트 -->

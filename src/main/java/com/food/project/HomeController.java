@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.food.project.geo.GeoDAO;
 import com.food.project.geo.GeoVO;
 import com.food.project.map.MapVO;
 import com.food.project.market.MarketDAO;
@@ -29,8 +28,6 @@ public class HomeController {
 	@Autowired	
 	private MarketDAO marketDAO;
 	@Autowired
-	private GeoDAO geoDAO;
-	@Autowired
 	private MarketService marketService;
 	@Autowired
 	private MemberService memberService;
@@ -43,7 +40,6 @@ public class HomeController {
 	public List<MapVO> search(String str) throws Exception{
 		System.out.println("str : "+str);
 		
-		ModelAndView mv = new ModelAndView();
 		ArrayList<MapVO> mapList = new ArrayList<MapVO>();
 		MarketVO marketVO = new MarketVO();
 		

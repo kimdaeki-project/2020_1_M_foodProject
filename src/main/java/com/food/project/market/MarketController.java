@@ -18,6 +18,7 @@ import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
 import com.food.project.menu.MenuService;
 import com.food.project.menu.MenuVO;
+import com.food.project.ordered.OrderedService;
 import com.food.project.review.ReviewService;
 import com.food.project.review.ReviewVO;
 import com.food.project.util.Pager;
@@ -35,6 +36,8 @@ public class MarketController {
 	private MemberService memberService;
 	@Autowired
 	private ReviewService reviewService;
+	@Autowired
+	private OrderedService orderedService;
 
 	
 	//마켓종료
@@ -77,7 +80,6 @@ public class MarketController {
 		
 		return result;
 	}
-	
 	
 	//조회 - select List(GET)
 	@GetMapping("marketList")
@@ -240,6 +242,19 @@ public class MarketController {
 		mv.addObject("result", result);
 		mv.setViewName("member/memberPage");
 		
+		return mv;
+	}
+	
+	@GetMapping("marketOrder")
+	public ModelAndView marketOrder(MarketVO marketVO) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		// 뭘 긁어와야하나 이미 주문 끝났놈 (isOrderChecked == 1 && deleteAt == null)
+		
+		System.out.println("marketOrder");
+		
+		mv.setViewName("market/marketOrder");
 		return mv;
 	}
 }
