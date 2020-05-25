@@ -18,55 +18,15 @@ public class OrderedVO {
     private String merchant_uid; 
     private String pg;
     private String pay_method;
+    private String apply_num;
     private int cancleType;
     private String cancleDetail;
     private int isOrderChecked;
+    private int isReview;
     private int timeLag;   
     private Date createAt;
     private Date deleteAt;
     
-	public int getTimeLag() {
-		return timeLag;
-	}
-	public void setTimeLag(int timeLag) {
-		this.timeLag = timeLag;
-	}
-	public String getMarketName() {
-		return marketName;
-	}
-	public void setMarketName(String marketName) {
-		this.marketName = marketName;
-	}
-	public String getMenuName() {
-		return menuName;
-	}
-	public void setMenuName(String menuName) {
-		this.menuName = menuName;
-	}
-	public String getMenuThumbImg() {
-		return menuThumbImg;
-	}
-	public void setMenuThumbImg(String menuThumbImg) {
-		this.menuThumbImg = menuThumbImg;
-	}
-	public int getCancleType() {
-		return cancleType;
-	}
-	public void setCancleType(int cancleType) {
-		this.cancleType = cancleType;
-	}
-	public String getCancleDetail() {
-		return cancleDetail;
-	}
-	public void setCancleDetail(String cancleDetail) {
-		this.cancleDetail = cancleDetail;
-	}
-	public int getIsOrderChecked() {
-		return isOrderChecked;
-	}
-	public void setIsOrderChecked(int isOrderChecked) {
-		this.isOrderChecked = isOrderChecked;
-	}
 	public long getNum() {
 		return num;
 	}
@@ -90,6 +50,24 @@ public class OrderedVO {
 	}
 	public void setMenuNum(long menuNum) {
 		this.menuNum = menuNum;
+	}
+	public String getMarketName() {
+		return marketName;
+	}
+	public void setMarketName(String marketName) {
+		this.marketName = marketName;
+	}
+	public String getMenuName() {
+		return menuName;
+	}
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+	public String getMenuThumbImg() {
+		return menuThumbImg;
+	}
+	public void setMenuThumbImg(String menuThumbImg) {
+		this.menuThumbImg = menuThumbImg;
 	}
 	public String getCateMenuOptions() {
 		return cateMenuOptions;
@@ -132,6 +110,42 @@ public class OrderedVO {
 	}
 	public void setPay_method(String pay_method) {
 		this.pay_method = pay_method;
+	}
+	public String getApply_num() {
+		return apply_num;
+	}
+	public void setApply_num(String apply_num) {
+		this.apply_num = apply_num;
+	}
+	public int getCancleType() {
+		return cancleType;
+	}
+	public void setCancleType(int cancleType) {
+		this.cancleType = cancleType;
+	}
+	public String getCancleDetail() {
+		return cancleDetail;
+	}
+	public void setCancleDetail(String cancleDetail) {
+		this.cancleDetail = cancleDetail;
+	}
+	public int getIsOrderChecked() {
+		return isOrderChecked;
+	}
+	public void setIsOrderChecked(int isOrderChecked) {
+		this.isOrderChecked = isOrderChecked;
+	}
+	public int getIsReview() {
+		return isReview;
+	}
+	public void setIsReview(int isReview) {
+		this.isReview = isReview;
+	}
+	public int getTimeLag() {
+		return timeLag;
+	}
+	public void setTimeLag(int timeLag) {
+		this.timeLag = timeLag;
 	}
 	public Date getCreateAt() {
 		return createAt;

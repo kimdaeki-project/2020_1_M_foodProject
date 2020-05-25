@@ -181,8 +181,6 @@
 	
 	/* 클릭시 변경 */
 	$(".category").click(function() {
-		console.log('click');
-		
 		var li = $('.category');
 		
 		$(this).css('background-color','#27b06e');
@@ -565,8 +563,6 @@
 				}
 				index++;
 			}
-			console.log(markets);
-			console.log(geos);
 			// 선별된 market, Geo를 이용하여 position, marker, overlay값 갱신
 			positions = getPositions(markets, geos);
 			markers = getMarkers(positions);
@@ -800,20 +796,44 @@
 				$("#btn-search").click(function() {
 
 			    	var str = $("#text-search").val();
+			    	
+			    	if(str == "" || str == null || str.isEmpty()) {
+			    		alert("검색어를 입력해주세요!");
+			    		return;
+			    	}
 			        	
 			    	$.get("./search?str="+str,function(result){
 			        
-						// 마켓 마커 생성 및 마커,오버레이 그리기
 						getMarketMarker(result,CATEGORY_DEFAULT);
 			         });
-			    	
 
-			    	
 					$(".category").css('background-color','white');
 					$(".category").css('color','#3d3d3d');
 			    });
-				//=====================================================	
+				
+				// 검색별 보기 (키보드 enter시, 검색어가 들어간 마켓명 선별하여 보여주기)
+				$("#text-search").keyup(function(key) {
+
+					if (key.keyCode != 13) {
+						
+						return;
+					}
 					
+			    	var str = $("#text-search").val();
+			    	
+			    	if(str.length == 0) {
+			    		alert("검색어를 입력해주세요!");
+			    		return;
+			    	}
+			        	
+			    	$.get("./search?str="+str,function(result){
+			        
+						getMarketMarker(result,CATEGORY_DEFAULT);
+			         });
+
+					$(".category").css('background-color','white');
+					$(".category").css('color','#3d3d3d');
+			    });
 			}, 200);
 		}
 		
