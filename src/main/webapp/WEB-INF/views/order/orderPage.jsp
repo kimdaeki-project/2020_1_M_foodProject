@@ -29,6 +29,7 @@
 				<tbody>
 					<!-- tr반복 -->
 					<c:forEach var="orderedVO" items="${orderedList}">
+						<div style="display : none;" class="orderNumDiv" title="${orderedVO.num}"></div>
 						<tr class="op_table_tr">
 		            		<td>${orderedVO.timeLag}분</td>
 							<td style="text-align: left;" class="op_td_item">
@@ -59,7 +60,7 @@
 					<dl class="op_op_dl">
 						<!-- 함수 적용해야함 -->
 						<dt>연락처</dt>
-						<dd>${sessionScope.memberVO.phone}</dd>
+						<dd id="memberPhone" title="${sessionScope.memberVO.phone}"></dd>
 					</dl>
 				</div>
 			</div>
@@ -71,10 +72,10 @@
 			<div class="op_paywhat">
 				<h3>결제 수단</h3>
 				<label for="agree">
-					<input type="radio" id="here" name="payment" checked="checked">
+					<input type="radio" class="payment" title="card" name="payment" checked="checked">
 					카드 결제
 				</label> <label for="agree">
-					<input type="radio" id="there" name="payment">
+					<input type="radio" class="payment" title="cash" name="payment">
 					현장 결제
 				</label>
 			</div>
@@ -106,6 +107,7 @@
 	<%@ include file="../templates/footer.jsp"%>
 
 	<script type="text/javascript">
+		
 		//========================
 		// 콤마 찍기
 		//========================
@@ -128,6 +130,9 @@
 		//=========================
 		// 결제 모듈 관련
 		//=========================
+		// 유저 핸드폰 번호
+		var memberPhone = phoneFomatter($('#memberPhone').prop("title"));
+		
 		// 핸드폰 번호 파싱해서 '-' 붙이기
 		function phoneFomatter(num,type){
 			
@@ -171,81 +176,97 @@
 	   		phoneFomatter('0310000000',0);  //031-***-0000
 	   		phoneFomatter('16880000');      //1688-0000 */
 		}
-				
+		
+		// 주문자 연락처 phoneForm 적용
+		$('#memberPhone').text(memberPhone);
+		
+		// 결제 post
+		function paymentAjax(data) {
+			
+			// 결제 관련 post 요청
+			$.ajax({
+				url:"./orderDone",
+				type:"post",
+				data: data,
+				success:function(result){
+					if(result > 0) {
+						alert("결제 완료");
+						location.href = "./orderDone";
+					} else {
+						alert("결제에 실패하였습니다");
+						location.href="./orderPage?memberNum=${sessionScope.memberVO.num}";
+					}
+				}
+			});
+		}
+		
 		// 결제
 		function payment() {
-				$(function(){
 			
-		        var IMP = window.IMP; // 생략가능
-		        IMP.init(`${iamport_id}`); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-		        var msg;
-		        
-		        IMP.request_pay({
-		            //pg : 'kakaopay',
-		            //pay_method : 'card',
-		            pg : 'html5_inicis',
-		            merchant_uid : 'Fusulan_Truck_' + new Date().getTime(),
-		            name : '결제테스트',
-		        	amount : ${orderedVO.amount},	// 최소 100원이상(이니시스 기준)
-		        	//buyer_email : 'iamport@siot.do',
-		        	buyer_name : ${sessionScope.memberVO.name},
-		        	buyer_tel : phoneFomatter(${sessionScope.memberVO.phone}),
-		        	//buyer_addr : '서울특별시 강남구 삼성동',
-		        	//buyer_postcode : '123-456'
-		        }, function(rsp) {
-		        	//console.log(rsp);
-		            if ( rsp.success ) {
-		                var msg = '결제가 완료되었습니다.';
-		                msg += '고유ID : ' + rsp.imp_uid;
-		                msg += '상점 거래ID : ' + rsp.merchant_uid;
-		                msg += '결제 금액 : ' + rsp.paid_amount;
-		                msg += '카드 승인번호 : ' + rsp.apply_num;
-		            
-		                var data = {
-		                		
-		                	imp_uid : rsp.imp_uid,
-		                	merchant_uid : rsp.merchant_uid,
-		                	paid_amount : rsp.paid_amount,
-		                	apply_num : rsp.apply_num
-		                }
-		                
-		                // return 받은 값들 백단으로 보내서 저장해야함 (get? post?)
-			            $.ajax({
-							url:"../ordered/orderedDoen",
-							type:"POST",
-							data: data,
-							success:function(result){
-								if(result > 0) {
-									alert("결제 완료!");
-									
-									// redirect 마이페이지 페이지
-						            location.href = "../member/memberPage";
-								
-								} else {
-									alert("결제 실패");
-								}
-							}
-						});
-			            
-		            } else {
-		                var msg = '결제에 실패하였습니다.';
-		                msg += '에러내용 : ' + rsp.error_msg;
-		            }
+		    var IMP = window.IMP; // 생략가능
+		    IMP.init(`${iamport_id}`); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+		    var msg;
+		    var data;
+			var orderedNum = [];
+				
+			// orderNum
+			$(".orderNumDiv").each(function() {
+				orderedNum.push($(this).prop("title"));			
+			});
+				
+			orderedNum.push("null");
+				
+		    // 결제 방법
+		    var pay_method;
+		    $('.payment').each(function() {
+		   	
+		      	if($(this).attr("checked") == "checked")
+		      		pay_method = $(this).prop("title");
+		        	
+		       	console.log(pay_method);
 		    });
+		        
+		    // 결제 방법이 card라면 결제창, cash라면 주문완료
+		    if(pay_method == 'card') {
+		    	IMP.request_pay({
+			        pg : 'html5_inicis',
+			        merchant_uid : 'Fusulan_Truck_' + new Date().getTime(),
+			        amount : ${totalAmount},	// 최소 100원이상(이니시스 기준)
+			     	buyer_name : `${sessionScope.memberVO.name}`,
+			      	buyer_tel : memberPhone,
+			    }, function(rsp) {
+			      	console.log(rsp);
+			        if ( rsp.success ) {
+			            
+			            var data = {
+			                		
+			              	imp_uid : rsp.imp_uid,
+			               	merchant_uid : rsp.merchant_uid,
+			               	pg : 'inicis',
+			               	pay_method : 'card',
+			               	apply_num : rsp.apply_num,
+			               	orderedNum : orderedNum
+			            };
+			            
+			            paymentAjax(data);
+			            
+			        } else {
+			            var msg = '결제에 실패하였습니다.';
+		                alert(msg);
+		                location.href="./orderPage?memberNum=${sessionScope.memberVO.num}";
+		            }
+			    });
+		   	} else {
+		   		
+				var data = { 
+			    	pay_method : 'cash',
+			    	orderedNum : orderedNum
+			    };
+				
+				paymentAjax(data)
+		   	}
 		}
-		
-		function paymentTest() {
-			
-			var iamport_id = `${iamport_id}`;
-			console.log(typeof iamport_id);
-			console.log(iamport_id);
-			
-			console.log();	// name(주문 고유 넘버?)
-			//amount : 1,	// 최소 100원이상(이니시스 기준)
-        	//buyer_tel : // 구매자 핸드폰 '010-1234-5678', (필수값)
-			phoneFomatter('01000000000');
-		}
-		
+
 		function main() {
 		
 			$('.op_finalPay').click(function() {

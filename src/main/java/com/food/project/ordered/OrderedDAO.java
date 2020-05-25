@@ -45,8 +45,8 @@ public class OrderedDAO {
 	}
 	
 	// 결제 완료
-	public int orderedDoen(OrderedVO orderedVO) throws Exception {
-		return sqlSession.update(NAMESPACE+"orderedDoen", orderedVO);
+	public int orderedDone(OrderedVO orderedVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"orderedDone", orderedVO);
 	}
 	
 	// isReview 업데이트

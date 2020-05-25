@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,7 @@ public class OrderedController {
 	//장바구니에 값 추가
 	@PostMapping("cartAdd")
 	@ResponseBody
-	public int cartAdd(OrderedVO orderedVO,String menuPrice,@RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
-		System.out.println("memberNum : "+orderedVO.getMemberNum());
-		System.out.println("marketNum : "+orderedVO.getMarketNum());
-		System.out.println("menuNum : "+orderedVO.getMenuNum());
-		System.out.println("orderedPcs : "+orderedVO.getPcs());
-		System.out.println("menuPrice : "+menuPrice);
+	public int cartAdd(OrderedVO orderedVO,String menuPrice, @RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
 		
 		String cateMenuOptions = "";
 		if(optionNum == null) {
@@ -57,9 +53,6 @@ public class OrderedController {
 		orderedVO.setCateMenuOptions(cateMenuOptions);
 		orderedVO.setAmount(amount);
 		
-		System.out.println("catemenuOptions : "+ cateMenuOptions);
-		System.out.println("amount : "+amount);
-		
 		int result = orderedService.orderedInsert(orderedVO);
 		if(result>0) {
 			System.out.println("장바구니 등록성공");
@@ -70,13 +63,44 @@ public class OrderedController {
 		return result;
 	}
 	
-	// 결제 완료
-	@PostMapping("orderedDoen")
+	// 결제 완료 창
+	@GetMapping("orderDone")
+	public ModelAndView orderedDone() throws Exception {
+		
+		System.out.println("is come in?");
+		
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("order/orderDone");
+		return mv;
+	}
+	
+	// 결제 완료 요청
+	@PostMapping("orderDone")
 	@ResponseBody
-	public int orderedDoen(OrderedVO orderedVO) throws Exception {
+	@Transactional
+	public int orderedDone(OrderedVO orderedVO, @RequestParam(value = "orderedNum[]")List<String> orderedNum) throws Exception {
 		
 		// 데이터 들어오는거 확인해야함
-		return orderedService.orderedDoen(orderedVO);
+		System.out.println("orderedDone post");
+		System.out.println(orderedVO.getImp_uid());
+		System.out.println(orderedVO.getMerchant_uid());
+		System.out.println(orderedVO.getPg());
+		System.out.println(orderedVO.getPay_method());
+		
+		int result = 0;
+		for (String num : orderedNum) {
+			if(num.equals("null"))
+				break;
+			
+			System.out.println(num);
+			orderedVO.setNum(Integer.parseInt(num));
+			
+			result = orderedService.orderedDone(orderedVO);
+			System.out.println("result : "+result);
+		}
+		
+		return result;
 	}
 	
 	//장바구니/주문창
@@ -84,15 +108,12 @@ public class OrderedController {
 	@GetMapping("orderedList")
 	public ModelAndView orderedList(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("orderedList");
-		System.out.println("memberNum : "+orderedVO.getMemberNum());
 		
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
 		
 		int totalAmount = 0;
 		for (OrderedVO vo : orderedList) {
 			totalAmount += vo.getAmount();
-			System.out.println(vo.getPcs());
 		}
 		
 		int cartSize = orderedList.size();
@@ -109,7 +130,6 @@ public class OrderedController {
 	//장바구니 전체목록 삭제(memberNum)
 	@GetMapping("cartDeleteAll")
 	public ModelAndView cartDeleteAll(OrderedVO orderedVO) throws Exception{
-		System.out.println("cartDeleteAll");
 		
 		ModelAndView mv = new ModelAndView();
 		
@@ -129,15 +149,12 @@ public class OrderedController {
 	@GetMapping("cartDeleteSelect")
 	public ModelAndView cartDeleteSelect(OrderedVO orderedVO,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("orderedNum : "+orderedVO.getNum());
 		
 		int result = orderedService.orderDelete(orderedVO);
-		System.out.println("result: "+result);
 		
 		if(result > 0) {
 			MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
 			orderedVO.setMemberNum(memberVO.getNum());
-			System.out.println("memberVO.num : "+orderedVO.getMemberNum());
 			
 			List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
 			
@@ -204,14 +221,6 @@ public class OrderedController {
 		ModelAndView mv = new ModelAndView();
 		
 		return mv;
-	}
-	
-	// isReview 업데이트(isReview : 0. 리뷰등록 X / 1. 리뷰 등록)
-	@PostMapping("orderedIsReview")
-	@ResponseBody
-	public int orderedIsReviewUpdate(OrderedVO orderedVO) throws Exception {
-		
-		return orderedService.orderedIsReviewUpdate(orderedVO); 
 	}
 	
 	//주문 취소 - Update(cancleType : 0.개인변심/ 1.상품문제) (GET/POST)

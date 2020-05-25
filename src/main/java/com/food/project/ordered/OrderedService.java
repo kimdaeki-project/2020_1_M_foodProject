@@ -38,6 +38,7 @@ public class OrderedService {
 		orderedVO.setCancleDetail(null);
 		orderedVO.setTimeLag(30);
 		orderedVO.setIsOrderChecked(0);
+		orderedVO.setIsReview(0);
 		
 		//주문등록
 		int result = orderedDAO.orderedInsert(orderedVO);
@@ -57,8 +58,8 @@ public class OrderedService {
 	
 	
 	// 결제 완료
-	public int orderedDoen(OrderedVO orderedVO) throws Exception {
-		return orderedDAO.orderedDoen(orderedVO);
+	public int orderedDone(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedDone(orderedVO);
 	}
 	
 	// isReview 업데이트(isReview : 0. 리뷰등록 X / 1. 리뷰 등록)
