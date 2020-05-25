@@ -150,9 +150,12 @@
 								<strong>${reviewVO.orderedVO.menuName} - ${reviewVO.orderedVO.cateMenuOptions}</strong>
 								<em>총액 : ${reviewVO.orderedVO.amount}원 | 구매일 : ${reviewVO.orderedVO.createAt}</em>
 							</a>
-							<c:forEach begin="1" end="${reviewVO.rating}">
-								<img alt="rating" src="../resources/img/review/green-star.png" style="width: 15xp; height: 15px;">
-							</c:forEach>
+							<c:if test="${reviewVO.rating ne 0}">
+								<c:forEach begin="1" end="${reviewVO.rating}">
+									<img alt="rating" src="../resources/img/review/green-star.png" style="width: 15xp; height: 15px;">
+								</c:forEach>
+							</c:if>
+							
 							<p>${reviewVO.contents}</p>
 							작성일 : ${reviewVO.regDate}
 						</div>
@@ -170,11 +173,11 @@
 					<!-- 구매관련 정보 div -->
 					<div class="oap_payInfo">
 						<c:if test="${reviewVO.isReply eq 0}">
-							<div class="btn-reply" title="${reviewVO.boardNum}">답글작성</div>
+							<div class="btn-reply" data-title="${reviewVO.boardNum}">답글작성</div>
 						</c:if>
-						<c:if test="${reviewVO.isReply eq 1}">
-							<div class="" title="${reviewVO.boardNum}">작성완료</div>
-							<div style="margin-top: 10px;" class="btn-reply-update" title="${reviewVO.boardNum}">답글수정</div>
+						<c:if test="${reviewVO.isReply ne 0}">
+							<div style="cursor: default;" data-title="${reviewVO.boardNum}">작성완료</div>
+							<div style="margin-top: 10px;" id="btn-reply-update" data-title="${reviewVO.boardNum}">답글수정</div>
 						</c:if>
 						
 					</div>
@@ -190,8 +193,27 @@
 	</div>
 	<script type="text/javascript">
 		$(".btn-reply").click(function() {
-			location.href="../review/reviewReply?boardNum="+$(this).attr("title");
+			location.href="../review/reviewReply?boardNum="+$(this).data("title");
 		});
+		
+		$("#btn-reply-update").click(function() {
+			location.href="../review/reviewReplyUpdate?boardNum="+$(this).data("title");
+		});
+		
 	</script>
 	
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

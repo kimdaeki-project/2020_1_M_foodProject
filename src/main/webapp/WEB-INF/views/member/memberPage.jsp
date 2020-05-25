@@ -84,8 +84,9 @@
                  </c:if>
 
 
-               <li id="member_delete" class="mp_myInfoNav_li">
-               <a class="mp_myInfoNav_a">탈퇴하기</a></li>
+              <li id="member_delete" class="mp_myInfoNav_li">
+              	<a class="mp_myInfoNav_a">탈퇴하기</a>
+              </li>
                <li id="li5" class="mp_myInfoNav_li">
                <a class="mp_myInfoNav_a" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
             </ul>
@@ -245,7 +246,7 @@
 		$("#member_delete").click(function() {
 			var check = confirm("탈퇴하시겠습니까?");
 			if (check) {
-				location.href = "./reviewDelete"
+				location.href = "./memberDelete?num=${sessionScope.memberVO.num}";
 			}
 		});
 

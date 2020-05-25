@@ -12,7 +12,7 @@ public class ReviewVO extends BoardVO{
 	private long step;
 	private long depth;
 	private long orderNum;
-	private int isReply;
+	private long isReply;
 	
 	
 
@@ -37,10 +37,10 @@ public class ReviewVO extends BoardVO{
 	
 	
 	
-	public int getIsReply() {
+	public long getIsReply() {
 		return isReply;
 	}
-	public void setIsReply(int isReply) {
+	public void setIsReply(long isReply) {
 		this.isReply = isReply;
 	}
 	public long getOrderNum() {

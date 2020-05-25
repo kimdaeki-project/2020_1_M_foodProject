@@ -24,7 +24,7 @@
 	
 	
 	<update id="memberDelete" parameterType="MemberVO">
-		update member set deleteAt=sysdate where id=#{id}	
+		update member set deleteAt=sysdate where num=#{num}	
 	</update>
 	
 	<update id="memberUpdate" parameterType="MemberVO">

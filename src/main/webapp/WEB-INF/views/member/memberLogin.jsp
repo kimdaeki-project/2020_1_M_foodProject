@@ -45,10 +45,10 @@
 
 			<nav class="joinandfind">
 				<div>
-					<a href="" class="memberLogin_a">아이디 찾기</a>
+					<a href="" id="btn-id-search" class="memberLogin_a btn-mailCertification">아이디 찾기</a>
 				</div>
 				<div>
-					<a href="" class="memberLogin_a">비밀번호 찾기</a>
+					<a href="" id="btn-pwd-search" class="memberLogin_a btn-mailCertification">비밀번호 찾기</a>
 				</div>
 				<div>
 					<a href="${pageContext.request.contextPath}/member/memberJoin"
@@ -65,6 +65,13 @@
 	<%@ include file="../templates/footer.jsp"%>
 
 	<script type="text/javascript">
+		$("#btn-mailCertification").click(function() {
+			$.get("./mailCertification?email=gtm1213@naver.com",function(result){
+				console.log(result);
+			});
+		});
+		
+	
 	
 		//로그인 한 사람 좌표 불러오기
 		if (navigator.geolocation) {

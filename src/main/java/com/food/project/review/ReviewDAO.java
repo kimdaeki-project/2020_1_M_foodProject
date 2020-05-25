@@ -24,8 +24,8 @@ public class ReviewDAO implements BoardDAO{
 	}
 	
 	//덧글 작성시 IsReply값 변경
-	public int isReplyUpdate(long boardNum) throws Exception{
-		return sqlSession.update(NAMESPACE+"isReplyUpdate", boardNum);
+	public int isReplyUpdate(ReviewVO reviewVO) throws Exception{
+		return sqlSession.update(NAMESPACE+"isReplyUpdate", reviewVO);
 	}
 	
 	//이미지가 존재하는 리뷰의 전체 목록 조회
@@ -95,10 +95,7 @@ public class ReviewDAO implements BoardDAO{
 	//리뷰 갱신
 	@Override
 	public int boardUpdate(BoardVO boardVO) throws Exception {
-		
-		int result = sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
-		System.out.println("DAO result : "+result);
-		return result;
+		return sqlSession.update(NAMESPACE+"boardUpdate", boardVO);
 	}
 
 	

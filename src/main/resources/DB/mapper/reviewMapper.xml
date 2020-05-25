@@ -48,7 +48,6 @@
 			<result column="amount" property="amount"/>
 			<result column="cateMenuOptions" property="cateMenuOptions"/>
 			<result column="createAt" property="createAt"/>
-			
 		</association>
 	</resultMap>
 	
@@ -73,7 +72,7 @@
 	</select>
 	
 	<select id="myReviewList" parameterType="Long" resultType="ReviewVO">
-		select * from review where memberNum=#{memberNum} ORDER BY boardNum DESC
+		select * from review where memberNum=#{memberNum} and step=0 ORDER BY boardNum DESC
 	</select>
 
 	<select id="marketAvg" parameterType="Long" resultType="Double">
@@ -115,28 +114,26 @@
 		#{boardNum},0,0,#{orderNum},0)
 	</insert>
 	
+	<insert id="boardReply" parameterType="ReviewVO">
+		insert into review values(#{isReply},#{memberNum},#{marketNum},null,0,#{contents},sysdate,
+		(select ref from review where boardNum=#{boardNum}),
+		(select step from review where boardNum=#{boardNum})+1,
+		(select depth from review where boardNum=#{boardNum})+1,#{orderNum},0)
+	</insert>
+	
+	<update id="isReplyUpdate" parameterType="ReviewVO">
+		update review set isReply=#{isReply} where boardNum = #{boardNum}
+	</update>
 	
 	<update id="boardReplyUpdate" parameterType="ReviewVO">
 		update review set
 		step = step+1
 		where ref=(select ref from review where boardNum=#{boardNum})
 		and step > (select step from review where boardNum=#{boardNum})
-		
 	</update>
 	
 	<update id="boardUpdate" parameterType="ReviewVO">
-		update review set contents=#{contents},rating=#{rating},fileName=#{fileName},regDate=sysdate where boardNum=#{boardNum}
-	</update>
-	
-	<insert id="boardReply" parameterType="ReviewVO">
-		insert into review values(board_seq.nextval,#{memberNum},#{marketNum},null,0,#{contents},sysdate,
-		(select ref from review where boardNum=#{boardNum}),
-		(select step from review where boardNum=#{boardNum})+1,
-		(select depth from review where boardNum=#{boardNum})+1,#{orderNum},0)
-	</insert>
-	
-	<update id="isReplyUpdate" parameterType="Long">
-		update review set isreply = 1 where boardNum = #{boardNum};
+		update review set contents=#{contents},rating=#{rating,jdbcType=INTEGER},fileName=#{fileName,jdbcType=VARCHAR},regDate=sysdate where boardNum=#{boardNum}
 	</update>
 	
 	<delete id="boardDelete" parameterType="ReviewVO">
