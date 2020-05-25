@@ -37,7 +37,7 @@
 									</label>
 									<div style="padding-right: 30px;">
 										<input type="button" class="minus" value="ー">
-										<input type="text" value="0" class="quantity quantity${vo.num}" id="quantity${vo.num}">
+										<input type="text" value="1" class="quantity" title="0" readonly="readonly">
 										<input type="button" class="plus" value="+">
 									</div>
 								</dd>
@@ -64,23 +64,21 @@
 
 	<script type="text/javascript">
 	
-		var quantity = $("#quantity").val();
+		var title = $(".quantity").attr('title');  
 	
 		//수량조절
-		$(".plus").click(function() {
-			quantity++;	
-
-			$(this).prev().val(quantity);
-			console.log(quantity);
-		});
-		
-		$(".minus").click(function() {			
-			quantity--;
-			if (quantity <= 1) {
-				quantity=1;
+		$(".option_num").click(function() {
+			if ($(this).is(":checked") == true) {
+				//체크 됨
+				//체크하면 숫자조절되고
+				console.log(title);
+			} else {
+				//체크 안됨
+				//체크안하면 숫자 0으로 초기화
+				$(".quantity").val(0);
+				console.log($(".quantity").val());
+				
 			}
-			$(".quantity").val(quantity);
-			console.log(quantity);
 		});
 
 		//로그인
