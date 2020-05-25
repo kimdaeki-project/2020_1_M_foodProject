@@ -35,9 +35,9 @@
 										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">
 										${vo.name} ${vo.price}
 									</label>
-									<div style="padding-right: 30px;">
+									<div class="quanClass" style="padding-right: 30px;">
 										<input type="button" class="minus" value="ー">
-										<input type="text" value="1" class="quantity" title="0" readonly="readonly">
+										<input type="text" value="0" class="quantity ${vo.num}" title="0" readonly="readonly">
 										<input type="button" class="plus" value="+">
 									</div>
 								</dd>
@@ -67,19 +67,49 @@
 		var title = $(".quantity").attr('title');  
 	
 		//수량조절
-		$(".option_num").click(function() {
-			if ($(this).is(":checked") == true) {
-				//체크 됨
-				//체크하면 숫자조절되고
-				console.log(title);
-			} else {
-				//체크 안됨
-				//체크안하면 숫자 0으로 초기화
-				$(".quantity").val(0);
-				console.log($(".quantity").val());
+		$(".ml_opLabel").change(function() {
+			
+			var quantity = $(this).siblings().find('.quantity');
+			var quan = $(this).siblings().find('.quantity').val();
+			var plus = $(this).siblings().find('.plus');
+			var minus = $(this).siblings().find('.minus');
+			
+			if ($(".option_num").is(":checked")) {
+				 
+				quan++;
+				quantity.val(quan);
 				
+				//플러스
+				plus.click(function() { 
+					quan++;
+					quantity.val(quan);
+				});
+				
+				//마이너스
+				minus.click(function() {
+					quan--;
+					if (quan <= 1) {
+						quan=1;
+					}
+					quantity.val(quan);
+					
+				});	
+				
+			} else{
+				quantity.val(0);
+				plus.click(function() { 
+					quantity.val(0);
+				});
+				
+				//마이너스
+				minus.click(function() {
+					quantity.val(0);
+				});	
 			}
+			
 		});
+		
+		//이벤트위임
 
 		//로그인
 		$("#ml_order").click(function() {
