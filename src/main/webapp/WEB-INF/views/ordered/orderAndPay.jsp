@@ -147,6 +147,22 @@ hr{
 	cursor: pointer;
 }
 
+.cancelReason{
+	display: none;
+	margin-bottom: 23px;
+}
+
+.cr_select{
+    padding: 10px 20px;
+}
+
+.cr_ta{
+	resize: none;
+    width: 95%;
+    margin: 0 20px;
+    height: 70px;
+}
+
 </style>
 <title>사용자 주문내역 페이지</title>
 </head>
@@ -200,7 +216,21 @@ hr{
 						</c:if>
 					</div>
 				</div>
-			<hr class="orderHr" style="border-bottom : 1px solid; border-color : #e7e7e7;" data-num="${orderedVO.num}">
+				<c:if test="${orderedVO.isOrderChecked eq 1}">
+					<div class="cancelReason">
+						<div class="cr_select">
+						주문 취소 사유<select style="padding: 2px 5px; margin-left: 10px;">
+							<option>이유1</option>
+							<option>이유2</option>
+							<option>이유3</option>
+							<option>이유4</option>
+						</select>
+						<button>?</button>
+						</div>
+						<textarea rows="" cols="" placeholder="주문 취소 이유를 적어주세요!" class="cr_ta"></textarea>
+					</div>
+				</c:if>
+				<hr class="orderHr" style="border-bottom : 1px solid; border-color : #e7e7e7;" data-num="${orderedVO.num}">
 			<!-- 반복 끝 -->
 			</c:forEach>
 		</div>
@@ -217,7 +247,7 @@ hr{
 			});
 		});
 	
-		// 구매 취소
+		/* // 구매 취소
 		$(".orderCancle").each(function() {
 			
 			var thisObj = $(this);
@@ -254,6 +284,11 @@ hr{
                		});
 				}
 			});
+		}); */
+		
+		//
+		$(".orderCancle").click(function() {
+			$('.cancelReason').css('display','grid');
 		});
 		
 		// 후기 쓰기
