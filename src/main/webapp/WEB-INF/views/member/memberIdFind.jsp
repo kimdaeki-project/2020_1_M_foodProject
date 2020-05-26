@@ -10,6 +10,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 </head>
 <body>
+   <%@ include file="../templates/header.jsp"%>
     <div class="mif_container">
 		<article class="mif_article">
 			
@@ -26,6 +27,7 @@
 			</div>
 		</article>
 	</div>
+   <%@ include file="../templates/footer.jsp"%>
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 	<script type="text/javascript">

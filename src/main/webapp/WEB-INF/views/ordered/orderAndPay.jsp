@@ -54,6 +54,7 @@
 
 .oap_ii_info{
 	margin-left: 10px;
+	width: 100%;
 }
 
 .oap_ii_info > span{

@@ -11,6 +11,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 </head>
 <body>
+   <%@ include file="../templates/header.jsp"%>
 	<div class="mif_container">
 		<article class="mif_article">
 			<div id="form-data">
@@ -26,6 +27,7 @@
 			</div>
 		</article>
 	</div>
+   <%@ include file="../templates/footer.jsp"%>
 	
 	
 	<script type="text/javascript">

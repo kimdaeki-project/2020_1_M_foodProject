@@ -11,7 +11,7 @@ body{
 
 .mif_article{
 	box-sizing: border-box;
-	padding: 72px 20%;
+	padding: 20%;
 }
 
 .mif_article > div{
@@ -32,7 +32,6 @@ body{
     font-size: 14px;
     line-height: 20px;
     color: #6f7174;
-    font-weight: 600;
 }
 
 .mif_form{
