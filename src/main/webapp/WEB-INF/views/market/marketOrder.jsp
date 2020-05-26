@@ -143,37 +143,36 @@ hr{
 			<h2>마켓 주문 리스트</h2>
 			<!-- 하단의 div가 반복 -->
 			<c:forEach var="orderedVO" items="${orderedList}">
-				<div class="oap_item">
+				<div class="oap_item" data-num="${orderedVO.num}">
 					<!-- 아이템 정보 div -->
 					<div class="oap_itemInfo">
 						<a class="oap_ii_storePic">
-							<img alt="고객이 구매한 메뉴" src="${pageContext.request.contextPath}/resources/img/food2.png">
+							<img alt="상점사진" src="../resources/upload/menu/${orderedVO.menuThumbImg}">
 						</a>
 						<div class="oap_ii_info">
-							<div class="oap_items">
-								<strong>주문상세</strong>
-								<em>주문시각</em>
-							</div>
-							<p>
-							주문한 메뉴<br>
-							옵션1 - 수량<br>
-							옵션2 - 수량
-							</p>
+							<a class="oap_items">
+								<strong>${orderedVO.menuName}</strong>
+								<em>선택옵션 : ${orderedVO.cateMenuOptions}</em><br>
+								<em>가격 : ${orderedVO.amount}원</em>
+								<em>&nbsp;|&nbsp;</em>
+								<em>주문일자 : ${orderedVO.createAt}</em><br>
+								<em id="orderConfirmTime">주문확인 시간 : -</em>
+							</a>
 						</div>
 					</div>
 					
 					<!-- 상점 정보 div -->
 					<div class="oap_storeInfo">
 						<div class="oap_siDiv">
-							<span class="storename">고객명</span>
-							<span class="storecrn">아이디</span>
-							<span class="storego">주문번호</span>
+							<span class="storename">${orderedVO.memberVO.name}님</span>
+							<span class="storecrn">${orderedVO.memberVO.id}</span>
+							<%-- <span class="storego">${orderedVO.num}</span> --%>
 						</div>
 					</div>
 					
 					<!-- 구매관련 정보 div -->
 					<div class="oap_payInfo">
-						<div>확인하기</div>
+						<div id='orderConfirmBtn' data-num="${orderedVO.num}">확인하기</div>
 						<div style="margin-top: 10px;">취소하기</div>
 					</div>
 				</div>
@@ -182,4 +181,24 @@ hr{
 			<!-- 반복 끝 -->	
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		$('#orderConfirmBtn').click(function(){
+			// oredered.num 만 인자로 보내면 됨
+			var url = "${pageContext.request.contextPath}/ordered/orderConfirm";
+			var num = $(this).data("num");
+			
+			console.log(url);
+			console.log(num);
+			
+			$.post(url, {num: num}, function(result){
+				if(result > 0) {
+					var date = new Date();
+					var time = `${date.getYear()}/${date.getMonth()}/${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+					var msg = '주문확인 시간 : -' + time;
+					$('#orderConfirmTime').text(msg);
+				}
+			});
+		});
+	</script>
 </body>

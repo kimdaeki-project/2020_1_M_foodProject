@@ -87,6 +87,9 @@ public class OrderedController {
 	@ResponseBody
 	public int orderedConfirm(OrderedVO orderedVO) throws Exception {
 		
+		System.out.println("orderConfirm");
+		// 여기까지 들어오는지 확인
+		
 		return orderedService.orderedConfirm(orderedVO);
 	}
 	
