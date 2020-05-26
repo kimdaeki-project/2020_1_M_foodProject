@@ -6,8 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <link rel="stylesheet" href="../resources/css/member/memberLogin.css">
 </head>
@@ -45,10 +44,10 @@
 
 			<nav class="joinandfind">
 				<div>
-					<a id="btn-id-search" class="memberLogin_a btn-mailCertification">아이디 찾기</a>
+					<a href="./memberIdFind" id="btn-id-search" class="memberLogin_a btn-mailCertification">아이디 찾기</a>
 				</div>
 				<div>
-					<a id="btn-pwd-search" class="memberLogin_a btn-mailCertification">비밀번호 찾기</a>
+					<a href="./memberPwFind" id="btn-pwd-search" class="memberLogin_a btn-mailCertification">비밀번호 찾기</a>
 				</div>
 				<div>
 					<a href="${pageContext.request.contextPath}/member/memberJoin"
@@ -65,61 +64,34 @@
 	<%@ include file="../templates/footer.jsp"%>
 
 	<script type="text/javascript">
-		$("#btn-id-search").click(function() {
-			$.ajax({
-				url:"./mailCertification",
-				type:"post",
-				data:{
-					email:'gtm1213@naver.com',
-					name:'태민'
-				},
-				success:function(result){
-					if(result == 1){
-						
-					}else{
-						alert("등록되지 않은 이메일입니다.");
-					}
-				}
-				
-			});
-// 			alert("dddd");
-		});
 		
-		$("#btn-pwd-search").click(function() {
-			$.post("./mailCertification",{email:'gtm1213@naver.com',name:'태민',id:'admin'},function(result){
-				console.log("result : "+result);
-			});
-		});
-		
-	
-	
 		//로그인 한 사람 좌표 불러오기
-// 		if (navigator.geolocation) {
-// 			navigator.geolocation.getCurrentPosition(showPosition);
-// 		} else {
-// 			alert("허용안해서 주소 못불러옴")
-// 		}
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		} else {
+			alert("허용안해서 주소 못불러옴")
+		}
 
-// 		function showPosition(position) {
-// 			$("#latitude").val(position.coords.latitude + "");
-// 			$("#longitude").val(position.coords.longitude + "");
-// 		}
+		function showPosition(position) {
+			$("#latitude").val(position.coords.latitude + "");
+			$("#longitude").val(position.coords.longitude + "");
+		}
 		
 		//유효성 검사
-// 		$("#joinForm").validate({
-//         rules:{
-//             id:{required: true},
-//             password:{required: true},
-//         },
-//         messages:{
-//             id:{
-//                 required:"아이디를 입력해주세요!",
-//             },
-//             password:{
-//                 required:"비밀번호를 입력해주세요!",
-//             }
-//         }
-//    	 });
+		$("#joinForm").validate({
+        rules:{
+            id:{required: true},
+            password:{required: true},
+        },
+        messages:{
+            id:{
+                required:"아이디를 입력해주세요!",
+            },
+            password:{
+                required:"비밀번호를 입력해주세요!",
+            }
+        }
+   	 });
 
 		
 	</script>

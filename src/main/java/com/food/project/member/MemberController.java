@@ -33,6 +33,16 @@ public class MemberController {
 	private MailService mailService;
 	
 	
+	@GetMapping("memberIdFind")
+	public void memberIdFind() throws Exception{
+		
+	}
+	
+	@GetMapping("memberPwFind")
+	public void memberPwFind() throws Exception{
+		
+	}
+	
 	public int emailRnd() {
 		//6자리 랜덤 값 생성
 		int rnd = (int)(Math.floor(Math.random() * 1000000)+100000);
@@ -68,7 +78,12 @@ public class MemberController {
 				rnd = emailRnd();
 				result = 1; //아이디가 존재
 				session.setAttribute("mailCertification", rnd);
+				
+			}else {
+				System.out.println("등록되지 않은 이메일입니다.");
+				return 0;
 			}
+			
 			
 		}else {
 			System.out.println("비번 찾기");
@@ -76,15 +91,16 @@ public class MemberController {
 		}
 		
 		
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> result1 : "+result);
 		
 		mailVO.setSubject("Fusulian 아이디/비밀번호 찾기 메일입니다!");
-		mailVO.setSenderMail("gotaem17@gmail.com");
+		mailVO.setSenderMail("foodProject200501@gmail.com");
 		mailVO.setSenderName("Fusulian");
 		mailVO.setReceiveMail(email);
-		mailVO.setMessage("인증 번호는 "+ 11111 +" 입니다.");
+		mailVO.setMessage("인증 번호는 '"+ rnd +"' 입니다.");
 		
-		//mailService.sendMail(mailVO);
-		System.out.println("result : "+result);
+		mailService.sendMail(mailVO);
+		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> result2 : "+result);
 		
 		
 		return result;

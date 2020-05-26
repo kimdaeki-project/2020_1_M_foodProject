@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/member/memberIdFind.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 </head>
 <body>
 	<div class="mif_container">
@@ -24,8 +27,15 @@
 		</article>
 	</div>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
+	
 	<script type="text/javascript">
+	
+	$("#btn-pwd-search").click(function() {
+		$.post("./mailCertification",{email:'gtm1213@naver.com',name:'태민',id:'admin'},function(result){
+			console.log("result : "+result);
+		});
+	});
+	
 	$("#joinForm").validate({
         rules:{
             id:{required: true, maxlength: 6},
