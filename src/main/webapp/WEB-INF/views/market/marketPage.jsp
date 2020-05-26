@@ -206,10 +206,10 @@ input[type="file" i] {
 
 
 		<div class="mp_infoMod_box">
-			<p>트럭 메인 이미지 첨부 (변경을 원하는 경우에만 첨부하세요!)</p>
 			<div style="display: flex;">
-			<!-- 새로 첨부할 이미지 -->
-				<input type="file" class="mp_infoMod_input mp_filep" id="newfile" name="files">
+				<!-- 새로 첨부할 이미지 -->
+				<input type="text" class="mp_infoMod_input mp_filep" id="file" name="thumbImg" value="${marketVO.thumbImg}">
+				<span id="ma_fileDel">✖</span>
 			</div>
 		</div>
 
@@ -227,7 +227,14 @@ input[type="file" i] {
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+
 <script type="text/javascript">
+	
+	$("#ma_fileDel").click(function() {
+		$("#file").prop("type","file");
+		$("#file").prop("name","files");
+	});
+
 
 	//기존이미지 삭제하면 새로운 이미 선택 가능(toggle)
 	//name을 바꾸기...

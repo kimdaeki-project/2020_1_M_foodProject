@@ -52,7 +52,7 @@
 	
 	<!-- isReview 없데이트 -->
 	<update id="orderedIsReviewUpdate" parameterType="OrderedVO">
-		UPDATE ordered SET isReview = 1 WHERE num=#{num}
+		UPDATE ordered SET isReview = #{isReview} WHERE num=#{num}
 	</update>
 	
 	<!-- 결제 후, 지우기(UPDATE deleteAt) -->

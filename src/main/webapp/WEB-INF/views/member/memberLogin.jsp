@@ -42,6 +42,9 @@
             </nav>
          </form>
 
+
+
+
          <nav class="joinandfind">
             <div>
                <a href="./memberIdFind" id="btn-id-search" class="memberLogin_a btn-mailCertification">아이디 찾기</a>
@@ -54,6 +57,7 @@
                   class="memberLogin_a">회원가입</a>
             </div>
          </nav>
+
          <div class="ml_kakao">
             <a href="https://kauth.kakao.com/oauth/authorize?client_id=97f1860e20781cd962ba73e33913c194&redirect_uri=http://localhost:8080/project/auth/kakao&response_type=code">
                카카오로 시작하기
@@ -79,6 +83,7 @@
       
       //유효성 검사
       $("#joinForm").validate({
+
         rules:{
             id:{required: true},
             password:{required: true},
@@ -91,7 +96,9 @@
                 required:"비밀번호를 입력해주세요!",
             }
         }
+
        });
+
 
       
    </script>

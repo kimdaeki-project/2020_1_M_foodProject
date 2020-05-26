@@ -214,14 +214,10 @@ public class MarketController {
 	public ModelAndView marketUpdate(MemberVO memberVO,MarketVO marketVO,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("marketPage num: "+marketVO.getNum());
-		
 		marketVO.setUserNum(memberVO.getNum());
-		
 		marketVO = marketService.marketSelect(marketVO);
 		
 		if(marketVO != null) {
-			System.out.println("마켓 셀렉트");
 			mv.addObject("marketVO", marketVO);
 			mv.setViewName("market/marketPage");
 		}else {

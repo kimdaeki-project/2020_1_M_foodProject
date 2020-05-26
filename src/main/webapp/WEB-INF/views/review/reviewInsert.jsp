@@ -15,8 +15,7 @@
 		<section class="rl_section">
 			<div class="rl_item">
 				<div class="rl_item_pic">
-					<img class="rl_item_img" alt="food"
-						src="${pageContext.request.contextPath}/resources/upload/menu/${orderedVO.menuThumbImg}">
+					<img class="rl_item_img" alt="food" src="${pageContext.request.contextPath}/resources/upload/menu/${orderedVO.menuThumbImg}">
 				</div>
 				<div class="rl_item_info">
 					<p class="rl_item_p">${orderedVO.marketName}</p>
@@ -24,7 +23,7 @@
 					<p class="rl_item_p">${orderedVO.cateMenuOptions}</p>
 					<input type="hidden" name="memberNum" value="${orderedVO.memberNum}">
 					<input type="hidden" name="marketNum" value="${orderedVO.marketNum}">
-					<input type="hidden" name="orderNum" value="${orderedVO.num}">
+					<input type="hidden" name="num" value="${orderedVO.num}">
 				</div>
 			</div>
 			<div class="rl_rate">

@@ -26,6 +26,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	
+	
 	<interceptors>
 		<interceptor>
 			<!-- URL Pattern -->

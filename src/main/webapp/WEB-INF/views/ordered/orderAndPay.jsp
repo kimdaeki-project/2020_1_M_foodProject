@@ -191,11 +191,12 @@ hr{
 					<!-- 아이템 정보 div -->
 					<div class="oap_itemInfo">
 						<a class="oap_ii_storePic">
-							<img alt="상점사진" src="${orderedVO.menuThumbImg}">
+							<img alt="상점사진" src="../resources/upload/menu/${orderedVO.menuThumbImg}">
 						</a>
 						<div class="oap_ii_info">
 							<a class="oap_items">
-								<strong>${orderedVO.menuName} - ${orderedVO.cateMenuOptions}</strong>
+								<strong>${orderedVO.menuName}</strong>
+								<em>선택옵션 : ${orderedVO.cateMenuOptions}</em><br>
 								<em>가격 : ${orderedVO.amount}원</em>
 								<em>&nbsp;|&nbsp;</em>
 								<em>주문일자 : ${orderedVO.createAt}</em>
@@ -221,10 +222,17 @@ hr{
 					
 					<!-- 구매관련 정보 div -->
 					<div class="oap_payInfo">
+					
 						<c:if test="${orderedVO.isOrderChecked eq 1}">
 							<div class="orderCancle" data-num="${orderedVO.num}">구매취소</div>
 						</c:if>
-						<div id="113" class="reviewInsert" style="margin-top: 10px;" data-num="${orderedVO.num}">후기쓰기</div>
+						
+						<c:if test="${orderedVO.isReview eq 0}">
+							<div id="113" class="reviewInsert" style="margin-top: 10px;" data-num="${orderedVO.num}">후기쓰기</div>
+						</c:if>
+						<c:if test="${orderedVO.isReview ne 0}">
+							<div id="113" class="reviewUpdate" style="margin-top: 10px;" data-num="${orderedVO.isReview}">후기수정</div>
+						</c:if>
 					</div>
 				</div>
 				<c:if test="${orderedVO.isOrderChecked eq 1}">
@@ -253,7 +261,6 @@ hr{
 	
 		// 상점 바로가기
 		$('.storego').each(function() {
-			
 			$(this).click(function() {
 				var userNum = $(this).data("num");
 				location.href = '../market/marketSelect?userNum='+userNum;
@@ -360,10 +367,19 @@ hr{
 		
 		// 후기 쓰기
 		$(".reviewInsert").each(function() {
-			
 			$(this).click(function() {
 				var num = $(this).data("num");
 				location.href="../review/reviewInsert?num="+num;
+			});
+		});
+		
+		//후기 수정
+		$(".reviewUpdate").each(function() {
+			alert
+			
+			$(this).click(function() {
+				var num = $(this).data("num");
+				location.href="../review/reviewUpdate?boardNum="+num;
 			});
 		});
 		
