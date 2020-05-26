@@ -12,7 +12,7 @@
 <body>
 	<div class="ml_container">
 		<section class="ml_container2">
-			<h3 class="ml_container2_h3">트럭 리스트</h3>
+			<h3 class="ml_container2_h3">등록된 푸드마켓</h3>
 			<ul class="ml_container2_ul">
 				<c:forEach items="${marketList}" var="vo">
 					<li class="ml_container2_li"><a class="ml_container2_a"

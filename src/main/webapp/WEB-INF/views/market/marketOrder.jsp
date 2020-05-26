@@ -142,41 +142,43 @@ hr{
 		<div style="margin-left: 50px;">
 			<h2>마켓 주문 리스트</h2>
 			<!-- 하단의 div가 반복 -->
-			<div class="oap_item">
-				<!-- 아이템 정보 div -->
-				<div class="oap_itemInfo">
-					<a class="oap_ii_storePic">
-						<img alt="고객이 구매한 메뉴" src="${pageContext.request.contextPath}/resources/img/food2.png">
-					</a>
-					<div class="oap_ii_info">
-						<div class="oap_items">
-							<strong>주문상세</strong>
-							<em>주문시각</em>
+			<c:forEach var="orderedVO" items="${orderedList}">
+				<div class="oap_item">
+					<!-- 아이템 정보 div -->
+					<div class="oap_itemInfo">
+						<a class="oap_ii_storePic">
+							<img alt="고객이 구매한 메뉴" src="${pageContext.request.contextPath}/resources/img/food2.png">
+						</a>
+						<div class="oap_ii_info">
+							<div class="oap_items">
+								<strong>주문상세</strong>
+								<em>주문시각</em>
+							</div>
+							<p>
+							주문한 메뉴<br>
+							옵션1 - 수량<br>
+							옵션2 - 수량
+							</p>
 						</div>
-						<p>
-						주문한 메뉴<br>
-						옵션1 - 수량<br>
-						옵션2 - 수량
-						</p>
+					</div>
+					
+					<!-- 상점 정보 div -->
+					<div class="oap_storeInfo">
+						<div class="oap_siDiv">
+							<span class="storename">고객명</span>
+							<span class="storecrn">아이디</span>
+							<span class="storego">주문번호</span>
+						</div>
+					</div>
+					
+					<!-- 구매관련 정보 div -->
+					<div class="oap_payInfo">
+						<div>확인하기</div>
+						<div style="margin-top: 10px;">취소하기</div>
 					</div>
 				</div>
-				
-				<!-- 상점 정보 div -->
-				<div class="oap_storeInfo">
-					<div class="oap_siDiv">
-						<span class="storename">고객명</span>
-						<span class="storecrn">아이디</span>
-						<span class="storego">주문번호</span>
-					</div>
-				</div>
-				
-				<!-- 구매관련 정보 div -->
-				<div class="oap_payInfo">
-					<div>확인하기</div>
-					<div style="margin-top: 10px;">취소하기</div>
-				</div>
-			</div>
-			<hr>
+				<hr>
+			</c:forEach>
 			<!-- 반복 끝 -->	
 		</div>
 	</div>

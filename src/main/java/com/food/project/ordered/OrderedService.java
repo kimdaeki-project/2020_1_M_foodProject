@@ -12,6 +12,12 @@ public class OrderedService {
 	@Autowired
 	private OrderedDAO orderedDAO;
 	
+	// 마켓에서 받은 주문 조회
+	public List<OrderedVO> marketOrder(OrderedVO orderedVO) throws Exception {
+	
+		return orderedDAO.marketOrder(orderedVO);
+	}
+	
 	//주문 전체 조회 - SelectList (판매자ID)
 	public List<OrderedVO> orderedList(OrderedVO orderedVO) throws Exception{
 		return orderedDAO.orderedList(orderedVO);

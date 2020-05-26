@@ -13,6 +13,11 @@ public class OrderedDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE="com.food.project.ordered.OrderedDAO.";
 	
+	// 마켓에서 받은 주문 조회
+	public List<OrderedVO> marketOrder(OrderedVO orderedVO) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+"marketOrder");
+	}
 	
 	//주문 시퀀스 증가
 	public long orderedCount() throws Exception{

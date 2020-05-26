@@ -63,16 +63,16 @@
 							</div>
 							<div class="nav-button">
 								<button class="nav-more">상품 더 담기</button>
-								<button class="nav-order">주문하기</button>
+								<button class="nav-order" data-size="${cartSize}">주문하기</button>
 							</div>
 						</div>
 					</nav>
 				</article>
 	<script type="text/javascript">
 	
+		// 해당 메뉴 장바구니에서 비우기 (원래 위임으로 앞에 있어야함)
 		$(".btn-select-delete").each(function() {
 			$(this).click(function(){
-				alert($(this).data("title"));
 				var num = $(this).data("title");
 				$.get("${pageContext.request.contextPath}/ordered/cartDeleteSelect?num="+num,function(result){
 					$(".cart-body").html(result);						

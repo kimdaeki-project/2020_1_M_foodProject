@@ -38,12 +38,12 @@
 		<!-- 지도 -->
 		<div id="main">
 			<div class="rec1">
-				<h2>언제나 무료배송되는 프코스팟</h2>
-				<p>1개만 주문해도 무료배송되는 프레시코드</p>
+				<h2>언제나 우리 곁으로, 푸드마켓</h2>
+				<p>간편하게 주문하고, 바로 먹자</p>
 			</div>
 			<div class="rec1">
 				<h2 style="font-size: 35px; margin-top: 25px;">936개</h2>
-				<p>현재 오픈된 프코스팟</p>
+				<p>현재 오픈한 푸드마켓</p>
 			</div>
 			<div id="map_wrapper">
 				
@@ -76,12 +76,12 @@
 		<div class="main_spot">
 			<div>
 				<header class="ms_header">
-					<h2>프코스팟이 없으신가요?</h2>
-					<p>오픈 희망하는 곳을 직접 신청해주세요! 동료들과 함께 신청하면 오픈 확률도 쭉쭉 상승해요</p>
+					<h2>주변에 있는 푸드마켓이 궁금하신가요?</h2>
+					<p>지도를 통해 마켓을 찾아보세요! 친구들과 함께라면 찾는 재미가 두배!</p>
 				</header>
-				<nav class="ms_nav">
+				<!-- <nav class="ms_nav">
 					<button>신청하기</button>
-				</nav>
+				</nav> -->
 			</div>
 		</div>
 

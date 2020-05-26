@@ -5,9 +5,9 @@
   
 <mapper namespace="com.food.project.market.MarcketDAO">
 
-	<resultMap type="MarketVO" id="ListResult">
+	<resultMap type="MarketVO" id="ReviewResult">
 		<id column="num" property="num"/> 
-		<id column="userNum" property="userNum"/>
+		<result column="userNum" property="userNum"/>
 		<result column="categoryNum" property="categoryNum"/>
 		<result column="crn" property="crn"/>
 		<result column="marketName" property="marketName"/>
@@ -27,7 +27,7 @@
 		</association>
 	</resultMap>
 
-	<select id="marketGuList" parameterType="MarketVO" resultMap="ListResult">
+	<select id="marketGuList" parameterType="MarketVO" resultMap="ReviewResult">
 		SELECT m.*, r.rating 
 		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
 		ON (m.num = r.marketNum) 
@@ -35,7 +35,7 @@
 		ORDER BY m.userNum
 	</select>
 	
-	<select id="marketList" resultMap="ListResult">
+	<select id="marketList" resultMap="ReviewResult">
 		SELECT m.*, r.rating 
 		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
 		ON (m.num = r.marketNum) ORDER BY m.num DESC
@@ -45,7 +45,7 @@
 		select * from market where userNum = #{userNum}
 	</select>
 	
-	<select id="marketSearch" parameterType="MarketVO" resultMap="ListResult">
+	<select id="marketSearch" parameterType="MarketVO" resultMap="ReviewResult">
 		SELECT m.*, r.rating 
 		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
 		ON (m.num = r.marketNum) 

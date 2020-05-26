@@ -5,6 +5,47 @@
   
 <mapper namespace="com.food.project.ordered.OrderedDAO">
 
+	<resultMap type="OrderedVO" id="MarketOrderMap">
+		<id column="num" property="num"/> 
+		<result column="memberNum" property="memberNum"/>
+		<result column="marketNum" property="marketNum"/>
+		<result column="menuNum" property="menuNum"/>
+		<result column="marketName" property="marketName"/>
+		<result column="menuName" property="menuName"/>
+		<result column="menuThumbImg" property="menuThumbImg"/>
+		<result column="cateMenuOptions" property="cateMenuOptions"/>
+		<result column="pcs" property="pcs"/>
+		<result column="amount" property="amount"/>
+		<result column="isCart" property="isCart"/>
+		<result column="imp_uid" property="imp_uid"/>
+		<result column="merchant_uid" property="merchant_uid"/>
+		<result column="pg" property="pg"/>
+		<result column="pay_method" property="pay_method"/>
+		<result column="apply_num" property="apply_num"/>
+		<result column="cancleType" property="cancleType"/>
+		<result column="cancleDetail" property="cancleDetail"/>
+		<result column="isOrderChecked" property="isOrderChecked"/>
+		<result column="isReview" property="isReview"/>
+		<result column="timeLag" property="timeLag"/>
+		<result column="createAt" property="createAt"/>
+		<result column="updateAt" property="updateAt"/>
+		<result column="deleteAt" property="deleteAt"/>
+		
+		<association property="memberVO" javaType="MemberVO">
+			<result column="id" property="id"/>
+			<result column="name" property="name"/>
+		</association>
+	</resultMap>
+
+	<!-- 먼저 주문한 사람이 먼저 보이도록 할거임(ASC) -->
+	<select id="marketOrder" parameterType="OrderedVO" resultMap="MarketOrderMap">
+		SELECT o.*, m.id, m.name FROM
+		(SELECT * FROM ordered WHERE marketNum = 4 AND isOrderChecked = 1) o 
+		join member m
+		ON (o.memberNum = m.num)
+		ORDER BY o.updateAt
+	</select>
+
 	<select id="orderedCount" resultType="Long">
 		select ordered_seq.nextval from dual
 	</select>
@@ -12,8 +53,10 @@
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
 		SELECT * FROM ordered WHERE 
 		memberNum=#{memberNum} AND 
-		isOrderChecked=#{isOrderChecked} AND 
+		isOrderChecked=#{isOrderChecked} AND
+		isCart=#{isCart} AND
 		deleteAt IS NULL
+		ORDER BY updateAt DESC
 	</select>
 	
 	<select id="orderedListNot" parameterType="OrderedVO" resultType="OrderedVO">
@@ -21,13 +64,15 @@
 		memberNum=#{memberNum} AND 
 		isOrderChecked!=#{isOrderChecked} AND 
 		deleteAt IS NULL
+		ORDER BY updateAt DESC
 	</select>
 	
 	<select id="orderedMarketList" parameterType="OrderedVO" resultType="OrderedVO">
 		SELECT * FROM ordered WHERE 
 		marketNum=#{marketNum} AND 
-		isOrderChecked!=#{isOrderChecked} AND 
+		isOrderChecked=#{isOrderChecked} AND 
 		deleteAt IS NULL
+		ORDER BY updateAt DESC
 	</select>
 	
 	
