@@ -26,8 +26,8 @@
 		INSERT INTO ordered VALUES(
 			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 
 			#{pcs}, #{amount}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid, jdbcType=VARCHAR}, #{pg, jdbcType=VARCHAR}, 
-			#{pay_method, jdbcType=VARCHAR}, #{apply_num, jdbcType=VARCHAR}, #{cancleType}, #{cancleDetail, jdbcType=VARCHAR}, 
-			#{isOrderChecked}, #{isReview}, #{timeLag}, sysdate, sysdate, null
+			#{pay_method, jdbcType=VARCHAR}, #{apply_num, jdbcType=VARCHAR}, #{cancleType, jdbcType=INTEGER}, 
+			#{cancleDetail, jdbcType=VARCHAR}, #{isOrderChecked}, #{isReview}, #{timeLag}, sysdate, sysdate, null
 		)
 	</insert>
 	

@@ -19,13 +19,9 @@
 			<img src="${pageContext.request.contextPath}/resources/upload/menu/${menuVO.thumbImg}">
 			<div class="ms_menuInfo">
 				<h2>${menuVO.name}</h2>
+				<p>${menuVO.detail}</p>
 				<div style="display: flex; justify-content: space-between;">
-					<p style="margin: 0">${menuVO.price}</p>
-					<div class="quanClass">
-						<input type="button" class="minus" value="ー"> 
-						<input type="text" value="1" class="quantity ${vo.num}" readonly="readonly"> 
-						<input type="button" class="plus" value="+">
-					</div>
+					<p id="menuBasicPrice" style="margin: 0" data-price="${menuVO.price}"></p>
 				</div>
 				<nav></nav>
 				<!-- 옵션 선택 페이지 -->
@@ -40,7 +36,10 @@
 								<dd style="display: flex; justify-content: space-between; margin-top: 5px;">
 									<label class="ml_opLabel" style="max-width: 300px;"> 
 										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">
-										${vo.name} ${vo.price}
+										<!-- name과 price간 간격이 필요 -->
+										<div class="option_div" data-name="${vo.name}">
+										${vo.name} ${vo.price}원
+										</div>
 									</label>
 								</dd>
 							</c:forEach>
@@ -48,6 +47,11 @@
 						</c:forEach>
 						
 					</dl>
+				</div>
+				<div class="quanClass">
+					<input type="button" class="minus" value="ー"> 
+					<input type="text" value="1" class="quantity ${vo.num}" readonly="readonly"> 
+					<input type="button" class="plus" value="+">
 				</div>
 				<c:if test="${empty sessionScope.memberVO}">
 					<button class="none" type="button">장바구니</button>
@@ -57,8 +61,6 @@
 					<button id="ml_cart" type="button">장바구니</button>
 					<button id="ml_order" type="submit">주문하기</button>
 				</c:if>
-				
-				
 			</div>
 		</div>
 	</div>
@@ -66,47 +68,73 @@
 
 	<script type="text/javascript">
 	
-		var title = $(".quantity").attr('title');  
+		//========================
+		// 콤마 찍기
+		//========================
+		// 천단위로 숫자에 콤마 찍기
+		function moneyFormat(money) {
+			return money.toLocaleString();
+		}
 		
+		// 메뉴 기본 금액 에 콤마 찍기
+		$(function(){
+			var price = $('#menuBasicPrice').data("price");
+			$('#menuBasicPrice').text(moneyFormat(price)+'원');
+		});
+		
+		// 각 주문의 금액에 콤마 찍기
+		$(function() {
+			$('.option_num').each(function() {
+				var nameAndPrice = $(this).val();
+				nameAndPrice = nameAndPrice.split(" ");
+				nameAndPrice[1] *= 1; // string to int
+				nameAndPrice[1] = moneyFormat(nameAndPrice[1]);
+				
+				$('.option_div').each(function() {
+					
+					var name = $(this).data("name");
+					if(name == nameAndPrice[0]) {
+						$(this).text(nameAndPrice[0]+' +'+nameAndPrice[1]+'원');
+					}
+				});
+			});
+		});
+	
 		//수량조절 +
+		var quan = 1;
 		$(".plus").click(function() {
 
 			var quantity = $(this).prev();
-			var quan = $(this).prev().val();
+			quan = $(this).prev().val();
 			
 			quan++;
 			quantity.val(quan);
-			
 		});
 		
 		//수량조절 -
 		$('.minus').click(function() {
 
 			var quantity = $(this).next();
-			var quan = $(this).next().val();
+			quan = $(this).next().val();
 			
 			quan--;
 			if (quan <= 1) {
 				quan=1;
 			}
 			quantity.val(quan);
-			
 		});
-		
-		//이벤트위임
 
-		//로그인
+		// 주문하기 버튼
 		$("#ml_order").click(function() {
-			location.href="${pageContext.request.contextPath}/ordered/orderPage";
+			location.href="${pageContext.request.contextPath}/ordered/orderPage?memberNum=${sessionScope.memberVO.num}";
 		});
 	
-	
+		//로그인
 		$(".none").each(function() {
 			$(this).click(function() {
 				alert("로그인을 해야만 사용이 가능합니다.");
 				location.href="../member/memberLogin";
 			});
-			
 		});
 			
 		//장바구니를 누르면 메뉴(옵션포함)추가
@@ -135,9 +163,8 @@
 						menuName: `${menuVO.name}`,
 						marketName: `${marketVO.marketName}`,
 						menuThumbImg: `${menuVO.thumbImg}`,
-						pcs: 2 // test 값
+						pcs: quan
 				}
-				
 				
 				$.ajax({
 					url:"../ordered/cartAdd",
@@ -157,10 +184,7 @@
 					}
 				});			
 		});
-		
-		$("#ml_order").click(function() {
-				
-		})
+
 	</script>
 </body>
 </html>

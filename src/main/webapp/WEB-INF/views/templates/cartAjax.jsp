@@ -10,7 +10,7 @@
 						<h2>장바구니</h2>
 					</header>
 					<div class="cart-div1">
-						<span>프코스팟배송 | 무료배송</span>
+						<span>우리집 근처로 오는 음식점, 푸드마켓 </span>
 					</div>
 					<div class="cart-div2">
 						<div class="cart-selectAll">
@@ -33,7 +33,7 @@
 												<div class="cart-col">
 													<div style="display: flex; justify-content: space-between;">
 														<strong>${orderedVO.marketName} ${orderedVO.menuName}</strong> 
-														<span class="btn-select-delete" style="cursor: pointer; padding: 0 10px;" title="${orderedVO.num}">✖</span>
+														<span class="btn-select-delete" style="cursor: pointer; padding: 0 10px;" data-title="${orderedVO.num}">✖</span>
 													</div>
 													<span>${orderedVO.cateMenuOptions}</span>
 												</div>
@@ -72,11 +72,10 @@
 	
 		$(".btn-select-delete").each(function() {
 			$(this).click(function(){
-				alert($(this).attr("title"));
-				var num = $(this).attr("title");
+				alert($(this).data("title"));
+				var num = $(this).data("title");
 				$.get("${pageContext.request.contextPath}/ordered/cartDeleteSelect?num="+num,function(result){
-					$(".cart-body").html(result);
-													
+					$(".cart-body").html(result);						
 				});
 			});
 		});

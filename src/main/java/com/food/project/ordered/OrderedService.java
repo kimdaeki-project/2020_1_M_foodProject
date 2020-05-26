@@ -39,7 +39,6 @@ public class OrderedService {
 		orderedVO.setMerchant_uid(null);
 		orderedVO.setPg(null);
 		orderedVO.setPay_method(null);
-		orderedVO.setCancleType(2);
 		orderedVO.setCancleDetail(null);
 		orderedVO.setTimeLag(30);
 		orderedVO.setIsOrderChecked(0);

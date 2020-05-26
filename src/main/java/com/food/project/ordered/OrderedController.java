@@ -49,7 +49,11 @@ public class OrderedController {
 			String[] price = str.split(" ");
 			amount += Integer.parseInt(price[1]);
 		}
-		cateMenuOptions = cateMenuOptions.substring(1, cateMenuOptions.length()-1 );
+		
+		// cateMenuOptions에 값이 있을때만 적용
+		if(!cateMenuOptions.equals("")) {
+			cateMenuOptions = cateMenuOptions.substring(0, cateMenuOptions.length()-1);
+		}
 		
 		// amount 만들기
 		amount *= orderedVO.getPcs(); 
