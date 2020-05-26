@@ -143,7 +143,6 @@ hr{
 			<h2>마켓 주문 리스트</h2>
 			<!-- 하단의 div가 반복 -->
 			<div class="oap_item">
-				
 				<!-- 아이템 정보 div -->
 				<div class="oap_itemInfo">
 					<a class="oap_ii_storePic">
@@ -176,10 +175,9 @@ hr{
 					<div>확인하기</div>
 					<div style="margin-top: 10px;">취소하기</div>
 				</div>
-				
 			</div>
 			<hr>
-			
+			<!-- 반복 끝 -->	
 		</div>
 	</div>
 </body>

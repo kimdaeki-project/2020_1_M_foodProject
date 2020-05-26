@@ -19,6 +19,7 @@ import com.food.project.member.MemberVO;
 import com.food.project.menu.MenuService;
 import com.food.project.menu.MenuVO;
 import com.food.project.ordered.OrderedService;
+import com.food.project.ordered.OrderedVO;
 import com.food.project.review.ReviewService;
 import com.food.project.review.ReviewVO;
 import com.food.project.util.Pager;
@@ -243,12 +244,19 @@ public class MarketController {
 	
 	@GetMapping("marketOrder")
 	public ModelAndView marketOrder(MarketVO marketVO) throws Exception {
+
+		System.out.println("marketOrder");
 		
 		ModelAndView mv = new ModelAndView();
 		
 		// 뭘 긁어와야하나 이미 주문 끝났놈 (isOrderChecked == 1 && deleteAt == null)
+		OrderedVO orderedVO = new OrderedVO();
+		orderedVO.setMarketNum(marketVO.getNum());
+		orderedVO.setIsOrderChecked(1);		// 주문 들어온 상태
 		
-		System.out.println("marketOrder");
+		List<OrderedVO> list = orderedService.orderedMarketList(orderedVO);
+		
+		
 		
 		mv.setViewName("market/marketOrder");
 		return mv;
