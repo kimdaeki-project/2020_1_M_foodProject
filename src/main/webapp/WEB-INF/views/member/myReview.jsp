@@ -163,8 +163,8 @@ a {
 									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
 								</div>
 								<div class="rev_review5">
-									<input type="button" class="rev_mod" title="${reviewVO.boardNum}" value="수정하기">
-									<img class="rev_del" alt="delete" title="${reviewVO.boardNum}" src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
+									<input type="button" class="rev_mod" data-title="${reviewVO.boardNum}" value="수정하기">
+									<img class="rev_del" alt="delete" data-title="${reviewVO.boardNum}" data-ordernum="${reviewVO.orderNum}"  src="${pageContext.request.contextPath}/resources/img/header/x.png"></img>
 								</div>
 							</div>
 						</div>
@@ -179,15 +179,17 @@ a {
 
 	//수정하기 버튼 누르면 수정하기
 	$(".rev_mod").click(function() {
-		
-		location.href="../review/reviewUpdate?boardNum="+$(this).attr("title");
+		var boardNum = $(this).data("title");
+		location.href="../review/reviewUpdate?boardNum="+boardNum;
 	});
 	
 	//X버튼 누르면 삭제하기
 	$(".rev_del").click(function() {
 		var check = confirm("삭제하시겠습니까?");
 		if (check) {
-			location.href = "../review/reviewDelete?boardNum="+$(this).attr("title");
+			var boardNum = $(this).data("title");
+			var orderNum = $(this).data("ordernum");
+			location.href = "../review/reviewDelete?boardNum="+boardNum+"&orderNum="+orderNum;
 		}
 	});
 </script>

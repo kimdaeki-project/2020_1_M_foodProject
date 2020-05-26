@@ -24,6 +24,7 @@
 					<input type="hidden" name="memberNum" value="${orderedVO.memberNum}">
 					<input type="hidden" name="marketNum" value="${orderedVO.marketNum}">
 					<input type="hidden" name="num" value="${orderedVO.num}">
+					<input type="hidden" name="orderNum" value="${orderedVO.num}">
 				</div>
 			</div>
 			<div class="rl_rate">

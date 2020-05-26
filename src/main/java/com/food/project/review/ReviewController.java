@@ -245,9 +245,19 @@ public class ReviewController {
 	public ModelAndView reviewDelete(ReviewVO reviewVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		System.out.println("rboardNum : "+reviewVO.getBoardNum());
+		System.out.println("rorderNum : "+reviewVO.getOrderNum());
+		
 		int result = reviewService.boardDelete(reviewVO);
 		if(result > 0) {
 			System.out.println("리뷰 삭제 완료");
+			
+			OrderedVO orderedVO = new OrderedVO();
+			
+			orderedVO.setNum(reviewVO.getOrderNum());
+			orderedVO.setIsReview(0);
+			orderedService.orderedIsReviewUpdate(orderedVO);
+			
 		}else {
 			System.out.println("리뷰 삭제 실패");
 		}
