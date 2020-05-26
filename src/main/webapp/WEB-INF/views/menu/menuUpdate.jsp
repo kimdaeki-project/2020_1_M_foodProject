@@ -2,21 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<!-- <!DOCTYPE html> -->
-<!-- <html> -->
-<!-- <head> -->
-<!-- <meta charset="UTF-8"> -->
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script> -->
-<%-- <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script> --%>
-<!-- <title>menuUpdate</title> -->
+
+
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/menu/menuUpdate.css">
-<!-- </head> -->
-<!-- <body> -->
-    <form action="../menu/menuUpdate" method="post" enctype="multipart/form-data" name="menuUpdate" id="manuUpdate">
-		<h2>메뉴 추가</h2>
+
+    <form action="../menu/menuUpdate" method="post" enctype="multipart/form-data" name="menuUpdate" id="manuUpdate" style="margin-left: 50px;">
+		<h2>메뉴 수정</h2>
 		<input type="hidden" name="num" value="${menuVO.num}">
-		<div class="menuAdd_box">
+		<div class="menuAdd_box" style="margin-top: 12px">
 			<label for="title">메뉴명 : </label> 
 			<input type="text" id="title" name="name" value="${menuVO.name}">
 		</div>
@@ -43,6 +36,7 @@
 			<c:forEach var="categoryVO" items="${cateList}" varStatus="i">
 				<div class="cb" title="1">${categoryVO.name.trim()}
 					<input type="button" class="add" id="cateName${i.index+1}" name="cate_name_${i.index+1}" title="${i.index+1}" value="옵션추가">
+					<input type="button" class="del" value="카테고리 삭제">
 							
 					<c:forEach var="vo" items="${categoryVO.menuOptionVOs}" varStatus="k">
 						<div class="opDiv">
@@ -106,7 +100,9 @@
 			var cateVal = $("#input").val();
 			var c_name = '<div class="cb" title="1">'
 				+ cateVal
-				+ '<input type="button" class="add" value="옵션 추가" id="cateName'+i+'" name="cate_name_'+i+'" title="'+i+'"></div>';
+				+ '<input type="button" class="add" value="옵션 추가" id="cateName'+i+'" name="cate_name_'+i+'" title="'+i+'">'
+				+ '<input type="button" class="del" value="카테고리 삭제">'
+				+ '</div>';
 			var c_hidden = '<input type="hidden" value="'+cateVal+'" name="cate_name_'+i+'">';
 
 			$("#category_box").append(c_name);
@@ -137,9 +133,10 @@
 					$(".thumbImg1").prop("name","files");
 				});
 				
-
-
-	
+				//카테고리 삭제 버튼 누르면 그 카테고리 박스 삭제
+				$("#category_box").on('click', '.del', function() {
+					$(this).parent().remove();
+				});	
 	
 
 	//유효성 검사
