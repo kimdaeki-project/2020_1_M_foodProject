@@ -18,8 +18,6 @@ import com.food.project.mail.MailVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
 
-import oracle.jdbc.proxy.annotation.Post;
-
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -49,60 +47,58 @@ public class MemberController {
 		if(rnd>1000000){
 			rnd = rnd - 100000;
 		}
-		System.out.println(rnd);
-		
 		return rnd;
 	}
 	
 	@PostMapping("mailCertification")
 	@ResponseBody
 	public int idSearch(String email,String name,String id,HttpSession session) throws Exception{
-		ModelAndView mv = new ModelAndView();
 		MailVO mailVO = new MailVO();
 		MemberVO memberVO = new MemberVO();
 		int result = 0;
-		int rnd = 0;
-		
-		memberVO.setName(name);
 		memberVO.setEmail(email);
 		
 		
-		//아이디 비번 찾기 결정
-		if(id == null) { //아이디 찾기
-			System.out.println("아이디 찾기");
-			
-			
-			memberVO = memberService.emailSearch(memberVO);
-			if(memberVO != null) {
-				System.out.println("아이디가 존재하는 이메일");
-				rnd = emailRnd();
-				result = 1; //아이디가 존재
-				session.setAttribute("mailCertification", rnd);
-				
-			}else {
-				System.out.println("등록되지 않은 이메일입니다.");
-				return 0;
-			}
-			
-			
-		}else {
-			System.out.println("비번 찾기");
-			memberVO.setId(id);
-		}
-		
-		
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> result1 : "+result);
-		
-		mailVO.setSubject("Fusulian 아이디/비밀번호 찾기 메일입니다!");
 		mailVO.setSenderMail("foodProject200501@gmail.com");
 		mailVO.setSenderName("Fusulian");
 		mailVO.setReceiveMail(email);
-		mailVO.setMessage("인증 번호는 '"+ rnd +"' 입니다.");
 		
-		mailService.sendMail(mailVO);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> result2 : "+result);
+
 		
-		
+		if(id == null) { //아이디 찾기
+			memberVO.setName(name);
+			memberVO.setType("id");
+			memberVO = memberService.emailSearch(memberVO);
+			if(memberVO != null) {
+				result = 1;
+				id = memberVO.getId();
+				mailVO.setSubject("Fusulian 아이디 찾기 메일입니다!");
+				mailVO.setMessage("사용자의 아이디는 '"+ id +"' 입니다.");
+				
+				mailService.sendMail(mailVO);
+			}else {
+				return 0;
+			}
+			
+		}else { //비밀번호 찾기
+			System.out.println("비번 찾기");
+			memberVO.setId(id);
+			memberVO.setType("pwd");
+			memberVO = memberService.emailSearch(memberVO);
+			if(memberVO != null) {
+				int pwd = emailRnd();
+				mailVO.setSubject("Fusulian 비밀번호 찾기 메일입니다!");
+				mailVO.setMessage("사용자의 임시 비밀번호는 '"+ pwd +"' 입니다.");
+				
+				memberVO.setPassword(pwd+"");
+				
+				result = memberService.temporaryPW(memberVO);
+				
+				mailService.sendMail(mailVO);
+			}else {
+				return 0;
+			}
+		}
 		return result;
 	}
 	
@@ -110,7 +106,7 @@ public class MemberController {
 	
 	// 로그인(GET/POST)
 	@GetMapping("memberLogin")
-	public void memberLogin(@CookieValue(value = "cId", required = false) String cId) throws Exception {
+	public void memberLogin(@CookieValue(value = "cId", required = false) String cId,String id) throws Exception {
 
 	}
 
@@ -125,8 +121,6 @@ public class MemberController {
 		}
 		response.addCookie(cookie);
 
-//		System.out.println("latitude: "+memberVO.getLatitude());
-//		System.out.println("longittude: "+memberVO.getLongitude());
 		
 		memberVO = memberService.memberLogin(memberVO);
 		

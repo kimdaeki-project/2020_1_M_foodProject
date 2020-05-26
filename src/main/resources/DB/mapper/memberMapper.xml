@@ -5,14 +5,25 @@
   
 <mapper namespace="com.food.project.member.MemberDAO">
 	
-	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
-		select * from member where email=#{email} and name=#{name}
-	</select>
-	
 	<insert id="memberJoin" parameterType="MemberVO">
 		INSERT INTO member VALUES(member_seq.nextval,#{id},#{email},#{password},#{name},#{age},
 		#{gender},#{nickName},'local',#{phone},#{address},0,#{latitude},#{longitude},null,sysdate,sysdate,null)
 	</insert>
+	
+	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where email=#{email}
+		<choose>
+			<when test="type == 'id'">
+				 and name=#{name}
+			</when>
+			<when test="type == 'pwd'">
+				 and id=#{id}
+			</when>
+		</choose>
+		and deleteAt is null
+	</select>
+	
+	
 	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
 		SELECT * FROM member where id=#{id} and password=#{password} and deleteAt is null
@@ -25,6 +36,7 @@
 	<select id="memberSelect" parameterType="MemberVO" resultType="MemberVO">
 		select * from member where num=#{num}
 	</select>
+	
 	
 	
 	<update id="memberDelete" parameterType="MemberVO">
@@ -41,6 +53,10 @@
 	
 	<update id="locationUpdate" parameterType="MemberVO">
 		update member set latitude=#{latitude},longitude=#{longitude} where num=#{num}
+	</update>
+	
+	<update id="temporaryPW" parameterType="MemberVO">
+		update member set password = #{password} where id=#{id} and email=#{email}
 	</update>
 	
 	

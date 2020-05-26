@@ -487,7 +487,7 @@ public class MenuController {
 		
 		if(result > 0) {
 			msg = "메뉴가 수정 되었습니다";
-			url = "redirect:../member/memberPage";
+			url = "../member/memberPage";
 		}
 		
 		// 이미지 테이블에 insert

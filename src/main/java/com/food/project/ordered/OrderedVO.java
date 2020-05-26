@@ -22,7 +22,7 @@ public class OrderedVO {
     private int cancleType;
     private String cancleDetail;
     private int isOrderChecked;
-    private int isReview;
+    private long isReview;
     private int timeLag;   
     private Date createAt;
     private Date deleteAt;
@@ -135,10 +135,10 @@ public class OrderedVO {
 	public void setIsOrderChecked(int isOrderChecked) {
 		this.isOrderChecked = isOrderChecked;
 	}
-	public int getIsReview() {
+	public long getIsReview() {
 		return isReview;
 	}
-	public void setIsReview(int isReview) {
+	public void setIsReview(long isReview) {
 		this.isReview = isReview;
 	}
 	public int getTimeLag() {

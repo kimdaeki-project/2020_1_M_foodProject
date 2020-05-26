@@ -23,6 +23,16 @@ public class MemberVO {
 	private Date updateAt;
 	private Date deleteAt;
 	
+	private String type;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	
+	
 	
 	public String getAddress() {
 		return address;

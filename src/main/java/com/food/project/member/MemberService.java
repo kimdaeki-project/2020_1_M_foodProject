@@ -9,6 +9,11 @@ public class MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
+	//임시 비밀번호 설정
+	public int temporaryPW(MemberVO memberVO) throws Exception{
+		return memberDAO.temporaryPW(memberVO);
+	}
+	
 	//메일 조회
 	public MemberVO emailSearch(MemberVO memberVO) throws Exception{
 		return memberDAO.emailSearch(memberVO);

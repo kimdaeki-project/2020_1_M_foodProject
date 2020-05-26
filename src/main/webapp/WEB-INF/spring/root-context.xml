@@ -54,8 +54,8 @@
                <prop key="mail.debug">true</prop>
          </props>
       </property>
- 
    </bean>
+   
 	
 		
 </beans>

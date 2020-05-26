@@ -26,13 +26,6 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<!-- mail -->
-	<beans>
-	     <task:annotation-driven executor="myExecutor" exception-handler="exceptionHandler"/>
-	     <task:executor id="myExecutor" pool-size="7-42" queue-capacity="11"/>
-	     <bean id="asyncBean" class="com.foo.MyAsyncBean"/>
-	     <bean id="exceptionHandler" class="com.foo.MyAsyncUncaughtExceptionHandler"/>
-	</beans>
 	
 	
 	<interceptors>

@@ -139,7 +139,6 @@ a {
 
 			<c:forEach items="${myReviewList}" var="reviewVO">
 				<li class="rev_li">
-					<!-- <a href="#"> -->
 						<div class="rev_item">
 							<img class="rev_item_img" alt="" src="${pageContext.request.contextPath}/resources/img/food2.png">
 							<div class="rev_item_div">
@@ -152,8 +151,7 @@ a {
 							<div class="rev_review3">
 								<div>
 									<c:forEach begin="1" end="${reviewVO.rating}">
-										<img alt=""
-											src="${pageContext.request.contextPath}/resources/img/review/green-star.png"
+										<img alt="" src="${pageContext.request.contextPath}/resources/img/review/green-star.png"
 											style="width: 16px; height: 16px;">
 									</c:forEach>
 									<span style="color: #6f7174; font-size: 18px; margin-left: 3px;">${reviewVO.rating}</span>

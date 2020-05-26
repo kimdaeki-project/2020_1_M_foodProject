@@ -153,37 +153,36 @@ public class MarketService {
 		System.out.println("path :"+path);
 		int result = 0;
 		
-		//파일(이미지) 수정
-		//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
-		String fileName = fileSaver.saveByUtils(file, path);
-		System.out.println("fileName : "+fileName);
-
-		//2.DB등록
-		FileInfoVO fileInfoVO = new FileInfoVO();
 		
-		long num = fileInfoDAO.fileCount();
-		fileInfoVO.setNum(num);
-		
-		fileInfoVO.setFileName(fileName);
-		fileInfoVO.setOriName(file.getOriginalFilename());
-		System.out.println("oriName:" +file.getOriginalFilename());
-		fileInfoVO.setKind(1); //market
-		fileInfoVO.setRefNum(marketVO.getNum());
-		System.out.println("refNum:" +fileInfoVO.getRefNum());
-		//reviewNum, foodNum은 입력안해서 null값 부여
+		if(file != null) {
+			//파일(이미지) 수정
+			//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
+			String fileName = fileSaver.saveByUtils(file, path);
+			marketVO.setThumbImg(fileName);
+			
+			//2.DB등록
+			FileInfoVO fileInfoVO = new FileInfoVO();
+			long num = fileInfoDAO.fileCount();
+			fileInfoVO.setNum(num);
+			
+			fileInfoVO.setFileName(fileName);
+			fileInfoVO.setOriName(file.getOriginalFilename());
+			System.out.println("oriName:" +file.getOriginalFilename());
+			fileInfoVO.setKind(1); //market
+			fileInfoVO.setRefNum(marketVO.getNum());
+			System.out.println("refNum:" +fileInfoVO.getRefNum());
+			//reviewNum, foodNum은 입력안해서 null값 부여
 
-		result = fileInfoDAO.fileInfoInsert(fileInfoVO);
-		System.out.println("fileUpdate result : "+result);
+			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
+			System.out.println("fileUpdate result : "+result);
 
-		if(result<1) {
-			throw new Exception();
+			if(result<1) {
+				throw new Exception();
+			}
 		}
-
 		
 		//1.회원정보 수정
-		marketVO.setThumbImg(fileName);
 		result = marketDAO.marketUpdate(marketVO);
-		System.out.println("marketUpdate result : "+result);
 		
 		return result;
 	}

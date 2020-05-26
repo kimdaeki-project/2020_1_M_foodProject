@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -216,18 +217,26 @@ public class ReviewController {
 	
 	//리뷰등록(POST)
 	@PostMapping("reviewInsert")
-	public ModelAndView reviewInsert(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
+	public ModelAndView reviewInsert(OrderedVO orderedVO,ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		int result = reviewService.boardInsert(reviewVO,files,session);
+		System.out.println("리뷰 등록 결과 : "+result);
 		
 		if(result > 0) {
-			System.out.println("리뷰등록 성공");
-			mv.setViewName("redirect:../member/memberPage");
-		}else {
-			System.out.println("리뷰 등록 실패");
+			System.out.println("odernum : "+orderedVO.getNum());
+			orderedVO.setIsReview(reviewVO.getBoardNum());
+			result = orderedService.orderedIsReviewUpdate(orderedVO);
 		}
 		
+		if(result > 0) {
+			mv.addObject("msg", "후기 등록이 완료되었습니다.");
+			mv.addObject("path", "../member/memberPage");
+		}else {
+			mv.addObject("msg", "후기 등록 실패");
+		}
+		
+		mv.setViewName("common/result");
 		return mv;
 	}
 	
