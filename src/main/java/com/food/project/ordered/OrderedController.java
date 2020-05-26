@@ -30,16 +30,31 @@ public class OrderedController {
 	//장바구니에 값 추가
 	@PostMapping("cartAdd")
 	@ResponseBody
-	public int cartAdd(OrderedVO orderedVO,String menuPrice, @RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
+	@Transactional
+	public int cartAdd(OrderedVO orderedVO, String menuPrice, @RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
 		
+		// 주문하기로 들어온 요청일 경우, 이미 있는 주문 DB를 삭제하고 insert
+		if(orderedVO.getIsCart() == 0) {
+			System.out.println("in here");
+			int result = orderedService.cartDeleteAll(orderedVO);
+			if(result > 0) {
+				System.out.println("deleteDone");
+			} else {
+				System.out.println("deleteFail");
+				throw new Exception();
+			}
+		}
+		
+		System.out.println("save");
+		
+		// cateMenuOptions 만들기
 		String cateMenuOptions = "";
 		if(optionNum == null) {
 			cateMenuOptions = null;
 		}
 		
-		int amount = Integer.parseInt(menuPrice);
+		int amount = Integer.parseInt(menuPrice);		
 		
-		// cateMenuOptions 만들기
 		for (String str : optionNum) {
 			if(str.equals("null"))
 				break;
@@ -66,6 +81,7 @@ public class OrderedController {
 			System.out.println("장바구니 등록성공");
 		}else {
 			System.out.println("장바구니 등록실패");
+			throw new Exception();
 		}
 		
 		return result;
@@ -113,7 +129,7 @@ public class OrderedController {
 	public ModelAndView orderedList(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		orderedVO.setIsOrderChecked(0);		// 0 : 장바구니에 담긴 것만 긁어오기
+		orderedVO.setIsOrderChecked(0);		// 0: 결제 전, 1: 결제 후(주문 요청), 2: 결제 후(주문 확인)
 		
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
 		
@@ -183,14 +199,15 @@ public class OrderedController {
 		return mv;
 	}
 	
-	
-	//결제 페이지로 이동
+	// 결제 페이지로 이동(isCart : false(주문하기 요청), true(장바구니에서 요청))
 	@GetMapping("orderPage")
 	public ModelAndView orderPage(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 
+		System.out.println("orderPage");
+		
 		List<OrderedVO> orderedList = orderedService.orderedList(orderedVO);
-	
+		System.out.println("size : "+orderedList.size());
 		int totalAmount = 0;
 		for (OrderedVO vo : orderedList) {
 			totalAmount += vo.getAmount();
@@ -251,8 +268,7 @@ public class OrderedController {
 		
 		List<OrderedVO> list = orderedService.orderedListNot(orderedVO);
 		for (OrderedVO vo : list) {
-			
-			System.out.println(vo.getNum());
+			System.out.println(vo);
 		}
 		mv.addObject("orderedList", list);
 		mv.setViewName("ordered/orderAndPay");

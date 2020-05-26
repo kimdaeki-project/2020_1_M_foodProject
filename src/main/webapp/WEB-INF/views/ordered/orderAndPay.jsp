@@ -200,15 +200,13 @@ hr{
 								<em>&nbsp;|&nbsp;</em>
 								<em>주문일자 : ${orderedVO.createAt}</em>
 							</a>
-							<c:if test="${orderedVO.isReview eq 0}">
-								<c:if test="${orderedVO.isOrderChecked eq 1}">
-									<span>주문 확인  : 대기중</span>
-									<p> 주문 확인 전에는 주문 취소가 가능합니다. 주문 확인시 취소가 불가능하오니, 이점에 유의해주시기 바랍니다. </p>
-								</c:if>
-								<c:if test="${orderedVO.isOrderChecked eq 2}">
-									<span>주문 확인 : 확인</span>
-									<p> 주문이 완료되었습니다. </p>
-								</c:if>
+							<c:if test="${orderedVO.isOrderChecked eq 1}">
+								<span>주문 확인  : 대기중</span>
+								<p> 주문 확인 전에는 주문 취소가 가능합니다. 주문 확인시 취소가 불가능하오니, 이점에 유의해주시기 바랍니다. </p>
+							</c:if>
+							<c:if test="${orderedVO.isOrderChecked eq 2}">
+								<span>주문 확인 : 확인</span>
+								<p> 주문이 완료되었습니다. </p>
 							</c:if>
 						</div>
 					</div>
@@ -223,12 +221,10 @@ hr{
 					
 					<!-- 구매관련 정보 div -->
 					<div class="oap_payInfo">
-						<c:if test="${orderedVO.isReview eq 0}">
-							<c:if test="${orderedVO.isOrderChecked eq 1}">
-								<div class="orderCancle" data-num="${orderedVO.num}">구매취소</div>
-							</c:if>
-							<div id="113" class="reviewInsert" style="margin-top: 10px;" data-num="${orderedVO.num}">후기쓰기</div>
+						<c:if test="${orderedVO.isOrderChecked eq 1}">
+							<div class="orderCancle" data-num="${orderedVO.num}">구매취소</div>
 						</c:if>
+						<div id="113" class="reviewInsert" style="margin-top: 10px;" data-num="${orderedVO.num}">후기쓰기</div>
 					</div>
 				</div>
 				<c:if test="${orderedVO.isOrderChecked eq 1}">

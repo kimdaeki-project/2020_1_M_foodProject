@@ -126,7 +126,50 @@
 
 		// 주문하기 버튼
 		$("#ml_order").click(function() {
-			location.href="${pageContext.request.contextPath}/ordered/orderPage?memberNum=${sessionScope.memberVO.num}";
+			
+			console.log("주문하기");
+			
+			var marketNum = $("#marekt_num").val();
+			var menuNum = $("#menu_num").val();
+			var memberNum = $("#member_num").val();
+			
+			var optionNum = [];
+			
+			//선택한 옵션 번호 구별 num값 추출
+			$(".option_num").each(function() {
+				if($(this).prop("checked") == true){
+					optionNum.push($(this).val());
+				}
+			});
+			
+			optionNum.push("null");
+			
+			var data = {
+					memberNum : memberNum,
+					marketNum : marketNum,
+					menuNum : menuNum,
+					optionNum : optionNum,
+					menuPrice : ${menuVO.price},
+					menuName: `${menuVO.name}`,
+					marketName: `${marketVO.marketName}`,
+					menuThumbImg: `${menuVO.thumbImg}`,
+					pcs: quan,
+					isCart : 0	// 주문하기
+			}
+			
+			$.ajax({
+				url:"../ordered/cartAdd",
+				type:"POST",
+				data: data,
+				success:function(result){
+					if(result > 0) {
+						console.log("테이블에 담겼어요!");
+						location.href="${pageContext.request.contextPath}/ordered/orderPage?memberNum=${sessionScope.memberVO.num}&isCart=0";
+					} else {
+						//alert("테이블에 담을 수 없어요 ㅠㅠ");
+					}
+				}
+			});
 		});
 	
 		//로그인
@@ -136,53 +179,49 @@
 				location.href="../member/memberLogin";
 			});
 		});
-			
-		//장바구니를 누르면 메뉴(옵션포함)추가
+		
+		//장바구니 버튼 클릭 핸들러
 		$("#ml_cart").click(function() {
-				var marketNum = $("#marekt_num").val();
-				var menuNum = $("#menu_num").val();
-				var memberNum = $("#member_num").val();
-				
-				var optionNum = [];
-				
-				//선택한 옵션 번호 구별 num값 추출
-				$(".option_num").each(function() {
-					if($(this).prop("checked") == true){
-						optionNum.push($(this).val());
-					}
-				});
-				
-				optionNum.push("null");
-				
-				var data = {
-						memberNum : memberNum,
-						marketNum : marketNum,
-						menuNum : menuNum,
-						optionNum : optionNum,
-						menuPrice : ${menuVO.price},
-						menuName: `${menuVO.name}`,
-						marketName: `${marketVO.marketName}`,
-						menuThumbImg: `${menuVO.thumbImg}`,
-						pcs: quan
+			var marketNum = $("#marekt_num").val();
+			var menuNum = $("#menu_num").val();
+			var memberNum = $("#member_num").val();
+			
+			var optionNum = [];
+			
+			//선택한 옵션 번호 구별 num값 추출
+			$(".option_num").each(function() {
+				if($(this).prop("checked") == true){
+					optionNum.push($(this).val());
 				}
-				
-				$.ajax({
-					url:"../ordered/cartAdd",
-					type:"POST",
-					data: data,
-					success:function(result){
-						if(result > 0) {
-							alert("장바구니에 담겼어요!");						
-						} else {
-							alert("장바구니에 담을 수가 없네요ㅠㅠ");
-						}
-						
-						// 모든 옵션 체크 풀기
-						$(".option_num").each(function() {
-							$(this).attr("checked", false);
-						});
+			});
+			
+			optionNum.push("null");
+			
+			var data = {
+					memberNum : memberNum,
+					marketNum : marketNum,
+					menuNum : menuNum,
+					optionNum : optionNum,
+					menuPrice : ${menuVO.price},
+					menuName: `${menuVO.name}`,
+					marketName: `${marketVO.marketName}`,
+					menuThumbImg: `${menuVO.thumbImg}`,
+					pcs: quan,
+					isCart : 1	// 장바구니에 담음
+			}
+			
+			$.ajax({
+				url:"../ordered/cartAdd",
+				type:"POST",
+				data: data,
+				success:function(result){
+					if(result > 0) {
+						alert("장바구니에 담겼어요!");
+					} else {
+						alert("장바구니에 담을 수 없어요 ㅠㅠ");
 					}
-				});			
+				}
+			});
 		});
 
 	</script>

@@ -32,7 +32,6 @@ public class OrderedService {
 		//주문번호 sequence 증가
 		long orderNum = orderedDAO.orderedCount();
 		
-		System.out.println("orderNum : "+orderNum);
 		//장바구니 기본값 설정
 		orderedVO.setNum(orderNum);
 		orderedVO.setImp_uid(null);
@@ -43,6 +42,9 @@ public class OrderedService {
 		orderedVO.setTimeLag(30);
 		orderedVO.setIsOrderChecked(0);
 		orderedVO.setIsReview(0);
+		
+		// 값 찍어보기
+		//System.out.println(orderedVO);
 		
 		//주문등록
 		int result = orderedDAO.orderedInsert(orderedVO);

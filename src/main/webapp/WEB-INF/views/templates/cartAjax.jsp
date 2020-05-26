@@ -32,7 +32,7 @@
 											<img alt=""	src="${pageContext.request.contextPath}/resources/upload/menu/${orderedVO.menuThumbImg}">
 												<div class="cart-col">
 													<div style="display: flex; justify-content: space-between;">
-														<strong>${orderedVO.marketName} ${orderedVO.menuName}</strong> 
+														<strong>[${orderedVO.marketName}] ${orderedVO.menuName}</strong> 
 														<span class="btn-select-delete" style="cursor: pointer; padding: 0 10px;" data-title="${orderedVO.num}">✖</span>
 													</div>
 													<span>${orderedVO.cateMenuOptions}</span>
@@ -40,7 +40,7 @@
 											</div>
 											<div class="cart-row2">
 												<div>주문 수량 ${orderedVO.pcs}개</div>
-												<div>가격 ${orderedVO.amount}원</div>
+												<div class="eachPrice" data-price="${orderedVO.amount}"></div>
 											</div>
 										</div>
 									</li>
@@ -53,12 +53,12 @@
 							<hr>
 							<div class="cart-result-body">
 								<dl class="cart-dl">
-									<dt>총 주문 갯수</dt>
+									<dt>총 주문 수량</dt>
 									<dd>${cartSize}개</dd>
 								</dl>
 								<dl class="cart-dl">
 									<dt>총 상품 금액</dt>
-									<dd>${totalAmount}원</dd>
+									<dd id="totalAmount"></dd>
 								</dl>
 							</div>
 							<div class="nav-button">
@@ -79,5 +79,24 @@
 				});
 			});
 		});
-														
+		
+		//========================
+		// 콤마 찍기
+		//========================
+		// 천단위로 숫자에 콤마 찍기
+		function moneyFormat(money) {
+			return money.toLocaleString();
+		}
+		
+		// 총 주문 금액에 콤마 찍기
+		$('#totalAmount').text(moneyFormat(${totalAmount})+'원');
+		
+		// 각 주문의 금액에 콤마 찍기
+		$(".eachPrice").each(function() {
+			
+			// string to number
+			var price = $(this).data("price");
+			$(this).text('상품 금액 '+moneyFormat(price)+'원');
+		});
+		
 	</script>
