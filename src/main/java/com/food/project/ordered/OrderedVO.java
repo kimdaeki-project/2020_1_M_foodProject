@@ -14,6 +14,7 @@ public class OrderedVO {
 	private String cateMenuOptions;
 	private int pcs;
 	private int	amount;
+	private int isCart;
     private String imp_uid;
     private String merchant_uid; 
     private String pg;
@@ -86,6 +87,12 @@ public class OrderedVO {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
+	}
+	public int getIsCart() {
+		return isCart;
+	}
+	public void setIsCart(int isCart) {
+		this.isCart = isCart;
 	}
 	public String getImp_uid() {
 		return imp_uid;
@@ -163,22 +170,24 @@ public class OrderedVO {
 	public String toString() {
 	
 		System.out.println("=======================================");
-		System.out.println(this.getNum());
-		System.out.println(this.getMemberNum());
-		System.out.println(this.getMarketNum());
-		System.out.println(this.getMenuNum());
-		System.out.println(this.getMarketName());
-		System.out.println(this.getMenuName());
-		System.out.println(this.getMenuThumbImg());
-		System.out.println(this.getCateMenuOptions());
-		System.out.println(this.getPcs());
-		System.out.println(this.getAmount());
-		System.out.println(this.getCancleType());
-		System.out.println(this.getCancleDetail());
-		System.out.println(this.getIsOrderChecked());
-		System.out.println(this.getIsReview());
-		System.out.println(this.getTimeLag());
+		System.out.println("num : "+this.getNum());
+		System.out.println("memberNum : "+this.getMemberNum());
+		System.out.println("marketNum : "+this.getMarketNum());
+		System.out.println("menuNum : "+this.getMenuNum());
+		System.out.println("marketName : "+this.getMarketName());
+		System.out.println("menuName : "+this.getMenuName());
+		System.out.println("menuThumbImg : "+this.getMenuThumbImg());
+		System.out.println("cateMenuOptions : "+this.getCateMenuOptions());
+		System.out.println("pcs : "+this.getPcs());
+		System.out.println("amount : "+this.getAmount());
+		System.out.println("isCart : "+this.getIsCart());
+		System.out.println("cancleType : "+this.getCancleType());
+		System.out.println("cancleDetail : "+this.getCancleDetail());
+		System.out.println("isOrderChecked : "+this.getIsOrderChecked());
+		System.out.println("isReview : "+this.getIsReview());
+		System.out.println("timeLag : "+this.getTimeLag());
 		
 		return null;
 	}
+	
 }

@@ -10,22 +10,28 @@
 	</select>
 
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
-		SELECT * FROM ordered WHERE memberNum=#{memberNum} AND isOrderChecked=#{isOrderChecked} AND deleteAt IS NULL
+		SELECT * FROM ordered WHERE 
+		memberNum=#{memberNum} AND 
+		isOrderChecked=#{isOrderChecked} AND 
+		deleteAt IS NULL
 	</select>
 	
 	<select id="orderedListNot" parameterType="OrderedVO" resultType="OrderedVO">
-		SELECT * FROM ordered where memberNum=#{memberNum} AND isOrderChecked!=#{isOrderChecked} AND deleteAt IS NULL
+		SELECT * FROM ordered WHERE 
+		memberNum=#{memberNum} AND 
+		isOrderChecked!=#{isOrderChecked} AND 
+		deleteAt IS NULL
 	</select>
 	
 	<select id="orderedSelect" parameterType="OrderedVO" resultType="OrderedVO">
 		SELECT * FROM ordered WHERE num=#{num}
 	</select>
 	
-	<!-- isOrderChecked 다음에 isReview 필드 추가(Default = 0) -->
+	<!-- 테이블에 값 입력 -->
 	<insert id="orderedInsert" parameterType="OrderedVO">
 		INSERT INTO ordered VALUES(
 			#{num}, #{memberNum}, #{marketNum},#{menuNum},#{marketName},#{menuName},#{menuThumbImg}, #{cateMenuOptions, jdbcType=VARCHAR}, 
-			#{pcs}, #{amount}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid, jdbcType=VARCHAR}, #{pg, jdbcType=VARCHAR}, 
+			#{pcs}, #{amount}, #{isCart}, #{imp_uid, jdbcType=VARCHAR}, #{merchant_uid, jdbcType=VARCHAR}, #{pg, jdbcType=VARCHAR}, 
 			#{pay_method, jdbcType=VARCHAR}, #{apply_num, jdbcType=VARCHAR}, #{cancleType, jdbcType=INTEGER}, 
 			#{cancleDetail, jdbcType=VARCHAR}, #{isOrderChecked}, #{isReview}, #{timeLag}, sysdate, sysdate, null
 		)
@@ -54,8 +60,9 @@
 		UPDATE ordered SET cancleType=#{cancleType}, cancleDetail=#{cancleDetail, jdbcType=VARCHAR}, deleteAt=sysdate WHERE num=#{num}
 	</update>
 	
+	<!-- 해당 멤버의 ordered 전부 지우기 -->
 	<delete id="cartDeleteAll" parameterType="OrderedVO">
-		delete from ordered where memberNum=#{memberNum}
+		DELETE FROM ordered WHERE memberNum=#{memberNum} AND isOrderChecked = 0 AND isCart = #{isCart}
 	</delete>
 	
 	<!-- 장바구니에서 지우기(DELETE) -->
