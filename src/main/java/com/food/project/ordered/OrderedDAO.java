@@ -29,6 +29,11 @@ public class OrderedDAO {
 		return sqlSession.selectList(NAMESPACE+"orderedListNot",orderedVO);
 	}
 	
+	// 주문 마켓 기준 전체 조회 
+	public List<OrderedVO> orderedMarketList(OrderedVO orderedVO) throws Exception {
+		return sqlSession.selectList(NAMESPACE+"orderedMarketList", orderedVO);
+	}
+	
 	//주문 조회 - SelectOne (유저ID or 판매자ID)
 	public OrderedVO orderedSelect(OrderedVO orderedVO) throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"orderedSelect", orderedVO);

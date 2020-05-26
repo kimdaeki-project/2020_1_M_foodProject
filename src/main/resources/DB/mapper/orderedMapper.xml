@@ -23,6 +23,14 @@
 		deleteAt IS NULL
 	</select>
 	
+	<select id="orderedMarketList" parameterType="OrderedVO" resultType="OrderedVO">
+		SELECT * FROM ordered WHERE 
+		marketNum=#{marketNum} AND 
+		isOrderChecked!=#{isOrderChecked} AND 
+		deleteAt IS NULL
+	</select>
+	
+	
 	<select id="orderedSelect" parameterType="OrderedVO" resultType="OrderedVO">
 		SELECT * FROM ordered WHERE num=#{num}
 	</select>
