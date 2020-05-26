@@ -82,9 +82,10 @@ body {
 	position: absolute;
 	border: none;
 	height: 28px;
+	padding: 0 20px;
 	font-size: 15px;
 	top: 12px;
-	right: 18px;
+	right: 1px;
 	color: #27b06e;
 	font-family: 'Noto Sans KR', sans-serif;
 	background-color: transparent;
