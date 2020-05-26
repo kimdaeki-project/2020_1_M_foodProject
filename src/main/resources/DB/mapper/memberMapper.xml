@@ -5,6 +5,10 @@
   
 <mapper namespace="com.food.project.member.MemberDAO">
 	
+	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where email=#{email} and name=#{name}
+	</select>
+	
 	<insert id="memberJoin" parameterType="MemberVO">
 		INSERT INTO member VALUES(member_seq.nextval,#{id},#{email},#{password},#{name},#{age},
 		#{gender},#{nickName},'local',#{phone},#{address},0,#{latitude},#{longitude},null,sysdate,sysdate,null)

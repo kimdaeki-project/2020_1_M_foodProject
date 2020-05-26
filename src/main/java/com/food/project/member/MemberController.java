@@ -18,6 +18,8 @@ import com.food.project.mail.MailVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -31,23 +33,59 @@ public class MemberController {
 	private MailService mailService;
 	
 	
-	@GetMapping("mailCertification")
-	@ResponseBody
-	public int idSearch(String email) throws Exception{
-		int result=1;
-		
-		MailVO mailVO = new MailVO();
-		
-		int rnd = (int)Math.random()*1000;
+	public int emailRnd() {
+		//6자리 랜덤 값 생성
+		int rnd = (int)(Math.floor(Math.random() * 1000000)+100000);
+		if(rnd>1000000){
+			rnd = rnd - 100000;
+		}
 		System.out.println(rnd);
+		
+		return rnd;
+	}
+	
+	@PostMapping("mailCertification")
+	@ResponseBody
+	public int idSearch(String email,String name,String id,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MailVO mailVO = new MailVO();
+		MemberVO memberVO = new MemberVO();
+		int result = 0;
+		int rnd = 0;
+		
+		memberVO.setName(name);
+		memberVO.setEmail(email);
+		
+		
+		//아이디 비번 찾기 결정
+		if(id == null) { //아이디 찾기
+			System.out.println("아이디 찾기");
+			
+			
+			memberVO = memberService.emailSearch(memberVO);
+			if(memberVO != null) {
+				System.out.println("아이디가 존재하는 이메일");
+				rnd = emailRnd();
+				result = 1; //아이디가 존재
+				session.setAttribute("mailCertification", rnd);
+			}
+			
+		}else {
+			System.out.println("비번 찾기");
+			memberVO.setId(id);
+		}
+		
+		
 		
 		mailVO.setSubject("Fusulian 아이디/비밀번호 찾기 메일입니다!");
 		mailVO.setSenderMail("gotaem17@gmail.com");
 		mailVO.setSenderName("Fusulian");
 		mailVO.setReceiveMail(email);
-		mailVO.setMessage("인증 번호는 "+ rnd +" 입니다.");
+		mailVO.setMessage("인증 번호는 "+ 11111 +" 입니다.");
 		
 		//mailService.sendMail(mailVO);
+		System.out.println("result : "+result);
+		
 		
 		return result;
 	}
