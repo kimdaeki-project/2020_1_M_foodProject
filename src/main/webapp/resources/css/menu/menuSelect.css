@@ -191,15 +191,20 @@ input[type=radio].ml_radio{
     font-weight: 600;
 }
 
+.button_wrap{
+	padding: 0 10px;
+	font-weight: 600;
+}
+
 @media screen and (max-width: 920px) {
 	.none{
-		margin-top: 5px;;
+		margin-top: 5px;
 	}
 }
 
 @media screen and (max-width: 880px) {
 	.ms_menu{
-		display: grid;
+		display: block;
 	}
 
 	.ms_menu > img{
@@ -210,6 +215,11 @@ input[type=radio].ml_radio{
 	.ms_menuInfo{
 		padding: 0;
 		width: 100%;
+		display: block;
+	}
+	
+	.ms_menuInfo > h2{
+		margin: 20px 0 0 0;
 	}
 
 }
