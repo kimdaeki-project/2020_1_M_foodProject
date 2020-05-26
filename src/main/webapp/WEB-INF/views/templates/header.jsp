@@ -23,7 +23,7 @@
 			<ul class="h_nav_ul">
 				<li><a
 					href="${pageContext.request.contextPath}/market/marketList">메뉴보기</a></li>
-				<li><a href="#">트럭스팟</a></li>
+				<li><a href="#936">트럭스팟</a></li>
 				<li><a href="#">이용안내</a></li>
 				<li><a href="#">이벤트</a></li>
 			</ul>

@@ -299,6 +299,7 @@ style> <style>.wrap {
 	border-bottom: 1px solid #ddd;
 	font-size: 18px;
 	font-weight: bold;
+	color: #3d3d3d;
 }
 
 .info .close {
@@ -325,6 +326,7 @@ style> <style>.wrap {
 	position: relative;
 	margin: 13px 0 0 90px;
 	height: 75px;
+	line-height: 24px;
 }
 
 .desc .market {
@@ -341,8 +343,8 @@ style> <style>.wrap {
 
 .info .img {
 	position: absolute;
-	top: 6px;
-	left: 5px;
+	top: 9px;
+	left: 6px;
 	width: 73px;
 	height: 71px;
 	border: 1px solid #ddd;

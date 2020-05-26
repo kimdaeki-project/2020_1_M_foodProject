@@ -175,6 +175,11 @@ input[type="file" i] {
 #newfile{
 	margin-bottom: 0;
 }
+
+.ma_fileDel{
+    line-height: 46px;
+    padding: 0 15px;
+}
 </style>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"

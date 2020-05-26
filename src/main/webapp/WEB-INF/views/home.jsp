@@ -42,7 +42,7 @@
 				<p>1개만 주문해도 무료배송되는 프레시코드</p>
 			</div>
 			<div class="rec1">
-				<h2 style="font-size: 35px; margin-top: 25px;">936개</h2>
+				<h2 style="font-size: 35px; margin-top: 25px;" id="936">936개</h2>
 				<p>현재 오픈된 프코스팟</p>
 			</div>
 			<div id="map_wrapper">
@@ -51,7 +51,7 @@
 				<div>
 				</div>
 					<div id="categorys_wrapper">
-						<ul class="categorys">
+						<ul class="categorys" id="rec1">
 							<input type="text" id="text-search" placeholder="검색어를 입력하세요">
 							<input type="button" id="btn-search" value="검색">
 						</ul>
@@ -479,8 +479,8 @@
 	            '            <div class="desc">' + 
 	            '                <div class="market">' + markets[i].marketIntro +
 	            '				 </div>' + 
-	            '                <div class="time">(open ~ close)'+ markets[i].openTime + ' ~ ' + markets[i].closeTime + '</div>' + 
-	            '                <div class="time">별점 : '+ markets[i].rating+'</div>' +
+	            '                <div class="time">(open ~ close) '+ markets[i].openTime + ' ~ ' + markets[i].closeTime + '</div>' + 
+	            '                <div class="time">별점 : '+ markets[i].rating+'점</div>' +
 	            '            </div>' + 
 	            '	    </div>' + 
 	            '    </div>' +    

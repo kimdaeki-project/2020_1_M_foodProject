@@ -20,34 +20,6 @@
 		font-size: 30px;
 		color: #6f7174;
 	}
-	
-	.done-table{
-		margin-top: 20px;	
-		width: 100%;
-		border: 1px solid #6f7174;
-	}
-	
-	.done-tr{
-	
-	}
-	
-	.done-tr > th{
-		text-align: left;
-		color: #3d3d3d;
-		width: 20%;
-		padding: 3px 0 3px 10px;
-	}
-	
-	.done-tr > td{
-		text-align: left;
-		color: #3d3d3d;
-		width: 80%;
-	}
-	
-	tbody{
-		margin: 0;
-		padding: 0;
-	}
 </style>
 </head>
 <body>

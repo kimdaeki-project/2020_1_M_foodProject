@@ -53,6 +53,7 @@
 
 .oap_ii_info{
 	margin-left: 10px;
+	width: 100%;
 }
 
 .oap_ii_info > span{
@@ -157,7 +158,8 @@
 							</c:if>
 							
 							<p>${reviewVO.contents}</p>
-							작성일 : ${reviewVO.regDate}
+							<p>작성일 : ${reviewVO.regDate}</p>
+							
 						</div>
 					</div>
 					

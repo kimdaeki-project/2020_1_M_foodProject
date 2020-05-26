@@ -203,6 +203,7 @@ hr{
 				<div class="oap_item" data-num="${orderedVO.num}">
 					<!-- 아이템 정보 div -->
 					<div class="oap_itemInfo">
+						<div style="display: flex;">
 						<a class="oap_ii_storePic">
 							<img alt="상점사진" src="../resources/upload/menu/${orderedVO.menuThumbImg}">
 						</a>
@@ -222,7 +223,7 @@ hr{
 								<span>주문 확인 : 확인</span>
 								<p> 주문이 완료되었습니다. </p>
 							</c:if>
-						</div>
+						</div></div>
 					</div>
 
 					<!-- 상점 정보 div -->
