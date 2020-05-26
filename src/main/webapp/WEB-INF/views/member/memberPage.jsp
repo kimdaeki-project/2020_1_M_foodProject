@@ -88,7 +88,7 @@
               	<a class="mp_myInfoNav_a">탈퇴하기</a>
               </li>
                <li id="li5" class="mp_myInfoNav_li">
-               <a class="mp_myInfoNav_a" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
+               <a class="mp_myInfoNav_a" href="${pageContext.request.contextPath}/member/memberLogout?num=${sessionScope.memberVO.num}">로그아웃</a></li>
             </ul>
          </aside>
          <div class="mp_box" style="width: 100%"></div>
@@ -250,7 +250,6 @@
 			}
 		});
 
-		$('#default').click();
 	</script>
 </body>
 </html>

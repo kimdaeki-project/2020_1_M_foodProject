@@ -45,11 +45,11 @@ public class MarketService {
 		return result;
 	}
 	//isClose
-		public int isOpen2(MarketVO marketVO) throws Exception{
-			int result = marketDAO.isOpen(marketVO);
+	public int isOpen2(MarketVO marketVO) throws Exception{
+		int result = marketDAO.isOpen(marketVO);
 			
-			return result;
-		}
+		return result;
+	}
 	
 	//조회 - selectList
 	public List<MarketVO> marketList() throws Exception{

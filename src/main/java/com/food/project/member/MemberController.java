@@ -146,9 +146,20 @@ public class MemberController {
 
 	// 로그아웃(GET)
 	@GetMapping("memberLogout")
-	public String memberLogout(HttpSession session) throws Exception {
+	public String memberLogout(HttpSession session,long num) throws Exception {
+
+		MarketVO marketVO = new MarketVO();
+		marketVO.setUserNum(num);
+		marketVO.setIsOpen(0);
+		
+		int reulst = marketService.isOpen2(marketVO);
+		if(reulst>0) {
+			System.out.println("상점종료");
+		}else {
+			System.out.println("실패");
+		}
+		
 		session.invalidate();
-		System.out.println("로그아웃");
 
 		return "redirect:/";
 	}

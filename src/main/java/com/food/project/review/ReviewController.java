@@ -41,6 +41,7 @@ public class ReviewController {
 	public ModelAndView marketReview(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 
+		
 		pager.setMarketNum(marketVO.getNum());
 		List<ReviewVO> reviewList = reviewService.reviewMarketList(pager);
 		
