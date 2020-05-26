@@ -66,12 +66,12 @@
 				</div>
 				<hr class="mkj_hr">
 				<div>
-					<label class="mkj_label"> <input type="checkbox"
+					<label class="mkj_label"> <input type="checkbox" id="chk_all"
 						name="terms"> <strong>이용약관 전체동의</strong>
-					</label> <label class="mkj_label"> <input type="checkbox"
+					</label> <label class="mkj_label"> <input type="checkbox" class="check_btn"
 						name="terms"> <span>(필수)이용약관에 동의합니다.</span> <a href="#"
 						class=".mkj_more">자세히</a>
-					</label> <label class="mkj_label"> <input type="checkbox"
+					</label> <label class="mkj_label"> <input type="checkbox" class="check_btn"
 						name="terms"> <span>(필수)개인정보처리방침에 동의합니다.</span> <a
 						href="#" class="more">자세히</a>
 					</label>
@@ -83,6 +83,7 @@
 			</form>
 		</article>
 	</div>
+	<%@ include file="../templates/footer.jsp"%>
 	
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
@@ -146,8 +147,79 @@
             }
         }
     });
-
+		
+$(function() {
+        
+       /*  //아이디 중복검사
+        $("#id").keyup(function() {
+        	console.log('성공');
+            var id = $("#id").val();
+            console.log(id);
+            console.log(id.length);
+            $.ajax({
+                url:'./memberIdCheck',
+                type:'get',
+                data:{ id:id },
+                success: function(data) {
+                	if (data===0){
+                        //사용중인 아이디라고 화면에 뜨게하기
+                        $("#mj_showIdChk").text("중복되는 아이디입니다.");
+						$("#mj_showIdChk").css("color", "red");
+                    } else if(data===1) {
+                    	// 5자리 갯수 이상, 사용 가능한 아이디라고 화면에 뜨게하기
+                    	if(id.length > 4) {
+                        	$("#mj_showIdChk").text("사용가능한 아이디입니다.");
+							$("#mj_showIdChk").css("color", "#27b06e");
+                    	} else {
+                    		$("#mj_showIdChk").empty();
+                    	}
+                    }
+                },
+                error: function() {
+						console.log("연결 실패");
+				}
+            });
+        }); */
+		
+		//체크 박스 전체선택, 해제
+		$("#chk_all").click(function() {
+			if ($("#chk_all").is(':checked')) {
+				$(".check_btn").prop("checked", true);
+				console.log('?');
+			}else {
+				$(".check_btn").prop("checked", false);
+				console.log('!');
+			}
+		});
+		
+		//체크박스 부분 선택
+		$('.check_btn').each(function() {
+			$(this).click(function() {
+				
+				var check = true;
+				$('.check_btn').each(function() {
+					if($(this).prop('checked') === false) {
+						check = false;
+						return;
+					}
+				});
+				
+				$('#chk_all').prop('checked', check);
+			});
+		});
+		
+		//약관 동의 안하면 가입 못함
+		$(function() {
+			$(".memberjoin_button").click(function() {
+				if ($("#chk_all").is(':checked')) {
+				}else {
+					alert('모든 약관에 동의해야 가입이 가능합니다!');
+					return false;
+				}
+			})
+        })
+        
+	});
 	</script>
-	<%@ include file="../templates/footer.jsp"%>
 </body>
 </html>

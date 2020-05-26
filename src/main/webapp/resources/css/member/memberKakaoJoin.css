@@ -92,6 +92,16 @@
 	cursor: pointer;
 }
 
-.mkj_radio{
+.more {
+	color: #27b06e;
+	cursor: pointer;
+}
 
+a{
+	color: #27b06e;
+	text-decoration: none;
+}
+
+.error{
+	color: #008080;
 }

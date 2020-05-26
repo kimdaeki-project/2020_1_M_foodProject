@@ -38,7 +38,7 @@
 									<label for="cb1"></label>
 									<div class="option_div" data-name="${vo.name}">
 										<div>${vo.name}</div>
-										<div>${vo.price} 원</div>
+										<div>${vo.price}원</div>
 									</div>
 								</dd>
 							</c:forEach>
