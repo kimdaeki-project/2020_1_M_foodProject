@@ -183,3 +183,35 @@ input[type="file" i]{
     overflow: hidden;
     height: 38px;
 }
+
+.del {
+    display: initial;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 15px;
+    outline: none;
+    width: 110px;
+    color: #ffffff;
+    background-color: #fbbc04;
+    margin-left: 5px;
+}
+
+.add {
+    display: initial;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 15px;
+    outline: none;
+    width: 80px;
+    color: #ffffff;
+    background-color: #27b06e;
+    margin-left: 5px;
+}
+
+.cb{
+	padding: 10px 0;
+}

@@ -11,13 +11,12 @@
 	display: table;
     width: 100%;
     min-height: 161px;
-    padding: 23px 0 0 0;
     table-layout: fixed;
 }
 
 .oap_itemInfo{
 	display: table-cell;
-	display: flex;
+	vertical-align: middle;
 }
 
 .oap_ii_storePic{
@@ -71,7 +70,6 @@
     border-top: 1px solid #f4f6f7;
     box-sizing: border-box;
     overflow: hidden;
-    height: 46px;
     font-size: 14px;
 }
 
@@ -153,7 +151,7 @@ hr{
 }
 
 .cr_select{
-    padding: 10px 20px;
+    padding: 10px 30px;
 	font-family: 'Noto Sans KR', sans-serif;
 	font-family: inherit;
     color: #3d3d3d;
@@ -171,11 +169,26 @@ hr{
 .cancleTextArea{
 	resize: none;
     width: 95%;
-    margin: 0 20px;
+    margin: 0 auto;
     height: 70px;
     border: 1px solid #dedede;
     padding: 5px;
 	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.oap_itemIfDiv{
+	display: flex;
+    padding: 10px 0;
+}
+
+.orderCancleBtn{
+	width: 100px;
+    color: #6f7174;
+    font-size: 13px;
+    line-height: 27px;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #dedede;
 }
 
 </style>
@@ -190,50 +203,54 @@ hr{
 				<div class="oap_item" data-num="${orderedVO.num}">
 					<!-- 아이템 정보 div -->
 					<div class="oap_itemInfo">
-						<a class="oap_ii_storePic">
-							<img alt="상점사진" src="${orderedVO.menuThumbImg}">
-						</a>
-						<div class="oap_ii_info">
-							<a class="oap_items">
-								<strong>${orderedVO.menuName} - ${orderedVO.cateMenuOptions}</strong>
-								<em>가격 : ${orderedVO.amount}원</em>
-								<em>&nbsp;|&nbsp;</em>
-								<em>주문일자 : ${orderedVO.createAt}</em>
+						<div class="oap_itemIfDiv">
+							<a class="oap_ii_storePic"> <img alt="상점사진"
+								src="${orderedVO.menuThumbImg}">
 							</a>
-							<c:if test="${orderedVO.isReview eq 0}">
-								<c:if test="${orderedVO.isOrderChecked eq 1}">
-									<span>주문 확인  : 대기중</span>
-									<p> 주문 확인 전에는 주문 취소가 가능합니다. 주문 확인시 취소가 불가능하오니, 이점에 유의해주시기 바랍니다. </p>
+							<div class="oap_ii_info">
+								<a class="oap_items"> <strong>${orderedVO.menuName}
+										- ${orderedVO.cateMenuOptions}</strong> <em>가격 :
+										${orderedVO.amount}원</em> <em>&nbsp;|&nbsp;</em> <em>주문일자 :
+										${orderedVO.createAt}</em>
+								</a>
+								<c:if test="${orderedVO.isReview eq 0}">
+									<c:if test="${orderedVO.isOrderChecked eq 1}">
+										<span>주문 확인 : 대기중</span>
+										<p>주문 확인 전에는 주문 취소가 가능합니다. 주문 확인시 취소가 불가능하오니, 이점에 유의해주시기
+											바랍니다.</p>
+									</c:if>
+									<c:if test="${orderedVO.isOrderChecked eq 2}">
+										<span>주문 확인 : 확인</span>
+										<p>주문이 완료되었습니다.</p>
+									</c:if>
 								</c:if>
-								<c:if test="${orderedVO.isOrderChecked eq 2}">
-									<span>주문 확인 : 확인</span>
-									<p> 주문이 완료되었습니다. </p>
-								</c:if>
-							</c:if>
+							</div>
 						</div>
 					</div>
-					
+
 					<!-- 상점 정보 div -->
 					<div class="oap_storeInfo">
 						<div class="oap_siDiv">
-							<span class="storename">${orderedVO.marketName}</span>
-							<span class="storego" data-num="${orderedVO.memberNum}">바로가기</span>
+							<span class="storename">${orderedVO.marketName}</span> <span
+								class="storego" data-num="${orderedVO.memberNum}">바로가기</span>
 						</div>
 					</div>
-					
+
 					<!-- 구매관련 정보 div -->
 					<div class="oap_payInfo">
 						<c:if test="${orderedVO.isReview eq 0}">
 							<c:if test="${orderedVO.isOrderChecked eq 1}">
 								<div class="orderCancle" data-num="${orderedVO.num}">구매취소</div>
 							</c:if>
-							<div id="113" class="reviewInsert" style="margin-top: 10px;" data-num="${orderedVO.num}">후기쓰기</div>
+							<div id="113" class="reviewInsert" style="margin-top: 10px;"
+								data-num="${orderedVO.num}">후기쓰기</div>
 						</c:if>
 					</div>
 				</div>
 				<c:if test="${orderedVO.isOrderChecked eq 1}">
 					<div class="cancleReason" data-num="${orderedVO.num}" data-show="0">
 						<div class="cr_select">
+							<div>
 							주문 취소 사유
 							<!-- (0:기타, 1:마켓의 요청으로 취소(취소 사유에 뜨지않음) 2:재주문을 위한 취소(default), 3:너무 먼 거리로 인한 취소, 4: 단순변심 -->
 							<select class="cancleReasonSelect" style="padding: 2px 5px; margin-left: 10px;" data-num="${orderedVO.num}">
@@ -242,6 +259,7 @@ hr{
 								<option value="4">단순변심으로 인한 취소</option>
 								<option value="0">기타 사유</option>
 							</select>
+							</div>
 							<button class="orderCancleBtn" data-num="${orderedVO.num}">취소 요청</button>
 						</div>
 						<textarea rows="" cols="" placeholder="주문 취소 이유를 적어주세요!" class="cancleTextArea" data-num="${orderedVO.num}"></textarea>

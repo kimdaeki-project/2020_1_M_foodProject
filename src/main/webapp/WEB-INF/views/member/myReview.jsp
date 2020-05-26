@@ -20,6 +20,7 @@ a {
 
 .rev_ul {
 	list-style: none;
+	padding: 0;
 }
 
 .rev_li {
@@ -103,6 +104,7 @@ a {
 .rev_review_img {
 	display: table-cell;
 	height: 90px;
+	width: 90px;
 }
 
 .rev_del {
