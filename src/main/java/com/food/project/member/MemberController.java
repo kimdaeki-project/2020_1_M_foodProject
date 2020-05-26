@@ -52,7 +52,7 @@ public class MemberController {
 	
 	@PostMapping("mailCertification")
 	@ResponseBody
-	public int idSearch(String email,String name,String id,HttpSession session) throws Exception{
+	public int idSearch(String email,String name,String id) throws Exception{
 		MailVO mailVO = new MailVO();
 		MemberVO memberVO = new MemberVO();
 		int result = 0;

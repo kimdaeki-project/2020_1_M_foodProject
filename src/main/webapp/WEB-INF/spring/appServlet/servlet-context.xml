@@ -32,9 +32,17 @@
 		<interceptor>
 			<!-- URL Pattern -->
 			<mapping path="/*"/>
-			<!-- Interceptor class -->
 			<beans:bean class="com.food.project.interceptor.TestInterceptor">
 			</beans:bean>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/member/memberPage"/>
+			<mapping path="/member/memberDelete"/>
+			<mapping path="/member/myReview"/>
+			<mapping path="/member/memberUpdate"/>
+			
+			<beans:ref bean="memberInterceptor"/>
 		</interceptor>
 		
 	</interceptors>
