@@ -84,7 +84,6 @@
 		</article>
 	</div>
 	
-	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 	<script type="text/javascript">
 		//성별가져오기?
