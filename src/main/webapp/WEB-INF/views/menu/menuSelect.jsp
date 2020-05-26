@@ -20,8 +20,8 @@
 			<div class="ms_menuInfo">
 				<h2>${menuVO.name}</h2>
 				<p>${menuVO.detail}</p>
-				<div style="display: flex; justify-content: space-between;">
-					<p id="menuBasicPrice" style="margin: 0" data-price="${menuVO.price}"></p>
+				<div>
+					<p id="menuBasicPrice" data-price="${menuVO.price}"></p>
 				</div>
 				<nav></nav>
 				<!-- 옵션 선택 페이지 -->
@@ -31,28 +31,30 @@
 						<c:set var="num" value="0" />
 						
 						<c:forEach var="categoryVO" items="${cateList}" varStatus="set">
-							<dt style="color: #3d3d3d;">${categoryVO.name}</dt>
+							<dt class="ml_dt">${categoryVO.name}</dt>
 								<c:forEach var="vo" items="${categoryVO.menuOptionVOs}" varStatus="status">
-								<dd style="display: flex; justify-content: space-between; margin-top: 5px;">
-									<label class="ml_opLabel" style="max-width: 300px;"> 
-										<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}">
-										<!-- name과 price간 간격이 필요 -->
-										<div class="option_div" data-name="${vo.name}">
-										${vo.name} ${vo.price}원
-										</div>
-									</label>
+								<dd class="ml_dd">
+									<input class="option_num" type="checkbox" name="test1" value="${vo.name} ${vo.price}" id="cb1"> 
+									<label for="cb1"></label>
+									<div class="option_div" data-name="${vo.name}">
+										<div>${vo.name}</div>
+										<div>${vo.price}원</div>
+									</div>
 								</dd>
 							</c:forEach>
-							<nav></nav>
 						</c:forEach>
-						
 					</dl>
 				</div>
+				<nav></nav>
 				<div class="quanClass">
-					<input type="button" class="minus" value="ー"> 
-					<input type="text" value="1" class="quantity ${vo.num}" readonly="readonly"> 
-					<input type="button" class="plus" value="+">
+					<span>수량</span>
+					<div>
+						<input type="button" class="minus" value="ー"> 
+						<input type="text" value="1" class="quantity ${vo.num}" readonly="readonly"> 
+						<input type="button" class="plus" value="+">
+					</div>
 				</div>
+				<nav></nav>
 				<c:if test="${empty sessionScope.memberVO}">
 					<button class="none" type="button">장바구니</button>
 					<button class="none" type="submit">주문하기</button>
@@ -90,13 +92,13 @@
 				nameAndPrice[1] *= 1; // string to int
 				nameAndPrice[1] = moneyFormat(nameAndPrice[1]);
 				
-				$('.option_div').each(function() {
+				/* $('.option_div').each(function() {
 					
 					var name = $(this).data("name");
 					if(name == nameAndPrice[0]) {
 						$(this).text(nameAndPrice[0]+' +'+nameAndPrice[1]+'원');
 					}
-				});
+				}); */
 			});
 		});
 	

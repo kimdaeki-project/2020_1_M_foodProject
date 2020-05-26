@@ -31,6 +31,25 @@ body {
 	width: 630px;
 }
 
+.ms_menuInfo > h2{
+	margin: 0;
+	font-size: 24px;
+    line-height: 28px;
+    color: #3d3d3d;
+}
+
+.ms_menuInfo > p{
+	margin: 10px 0 5px 0;
+    font-size: 15px;
+    line-height: 20px;
+    color: #6f7174;
+}
+
+#menuBasicPrice {
+	margin: 0 0 0 1px;
+    color: #6f7174;
+}
+
 .ms_menuInfo nav {
 	display: flex;
 	flex-wrap: wrap;
@@ -46,8 +65,49 @@ body {
 	border: transparent;
 	background: #27b06e;
 	color: #ffffff;
-	font-size: 14px;
+	font-size: 14.5px;
 	font-weight: 600;
+	width: 49%;
+}
+
+.ml_dd{
+	margin: 10px 0; 
+	display: flex;
+}
+
+input[id="cb1"] {
+	-webkit-appearance: none;
+    display: inline-block;
+    width: 21px;
+    height: 20px;
+    background-color: #e7e7e7;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+input[id="cb1"]:checked {
+	-webkit-appearance: none;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 6px solid #e7e7e7;
+    background-color: #27b06e;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.ml_dt{
+	 color: #3d3d3d;
+	 font-weight: 600;
+}
+
+.option_div{
+	width: 100%;
+    margin: 0 0 0 5px;
+    line-height: 24px;
+    display: flex;
+    color: #3d3d3d;
+    justify-content: space-between;
 }
 
 .ml_opList {
@@ -64,7 +124,7 @@ body {
 }
 
 .ml_opSel_dl {
-	margin: 0;
+	margin: 0 20px;
 }
 
 input[type=radio].ml_radio{
@@ -84,7 +144,6 @@ input[type=radio].ml_radio{
 	color: #3d3d3d;
 	border: 1px solid #c0c0c0;
 	border-right: none;
-	border-radius: 5px 0 0 5px;
 	height: 27px;
 	width: 30px;
 	margin: 0;
@@ -97,7 +156,6 @@ input[type=radio].ml_radio{
 	color: #3d3d3d;
 	background-color: #fff;
 	border: 1px solid #c0c0c0;
-	border-radius: 0 5px 5px 0;
 	height: 27px;
 	width: 30px;
 	margin: 0;
@@ -121,9 +179,16 @@ input[type=radio].ml_radio{
 	min-width: 90px;
 }
 
-.ml_opLabel{
-	min-width: 100px;
-	overflow: hidden;
+.quanClass{
+	display: flex;
+    color: #3d3d3d;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+.quanClass > span {
+    color: #3d3d3d;
+    font-weight: 600;
 }
 
 @media screen and (max-width: 920px) {
