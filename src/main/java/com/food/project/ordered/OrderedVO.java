@@ -159,4 +159,26 @@ public class OrderedVO {
 	public void setDeleteAt(Date deleteAt) {
 		this.deleteAt = deleteAt;
 	}
+
+	public String toString() {
+	
+		System.out.println("=======================================");
+		System.out.println(this.getNum());
+		System.out.println(this.getMemberNum());
+		System.out.println(this.getMarketNum());
+		System.out.println(this.getMenuNum());
+		System.out.println(this.getMarketName());
+		System.out.println(this.getMenuName());
+		System.out.println(this.getMenuThumbImg());
+		System.out.println(this.getCateMenuOptions());
+		System.out.println(this.getPcs());
+		System.out.println(this.getAmount());
+		System.out.println(this.getCancleType());
+		System.out.println(this.getCancleDetail());
+		System.out.println(this.getIsOrderChecked());
+		System.out.println(this.getIsReview());
+		System.out.println(this.getTimeLag());
+		
+		return null;
+	}
 }
