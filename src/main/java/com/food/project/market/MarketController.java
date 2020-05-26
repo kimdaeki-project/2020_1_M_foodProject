@@ -175,6 +175,9 @@ public class MarketController {
 		
 		if(result > 0) {
 			session.setAttribute("memberVO", memberVO);
+			
+			marketVO= marketService.marketSelect(marketVO);
+			session.setAttribute("marketVO", marketVO);
 			mv.addObject("msg", "판매자 등록에 성공하였습니다.");
 		}else {
 			mv.addObject("msg", "판매자 등록에 실패하였습니다.");
@@ -188,13 +191,20 @@ public class MarketController {
 	
 	//삭제(GET)
 	@GetMapping("marketDelete")
-	public String marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
-		System.out.println("marketDelete");
+	public ModelAndView marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
 		int result = marketService.marketDelete(marketVO,session);
 		if(result > 0) {
 			
+			session.setAttribute("marketVO", null);
+			mv.addObject("msg", "푸드트럭 탈퇴가 완료되었습니다.");
+			mv.addObject("path", "../member/memberPage");
 		}
-		return "redirect:../member/memberPage";
+		
+		mv.setViewName("common/result");
+		
+		return mv;
 		
 	}
 	
