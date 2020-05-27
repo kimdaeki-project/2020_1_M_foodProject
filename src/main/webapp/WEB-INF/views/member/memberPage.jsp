@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +79,16 @@
                   <li id="reviewMarket" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">[마켓] 리뷰 리스트</a>
                   </li>
-                 
+               </c:if>
+                    
+                 <!-- <c:if test="${memberVO.isFoodTruck eq '2'}"></c:if> -->    
+                 <c:if test="${memberVO.isFoodTruck eq '1'}">
+               	  <li id="marketManage" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">[관리자] 마켓 신청관리</a>
+                  </li>
+                  <li id="reviewManage" class="mp_myInfoNav_li">
+                  	<a class="mp_myInfoNav_a" href="#">[관리자] 리뷰 관리</a>
+                  </li>                 
                  </c:if>
 
 
@@ -236,6 +244,22 @@
 		$('#marketOrder').click(function() {
 			console.log("save");
 			$.get("../market/marketOrder?num=${sessionScope.marketVO.num}", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
+		//관리자 ===================================
+		//마켓 등록
+		$('#marketManage').click(function() {
+			$.get("../market/marketManage", function(result) {
+				$('.mp_box').empty();
+				$('.mp_box').append(result);
+			});
+		});
+		
+		$('#reviewManage').click(function() {
+			$.get("../review/reviewManage", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});

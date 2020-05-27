@@ -149,6 +149,11 @@ hr{
 .cancleReason{
 	display: none;
 	margin-bottom: 23px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.cancleReasonSelect{
+font-family: 'Noto Sans KR', sans-serif;
 }
 
 .cr_select{
@@ -204,7 +209,7 @@ hr{
 				<div class="oap_item" data-num="${orderedVO.num}">
 					<!-- 아이템 정보 div -->
 					<div class="oap_itemInfo">
-						<div style="display: flex;">
+						<div style="display: flex; padding: 10px 0;">
 						<a class="oap_ii_storePic">
 							<img alt="상점사진" src="../resources/upload/menu/${orderedVO.menuThumbImg}">
 						</a>
@@ -251,7 +256,7 @@ hr{
 					</div>
 				</div>
 				<c:if test="${orderedVO.isOrderChecked eq 1}">
-					<div class="cancleReason" data-num="${orderedVO.num}" data-show="0">
+					<div class="cancleReason" data-num="${orderedVO.num}" data-show="0" style="font-family: 'Noto Sans KR', sans-serif;">
 						<div class="cr_select">
 							<div>
 							주문 취소 사유
