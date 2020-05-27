@@ -184,15 +184,15 @@ input[type="file" i] {
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="mp_box mp_box_all">
 	<form action="../market/marketPage" id="mp_update" method="post" enctype="multipart/form-data">
 		<h2>마켓정보 수정</h2>
-		<input type="hidden" name="num" value="${marketVO.num}">
+		<input type="hidden" id="marketNum" name="num" value="${marketVO.num}">
 		<div class="mp_infoMod_box" style="margin-top: 12px">
 			<p>상점명</p>
-			<input type="text" name="marketName" class="mp_infoMod_input"
-				value="${marketVO.marketName}">
+			<input type="text" name="marketName" class="mp_infoMod_input" value="${marketVO.marketName}">
 		</div>
 		<div class="mp_infoMod_box">
 			<p>운영시간</p>
@@ -212,9 +212,13 @@ input[type="file" i] {
 
 		<div class="mp_infoMod_box">
 			<div style="display: flex;">
-				<!-- 새로 첨부할 이미지 -->
-				<input type="text" class="mp_infoMod_input mp_filep" id="file" name="thumbImg" value="${marketVO.thumbImg}">
-				<span id="ma_fileDel">✖</span>
+				<c:if test="${empty marketVO.thumbImg}">
+					<input type="file" id="thumbImg" name="files" class="mp_infoMod_input mp_filep"> 
+				</c:if>
+				<c:if test="${not empty marketVO.thumbImg}">
+					<input type="text" id="thumbImg" name="thumbImg" class="mp_infoMod_input mp_filep" value="${marketVO.thumbImg}" readonly="readonly"> 
+					<span id="ma_fileDel">✖</span>
+				</c:if>
 			</div>
 		</div>
 
@@ -225,8 +229,7 @@ input[type="file" i] {
 	</form>
 	<!-- 푸드트럭 탈퇴하기 추가 -->
 	<div class="mp_infoMod_box">
-		<button id="secession-truck" type="button" 
-		style="margin: 0; background-color: #fbbc04; color: #000; font-weight: 600;">푸드트럭 탈퇴</button>
+		<button id="secession-truck" type="button" style="margin: 0; background-color: #fbbc04; color: #000; font-weight: 600;">푸드트럭 탈퇴</button>
 	</div>
 </div>
 
@@ -235,9 +238,19 @@ input[type="file" i] {
 
 <script type="text/javascript">
 	
+	//파일 삭제
 	$("#ma_fileDel").click(function() {
-		$("#file").prop("type","file");
-		$("#file").prop("name","files");
+		var marketNum = $("#marketNum").val();
+		
+		$.get("../fileInfo/fileDelete?kind=1&refNum="+marketNum,function(result){
+			if(result > 0){
+				$("#thumbImg").val("");
+				$("#thumbImg").prop("type","file");
+				$("#thumbImg").prop("name","files");
+			}else{
+				alert("파일 삭제에 실패했습니다.");
+			}
+		});
 	});
 
 
@@ -263,7 +276,8 @@ input[type="file" i] {
 	//푸드트럭 탈퇴하기
 	$('#secession-truck').click(function() {
 		if(confirm("푸드트럭을 탈퇴하시겠습니까?") == true){
-			location.href = "../market/marketDelete?userNum=${sessionScope.marketVO.userNum}";
+			var marketNum = $("#marketNum").val();
+			location.href = "../market/marketDelete?userNum=${sessionScope.marketVO.userNum}&kind=1&refNum="+marketNum;
 	    }
 	});
 	

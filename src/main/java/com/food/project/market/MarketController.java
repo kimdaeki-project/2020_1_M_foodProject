@@ -14,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.board.BoardVO;
+import com.food.project.fileInfo.FileInfoDAO;
+import com.food.project.fileInfo.FileInfoVO;
 import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
 import com.food.project.menu.MenuService;
@@ -191,10 +193,10 @@ public class MarketController {
 	
 	//삭제(GET)
 	@GetMapping("marketDelete")
-	public ModelAndView marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
+	public ModelAndView marketDelete(MarketVO marketVO,FileInfoVO fileInfoVO,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		int result = marketService.marketDelete(marketVO,session);
+		int result = marketService.marketDelete(marketVO,fileInfoVO,session);
 		if(result > 0) {
 			
 			//memberSession변경

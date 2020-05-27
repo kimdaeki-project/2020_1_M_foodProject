@@ -35,6 +35,8 @@ public class MenuService {
 		// 저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
+		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
+		
 		System.out.println("path : " + path);
 		
 		int result = 0;
@@ -95,13 +97,14 @@ public class MenuService {
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
-		
-		System.out.println("path : "+path);
+		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
 		
 		int result = 0;
 		
+		System.out.println("length : "+files.length);
+		
 		//파일(이미지) 수정
-		if(files.length != 0) {
+		if(files.length > 1) {
 			for (MultipartFile file : files) {
 				//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
 				String fileName = fileSaver.saveByUtils(file, path);
@@ -125,6 +128,7 @@ public class MenuService {
 				
 			}
 		}
+		
 		result = menuDAO.menuUpdate(menuVO);
 		System.out.println("menu Service Result : "+result);
 		
@@ -137,7 +141,7 @@ public class MenuService {
 		// 경로 읽어오기
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
-		
+		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
 		
 		// 기존 계정에 관련된 파일들을 읽어옴
 		FileInfoVO fileInfoVO = new FileInfoVO();

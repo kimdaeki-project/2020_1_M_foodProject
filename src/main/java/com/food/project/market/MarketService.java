@@ -7,12 +7,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.fileInfo.FileInfoDAO;
 import com.food.project.fileInfo.FileInfoVO;
 import com.food.project.member.MemberDAO;
 import com.food.project.member.MemberVO;
+import com.food.project.menu.MenuVO;
 import com.food.project.util.FileSaver;
 
 @Service
@@ -120,15 +123,12 @@ public class MarketService {
 	}
 	
 	//삭제
-	public int marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
+	public int marketDelete(MarketVO marketVO,FileInfoVO fileInfoVO,HttpSession session) throws Exception{
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		//파일(이미지) 삭제
 		
 		//기존 계정에 관련된 파일들을 읽어옴
-		FileInfoVO fileInfoVO = new FileInfoVO();
-		fileInfoVO.setKind(1);
-		fileInfoVO.setRefNum(marketVO.getNum());
 		List<FileInfoVO> list = fileInfoDAO.fileInfoList(fileInfoVO);
 		
 		int result = 0;
@@ -195,6 +195,8 @@ public class MarketService {
 		
 		return result;
 	}
+	
+
 	
 	
 	

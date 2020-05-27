@@ -25,20 +25,21 @@
             <input id="latitude" type="hidden" name="latitude" value="">
             <input id="longitude" type="hidden" name="longitude" value="">
             <div>
-               <input name="id" type="text" placeholder="이메일을 입력해주세요" class="memberLogin_input" id="id" value="${cookie.cId.value}"> 
+               <input name="id" type="text" placeholder="아이디를 입력해주세요" class="memberLogin_input" id="id" value="${cookie.cId.value}"> 
                <input name="password" id="password" type="password" placeholder="비밀번호를 입력해주세요" class="memberLogin_input">
             </div>
             <label class="autologin"> 
-            <c:if test="${cookie.cookieId.value eq ''}">
+            <c:if test="${cookie.cId.value eq ''}">
                <input type="checkbox" name="remember" id="idSaveCheck" value="remember" >아이디 기억하기
             </c:if>
-            <c:if test="${cookie.cookieId.value ne ''}">
+            
+            <c:if test="${cookie.cId.value ne ''}">
                <input type="checkbox" name="remember" id="idSaveCheck" value="remember" checked="checked" >아이디 기억하기
             </c:if>
             
             </label>
             <nav>
-               <input id="btn-login" class="memberLogin_login memberLogin_button" type="submit" value="로그인">
+               <input id="btn-login" class="memberLogin_login memberLogin_button" type="button" value="로그인">
             </nav>
          </form>
 
@@ -69,6 +70,27 @@
 
    <script type="text/javascript">
       
+   
+   //로그인 성공유부 체크
+   	$("#btn-login").click(function() {
+		var id = $("#id").val();
+		var password = $("#password").val();
+		var remember = $("#idSaveCheck").prop("checked");
+		
+		$.post("./memberLogin",{id:id,password:password,remember:remember},function(result){
+			console.log("result: "+result);
+			if(result == 1){
+				location.href="../";
+			}else{
+				alert("비밀번호가 틀렸습니다.");
+				location.href="./memberLogin";
+			}
+		});
+   		
+	});
+   
+   
+   
       //로그인 한 사람 좌표 불러오기
       if (navigator.geolocation) {
          navigator.geolocation.getCurrentPosition(showPosition);

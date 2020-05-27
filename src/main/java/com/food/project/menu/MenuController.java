@@ -284,9 +284,6 @@ public class MenuController {
 		
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
 
-		
-		//MarketVO marketVO = (MarketVO)session.getAttribute("marketVO");
-
 		marketVO = marketService.marketSelect(marketVO);
 		System.out.println("num : "+marketVO.getNum());
 		
@@ -304,26 +301,22 @@ public class MenuController {
 	@Transactional
 	public ModelAndView menuUpdate(MenuVO menuVO, MultipartFile[] files,HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
 		System.out.println("num : "+menuVO.getNum());
 		System.out.println("menuVO.getName : "+menuVO.getName());
 		
-		
-		// 메뉴 업데이트
+		//메뉴 업데이트
 		int result = menuService.menuUpdate(menuVO, files, session);
 		
 		System.out.println("메뉴 업데이트 결과: "+result);
-		//메뉴 옵션 지우고
-		//카테고리 지우고
 			
+		
+		//카테고리 조회
 		CategoryVO categoryVO = new CategoryVO();
 		categoryVO.setMenuNum(menuVO.getNum());
-		
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
 		
-		
-		
-		if(cateList.size() != 0) {
+		//카테고리 삭제
+		if(cateList.size() > 0) {
 			for (CategoryVO vo : cateList) {
 				long categoryNum = vo.getNum();
 //				System.out.println("categoryNum : "+categoryNum);
@@ -346,7 +339,6 @@ public class MenuController {
 		//로그인된 세션에서 market의  num값 획득
 		MarketVO marketVO = (MarketVO)session.getAttribute("marketVO");
 		long marketNum = marketVO.getNum();
-//		System.out.println("marketNum>> : "+marketNum);		
 		
 		Map<String, MenuOptionVO> moMap = new HashMap<String, MenuOptionVO>();
 		Map<Integer, CategoryVO> cMap = new HashMap<Integer, CategoryVO>();
@@ -356,13 +348,10 @@ public class MenuController {
 		while(en.hasMoreElements()) {
 			String key = en.nextElement();
 			String str = request.getParameter(key);
-			
-//			System.out.println(key + " / "+str);
 				
 			String[] keys = key.split("_");
 			switch (keys[0]) {
 			case "menu":
-						
 				if(keys[1].equals("name")) {
 					menuVO.setName(str);
 				}else if(keys[1].equals("price")) {
@@ -373,7 +362,6 @@ public class MenuController {
 				break;
 
 			case "cate":
-						
 				String cateName = str;
 				Integer cateKey = Integer.parseInt(keys[2]);
 				
@@ -385,37 +373,29 @@ public class MenuController {
 				break;
 						
 			case "op" :
-						
 				String value = str;
 				String index = keys[2];
 				String index2 = keys[3];
 				String indexKey = index + "," + index2;
 						
 				if(keys[1].equals("name")) {
-							
 					if(moMap.containsKey(indexKey)) {
-								
 						MenuOptionVO menuOptionVO = moMap.get(indexKey);
 						menuOptionVO.setName(value);
 						moMap.put(indexKey, menuOptionVO);
 							
 					} else {
-							
 						MenuOptionVO menuOptionVO = new MenuOptionVO();
 						menuOptionVO.setName(value);
 						moMap.put(indexKey, menuOptionVO);
 					}
 							
 				} else if(keys[1].equals("price")) {
-						
 					if(moMap.containsKey(indexKey)) {
-								
 						MenuOptionVO menuOptionVO = moMap.get(indexKey);
 						menuOptionVO.setPrice(Integer.parseInt(value));
 						moMap.put(indexKey, menuOptionVO);
-							
 					} else {
-							
 						MenuOptionVO menuOptionVO = new MenuOptionVO();
 						menuOptionVO.setPrice(Integer.parseInt(value));
 						moMap.put(indexKey, menuOptionVO);
@@ -432,8 +412,6 @@ public class MenuController {
 		System.out.println("aaaa Result: "+result);
 				
 		if(result > 0) {
-//			System.out.println("메뉴는 수정 완료");
-					
 			//카테고리 등록
 			CategoryVO cateVO = new  CategoryVO();
 //			System.out.println("menuVO의 getnum : "+menuVO.getNum());
@@ -472,15 +450,12 @@ public class MenuController {
 
 					//카테고리의 키번호와 메뉴 옵션의 키번호가 일치할 경우에만  DB에 메뉴 옵션 등록
 					if(key2 == menuOptionkeyNum) {
-
 						MenuOptionVO menuOptionVO = new MenuOptionVO();
 						menuOptionVO.setCategoryNum(cateVO.getNum());
 						menuOptionVO.setName(menuOption.getName());
 						menuOptionVO.setPrice(menuOption.getPrice());
 
 						result = menuOptionSerice.menuOptionInsert(menuOptionVO);
-
-//						System.out.println("메뉴 등록완료 : "+menuOptionVO.getName());
 					}
 
 				}
@@ -491,7 +466,7 @@ public class MenuController {
 		}		
 		
 		String msg = "메뉴 수정 실패";
-		String url = "./menuUpdate?num=142";
+		String url = "./menuUpdate?num="+menuVO.getNum();
 		
 		if(result > 0) {
 			msg = "메뉴가 수정 되었습니다";

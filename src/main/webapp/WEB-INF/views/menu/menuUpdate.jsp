@@ -8,7 +8,7 @@
 
     <form action="../menu/menuUpdate" method="post" enctype="multipart/form-data" name="menuUpdate" id="manuUpdate" style="margin-left: 50px;">
 		<h2>메뉴 수정</h2>
-		<input type="hidden" name="num" value="${menuVO.num}">
+		<input type="hidden" id="menuNum" name="num" value="${menuVO.num}">
 		<div class="menuAdd_box" style="margin-top: 12px">
 			<label for="title">메뉴명 : </label> 
 			<input type="text" id="title" name="name" value="${menuVO.name}">
@@ -60,8 +60,14 @@
 		<div class="menuAdd_box">
 			<label for="thumbImg">메뉴 이미지: </label>
 			<div style="display: flex;">
-				<input type="text" id="thumbImg" name="thumbImg" class="thumbImg1" value="${menuVO.thumbImg}" readonly="readonly"> 
-				<span id="ma_fileDel">✖</span>
+				<c:if test="${empty menuVO.thumbImg}">
+					<input type="file" id="thumbImg" name="files" class="thumbImg1"> 
+				</c:if>
+				<c:if test="${not empty menuVO.thumbImg}">
+					<input type="text" id="thumbImg" name="thumbImg" class="thumbImg1" value="${menuVO.thumbImg}" readonly="readonly"> 
+					<span id="ma_fileDel">✖</span>
+				</c:if>
+				
 			</div>
 		</div>
 		<div class="menuAdd_box">
@@ -121,26 +127,35 @@
 				
 		});
 				
-				//옵션삭제 버튼을 누르면 옵션삭제 (O)
-				$("#category_box").on('click', '.delO', function() {
-					$(this).parent().remove();
-				});
+		//옵션삭제 버튼을 누르면 옵션삭제 (O)
+		$("#category_box").on('click', '.delO', function() {
+			$(this).parent().remove();
+		});
 				
-				//X누르면 파일 내용 삭제
-				$("#ma_fileDel").click(function() {
-					$(".thumbImg1").val();
+		//X누르면 파일 내용 삭제
+		$("#ma_fileDel").click(function() {
+			//ajax FILE DELETE
+			var menuNum = $("#menuNum").val();
+			
+			$.get("../fileInfo/fileDelete?kind=3&refNum="+menuNum,function(result){
+				if(result > 0){
+					$(".thumbImg1").val("");
 					$(".thumbImg1").prop("type","file");
 					$(".thumbImg1").prop("name","files");
-				});
+				}else{
+					alert("파일 삭제에 실패했습니다.");
+				}
+			});
+		});
 				
-				//카테고리 삭제 버튼 누르면 그 카테고리 박스 삭제
-				$("#category_box").on('click', '.del', function() {
-					$(this).parent().remove();
-				});	
+		//카테고리 삭제 버튼 누르면 그 카테고리 박스 삭제
+		$("#category_box").on('click', '.del', function() {
+			$(this).parent().remove();
+		});	
 	
 
-	//유효성 검사
-	$("#manuUpdate").validate({
+		//유효성 검사
+		$("#manuUpdate").validate({
         rules:{
             title:{required: true},
             price:{required: true, digits: true},
@@ -165,6 +180,5 @@
         }
     });
 
+
 </script>
-<!-- </body> -->
-<!-- </html> -->

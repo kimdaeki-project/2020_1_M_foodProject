@@ -113,19 +113,27 @@ public class MemberController {
 	}
 
 	@PostMapping("memberLogin")
-	public ModelAndView memberLogin(MemberVO memberVO, HttpSession session, String remember,HttpServletResponse response) throws Exception {
+	@ResponseBody
+	public int memberLogin(MemberVO memberVO, HttpSession session, Boolean remember,HttpServletResponse response) throws Exception {
 
-		ModelAndView mv = new ModelAndView();
-
+		System.out.println("remember : "+remember);
+		
 		Cookie cookie = new Cookie("cId", "");
-		if (remember != null) {
+		if (remember == true) {
 			cookie.setValue(memberVO.getId());
+			System.out.println("rememberTure");
+			System.out.println(cookie.getValue());
+		}else {
+			System.out.println("rememberFalse");
+			cookie.setValue("");
+			System.out.println(cookie.getValue());
 		}
 		response.addCookie(cookie);
 
 		
 		memberVO = memberService.memberLogin(memberVO);
 		
+		int result = 0;
 		if (memberVO != null) {
 			
 			if(memberVO.getIsFoodTruck() == 1) {
@@ -136,14 +144,9 @@ public class MemberController {
 				session.setAttribute("marketVO", marketVO);
 			}
 			session.setAttribute("memberVO", memberVO);
-			
-			mv.setViewName("redirect:../");
-			System.out.println("로그인 성공");
-		}else if(memberVO == null){
-			mv.setViewName("member/memberLogin");
-			System.out.println("로그인 실패");
+			result = 1;
 		}
-		return mv;
+		return result;
 	}
 
 	// 로그아웃(GET)
