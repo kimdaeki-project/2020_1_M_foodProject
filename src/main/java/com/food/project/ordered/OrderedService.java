@@ -12,6 +12,12 @@ public class OrderedService {
 	@Autowired
 	private OrderedDAO orderedDAO;
 	
+	// 마켓에서 받은 주문 조회
+	public List<OrderedVO> marketOrder(OrderedVO orderedVO) throws Exception {
+	
+		return orderedDAO.marketOrder(orderedVO);
+	}
+	
 	//주문 전체 조회 - SelectList (판매자ID)
 	public List<OrderedVO> orderedList(OrderedVO orderedVO) throws Exception{
 		return orderedDAO.orderedList(orderedVO);
@@ -55,6 +61,11 @@ public class OrderedService {
 		int result = orderedDAO.orderedInsert(orderedVO);
 		
 		return result;
+	}
+	
+	// 주문 종료
+	public int orderedFinish(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedFinish(orderedVO);
 	}
 	
 	//장바구니 목록 전체 삭제(memberNum)

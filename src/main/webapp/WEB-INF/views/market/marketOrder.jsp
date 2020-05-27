@@ -131,6 +131,14 @@
     border: 1px solid #dedede;
 }
 
+.orderConfirmBtn:hover {
+	cursor:pointer;
+}
+
+.orderCancleBtn:hover {
+	cursor:pointer;
+}
+
 hr{
 	
 }
@@ -142,42 +150,318 @@ hr{
 		<div style="margin-left: 50px;">
 			<h2>마켓 주문 리스트</h2>
 			<!-- 하단의 div가 반복 -->
-			<div class="oap_item">
-				<!-- 아이템 정보 div -->
-				<div class="oap_itemInfo">
-					<a class="oap_ii_storePic">
-						<img alt="고객이 구매한 메뉴" src="${pageContext.request.contextPath}/resources/img/food2.png">
-					</a>
-					<div class="oap_ii_info">
-						<div class="oap_items">
-							<strong>주문상세</strong>
-							<em>주문시각</em>
+			<c:forEach var="orderedVO" items="${orderedList}">
+				<div class="oap_item" data-num="${orderedVO.num}">
+					<!-- data div -->
+					<div class="updateAt" style="display : none;" data-update="${orderedVO.updateAt}"></div>
+					<div class="isOrderChecked" style="display : none;" data-num="${orderedVO.num}" data-check="${orderedVO.isOrderChecked}"></div>
+					<!-- 아이템 정보 div -->
+					<div class="oap_itemInfo">
+						<a class="oap_ii_storePic">
+							<img alt="상점사진" src="../resources/upload/menu/${orderedVO.menuThumbImg}">
+						</a>
+						<div class="oap_ii_info">
+							<a class="oap_items">
+								<strong>${orderedVO.menuName}</strong>
+								<em>선택옵션 : ${orderedVO.cateMenuOptions}</em><br>
+								<em>가격 : ${orderedVO.amount}원</em>
+								<em>&nbsp;|&nbsp;</em>
+								<em>주문일자 : ${orderedVO.createAt}</em><br>
+								<em>주문번호 : ${orderedVO.num}</em> <br>
+								<em class="orderConfirmTime" data-num="${orderedVO.num}">주문확인 시간 : -</em>
+							</a>
 						</div>
-						<p>
-						주문한 메뉴<br>
-						옵션1 - 수량<br>
-						옵션2 - 수량
-						</p>
+					</div>
+					
+					<!-- 상점 정보 div -->
+					<div class="oap_storeInfo">
+						<div class="oap_siDiv">
+							<span class="storename">${orderedVO.memberVO.name}님</span>
+							<span class="storecrn">${orderedVO.memberVO.id}</span>
+							<span class="storecrn phone" data-phone="${orderedVO.memberVO.phone}"></span>
+							<%-- <span class="storego">${orderedVO.num}</span> --%>
+						</div>
+					</div>
+					
+					<!-- 구매관련 정보 div -->
+					<div class="oap_payInfo">
+						<div class='orderFinishBtn' data-num="${orderedVO.num}">주문 완료</div>
+						<div class='orderConfirmBtn' data-num="${orderedVO.num}">확인하기</div>
+						<div class='orderCancleBtn' style="margin-top: 10px;" data-num="${orderedVO.num}">취소하기</div>
 					</div>
 				</div>
-				
-				<!-- 상점 정보 div -->
-				<div class="oap_storeInfo">
-					<div class="oap_siDiv">
-						<span class="storename">고객명</span>
-						<span class="storecrn">아이디</span>
-						<span class="storego">주문번호</span>
-					</div>
-				</div>
-				
-				<!-- 구매관련 정보 div -->
-				<div class="oap_payInfo">
-					<div>확인하기</div>
-					<div style="margin-top: 10px;">취소하기</div>
-				</div>
-			</div>
-			<hr>
+				<hr class="hr" data-num="${orderedVO.num}">
+			</c:forEach>
 			<!-- 반복 끝 -->	
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		
+		// 핸드폰 번호 파싱해서 '-' 붙이기
+		function phoneFomatter(num,type){
+			
+			var formatNum = '';
+		
+			if(num.length==11){
+	
+	        	if(type==0){
+	            	formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-****-$3');
+	        	}else{
+	            	formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+		        }
+		
+			}else if(num.length==8){
+				formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+		    }else{
+		        if(num.indexOf('02')==0){
+	    	        if(type==0){
+	     	           formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-****-$3');
+		            }else{
+		                formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+		            }
+	        	}else{
+		            if(type==0){
+		                formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-***-$3');
+		            }else{
+		                formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+		            }
+		        }
+		    }
+	
+	   		return formatNum;
+	   	
+	   		/* phoneFomatter('01000000000');   //010-0000-0000
+	   		phoneFomatter('01000000000',0); //010-****-0000
+	   		phoneFomatter('0100000000');    //010-000-0000
+	   		phoneFomatter('0100000000',0);  //010-***-0000
+	   		phoneFomatter('0200000000');    //02-0000-0000
+	   		phoneFomatter('0200000000',0);  //02-****-0000
+	   		phoneFomatter('0310000000');    //031-000-0000
+	   		phoneFomatter('0310000000',0);  //031-***-0000
+	   		phoneFomatter('16880000');      //1688-0000 */
+		}
+	
+		// 전화번호 form 바꿔서 각 란에 넣어주기
+		function showPhoneNums() {
+			
+			$('.phone').each(function() {
+				var phone = $(this).data("phone");
+				$(this).text(phoneFomatter(phone));
+			});
+		}
+		
+		// 시간 값 구하는 함수
+		function leadingZeros(n, digits) {
+		  var zero = '';
+		  n = n.toString();
+	
+		  if (n.length < digits) {
+		    for (i = 0; i < digits - n.length; i++)
+		      zero += '0';
+		  }
+		  return zero + n;
+		}
+	
+		function getTimeStamp() {
+		  var d = new Date();
+		  var s =
+		    leadingZeros(d.getYear()-100, 2) + '-' +
+		    leadingZeros(d.getMonth() + 1, 2) + '-' +
+		    leadingZeros(d.getDate(), 2) + ' ' +
+	
+		    leadingZeros(d.getHours(), 2) + ':' +
+		    leadingZeros(d.getMinutes(), 2) + ':' +
+		    leadingZeros(d.getSeconds(), 2);
+	
+		  return s;
+		}
+		
+		// 주문 시간 에 확인 시간 값 기입 (param = orderedVO.num)
+		function setOrderConfirmTime(num) {
+			
+			var date = new Date();
+			var time = getTimeStamp();
+			var msg = '주문확인 시간 : ' + time;
+			
+			$('.orderConfirmTime').each(function() {
+				if($(this).data("num") == num) {
+					$(this).text(msg);
+				}
+			});
+		}
+		
+		// 확인 버튼 삭제 (param = orderedVO.num)
+		function deleteOrderConfirmBtn(num) {
+			$('.orderConfirmBtn').each(function() {
+				if($(this).data("num") == num) {
+					$(this).remove();
+				}
+			});
+		}
+		
+		// 취소 버튼 삭제 (param = orderedVO.num)
+		function deleteOrderCancleBtn(num) {
+			$('.orderCancleBtn').each(function() {
+				if($(this).data("num") == num) {
+					$(this).remove();
+				}
+			});
+		}
+		
+		// 주문 완료 버튼 삭제 (param = orderedVO.num)
+		function deleteOrderFinishBtn(num) {
+			$('.orderFinishBtn').each(function() {
+				if($(this).data("num") == num) {
+					$(this).remove();
+				}
+			});
+		}
+		
+		// 주문 삭제
+		function deleteOrderDiv(num) {
+			$('.oap_item').each(function() {
+				if($(this).data("num") == num) {
+					$(this).remove();
+				}
+			});
+		}
+		
+		// hr 삭제
+		function deleteHr(num) {
+			$('.hr').each(function() {
+				if($(this).data("num") == num) {
+					$(this).remove();
+				}
+			});
+		}
+		
+		// 주문 확인 버튼 핸들러
+		function orderConfirmBtnHandler() {
+			$('.orderConfirmBtn').each(function(){
+				
+				$(this).click(function() {
+					
+					if(!confirm("주문을 받으시겠습니까?"))
+						return;
+					
+					// oredered.num 만 인자로 보내면 됨
+					var url = "${pageContext.request.contextPath}/ordered/orderConfirm";
+					var num = $(this).data("num");
+					
+					$.post(url, {num: num}, function(result){
+						if(result > 0) {
+							
+							// 주문 확인 시간 체크
+							setOrderConfirmTime(num);
+							
+							// 확인 버튼 삭제
+							deleteOrderConfirmBtn(num);
+							
+							// 취소 버튼 삭제
+							deleteOrderCancleBtn(num);
+						}
+					});
+				});
+			});
+		}
+		
+		// 주문 취소 버튼 핸들러
+		function orderCancleBtnHandler() {
+			$('.orderConfirmBtn').each(function(){
+				
+				$(this).click(function() {
+					
+					if(!confirm("정말 주문을 거절하시겠습니까?"))
+						return;
+					
+					// cancleType cancleDetail num
+					var url = "${pageContext.request.contextPath}/ordered/orderCancle";
+					var num = $(this).data("num");
+					var cancleType = 1;	// 마켓 요청 주문 취소 상태값
+					var isOrderChecked = 2; // 주문 취소 상태값
+					$.post(url, {num: num, cancleType: cancleType, isOrderChecked : isOrderChecked}, function(result){
+						if(result > 0) {
+							// 해당되는 div/hr 삭제
+							deleteOrderDiv(num);
+							deleteHr(num);
+						}
+					});
+				});
+			});
+		}
+		
+		// 주문 완료 버튼 핸들러
+		function orderFinishBtnHandler() {
+			$('.orderFinishBtn').each(function(){
+				
+				$(this).click(function() {
+					
+					// cancleType cancleDetail num
+					var url = "${pageContext.request.contextPath}/ordered/orderFinish";
+					var num = $(this).data("num");
+					
+					$.post(url, {num: num}, function(result){
+						if(result > 0) {
+							// 해당되는 div/hr 삭제
+							deleteOrderDiv(num);
+							deleteHr(num);
+						}
+					});
+				});
+			});
+		}
+		
+		// isOrderChecked에 따라 동적 페이지 구성
+		function changePageByIsOrderChecked() {
+			
+			$('.isOrderChecked').each(function() {
+				
+				var isOrderChecked = $(this).data("check");
+				var num = $(this).data("num");
+				switch(isOrderChecked) {
+				case 1 :
+					// 주문 완료 버튼 삭제
+					deleteOrderFinishBtn(num);
+					break;
+				case 2 :
+					// 해당되는 div/hr 삭제
+					deleteOrderDiv(num);
+					deleteHr(num);
+					break;
+				case 3 :
+					// 확인 버튼, 취소 버튼 삭제 , 주문 완료시간 넣기
+					setOrderConfirmTime(num);
+							
+					// 확인 버튼 삭제
+					deleteOrderConfirmBtn(num);
+							
+					// 취소 버튼 삭제
+					deleteOrderCancleBtn(num);
+					break;
+				default :
+					break;
+				}				
+			});
+		}
+		
+		// main();
+		$(function() {
+			
+			// 폰 번호 
+			showPhoneNums();
+			
+			// 오더 확인 버튼 핸들러
+			orderConfirmBtnHandler();
+			
+			// 주문 취소 버튼 핸들러
+			orderCancleBtnHandler();
+			
+			// 주문 확인 버튼 핸들러
+			orderFinishBtnHandler();
+			
+			// 동적 페이지 핸들러
+			changePageByIsOrderChecked();
+		});
+	</script>
 </body>

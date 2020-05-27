@@ -33,19 +33,14 @@ public class OrderedController {
 	@Transactional
 	public int cartAdd(OrderedVO orderedVO, String menuPrice, @RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
 		
-		// 주문하기로 들어온 요청일 경우, 이미 있는 주문 DB를 삭제하고 insert
+		// 주문하기로 들어온 요청일 경우, 이미 주문이 있다면,주문 DB를 삭제하고 insert
 		if(orderedVO.getIsCart() == 0) {
 			System.out.println("in here");
 			int result = orderedService.cartDeleteAll(orderedVO);
 			if(result > 0) {
 				System.out.println("deleteDone");
-			} else {
-				System.out.println("deleteFail");
-				throw new Exception();
 			}
 		}
-		
-		System.out.println("save");
 		
 		// cateMenuOptions 만들기
 		String cateMenuOptions = "";
@@ -274,6 +269,13 @@ public class OrderedController {
 		mv.setViewName("ordered/orderAndPay");
 		
 		return mv;
+	}
+	
+	// 주문 종료
+	@PostMapping("orderFinish")
+	@ResponseBody
+	public int orderedFinish(OrderedVO orderedVO) throws Exception {
+		return orderedService.orderedFinish(orderedVO);
 	}
 }
 

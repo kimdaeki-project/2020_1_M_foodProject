@@ -245,19 +245,18 @@ public class MarketController {
 	@GetMapping("marketOrder")
 	public ModelAndView marketOrder(MarketVO marketVO) throws Exception {
 
-		System.out.println("marketOrder");
-		
 		ModelAndView mv = new ModelAndView();
 		
-		// 뭘 긁어와야하나 이미 주문 끝났놈 (isOrderChecked == 1 && deleteAt == null)
+		// 데이터를 받아오기 위한 사전 작업
 		OrderedVO orderedVO = new OrderedVO();
 		orderedVO.setMarketNum(marketVO.getNum());
-		orderedVO.setIsOrderChecked(1);		// 주문 들어온 상태
 		
-		List<OrderedVO> list = orderedService.orderedMarketList(orderedVO);
+		System.out.println("marketOrder : "+orderedVO.getMarketNum());
 		
+		// 데이터 가져옴
+		List<OrderedVO> list = orderedService.marketOrder(orderedVO);
 		
-		
+		mv.addObject("orderedList", list);
 		mv.setViewName("market/marketOrder");
 		return mv;
 	}

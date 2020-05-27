@@ -123,6 +123,10 @@
 
 	//주문하기 창 누르면 이동
 	$(".cart-body").on("click",".nav-order",function() {
+		if($('.nav-order').data("size") == 0) {
+			alert("장바구니가 비었어요!");
+			return;
+		}
 		location.href="${pageContext.request.contextPath}/ordered/orderPage?memberNum=${sessionScope.memberVO.num}&isCart=1";
 	});
 

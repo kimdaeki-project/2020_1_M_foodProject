@@ -5,6 +5,48 @@
   
 <mapper namespace="com.food.project.ordered.OrderedDAO">
 
+	<resultMap type="OrderedVO" id="MarketOrderMap">
+		<id column="num" property="num"/> 
+		<result column="memberNum" property="memberNum"/>
+		<result column="marketNum" property="marketNum"/>
+		<result column="menuNum" property="menuNum"/>
+		<result column="marketName" property="marketName"/>
+		<result column="menuName" property="menuName"/>
+		<result column="menuThumbImg" property="menuThumbImg"/>
+		<result column="cateMenuOptions" property="cateMenuOptions"/>
+		<result column="pcs" property="pcs"/>
+		<result column="amount" property="amount"/>
+		<result column="isCart" property="isCart"/>
+		<result column="imp_uid" property="imp_uid"/>
+		<result column="merchant_uid" property="merchant_uid"/>
+		<result column="pg" property="pg"/>
+		<result column="pay_method" property="pay_method"/>
+		<result column="apply_num" property="apply_num"/>
+		<result column="cancleType" property="cancleType"/>
+		<result column="cancleDetail" property="cancleDetail"/>
+		<result column="isOrderChecked" property="isOrderChecked"/>
+		<result column="isReview" property="isReview"/>
+		<result column="timeLag" property="timeLag"/>
+		<result column="createAt" property="createAt"/>
+		<result column="updateAt" property="updateAt"/>
+		<result column="deleteAt" property="deleteAt"/>
+		
+		<association property="memberVO" javaType="MemberVO">
+			<result column="id" property="id"/>
+			<result column="name" property="name"/>
+			<result column="phone" property="phone"/>
+		</association>
+	</resultMap>
+
+	<!-- 먼저 주문한 사람이 먼저 보이도록 할거임(ASC) -->
+	<select id="marketOrder" parameterType="OrderedVO" resultMap="MarketOrderMap">
+		SELECT o.*, m.id, m.name, m.phone FROM
+		(SELECT * FROM ordered WHERE marketNum = #{marketNum} AND isOrderChecked != 0 AND deleteAt IS NULL) o 
+		join member m
+		ON (o.memberNum = m.num)
+		ORDER BY o.createAt
+	</select>
+
 	<select id="orderedCount" resultType="Long">
 		select ordered_seq.nextval from dual
 	</select>
@@ -12,8 +54,10 @@
 	<select id="orderedList" parameterType="OrderedVO" resultType="OrderedVO">
 		SELECT * FROM ordered WHERE 
 		memberNum=#{memberNum} AND 
-		isOrderChecked=#{isOrderChecked} AND 
+		isOrderChecked=#{isOrderChecked} AND
+		isCart=#{isCart} AND
 		deleteAt IS NULL
+		ORDER BY updateAt DESC
 	</select>
 	
 	<select id="orderedListNot" parameterType="OrderedVO" resultType="OrderedVO">
@@ -21,13 +65,15 @@
 		memberNum=#{memberNum} AND 
 		isOrderChecked!=#{isOrderChecked} AND 
 		deleteAt IS NULL
+		ORDER BY updateAt DESC
 	</select>
 	
 	<select id="orderedMarketList" parameterType="OrderedVO" resultType="OrderedVO">
 		SELECT * FROM ordered WHERE 
 		marketNum=#{marketNum} AND 
-		isOrderChecked!=#{isOrderChecked} AND 
+		isOrderChecked=#{isOrderChecked} AND 
 		deleteAt IS NULL
+		ORDER BY updateAt DESC
 	</select>
 	
 	
@@ -45,9 +91,17 @@
 		)
 	</insert>
 	
+	<!-- 마켓에서 소비자에게 물건 준 뒤, 누르는 버튼(일괄)-->
+	
+	
+	<!-- 마켓에서 소비자에게 물건 준 뒤, 누르는 버튼 -->
+	<update id="orderedFinish" parameterType="OrderedVO">
+		UPDATE ordered SET deleteAt=sysdate WHERE num = #{num}
+	</update>
+		
 	<!-- 마켓에서 주문 확인 -->
 	<update id="orderedConfirm" parameterType="OrderedVO">
-		UPDATE ordered SET isOrderChecked=2, updateAt=sysdate WHERE num=#{num} AND deleteAt IS NOT NULL
+		UPDATE ordered SET isOrderChecked=3, updateAt=sysdate WHERE num=#{num} AND deleteAt IS NULL
 	</update>
 	
 	<!-- 결제 완료 없데이트 -->
@@ -65,7 +119,9 @@
 	
 	<!-- 결제 후, 지우기(UPDATE deleteAt) -->
 	<update id="orderedCancle" parameterType="OrderedVO">
-		UPDATE ordered SET cancleType=#{cancleType}, cancleDetail=#{cancleDetail, jdbcType=VARCHAR}, deleteAt=sysdate WHERE num=#{num}
+		UPDATE ordered SET 
+		cancleType=#{cancleType}, cancleDetail=#{cancleDetail, jdbcType=VARCHAR}, isOrderChecked=#{isOrderChecked}, deleteAt=sysdate 
+		WHERE num=#{num}
 	</update>
 	
 	<!-- 해당 멤버의 ordered 전부 지우기 -->
