@@ -172,7 +172,7 @@
     //validate 유효성 검사
     $("#joinForm").validate({
         rules:{
-            name:{required: true, maxlength: 6},
+            name:{required: true, maxlength: 15},
             nickName:{required: true, maxlength: 6},
             id:{required: true, rangelength:[5, 10], eng_number:true},
             email:{required: true, email:true},
@@ -185,7 +185,7 @@
         messages:{
             name:{
                 required:"필수 입력 사항입니다.",
-                maxlength:"6글자까지만 입력 가능합니다."
+                maxlength:"15글자까지만 입력 가능합니다."
                 },
             nickName:{
                 required:"필수 입력 사항입니다.",

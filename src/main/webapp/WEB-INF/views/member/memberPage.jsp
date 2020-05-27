@@ -81,9 +81,8 @@
                   </li>
                </c:if>
                     
-                 <!-- <c:if test="${memberVO.isFoodTruck eq '2'}"></c:if> -->    
-                 <c:if test="${memberVO.isFoodTruck eq '1'}">
-               	  <li id="marketManage" class="mp_myInfoNav_li">
+                 <c:if test="${memberVO.isFoodTruck eq '2'}">  
+                  <li id="marketManage" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">[관리자] 마켓 신청관리</a>
                   </li>
                   <li id="reviewManage" class="mp_myInfoNav_li">
