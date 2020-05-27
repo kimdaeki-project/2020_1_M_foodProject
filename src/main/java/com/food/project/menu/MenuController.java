@@ -42,7 +42,8 @@ public class MenuController {
 	@GetMapping("marketMenu")
 	public ModelAndView marketMenu(MenuVO menuVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		System.out.println("marketMenu Controller IN");
+		
+		
 		System.out.println("marketNum : "+menuVO.getMarketNum());
 		
 		//메뉴 리스트 조회 (카테고리  collection값으로 추가되어있음)
@@ -266,9 +267,10 @@ public class MenuController {
 	}
 	
 	@GetMapping("menuUpdate")
-	public ModelAndView menuUpdate(MenuVO menuVO,HttpSession session) throws Exception {
+	public ModelAndView menuUpdate(MarketVO marketVO,MenuVO menuVO,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("menuVO.num : "+menuVO.getNum());
+//		System.out.println("menuVO.num : "+menuVO.getNum());
+		System.out.println("user.num : "+marketVO.getUserNum());
 		
 		menuVO = menuService.menuSelect(menuVO);
 		
@@ -278,11 +280,13 @@ public class MenuController {
 		
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
 
-		MarketVO marketVO = (MarketVO)session.getAttribute("marketVO");
-		marketVO.setNum(marketVO.getNum());
 		
+		//MarketVO marketVO = (MarketVO)session.getAttribute("marketVO");
+
 		marketVO = marketService.marketSelect(marketVO);
-				
+		System.out.println("num : "+marketVO.getNum());
+		
+		
 		mv.addObject("menuVO", menuVO);
 		mv.addObject("marketVO", marketVO);
 		mv.addObject("cateList", cateList);
@@ -505,11 +509,10 @@ public class MenuController {
 		
 		
 		String msg = "메뉴 삭제 실패";
-		String url = "member/memberPage";
+		String url = "redirect:../member/memberPage";
 		
 		if(result > 0) {
 			msg = "메뉴가 삭제 되었습니다";
-			url = "redirect:../member/memberPage";
 		}
 		
 		mv.addObject("msg", msg);

@@ -263,8 +263,7 @@ input[type="file" i] {
 	//푸드트럭 탈퇴하기
 	$('#secession-truck').click(function() {
 		if(confirm("푸드트럭을 탈퇴하시겠습니까?") == true){
-	        alert("탈퇴되었습니다!");
-			location.href = "./marketDelete"
+			location.href = "../market/marketDelete?userNum=${sessionScope.marketVO.userNum}";
 	    }
 	});
 	

@@ -195,7 +195,7 @@
 	</div>
 	<script type="text/javascript">
 		$(".btn-reply").click(function() {
-			location.href="../review/reviewReply?boardNum="+$(this).data("title");
+			location.href="../review/reviewReply?boardNum="+$(this).data("title")+"&marketNum=${sessionScope.marketVO.num}";
 		});
 		
 		$("#btn-reply-update").click(function() {

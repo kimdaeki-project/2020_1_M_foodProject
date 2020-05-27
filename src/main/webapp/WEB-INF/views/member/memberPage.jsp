@@ -33,7 +33,7 @@
       </div>
 
       <!-- 토글 버튼 -->
-      <c:if test="${memberVO.isFoodTruck eq '1'}">
+      <c:if test="${not empty sessionScope.marketVO}">
          <div class="toggleWrap" style="float: right;">
             <span class="storeOpen">영업 시작</span> 
             <input type="checkbox" id="toggle_alarm" name="" value="0" />
@@ -60,14 +60,14 @@
 
 
 				<!-- 판매자가 아닐때 -->
-               <c:if test="${memberVO.isFoodTruck eq '0'}">
+               <c:if test="${empty sessionScope.marketVO}">
                   <li id="marketJoin" class="mp_myInfoNav_li">
                   <a class="mp_myInfoNav_a">판매자 신청</a></li>
                </c:if>
                
                
 				<!-- 판매자 일 때 -->
-               <c:if test="${memberVO.isFoodTruck eq '1'}">
+               <c:if test="${not empty sessionScope.marketVO}">
                	  <li id="marketPage" class="mp_myInfoNav_li">
                   	<a class="mp_myInfoNav_a" href="#">[마켓] 정보 수정</a>
                   </li>
@@ -88,7 +88,7 @@
               	<a class="mp_myInfoNav_a">탈퇴하기</a>
               </li>
                <li id="li5" class="mp_myInfoNav_li">
-               <a class="mp_myInfoNav_a" href="${pageContext.request.contextPath}/member/memberLogout">로그아웃</a></li>
+               <a class="mp_myInfoNav_a" href="${pageContext.request.contextPath}/member/memberLogout?num=${sessionScope.memberVO.num}">로그아웃</a></li>
             </ul>
          </aside>
          <div class="mp_box" style="width: 100%"></div>
@@ -217,6 +217,7 @@
 
 		//마켓 메뉴 리스트 조회
 		$('#marketMenu').click(function() {
+// 			location.href="../menu/marketMenu?marketNum=${sessionScope.marketVO.num}";
 			$.get("../menu/marketMenu?marketNum=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
@@ -250,7 +251,6 @@
 			}
 		});
 
-		$('#default').click();
 	</script>
 </body>
 </html>

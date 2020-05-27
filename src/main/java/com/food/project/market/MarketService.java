@@ -45,11 +45,11 @@ public class MarketService {
 		return result;
 	}
 	//isClose
-		public int isOpen2(MarketVO marketVO) throws Exception{
-			int result = marketDAO.isOpen(marketVO);
+	public int isOpen2(MarketVO marketVO) throws Exception{
+		int result = marketDAO.isOpen(marketVO);
 			
-			return result;
-		}
+		return result;
+	}
 	
 	//조회 - selectList
 	public List<MarketVO> marketList() throws Exception{
@@ -137,8 +137,13 @@ public class MarketService {
 		//DB에서 삭제
 		result = fileInfoDAO.fileInfoDelete(fileInfoVO);
 		
+		MemberVO memberVO = new MemberVO();
+		memberVO.setNum(marketVO.getUserNum());
+		memberVO.setIsFoodTruck(0);
+		result = memberDAO.isFoodTruck(memberVO);
+		result = marketDAO.marketDelete(marketVO);
 		
-		return marketDAO.marketDelete(marketVO);
+		return result;
 	}
 	
 	// Geo 업데이트

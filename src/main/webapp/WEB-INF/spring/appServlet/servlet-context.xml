@@ -32,9 +32,43 @@
 		<interceptor>
 			<!-- URL Pattern -->
 			<mapping path="/*"/>
-			<!-- Interceptor class -->
 			<beans:bean class="com.food.project.interceptor.TestInterceptor">
 			</beans:bean>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/member/memberPage"/>
+			<mapping path="/member/memberDelete"/>
+			<mapping path="/member/myReview"/>
+			<mapping path="/member/memberUpdate"/>
+			<mapping path="/market/marketJoin"/>
+			
+			
+			<beans:ref bean="memberInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/market/*"/>
+			<exclude-mapping path="/market/marketList"/>
+			<exclude-mapping path="/market/marketSelect"/>
+			<exclude-mapping path="/market/marketJoin"/>
+			
+			<beans:ref bean="marketInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/menu/*"/>
+			<exclude-mapping path="/menu/menuList"/>
+			<exclude-mapping path="/menu/menuSelect"/>
+			
+			<beans:ref bean="menuInterceptor"/>		
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/review/*"/>
+			<exclude-mapping path="/review/reviewList"/>
+			
+			<beans:ref bean="reviewInterceptor"/>		
 		</interceptor>
 		
 	</interceptors>

@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +40,7 @@ public class ReviewController {
 	public ModelAndView marketReview(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 
+		
 		pager.setMarketNum(marketVO.getNum());
 		List<ReviewVO> reviewList = reviewService.reviewMarketList(pager);
 		

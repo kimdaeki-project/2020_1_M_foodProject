@@ -4,32 +4,51 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.awt.Menu;
 import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.food.project.AbstractTestCase;
+import com.food.project.market.MarketVO;
 
 public class menuTest extends AbstractTestCase {
 
 	@Autowired
 	private MenuDAO menuDAO;
 	
+	
 //	@Test
-//	public void menuAddTest() throws Exception {
-//	
-//		MenuVO menuVO = new MenuVO();
-//		
-//		menuVO.setNum(1);
-//		menuVO.setMarketNum(11);
-//		menuVO.setName("핫도그");
-//		menuVO.setPrice(3000);
-//		menuVO.setDetail("치즈듬뿍");
-//		
-//		int result = menuDAO.menuAdd(menuVO);
-//		assertEquals(1, result);
-//	}
+	public void marketMenuTest() throws Exception{
+		MenuVO menuVO = new MenuVO();
+		menuVO.setMarketNum(4);
+		
+		List<MenuVO> maketList = menuDAO.marketMenuList(menuVO);
+		
+		System.out.println("size : "+maketList.size());
+		
+		for (MenuVO vo : maketList) {
+			System.out.println(vo.getName());
+		}
+		
+		assertNotNull(maketList);
+	}
+	
+//	@Test
+	public void menuAddTest() throws Exception {
+	
+		MenuVO menuVO = new MenuVO();
+		
+		menuVO.setNum(1);
+		menuVO.setMarketNum(11);
+		menuVO.setName("핫도그");
+		menuVO.setPrice(3000);
+		menuVO.setDetail("치즈듬뿍");
+		
+		int result = menuDAO.menuAdd(menuVO);
+		assertEquals(1, result);
+	}
 	
 //	@Test
 //	public void menuAddTest() throws Exception {
