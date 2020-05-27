@@ -68,43 +68,44 @@ public class MarketService {
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		System.out.println("path : "+path);
 		
+		int result = 0;
+		
 		//marketCount값 증가
 		long num = marketDAO. marketCount();
 		marketVO.setNum(num);
 		
 		
-//		System.out.println("userNum: "+marketVO.getUserNum());
-		
-		//marketDB저장
-		marketVO.setThumbImg("");
-		int result = marketDAO.marketInsert(marketVO);
-		
-//		System.out.println("marketinsert result : "+result);
-		
 		//파일(이미지) 등록
-		for (MultipartFile file : files) {
-			//1.HDD등록
-			String fileName = fileSaver.saveByUtils(file, path);
-			//2.DB등록
-			
-			//file의 num시퀀스값 증가
-			num = fileInfoDAO.fileCount();
-			
-			FileInfoVO fileInfoVO = new FileInfoVO();
-			fileInfoVO.setNum(num);
-			fileInfoVO.setFileName(fileName);
-			
-			fileInfoVO.setOriName(file.getOriginalFilename());
-			fileInfoVO.setKind(1); //market
-			fileInfoVO.setRefNum(num);
-			//reviewNum, foodNum은 입력안해서 null값 부여
-			
-			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
-			
-			if(result<1) {
-				throw new Exception();
+		if(files.length > 0) {
+			for (MultipartFile file : files) {
+				//1.HDD등록
+				String fileName = fileSaver.saveByUtils(file, path);
+				marketVO.setThumbImg(fileName);
+				
+				//file의 num시퀀스값 증가
+				long fileNum = fileInfoDAO.fileCount();
+				
+				FileInfoVO fileInfoVO = new FileInfoVO();
+				fileInfoVO.setNum(fileNum);
+				fileInfoVO.setFileName(fileName);
+				
+				fileInfoVO.setOriName(file.getOriginalFilename());
+				fileInfoVO.setKind(1); //market
+				fileInfoVO.setRefNum(num);
+				//reviewNum, foodNum은 입력안해서 null값 부여
+				
+				result = fileInfoDAO.fileInfoInsert(fileInfoVO);
+				
+				if(result<1) {
+					throw new Exception();
+				}
 			}
 		}
+		
+		
+		//marketDB저장
+		result = marketDAO.marketInsert(marketVO);
+		
 		
 		//isFoodTruck 값 변경
 		MemberVO memberVO = new MemberVO();
@@ -113,13 +114,15 @@ public class MarketService {
 		
 		result = memberDAO.isFoodTruck(memberVO);
 		
+		
+		
 		return result;
 	}
 	
 	//삭제
 	public int marketDelete(MarketVO marketVO,HttpSession session) throws Exception{
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
-		
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		//파일(이미지) 삭제
 		
 		//기존 계정에 관련된 파일들을 읽어옴
@@ -155,6 +158,7 @@ public class MarketService {
 	public int marketUpdate(MarketVO marketVO,MultipartFile file,HttpSession session) throws Exception{
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		System.out.println("path :"+path);
 		int result = 0;
 		

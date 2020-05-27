@@ -43,7 +43,6 @@ public class MenuController {
 	public ModelAndView marketMenu(MenuVO menuVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		
 		System.out.println("marketNum : "+menuVO.getMarketNum());
 		
 		//메뉴 리스트 조회 (카테고리  collection값으로 추가되어있음)
@@ -51,7 +50,12 @@ public class MenuController {
 		
 		if(menuList != null) {
 			mv.addObject("menuList", menuList);
+			mv.setViewName("menu/marketMenu");			
+		}else {
+			System.out.println("null");
 		}
+		
+		
 		
 		return mv;
 	}

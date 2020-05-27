@@ -99,14 +99,16 @@ public class ReviewInterceptor extends HandlerInterceptorAdapter{
 		
 		if(method.equals("GET") && path.equals("/myReviewList")) {
 			List<ReviewVO> myReviewList = (List<ReviewVO>)mv.getModel().get("myReviewList");
-			
-			long num = myReviewList.get(0).getMemberNum();
-			
-			if(num != memberNum) {
-				mv.addObject("msg", "접근권한이 없습니다.");
-				mv.addObject("path", "../");
-				mv.setViewName("common/result");
+			if(myReviewList.size() > 0) {
+				long num = myReviewList.get(0).getMemberNum();
+				
+				if(num != memberNum) {
+					mv.addObject("msg", "접근권한이 없습니다.");
+					mv.addObject("path", "../");
+					mv.setViewName("common/result");
+				}
 			}
+			
 		}else if(method.equals("GET") && path.equals("/reviewUpdate")){
 			ReviewVO reviewVO = (ReviewVO)mv.getModel().get("reviewVO");
 			
@@ -119,18 +121,21 @@ public class ReviewInterceptor extends HandlerInterceptorAdapter{
 			
 		}else if(method.equals("GET") && path.equals("/reviewMarket")){
 			List<ReviewVO> reviewList = (List<ReviewVO>)mv.getModel().get("reviewList");
-		
-			long num = reviewList.get(0).getMemberNum();
 			
-			System.out.println("session Num: "+memberNum);
-			System.out.println("mv Num : "+num);
-			
-			
-			if(num != memberNum) {
-				mv.addObject("msg", "접근권한이 없습니다.");
-				mv.addObject("path", "../");
-				mv.setViewName("common/result");
+			if(reviewList.size() > 0) {
+				long num = reviewList.get(0).getMemberNum();
+				
+				System.out.println("session Num: "+memberNum);
+				System.out.println("mv Num : "+num);
+				
+				
+				if(num != memberNum) {
+					mv.addObject("msg", "접근권한이 없습니다.");
+					mv.addObject("path", "../");
+					mv.setViewName("common/result");
+				}
 			}
+			
 		
 		}else if(method.equals("GET") && path.equals("/reviewReplyUpdate")) {
 			long marketNum = marketVO.getNum();

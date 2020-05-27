@@ -81,14 +81,20 @@ public class MenuInterceptor extends HandlerInterceptorAdapter{
 			List<MenuVO> menuList = (List<MenuVO>)mv.getModel().get("menuList");
 			MarketVO marketVO = (MarketVO)request.getSession().getAttribute("marketVO");
 
-			long menu_marketNum = menuList.get(0).getMarketNum();
-			long market_num = marketVO.getNum();
-			
-			if(menu_marketNum != market_num) {
-				mv.addObject("msg", "접근권한이 없습니다.");
-				mv.addObject("path", "../");
-				mv.setViewName("common/result");
+			if(menuList.size() > 0) {
+				System.out.println("IN : " +menuList.size());
+				
+				
+				long menu_marketNum = menuList.get(0).getMarketNum();
+				long market_num = marketVO.getNum();
+				
+				if(menu_marketNum != market_num) {
+					mv.addObject("msg", "접근권한이 없습니다.");
+					mv.addObject("path", "../");
+					mv.setViewName("common/result");
+				}
 			}
+			
 			
 		}else if(method.equals("GET") && path.equals("/menuUpdate")) {
 			
