@@ -22,7 +22,7 @@
 	<select id="marketMenuList" parameterType="MenuVO" resultMap="marketMenuResult">
 		select m.*,c.name cateName from
 		(SELECT * FROM menu WHERE marketNum=#{marketNum} AND deleteAt IS NULL ) m 
-		join category c
+		left join category c
 		on(m.num = c.menuNum)
 	</select>
 	
