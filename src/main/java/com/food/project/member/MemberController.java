@@ -1,5 +1,7 @@
 package com.food.project.member;
 
+import java.text.SimpleDateFormat;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -163,6 +165,9 @@ public class MemberController {
 	public ModelAndView memberJoin(MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("memberJoin post");
+		
+		System.out.println(memberVO.getId());
+		System.out.println(memberVO.getBirth());
 
 		int result = memberService.memberJoin(memberVO);
 

@@ -63,6 +63,11 @@ public class OrderedService {
 		return result;
 	}
 	
+	// 주문 종료
+	public int orderedFinish(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedFinish(orderedVO);
+	}
+	
 	//장바구니 목록 전체 삭제(memberNum)
 	public int cartDeleteAll(OrderedVO orderedVO) throws Exception{
 		return orderedDAO.cartDeleteAll(orderedVO);

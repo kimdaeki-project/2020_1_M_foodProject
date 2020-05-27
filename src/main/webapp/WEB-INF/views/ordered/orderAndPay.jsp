@@ -298,7 +298,8 @@ hr{
 					data = { 
 						num: num, 
 						cancleType : cancleType, 
-						cancleDetail : cancleDetail
+						cancleDetail : cancleDetail,
+						isOrderChecked : 2
 					};
 					$.post(url, data, function(result) {
                     	

@@ -7,7 +7,7 @@
 	
 	<insert id="memberJoin" parameterType="MemberVO">
 		INSERT INTO member VALUES(member_seq.nextval,#{id},#{email},#{password},#{name},#{age},
-		#{gender},#{nickName},'local',#{phone},#{address},0,#{latitude},#{longitude},null,sysdate,sysdate,null)
+		#{gender},#{nickName},'local',#{phone},#{address},0,#{latitude},#{longitude}, #{birth}, sysdate, sysdate, null)
 	</insert>
 	
 	<select id="emailSearch" parameterType="MemberVO" resultType="MemberVO">

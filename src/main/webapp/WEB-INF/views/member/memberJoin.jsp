@@ -20,6 +20,17 @@
                 <div>
                     <fieldset class="memberJoin_fieldset">
                         <div>
+                            <p>아이디</p>
+                            <input type="text" placeholder="아이디를 입력해주세요!" id="id" class="memberJoin_input" name="id">
+                        </div>
+                        <div class="mj_showIdChk" id="mj_showIdChk"></div>
+                        <div>
+                            <p>비밀번호</p>
+                            <input type="password" placeholder="비밀번호는 6자이상으로!" class="memberJoin_input" name="password"
+                                id="password" style="margin-bottom: 5px;">
+                            <input type="password" placeholder="비밀번호 확인" class="memberJoin_input" id="password_check" name="password_check" style="margin-top: 5px;">
+                        </div>
+                        <div>
                             <p>이름</p>
                             <input type="text" placeholder="이름을 입력해주세요!" id="name" class="memberJoin_input" name="name">
                         </div>
@@ -29,20 +40,9 @@
                                 name="nickName">
                         </div>
                         <div>
-                            <p>아이디</p>
-                            <input type="text" placeholder="아이디를 입력해주세요!" id="id" class="memberJoin_input" name="id">
-                        </div>
-                        <div class="mj_showIdChk" id="mj_showIdChk"></div>
-                        <div>
                             <p>이메일</p>
                             <input type="email" placeholder="현재 사용하는 이메일을 입력해주세요!" id="email" class="memberJoin_input"
                                 name="email">
-                        </div>
-                        <div>
-                            <p>비밀번호</p>
-                            <input type="password" placeholder="비밀번호는 6자이상으로!" class="memberJoin_input" name="password"
-                                id="password" style="margin-bottom: 5px;">
-                            <input type="password" placeholder="비밀번호 확인" class="memberJoin_input" id="password_check" name="password_check" style="margin-top: 5px;">
                         </div>
                         <div>
                             <p>휴대폰 번호</p>
@@ -50,7 +50,7 @@
                                 id="phone">
                         </div>
                         <div>
-                            <p>생일</p>
+                            <p>출생년월일</p>
                             <input type="date" placeholder="2000.01.01" class="memberJoin_input" name="birth" id="birth">
                         </div>
                         <div>
@@ -127,8 +127,6 @@
 			</table>
 		</div>
 	</form>
-    
-</body>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript">

@@ -36,7 +36,7 @@ public class AuthController {
 		String email = (String)userInfo.get("email");
 		String gender = (String)userInfo.get("gender");
 		
-		mv.addObject("nickname", nickname);
+		mv.addObject("nickName", nickname);
 		if(userInfo.get("email") != null) {
 			mv.addObject("email", email);
 		}

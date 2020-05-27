@@ -250,7 +250,8 @@ public class MarketController {
 		// 데이터를 받아오기 위한 사전 작업
 		OrderedVO orderedVO = new OrderedVO();
 		orderedVO.setMarketNum(marketVO.getNum());
-		orderedVO.setIsOrderChecked(1);		// 주문 들어온 상태
+		
+		System.out.println("marketOrder : "+orderedVO.getMarketNum());
 		
 		// 데이터 가져옴
 		List<OrderedVO> list = orderedService.marketOrder(orderedVO);

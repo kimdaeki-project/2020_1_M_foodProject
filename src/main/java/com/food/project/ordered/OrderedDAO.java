@@ -16,7 +16,7 @@ public class OrderedDAO {
 	// 마켓에서 받은 주문 조회
 	public List<OrderedVO> marketOrder(OrderedVO orderedVO) throws Exception {
 		
-		return sqlSession.selectList(NAMESPACE+"marketOrder");
+		return sqlSession.selectList(NAMESPACE+"marketOrder",orderedVO);
 	}
 	
 	//주문 시퀀스 증가
@@ -48,6 +48,12 @@ public class OrderedDAO {
 	public int orderedInsert(OrderedVO orderedVO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"orderedInsert", orderedVO);
 	}
+	
+	// 주문 종료
+	public int orderedFinish(OrderedVO orderedVO) throws Exception {
+		return sqlSession.update(NAMESPACE+"orderedFinish", orderedVO);
+	}
+		
 	
 	//장바구니 목록 전체 삭제(memberNum)
 	public int cartDeleteAll(OrderedVO orderedVO) throws Exception{
