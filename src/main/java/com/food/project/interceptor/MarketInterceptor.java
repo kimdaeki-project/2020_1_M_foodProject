@@ -9,7 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.food.project.market.MarketVO;
-import com.food.project.member.MemberVO;
 
 @Component
 public class MarketInterceptor extends HandlerInterceptorAdapter{

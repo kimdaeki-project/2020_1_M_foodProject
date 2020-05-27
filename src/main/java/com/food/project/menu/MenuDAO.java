@@ -16,6 +16,8 @@ public class MenuDAO {
 	
 	//마켓 리스트 출력
 	public List<MenuVO> marketMenuList(MenuVO menuVO) throws Exception{
+		
+		System.out.println("dao.marketNum : "+menuVO.getMarketNum());
 		return sqlSession.selectList(NAMESPACE+"marketMenuList", menuVO);
 	}
 	

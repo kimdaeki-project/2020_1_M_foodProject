@@ -188,7 +188,7 @@ a {
 		if (check) {
 			var boardNum = $(this).data("title");
 			var orderNum = $(this).data("ordernum");
-			location.href = "../review/reviewDelete?boardNum="+boardNum+"&orderNum="+orderNum;
+			location.href = "../review/reviewDelete?boardNum="+boardNum+"&orderNum="+orderNum+"&memberNum=${sessionScope.memberVO.num}";
 		}
 	});
 </script>

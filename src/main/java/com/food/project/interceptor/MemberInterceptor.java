@@ -30,8 +30,6 @@ public class MemberInterceptor extends HandlerInterceptorAdapter {
 				request.setAttribute("path", "./memberLogin");
 			}
 			
-			
-			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 			dispatcher.forward(request, response);
 		}

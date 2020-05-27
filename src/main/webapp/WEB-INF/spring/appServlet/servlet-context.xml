@@ -43,6 +43,7 @@
 			<mapping path="/member/memberUpdate"/>
 			<mapping path="/market/marketJoin"/>
 			
+			
 			<beans:ref bean="memberInterceptor"/>
 		</interceptor>
 		
@@ -55,7 +56,20 @@
 			<beans:ref bean="marketInterceptor"/>
 		</interceptor>
 		
+		<interceptor>
+			<mapping path="/menu/*"/>
+			<exclude-mapping path="/menu/menuList"/>
+			<exclude-mapping path="/menu/menuSelect"/>
+			
+			<beans:ref bean="menuInterceptor"/>		
+		</interceptor>
 		
+		<interceptor>
+			<mapping path="/review/*"/>
+			<exclude-mapping path="/review/reviewList"/>
+			
+			<beans:ref bean="reviewInterceptor"/>		
+		</interceptor>
 		
 	</interceptors>
 	
