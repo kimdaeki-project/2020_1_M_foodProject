@@ -26,6 +26,7 @@
                      <input type="text" placeholder="아이디를 입력해주세요!" class="mkj_input"
                         name="id">
                   </div>
+                  <div class="mj_showIdChk" id="mj_showIdChk"></div>
                   <div>
                      <p>비밀번호</p>
                      <input type="password" placeholder="비밀번호를 입력해주세요!"
@@ -57,7 +58,7 @@
                   </div>
                   <div>
                      <p>주소</p>
-                     <input type="text"  class="memberJoin_input" name="address" id="address" onclick="goPopup();">
+                     <input type="text"  class="mkj_input" name="address" id="address" onclick="goPopup();">
                   </div>
                   <div>
                      <p>성별</p>
@@ -69,17 +70,22 @@
                </fieldset>
             </div>
             <hr class="mkj_hr">
-            <div>
-               <label class="mkj_label"> <input type="checkbox"
-                  name="terms"> <strong>이용약관 전체동의</strong>
-               </label> <label class="mkj_label"> <input type="checkbox"
-                  name="terms"> <span>(필수)이용약관에 동의합니다.</span> <a href="#"
-                  class=".mkj_more">자세히</a>
-               </label> <label class="mkj_label"> <input type="checkbox"
-                  name="terms"> <span>(필수)개인정보처리방침에 동의합니다.</span> <a
-                  href="#" class="more">자세히</a>
-               </label>
-            </div>
+            	<div>
+                    <label class="mkj_label">
+                        <input type="checkbox" id="chk_all" name="chk">
+                        <strong>이용약관 전체동의</strong>
+                    </label>
+                    <label class="mkj_label">
+                        <input type="checkbox" id="chk_1" name="chk" class="check_btn">
+                        <span>(필수)이용약관에 동의합니다.</span>
+                        <span class="memberJoin_more">자세히</span>
+                    </label>
+                    <label class="mkj_label">
+                        <input type="checkbox" id="chk_2" name="chk" class="check_btn">
+                        <span>(필수)개인정보처리방침에 동의합니다.</span>
+                        <span class="memberJoin_more"> 자세히</span>
+                    </label>
+                </div>
             <nav>
                <button type="submit" class="mkj_button">가입 완료 하기</button>
             </nav>
