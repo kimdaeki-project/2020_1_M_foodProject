@@ -176,11 +176,18 @@
 											</div>
 											<figure class="review-item__photos">
 												<!-- 회원이 이미지를 등록했을 때만 이미지 html문을 추가해 출력해준다 -->
-												<p>
+												<p class="ri_pic">
 													<a href="javascript:"> <i
 														style="background-image: url(&quot;../resources/upload/review/${reviewVO.fileName}&quot;);">photo</i>
 													</a>
 												</p>
+												<!-- 사진 모달 창 -->
+												<div class="modal_pic">
+													<div class="modal_pic_div">
+														<span class="mpd_off">✖</span> 
+														<img class="mpd_img" alt="" src="../resources/upload/review/${reviewVO.fileName}">
+													</div>
+												</div>
 											</figure>
 										</div>
 										<p class="review-item__date">
@@ -208,16 +215,16 @@
 					<div class="nav-paginate-wrap__desktop">
 						<nav class="nav-paginate">
 							<c:if test="${pager.curBlock gt 1}">
-								<a id="btn-pre" title="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-prev"></a>
+								<a id="btn-pre" title="./marketSelect?curPage=${pager.startNum-1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-prev" style="cursor: pointer;"></a>
 							</c:if>
 	
 							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-								<a class="nav_pagerA btn_page">${i}</a>
+								<a class="nav_pagerA btn_page" style="cursor: pointer;">${i}</a>
 							</c:forEach>
 								
 								
 							<c:if test="${pager.curBlock lt pager.totalBlock}">
-								<a id="btn-next" title="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-next">
+								<a  style="cursor: pointer;" id="btn-next" title="./marketSelect?curPage=${pager.lastNum+1}&userNum=${marketVO.userNum}" class="nav-paginate__dir nav-paginate-dir-next">
 									<i></i>
 								</a>
 							</c:if>
@@ -228,12 +235,41 @@
 			</div>
 		</div>
 	</div>
+	
+	<%-- <!-- 사진 모달 창 -->
+	<div class="modal_pic">
+		<div class="modal_pic_div">
+			<span class="mpd_off">✖</span>
+			<img class="mpd_img" alt="" src="${pageContext.request.contextPath}/resources/img/food.jpg">
+		</div>
+	</div> --%>
+	
 	<%@ include file="../templates/footer.jsp"%>
 </body>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 <script type="text/javascript">
-								
+
+	/* 모달창 닫기 */
+	$(".mpd_off").click(function() {
+		$(".modal_pic").css('display','none');
+	});
+	
+	/* 모달창 뜨게하기 */
+	/* $(".ri_pic").click(function() {
+		$(this).next().css('display','block');
+	}); */
+		
+	$(".review-item__photos").on('click', '.ri_pic', function() {
+		$(this).next().css('display','block');
+	});
+	
+	
+	
+	
+	
+	
+	//
 	$(".btn_page").each(function() {
 		$(this).click(function() {
 			console.log($(this).text());
