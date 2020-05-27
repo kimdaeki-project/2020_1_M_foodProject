@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
+<html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<title>트럭 신청받기</title>
 <style type="text/css">
 @charset "UTF-8";
 
@@ -71,7 +73,7 @@
     line-height: 18px;
     border-top: 1px solid #f4f6f7;
     box-sizing: border-box;
-    height: 100%;
+    height: auto;
     font-size: 14px;
     min-width: 200px;
 }
@@ -146,79 +148,123 @@
     background-color: #fff;
     cursor: pointer;
 }
-</style>
 
-<title>마켓 메뉴 리스트</title>
+.orderCancle:hover {
+	cursor: pointer;
+}
+
+.reviewInsert:hover {
+	cursor: pointer;
+}
+
+.cancleReason{
+	display: none;
+	margin-bottom: 23px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.cancleReasonSelect{
+font-family: 'Noto Sans KR', sans-serif;
+}
+
+.cr_select{
+    padding: 5px;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-family: inherit;
+    color: #3d3d3d;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cr_select > option{
+    border: 1px solid #dedede;
+	font-family: 'Noto Sans KR', sans-serif;
+	font-family: inherit;
+    color: #3d3d3d;
+}
+
+.cancleTextArea{
+	resize: none;
+    width: 98.3%;
+    margin: 0 auto;
+    height: 70px;
+    border: 1px solid #dedede;
+    padding: 5px;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.oap_itemIfDiv{
+	display: flex;
+    padding: 10px 0;
+}
+
+.orderCancleBtn{
+	width: 100px;
+    color: #6f7174;
+    font-size: 13px;
+    line-height: 27px;
+    text-decoration: none;
+    text-align: center;
+    border: 1px solid #dedede;
+}
+</style>
 </head>
-<body style="width: 100%;">
+<body>
 	<div>
 		<div style="margin-left: 50px;">
 			<div style="display: flex; justify-content: space-between;
     				border-bottom: 1px solid #e7e7e7;">
-				<h2 style="border: none;">마켓 메뉴 리스트</h2>
-				<input type="button" value="+" class="addMenu" id="menuAdd">
+				<h2 style="border: none;">마켓 신청 리스트</h2>
 			</div>
 			
 			<!-- 하단의 div가 반복 -->
-			<c:forEach var="menuVO" items="${menuList}">
 				<div class="oap_item">
 					<div class="oap_itemInfo">
 						<a class="oap_ii_storePic">
-							<img alt="메뉴대표사진" src="${pageContext.request.contextPath}/resources/upload/menu/${menuVO.thumbImg}">
+							<img alt="트럭사진" src="${pageContext.request.contextPath}/resources/upload/menu/${menuVO.thumbImg}">
 						</a>
 						<div class="oap_ii_info">
 							<div class="oap_items">
-								<strong>${menuVO.name}</strong>
-								<em>${menuVO.detail}</em>
+								<strong>트럭 이름</strong> <em>신청자 이름 -사업자 번호</em>
 							</div>
-							<p>
-							<c:forEach var="categoryVO" items="${menuVO.categoryVOs}">
-								${categoryVO.name} / 
-							</c:forEach>
-							</p> 
+							<p>트럭 설명</p>
+							<p style="padding-bottom: 23px;">트럭 메뉴,옵션 </p>
 						</div>
 					</div>
 					
-					<!-- 구매관련 정보 div -->
+					<!-- 신청관련 div -->
 					<div class="oap_payInfo">
-						<div class="menuUpdate" title="${menuVO.num}">수정하기</div>
-						<div class="menuDelete" title="${menuVO.num}" style="margin-top: 10px;">삭제하기</div>
+						<div class="menuUpdate">수락하기</div>
+						<div class="menuDelete" style="margin-top: 10px;">취소하기</div>
 					</div>
 				</div>
-
-				<hr>
-			</c:forEach>
-			
-			
+				
+				<div class="cancleReason">
+						<div class="cr_select">
+							<div>
+							신청 취소 사유
+							<select class="cancleReasonSelect" style="padding: 2px 5px; margin-left: 10px;">
+								<option value="1">부적절한 이름으로 인한 취소</option>
+								<option value="2">------------------</option>
+								<option value="3">------------------</option>
+								<option value="0">기타 사유</option>
+							</select>
+							</div>
+							<button class="orderCancleBtn">취소 요청</button>
+						</div>
+						<textarea rows="" cols="" placeholder="신청 취소 이유를 적어주세요!" class="cancleTextArea"></textarea>
+					</div>
+				<hr>			
 		</div>
 	</div>
-	<script type="text/javascript">
-		//메뉴 카테고리 추가
-		$('#menuAdd').click(function() {
-			$.get("../menu/menuAdd", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		
-	
-		//메뉴 카테고리 수정
-		$('.menuUpdate').click(function() {
-			$.get("../menu/menuUpdate?num="+$(this).attr("title")+"&userNum=${sessionScope.marketVO.userNum}", function(result) {
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		//메뉴 카테고리 수정
-		$('.menuDelete').click(function() {
-			$.get("../menu/menuDelete?num="+$(this).attr("title")+"&marketNum=${sessionScope.marketVO.num}", function(result) {
-				
-				$('.mp_box').empty();
-				$('.mp_box').append(result);
-			});
-		});
-		
-		
-	</script>
 
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript">
+	// 취소 요청란 열기
+	$(".menuDelete").click(function() {
+		console.log('click');
+		console.log($(this).parent().parent().next().css('display','block'));
+	});
+	</script>
 </body>
+</html>
