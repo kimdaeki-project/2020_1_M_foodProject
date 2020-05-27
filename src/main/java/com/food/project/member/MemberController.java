@@ -123,6 +123,10 @@ public class MemberController {
 		}
 		response.addCookie(cookie);
 
+		if(memberVO.getAddress() == null) {
+			System.out.println("address null");
+		}
+		
 		
 		memberVO = memberService.memberLogin(memberVO);
 		
