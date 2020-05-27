@@ -171,10 +171,10 @@
     $("#joinForm").validate({
         rules:{
             name:{required: true, maxlength: 15},
-            nickName:{required: true, maxlength: 6},
-            id:{required: true, rangelength:[5, 10], eng_number:true},
+            nickName:{required: true, maxlength: 15},
+            id:{required: true, rangelength:[5, 15], eng_number:true},
             email:{required: true, email:true},
-            password:{required: true, rangelength:[5, 10], eng_number:true},
+            password:{required: true, rangelength:[5, 15], eng_number:true},
             password_check:{required: true, equalTo:"#password"},
             phone:{required: true, maxlength:11, digits: true},
             birth:{required: true},
@@ -187,11 +187,11 @@
                 },
             nickName:{
                 required:"필수 입력 사항입니다.",
-                maxlength:"6글자까지만 입력 가능합니다."
+                maxlength:"15글자까지만 입력 가능합니다."
             },
             id:{
                 required:"필수 입력 사항입니다.",
-                rangelength:"최소 5글자, 10글자 사이여야 합니다.",
+                rangelength:"최소 5글자, 15글자 사이여야 합니다.",
                 eng_number:"영어와 숫자만 입력가능합니다."
             },
             email:{
@@ -200,7 +200,7 @@
             },
             password:{
                 required:"필수 입력 사항입니다.",
-                rangelength:"최소 5글자, 10글자 사이여야 합니다.",
+                rangelength:"최소 5글자, 15글자 사이여야 합니다.",
                 eng_number:"영어와 숫자만 입력가능합니다."
             },
             password_check:{
