@@ -34,7 +34,6 @@ body{
 	box-sizing: border-box;
 	padding: 5px;  
 	width: 25%;
-	height: 434px;
 }
 
 .ml_container2_a{
@@ -48,6 +47,14 @@ body{
 } 
 
 .ml_container2_span{
+	color: #6f7174;
+    height: 100px;
+    text-overflow: clip;
+    white-space: break-spaces;
+    overflow: hidden;
+} 
+
+.ml_container2_span_open{
 	color: #6f7174;
 } 
 

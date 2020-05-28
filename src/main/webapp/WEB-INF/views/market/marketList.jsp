@@ -21,7 +21,7 @@
 							<strong class="ml_container2_strong">${vo.marketName}</strong>
 							<span class="ml_container2_span">${vo.marketIntro}</span>
 							<em class="ml_container2_em">${vo.canOrder}</em>
-							<span class="ml_container2_span">${vo.isOpen}</span>
+							<span class="ml_container2_span_open">${vo.isOpen}</span>
 						</a>
 					</li>
 				</c:forEach>
