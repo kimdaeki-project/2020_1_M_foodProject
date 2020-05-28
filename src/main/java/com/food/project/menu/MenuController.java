@@ -149,7 +149,6 @@ public class MenuController {
 						moMap.put(indexKey, menuOptionVO);
 					}
 				}
-				
 				break;
 			
 			default:
@@ -299,7 +298,7 @@ public class MenuController {
 	
 	@PostMapping("menuUpdate")
 	@Transactional
-	public ModelAndView menuUpdate(MenuVO menuVO, MultipartFile[] files,HttpServletRequest request, HttpSession session) throws Exception {
+	public ModelAndView menuUpdate(MenuVO menuVO, MultipartFile files,HttpServletRequest request, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("num : "+menuVO.getNum());
 		System.out.println("menuVO.getName : "+menuVO.getName());

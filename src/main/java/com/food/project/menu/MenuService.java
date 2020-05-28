@@ -94,21 +94,18 @@ public class MenuService {
 	}
 
 	// 메뉴 수정
-	public int menuUpdate(MenuVO menuVO, MultipartFile[] files, HttpSession session) throws Exception {
+	public int menuUpdate(MenuVO menuVO, MultipartFile file, HttpSession session) throws Exception {
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
 //		path="C:\\Users\\SIST\\Documents\\workspace-sts-3.9.12.RELEASE\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //신우
 		
-//		System.out.println("path : "+path);
 		int result = 0;
 		
-		System.out.println("length : "+files.length);
-		
+		System.out.println("length : "+file.isEmpty());
 		//파일(이미지) 수정
-		if(files.length > 1) {
-			for (MultipartFile file : files) {
+		if(!file.isEmpty()) {
 				//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
 				String fileName = fileSaver.saveByUtils(file, path);
 				menuVO.setThumbImg(fileName);
@@ -128,8 +125,6 @@ public class MenuService {
 				if(result<1) {
 					throw new Exception();
 				}
-				
-			}
 		}
 		
 		result = menuDAO.menuUpdate(menuVO);
