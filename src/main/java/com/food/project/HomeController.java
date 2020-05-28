@@ -84,8 +84,6 @@ public class HomeController {
 			address = userVO.getAddress();
 		}
 		
-		System.out.println("get address : "+address);
-		
 		// 유저의 위치 (~구 찾기)
 		String[] addressInfo = address.split(" ");
 		MarketVO marketVO = new MarketVO();
@@ -98,8 +96,6 @@ public class HomeController {
 				break;
 			}
 		}
-		
-		System.out.println("get address2 : "+marketVO.getAddress());
 		
 		// 마켓 정보들 가져오기(~구 검색)
 		List<MarketVO> marketList = marketDAO.marketGuList(marketVO); //getMarketList();

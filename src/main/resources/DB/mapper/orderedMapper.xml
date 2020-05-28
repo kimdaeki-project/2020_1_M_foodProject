@@ -41,7 +41,10 @@
 	<!-- 먼저 주문한 사람이 먼저 보이도록 할거임(ASC) -->
 	<select id="marketOrder" parameterType="OrderedVO" resultMap="MarketOrderMap">
 		SELECT o.*, m.id, m.name, m.phone FROM
-		(SELECT * FROM ordered WHERE marketNum = #{marketNum} AND isOrderChecked != 0 AND deleteAt IS NULL) o 
+		(SELECT * FROM ordered WHERE 
+		marketNum = #{marketNum} AND 
+		isOrderChecked != 0 AND
+		deleteAt IS NULL) o 
 		join member m
 		ON (o.memberNum = m.num)
 		ORDER BY o.createAt
@@ -65,7 +68,7 @@
 		memberNum=#{memberNum} AND 
 		isOrderChecked!=#{isOrderChecked} AND 
 		deleteAt IS NULL
-		ORDER BY updateAt DESC
+		ORDER BY createAt DESC
 	</select>
 	
 	<select id="orderedMarketList" parameterType="OrderedVO" resultType="OrderedVO">
@@ -96,7 +99,7 @@
 	
 	<!-- 마켓에서 소비자에게 물건 준 뒤, 누르는 버튼 -->
 	<update id="orderedFinish" parameterType="OrderedVO">
-		UPDATE ordered SET deleteAt=sysdate WHERE num = #{num}
+		UPDATE ordered SET isOrderChecked=4 WHERE num = #{num}
 	</update>
 		
 	<!-- 마켓에서 주문 확인 -->
@@ -120,7 +123,7 @@
 	<!-- 결제 후, 지우기(UPDATE deleteAt) -->
 	<update id="orderedCancle" parameterType="OrderedVO">
 		UPDATE ordered SET 
-		cancleType=#{cancleType}, cancleDetail=#{cancleDetail, jdbcType=VARCHAR}, isOrderChecked=#{isOrderChecked}, deleteAt=sysdate 
+		cancleType=#{cancleType}, cancleDetail=#{cancleDetail, jdbcType=VARCHAR}, isOrderChecked=#{isOrderChecked} 
 		WHERE num=#{num}
 	</update>
 	

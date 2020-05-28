@@ -242,12 +242,35 @@
 		});
 		
 		// 마켓 주문 리스트 조회
+		var marketOrderFlag = false;
 		$('#marketOrder').click(function() {
-			console.log("save");
+
+			// 버튼 누를 시 갱신
 			$.get("../market/marketOrder?num=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
+			
+			// 자동 갱신 세팅은 처음 버튼 눌렀을 때에만
+			if(marketOrderFlag) {
+				return;
+			}
+			marketOrderFlag = true;
+			
+			// 1분마다 갱신
+			var pollingInterval = 1000 * 60 * 1;
+			setInterval(function() {
+				$.get("../market/marketOrder?num=${sessionScope.marketVO.num}", function(result) {
+					$('.mp_box').empty();
+					$('.mp_box').append(result);
+				});
+			}, pollingInterval);
+			
+			// 갱신 체크용 console clock;
+			/* var i=0;
+			setInterval(function() {
+				console.log(++i);
+			}, 1000); */
 		});
 		
 		//관리자 ===================================
