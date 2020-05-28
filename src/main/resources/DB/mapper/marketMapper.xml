@@ -44,7 +44,7 @@
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
 		select * from market where 
 		<choose>
-			<when test="type == 'login'">
+			<when test="type == 'userNum'">
 				userNum = #{userNum}
 			</when>
 			<otherwise>
@@ -73,7 +73,7 @@
 	</insert>
 	
 	<update id="marketDelete" parameterType="MarketVO">
-		update market set deleteAt = sysdate where userNum=#{userNum} 
+		update market set deleteAt = sysdate where num=#{num} 
 	</update>
 	
 	<update id="marketGeoUpdate" parameterType="MarketVO">

@@ -277,7 +277,7 @@ input[type="file" i] {
 	$('#secession-truck').click(function() {
 		if(confirm("푸드트럭을 탈퇴하시겠습니까?") == true){
 			var marketNum = $("#marketNum").val();
-			location.href = "../market/marketDelete?userNum=${sessionScope.marketVO.userNum}&kind=1&refNum="+marketNum;
+			location.href = "../market/marketDelete?num=${sessionScope.marketVO.num}&kind=1&refNum="+marketNum;
 	    }
 	});
 	
