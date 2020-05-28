@@ -180,6 +180,10 @@
 	<script type="text/javascript">
 	
 	//all 자동클릭
+	$(this).ready(function() {
+		$("#all").trigger("click");
+		
+	});
 	
 	/* 클릭시 변경 */
 	$(".category").click(function() {
