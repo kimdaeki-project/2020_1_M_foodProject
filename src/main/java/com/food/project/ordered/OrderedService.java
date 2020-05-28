@@ -38,6 +38,11 @@ public class OrderedService {
 		return orderedDAO.orderedSelect(orderedVO);
 	}
 	
+	// 주문 조회 - 몇번 주문했는지
+	public Long orderedQuantity(OrderedVO orderedVO) throws Exception {
+		return orderedDAO.orderedQuantity(orderedVO);
+	}
+	
 	//주문 등록 - 유저ID(장바구니에 등록)
 	public int orderedInsert(OrderedVO orderedVO) throws Exception{
 		//주문번호 sequence 증가

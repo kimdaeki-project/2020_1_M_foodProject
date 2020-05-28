@@ -34,6 +34,11 @@ public class MarketDAO {
 		return sqlSession.selectOne(NAMESPACE+"marketSelect", marketVO);
 	}
 	
+	// 조회 - 마켓 총 갯수 확인
+	public Long marketQuantity() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"marketQuantity");
+	}
+	
 	//market_seq값 증가
 	public long marketCount() throws Exception{
 		return sqlSession.selectOne(NAMESPACE+"marketCount");
