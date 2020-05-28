@@ -335,6 +335,11 @@ style> <style>.wrap {
 	white-space: nowrap;
 }
 
+.market {
+	font-size: 13px;
+	font-weight: bold;
+}
+
 .desc .time {
 	font-size: 11px;
 	color: #888;
