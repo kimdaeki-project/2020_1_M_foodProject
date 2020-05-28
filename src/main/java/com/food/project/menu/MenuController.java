@@ -272,10 +272,9 @@ public class MenuController {
 	}
 	
 	@GetMapping("menuUpdate")
-	public ModelAndView menuUpdate(MarketVO marketVO,MenuVO menuVO,HttpSession session) throws Exception {
+	public ModelAndView menuUpdate(long marketNum,MenuVO menuVO,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 //		System.out.println("menuVO.num : "+menuVO.getNum());
-		System.out.println("user.num : "+marketVO.getUserNum());
 		
 		menuVO = menuService.menuSelect(menuVO);
 		
@@ -285,6 +284,8 @@ public class MenuController {
 		
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
 
+		MarketVO marketVO = new MarketVO();
+		marketVO.setNum(marketNum);
 		marketVO = marketService.marketSelect(marketVO);
 		System.out.println("num : "+marketVO.getNum());
 		
@@ -486,7 +487,6 @@ public class MenuController {
 		ModelAndView mv = new ModelAndView();
 		
 		int result = menuService.menuDelete(menuVO, session);
-		
 		
 		String msg = "메뉴 삭제 실패";
 		String url = "redirect:../member/memberPage";

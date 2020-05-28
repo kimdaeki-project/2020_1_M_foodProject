@@ -204,7 +204,7 @@
 	
 		//메뉴 카테고리 수정
 		$('.menuUpdate').click(function() {
-			$.get("../menu/menuUpdate?num="+$(this).attr("title")+"&userNum=${sessionScope.marketVO.userNum}", function(result) {
+			$.get("../menu/menuUpdate?num="+$(this).attr("title")+"&marketNum=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});

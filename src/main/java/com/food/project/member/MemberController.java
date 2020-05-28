@@ -138,7 +138,7 @@ public class MemberController {
 			if(memberVO.getIsFoodTruck() == 1) {
 				MarketVO marketVO = new MarketVO();
 				marketVO.setUserNum(memberVO.getNum());
-				marketVO.setType("login");
+				marketVO.setType("userNum");
 				marketVO= marketService.marketSelect(marketVO);
 				
 				session.setAttribute("marketVO", marketVO);

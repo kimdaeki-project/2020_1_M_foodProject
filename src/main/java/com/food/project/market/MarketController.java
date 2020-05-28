@@ -193,9 +193,7 @@ public class MarketController {
 		
 		int result = marketService.marketDelete(marketVO,fileInfoVO,session);
 		if(result > 0) {
-			
 			//memberSession변경
-			
 			session.removeAttribute("marketVO");
 			mv.addObject("msg", "푸드트럭 탈퇴가 완료되었습니다.");
 			mv.addObject("path", "../member/memberPage");
