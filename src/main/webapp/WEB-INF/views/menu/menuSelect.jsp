@@ -147,6 +147,17 @@
 			
 			optionNum.push("null");
 			
+			console.log(memberNum);
+			console.log(marketNum);
+			console.log(menuNum);
+			console.log(optionNum);
+			console.log(${menuVO.price});
+			console.log(`${menuVO.name}`);
+			console.log(`${marketVO.marketName}`);
+			console.log(`${menuVO.thumbImg}`);
+			console.log(quan);
+			console.log(isCart);
+			
 			var data = {
 					memberNum : memberNum,
 					marketNum : marketNum,
@@ -185,6 +196,9 @@
 		
 		//장바구니 버튼 클릭 핸들러
 		$("#ml_cart").click(function() {
+			
+			console.log("장바구니");
+			
 			var marketNum = $("#marekt_num").val();
 			var menuNum = $("#menu_num").val();
 			var memberNum = $("#member_num").val();
@@ -199,6 +213,16 @@
 			});
 			
 			optionNum.push("null");
+			
+			console.log("멤버번호"+memberNum);
+			console.log("마켓번호"+marketNum);
+			console.log("메뉴번호"+menuNum);
+			console.log("옵션번호"+optionNum);
+			console.log("가격"+${menuVO.price});
+			console.log("메뉴명"+`${menuVO.name}`);
+			console.log("마켓명"+`${marketVO.marketName}`);
+			console.log("이미지"+`${menuVO.thumbImg}`);
+			console.log("수량"+quan);
 			
 			var data = {
 					memberNum : memberNum,
