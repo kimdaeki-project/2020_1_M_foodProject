@@ -130,6 +130,15 @@
     border: 1px solid #dedede;
     cursor: pointer;
 }
+
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 40% 0;
+    font-size: 14px;
+    color: #9b9b9b;
+}
 </style>
 </head>
 <body>
@@ -137,6 +146,9 @@
 		<div style="margin-left: 50px;">
 			<h2>마켓에 등록된 리뷰 목록</h2>
 			
+			<c:if test="${empty reviewList}">
+					<div class="empty">등록된 리뷰가 없습니다.</div>
+			</c:if>
 			
 			<!-- 하단의 div가 반복 -->
 			<c:forEach var="reviewVO" items="${reviewList}"> 

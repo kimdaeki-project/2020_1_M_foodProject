@@ -197,6 +197,15 @@ font-family: 'Noto Sans KR', sans-serif;
     border: 1px solid #dedede;
 }
 
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 40% 0;
+    font-size: 14px;
+    color: #9b9b9b;
+}
+
 </style>
 <title>사용자 주문내역 페이지</title>
 </head>
@@ -204,6 +213,11 @@ font-family: 'Noto Sans KR', sans-serif;
 	<div>
 		<div style="margin-left: 50px;">
 			<h2>주문/결제 내역</h2>
+				
+				<c:if test="${empty orderedList}">
+					<div class="empty">주문/결제 내역이 없습니다.</div>
+				</c:if>
+			
 				<!-- 하단의 div가 반복 -->
 				<c:forEach items="${orderedList}" var="orderedVO">
 				<div class="oap_item" data-num="${orderedVO.num}">
@@ -226,6 +240,10 @@ font-family: 'Noto Sans KR', sans-serif;
 								<p> 주문 확인 전에는 주문 취소가 가능합니다. 주문 확인시 취소가 불가능하오니, 이점에 유의해주시기 바랍니다. </p>
 							</c:if>
 							<c:if test="${orderedVO.isOrderChecked eq 2}">
+								<span>주문 확인  : 주문 취소</span>
+								<p> 해당 마켓의 사정으로 인하여 취소되었습니다. </p>
+							</c:if>
+							<c:if test="${orderedVO.isOrderChecked eq 3 || orderedVO.isOrderChecked eq 4}">
 								<span>주문 확인 : 확인</span>
 								<p> 주문이 완료되었습니다. </p>
 							</c:if>

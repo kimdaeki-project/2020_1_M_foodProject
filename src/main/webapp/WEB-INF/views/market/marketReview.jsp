@@ -13,6 +13,11 @@
 <body>
     <section class="menu-review__index">
         <h2 class="headerH2">마켓 리뷰 모음</h2>
+        
+        <c:if test="${empty reviewList}">
+			<div class="empty">작성된 리뷰가 없습니다.</div>
+		</c:if>
+		
         <ul id="review_table">
         	<c:forEach var="reviewVO" items="${reviewList}">
                 <c:if test="${reviewVO.step eq 0}">

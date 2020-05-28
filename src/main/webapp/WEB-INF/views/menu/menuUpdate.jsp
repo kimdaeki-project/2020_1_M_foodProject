@@ -11,11 +11,11 @@
 		<input type="hidden" id="menuNum" name="num" value="${menuVO.num}">
 		<div class="menuAdd_box" style="margin-top: 12px">
 			<label for="title">메뉴명 : </label> 
-			<input type="text" id="title" name="name" value="${menuVO.name}">
+			<input type="text" id="title" name="name" value="${menuVO.name}" required="required" class="mu_input">
 		</div>
 		<div class="menuAdd_box">
 			<label for="price">가격 : </label> 
-			<input type="text" id="price" name="price" value="${menuVO.price}">
+			<input type="text" id="price" name="price" value="${menuVO.price}" required="required" class="mu_input">
 		</div>
 		<div class="menuAdd_box">
 			<label for="detail">상세 :</label> 
@@ -30,9 +30,7 @@
 		
 		<!-- 추가된 카테고리 박스 -->
 		<div id="category_box">
-
-
-			
+		
 			<c:forEach var="categoryVO" items="${cateList}" varStatus="i">
 				<div class="cb" title="1">${categoryVO.name.trim()}
 					<input type="button" class="add" id="cateName${i.index+1}" name="cate_name_${i.index+1}" title="${i.index+1}" value="옵션추가">
@@ -40,8 +38,8 @@
 							
 					<c:forEach var="vo" items="${categoryVO.menuOptionVOs}" varStatus="k">
 						<div class="opDiv">
-							<input name="op_name_${i.index+1}_${k.index+1}" class="opName" type="text" id="cateName${i.index+1}" value="${vo.name}">
-							<input name="op_price_${i.index+1}_${k.index+1}" class="opPrice" type="text" id="catePrice${i.index+1}" value="${vo.price}">
+							<input name="op_name_${i.index+1}_${k.index+1}" class="opName" type="text" id="cateName${i.index+1}" value="${vo.name}" required="required">
+							<input name="op_price_${i.index+1}_${k.index+1}" class="opPrice" type="text" id="catePrice${i.index+1}" value="${vo.price}" required="required">
 							<input type="button" class="delO" value="옵션삭제">
 					 	</div>
 					 	<script type="text/javascript">
@@ -52,16 +50,14 @@
 				<input type="hidden" value="${categoryVO.name}" name="cate_name_${i.index+1}">
 			</c:forEach>
 			
-			
-
-			
 		</div>
 		
 		<div class="menuAdd_box">
 			<label for="thumbImg">메뉴 이미지: </label>
 			<div style="display: flex;">
+			
 				<c:if test="${empty menuVO.thumbImg}">
-					<input type="file" id="thumbImg" name="files" class="thumbImg1"> 
+					<input type="file" id="thumbImg" name="files" class="thumbImg1" required="required"> 
 				</c:if>
 				<c:if test="${not empty menuVO.thumbImg}">
 					<input type="text" id="thumbImg" name="thumbImg" class="thumbImg1" value="${menuVO.thumbImg}" readonly="readonly"> 
@@ -78,6 +74,22 @@
 
 
 	<script type="text/javascript">
+	
+		$("#submit").on('click', "input", function(e) {
+			
+			//전체값
+			var input = $(".mu_input").val();
+			var opName = $(".opName").val();
+			var opPrice = $(".opPrice").val();
+			var password = $("#password").val();
+			var password_check = $("#password_check").val();
+
+			if (input === '' && opName === ''&& opPrice === '') {
+				alert('모든 값을 채워주세요!');
+				e.preventDefault();
+			}
+			
+		});
 	
 		var i = ${fn:length(cateList)};
 	
@@ -120,7 +132,7 @@
 		
 			var index = $(this).attr("title");
 			var index2 = parseInt($(this).parent().attr("title")); //cb
-			var c_name = '<div class="opDiv"><input name="op_name_'+index+'_'+ index2 +'" class="opName" placeholder="옵션 이름" type="text"><input name="op_price_'+index+'_'+ index2 +'" class="opPrice" type="number" placeholder="가격"><input type="button" class="delO" value="옵션 삭제"></div>';
+			var c_name = '<div class="opDiv"><input required="required" name="op_name_'+index+'_'+ index2 +'" class="opName" placeholder="옵션 이름" type="text"><input required="required" name="op_price_'+index+'_'+ index2 +'" class="opPrice" type="number" placeholder="가격"><input type="button" class="delO" value="옵션 삭제"></div>';
 				
 			$(this).parent().append(c_name);
 			$(this).parent().attr("title", ++index2);
@@ -152,33 +164,8 @@
 		$("#category_box").on('click', '.del', function() {
 			$(this).parent().remove();
 		});	
-	
-
-		//유효성 검사
-		$("#manuUpdate").validate({
-        rules:{
-            title:{required: true},
-            price:{required: true, digits: true},
-            opName:{required: true},
-            opPrice:{required: true, digits: true}
-        },
-        messages:{
-            title:{
-                required:"필수 입력 사항입니다."
-                },
-           price:{
-                required:"필수 입력 사항입니다.",
-                digits:"숫자만 입력해주세요."
-            },
-           opName:{
-                required:"필수 입력 사항"
-                },
-           opPrice:{
-                required:"필수 입력 사항",
-                digits:"숫자만 입력"
-            }
-        }
-    });
+		
+		
 
 
 </script>

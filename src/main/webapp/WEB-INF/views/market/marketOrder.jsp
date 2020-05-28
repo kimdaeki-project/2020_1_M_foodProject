@@ -139,9 +139,20 @@
 	cursor:pointer;
 }
 
-hr{
-	
+
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 40% 0;
+    font-size: 14px;
+    color: #9b9b9b;
 }
+
+.orderFinishBtn:hover {
+	cursor:pointer;
+}
+
 </style>
 <title>판매자 주문내역 페이지</title>
 </head>
@@ -149,6 +160,11 @@ hr{
 	<div>
 		<div style="margin-left: 50px;">
 			<h2>마켓 주문 리스트</h2>
+			
+			<c:if test="${empty orderedList}">
+				<div class="empty">주문 요청이 없습니다.</div>
+			</c:if>
+			
 			<!-- 하단의 div가 반복 -->
 			<c:forEach var="orderedVO" items="${orderedList}">
 				<div class="oap_item" data-num="${orderedVO.num}">
@@ -162,8 +178,8 @@ hr{
 						</a>
 						<div class="oap_ii_info">
 							<a class="oap_items">
-								<strong>${orderedVO.menuName}</strong>
-								<em>선택옵션 : ${orderedVO.cateMenuOptions}</em><br>
+								<strong>${orderedVO.menuName} (선택옵션 : ${orderedVO.cateMenuOptions})</strong>
+								<em>수량 : ${orderedVO.pcs}개</em><br>
 								<em>가격 : ${orderedVO.amount}원</em>
 								<em>&nbsp;|&nbsp;</em>
 								<em>주문일자 : ${orderedVO.createAt}</em><br>
@@ -184,8 +200,7 @@ hr{
 					</div>
 					
 					<!-- 구매관련 정보 div -->
-					<div class="oap_payInfo">
-						<div class='orderFinishBtn' data-num="${orderedVO.num}">주문 완료</div>
+					<div class="oap_payInfo" data-num="${orderedVO.num}">
 						<div class='orderConfirmBtn' data-num="${orderedVO.num}">확인하기</div>
 						<div class='orderCancleBtn' style="margin-top: 10px;" data-num="${orderedVO.num}">취소하기</div>
 					</div>
@@ -309,6 +324,34 @@ hr{
 			});
 		}
 		
+		// 주문 완료 버튼 생성 (param = orderedVO.num)
+		function createOrderFinishBtn(num) {
+			$('.oap_payInfo').each(function() {
+				if($(this).data("num") == num) {
+					var html = "<div class='orderFinishBtn' data-num="+num+">판매완료</div>";
+					$(this).append(html);
+				}
+				
+				// 이벤트 위임
+				$(this).on("click", ".orderFinishBtn", function() {
+					
+					console.log("finish");
+					console.log("btn");
+					
+					var url = "${pageContext.request.contextPath}/ordered/orderFinish";
+					var num = $(this).data("num");
+					
+					$.post(url, {num: num}, function(result){
+						if(result > 0) {
+							// 해당되는 div/hr 삭제
+							deleteOrderDiv(num);
+							deleteHr(num);
+						}
+					});
+				});
+			});	
+		}
+		
 		// 주문 완료 버튼 삭제 (param = orderedVO.num)
 		function deleteOrderFinishBtn(num) {
 			$('.orderFinishBtn').each(function() {
@@ -360,6 +403,9 @@ hr{
 							
 							// 취소 버튼 삭제
 							deleteOrderCancleBtn(num);
+							
+							// 주문 완료 버튼 생성
+							createOrderFinishBtn(num);
 						}
 					});
 				});
@@ -368,7 +414,7 @@ hr{
 		
 		// 주문 취소 버튼 핸들러
 		function orderCancleBtnHandler() {
-			$('.orderConfirmBtn').each(function(){
+			$('.orderCancleBtn').each(function(){
 				
 				$(this).click(function() {
 					
@@ -394,6 +440,11 @@ hr{
 		// 주문 완료 버튼 핸들러
 		function orderFinishBtnHandler() {
 			$('.orderFinishBtn').each(function(){
+				
+				console.log("finish");
+				console.log("btn");
+				if(!confirm("판매 완료"));
+					return;
 				
 				$(this).click(function() {
 					
@@ -421,8 +472,6 @@ hr{
 				var num = $(this).data("num");
 				switch(isOrderChecked) {
 				case 1 :
-					// 주문 완료 버튼 삭제
-					deleteOrderFinishBtn(num);
 					break;
 				case 2 :
 					// 해당되는 div/hr 삭제
@@ -438,6 +487,13 @@ hr{
 							
 					// 취소 버튼 삭제
 					deleteOrderCancleBtn(num);
+					
+					// 판매 완료 버튼 생성
+					createOrderFinishBtn(num);
+					break;
+				case 4 :
+					deleteOrderDiv(num);
+					deleteHr(num);
 					break;
 				default :
 					break;
@@ -457,11 +513,13 @@ hr{
 			// 주문 취소 버튼 핸들러
 			orderCancleBtnHandler();
 			
-			// 주문 확인 버튼 핸들러
+			// 판매 완료 버튼 핸들러
 			orderFinishBtnHandler();
 			
 			// 동적 페이지 핸들러
 			changePageByIsOrderChecked();
+		
 		});
+		
 	</script>
 </body>
