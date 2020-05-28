@@ -633,7 +633,7 @@
 		//====================
 		function marketSelectHandler(clickedId) {
 		
-			var ref = '/project/market/marketSelect?num='+clickedId;
+			var ref = '/project/market/marketSelect?userNum='+clickedId;
 			location.href = ref;
 		}
 		
