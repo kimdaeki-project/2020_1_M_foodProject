@@ -473,8 +473,8 @@
 	            '        <div class="title click" id="'+ markets[i].userNum +'"'+'>' + markets[i].marketName + 
 	            '            <div class="close click" id="'+ markets[i].userNum +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
 	            '        <div class="body">' + 
-	            '            <div class="img" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
-	            '                <img src="#" width="73" height="70">' +
+	            '            <div class="img" id="'+ markets[i].num +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
+	            '                <img src="${pageContext.request.contextPath}/resources/upload/market/'+ markets[i].thumbImg +'" width="73" height="70">' +
 	            '           </div>' + 
 	            '            <div class="desc">' + 
 	            '                <div class="market">' + markets[i].marketIntro +
@@ -633,7 +633,7 @@
 		//====================
 		function marketSelectHandler(clickedId) {
 		
-			var ref = '/project/market/marketSelect?userNum='+clickedId;
+			var ref = '/project/market/marketSelect?num='+clickedId;
 			location.href = ref;
 		}
 		
