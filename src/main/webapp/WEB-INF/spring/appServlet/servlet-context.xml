@@ -50,6 +50,7 @@
 		<interceptor>
 			<mapping path="/market/*"/>
 			<exclude-mapping path="/market/marketList"/>
+			<exclude-mapping path="/market/marketListAjax"/>
 			<exclude-mapping path="/market/marketSelect"/>
 			<exclude-mapping path="/market/marketJoin"/>
 			

@@ -18,6 +18,7 @@ import com.food.project.member.MemberVO;
 import com.food.project.menu.MenuDAO;
 import com.food.project.menu.MenuVO;
 import com.food.project.util.FileSaver;
+import com.food.project.util.Pager;
 
 @Service
 @Transactional
@@ -33,6 +34,7 @@ public class MarketService {
 	private MemberDAO memberDAO;
 	@Autowired
 	private MenuDAO menuDAO;
+	
 	
 	
 	//marketName을 이용해 userName(MarketVO) 도출
@@ -58,8 +60,27 @@ public class MarketService {
 	}
 	
 	//조회 - selectList
-	public List<MarketVO> marketList() throws Exception{
-		return marketDAO.marketList();
+	public List<MarketVO> marketList(Pager pager,MemberVO memberVO) throws Exception{
+		
+		//멤버주소값에서 구 찾기
+		String address = memberVO.getAddress();
+		String[] addressInfo = address.split(" ");
+	    for (int i = 0; i < addressInfo.length; i++) {     
+	        //검색된 구값 넣어주기
+	        if(addressInfo[i].length()-1 == addressInfo[i].lastIndexOf("구")) {
+	        	pager.setAddress(addressInfo[i]);
+	            break;
+	        }
+	    }
+		
+		//makeRow 10에서 16으로 변경
+		pager.setPerPage(16);
+		pager.makeRow();
+
+		int totalNum = marketDAO.marketTotalNum(pager);
+		pager.makePage(totalNum);
+		
+		return marketDAO.marketList(pager);
 	}
 	
 	//조회 - select One

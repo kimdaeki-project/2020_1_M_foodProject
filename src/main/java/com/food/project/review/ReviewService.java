@@ -32,9 +32,9 @@ public class ReviewService implements BoardService{
 	//마켓의 전체 리뷰 목록 출력
 	public List<ReviewVO> reviewMarketList(Pager pager) throws Exception{
 		pager.makeRow();
+		
 		long marketNum = pager.getMarketNum();
 		long totalCount = reviewDAO.marketReviewCount(marketNum);
-		
 		pager.makePage(totalCount);
 		
 		return reviewDAO.reviewMarketList(pager);

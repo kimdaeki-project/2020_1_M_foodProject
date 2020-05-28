@@ -19,8 +19,18 @@ public class Pager {
 	private String kind;
 	private String search;
 	private long marketNum;
+	private String address;
 	
 	
+	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 
 	public long getMarketNum() {
 		return marketNum;
@@ -76,6 +86,16 @@ public class Pager {
 		if(curBlock == this.totalBlock) {
 			this.lastNum = this.totalPage;
 		}
+		
+		
+	
+		
+		System.out.println("totalPage : "+totalCount);
+		System.out.println("totalCount : "+totalCount);
+		
+		System.out.println("startNum : "+this.startNum);
+		System.out.println("lastNum : "+this.lastNum);
+		
 	}
 	
 	public long getStartRow() {

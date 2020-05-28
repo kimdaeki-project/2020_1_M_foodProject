@@ -6,6 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.food.project.member.MemberVO;
+import com.food.project.util.Pager;
+
 @Repository
 public class MarketDAO {
 	
@@ -24,9 +27,14 @@ public class MarketDAO {
 		return sqlSession.selectList(NAMESPACE+"marketGuList", marketVO);
 	}
 	
+	//pager totalNum
+	public int marketTotalNum(Pager pager) throws Exception{
+		return sqlSession.selectOne(NAMESPACE+"marketTotalNum",pager);
+	}
+	
 	//조회 - select List (하나의 판매자에 대한 여러 푸드트럭의 정보 - userNum으로 조회)
-	public List<MarketVO> marketList() throws Exception{
-		return sqlSession.selectList(NAMESPACE+"marketList");
+	public List<MarketVO> marketList(Pager pager) throws Exception{
+		return sqlSession.selectList(NAMESPACE+"marketList",pager);
 	}
 	
 	//조회 - select One (하나의 푸드트럭에 대한 정보 - num으로 조회)

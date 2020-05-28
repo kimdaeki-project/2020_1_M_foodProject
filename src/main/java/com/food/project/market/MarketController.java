@@ -84,16 +84,30 @@ public class MarketController {
 	
 	//조회 - select List(GET)
 	@GetMapping("marketList")
-	public ModelAndView marketList() throws Exception{
+	public ModelAndView marketList(Pager pager,MemberVO memberVO) throws Exception{
 		
 		ModelAndView mv = new ModelAndView();
-		List<MarketVO> list = marketService.marketList();
+		List<MarketVO> list = marketService.marketList(pager,memberVO);
 		
 		mv.addObject("marketList", list);
 		mv.setViewName("market/marketList");
 		
 		return mv;
 	}
+	
+	
+	@GetMapping("marketListAjax")
+	public ModelAndView marketListAjax(Pager pager,MemberVO memberVO) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		List<MarketVO> list = marketService.marketList(pager,memberVO);
+		
+		mv.addObject("marketList", list);
+		mv.setViewName("market/marketListAjax");
+		
+		return mv;
+	}
+	
 
 	//조회 - select One(GET)
 	@GetMapping("marketSelect")
@@ -117,7 +131,7 @@ public class MarketController {
 		List<ReviewVO> totalImageList = reviewService.imgTatalList(marketVO);
 		
 		
-		//리뷰																				/////////////
+		//리뷰																				
 		pager.setMarketNum(marketVO.getNum());
 		List<BoardVO> reviewList = reviewService.boardList(pager);
 		if(reviewList != null) {

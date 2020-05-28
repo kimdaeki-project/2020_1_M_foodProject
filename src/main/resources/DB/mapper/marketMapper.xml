@@ -35,10 +35,19 @@
 		ORDER BY m.userNum
 	</select>
 	
-	<select id="marketList" resultMap="ReviewResult">
-		SELECT m.*, r.rating 
-		FROM market m left join (SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
-		ON (m.num = r.marketNum) ORDER BY m.num DESC
+	<select id="marketTotalNum" parameterType="Pager" resultType="Integer">
+		select count(num) from market where deleteAt is null and address like '%' || #{address} || '%'
+	</select>
+	
+	<select id="marketList" parameterType="Pager" resultMap="ReviewResult">
+		select * from 
+		(select A.*,rowNum R from
+		(SELECT m.*, r.rating FROM 
+		(select * from market where deleteAt is null and address like '%' || #{address} || '%') m 
+		left join 
+		(SELECT marketNum, round(AVG(rating),1) as rating FROM review GROUP BY marketNum) r
+		ON (m.num = r.marketNum) ORDER BY m.num DESC)A ) B
+		where R between #{startRow} and #{lastRow}
 	</select>
 	
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
