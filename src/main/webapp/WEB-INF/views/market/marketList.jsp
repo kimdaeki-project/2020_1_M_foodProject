@@ -8,7 +8,6 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/market/marketList.css">
 </head>
 <%@ include file="../templates/header.jsp"%>
-
 <body>
 	<div class="ml_container">
 		<section class="ml_container2">
@@ -20,8 +19,20 @@
 							<img class="ml_container2_img" alt="" src="${pageContext.request.contextPath}/resources/upload/market/${vo.thumbImg}">
 							<strong class="ml_container2_strong">${vo.marketName}</strong>
 							<span class="ml_container2_span">${vo.marketIntro}</span>
-							<em class="ml_container2_em">${vo.canOrder}</em>
-							<span class="ml_container2_span_open">${vo.isOpen}</span>
+							<div>
+							<c:if test="${vo.canOrder eq 1 && vo.isOpen eq 1}">
+								<em class="ml_container2_em">주문 가능!</em>
+							</c:if>
+							<c:if test="${vo.canOrder eq 0 || vo.isOpen eq 0}">
+								<em class="ml_container2_em">주문 불가!</em>
+							</c:if>
+							<c:if test="${vo.isOpen eq 0}">
+								<em class="ml_container2_span_open">CLOSE</em>
+							</c:if>
+							<c:if test="${vo.isOpen eq 1}">
+								<em class="ml_container2_span_open">OPEN</em>
+							</c:if>
+							</div>
 						</a>
 					</li>
 				</c:forEach>

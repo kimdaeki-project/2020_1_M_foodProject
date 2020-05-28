@@ -165,7 +165,8 @@ input[type="file" i]{
 			</div>
 			<div class="mp_infoMod_box">
 				<p>비밀번호</p>
-				<input type="password" name="password" class="mp_infoMod_input" value="${memberVO.password}">
+				<input type="password" id="password" name="password" class="mp_infoMod_input" value="${memberVO.password}">
+				<input type="password" id="password_check" name="password_check" class="mp_infoMod_input" placeholder="비밀번호 재확인!">
 			</div>
 			<div class="mp_infoMod_box">
 				<p>휴대폰 번호</p>
@@ -179,7 +180,7 @@ input[type="file" i]{
 	
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-	<script type="text/javascript">
+	<script type="text/javascript">	
 	
     //validate 유효성 검사
     $("#memberUpdate").validate({
@@ -188,6 +189,7 @@ input[type="file" i]{
             nickName:{required: true, maxlength: 6},
             email:{required: true, email:true},
             password:{required: true, rangelength:[5, 10], eng_number:true},
+            password_check:{required: true, equalTo:"#password"},
             phone:{required: true, maxlength:11, digits: true}
         },
         messages:{
@@ -207,6 +209,10 @@ input[type="file" i]{
                 required:"필수 입력 사항입니다.",
                 rangelength:"최소 5글자, 10글자 사이여야 합니다.",
                 eng_number:"영어와 숫자만 입력가능합니다."
+            },
+            password_check:{
+                required:"필수 입력 사항입니다.",
+                equalTo:"입력하신 비밀번호와 일치하지 않습니다."
             },
             phone:{
                 required:"필수 입력 사항입니다.",
