@@ -79,10 +79,12 @@ public class HomeController {
 		String address = "";
 		MemberVO userVO = (MemberVO)session.getAttribute("memberVO");
 		if(userVO == null) {
-			address = getAddress(); //"서울특별시 중구 세종대로 110";
+			address = getAddress(); //"서울특별시 마포구 월드컵북로 21";
 		} else {
 			address = userVO.getAddress();
 		}
+		
+		System.out.println("get address : "+address);
 		
 		// 유저의 위치 (~구 찾기)
 		String[] addressInfo = address.split(" ");
@@ -97,12 +99,19 @@ public class HomeController {
 			}
 		}
 		
+		System.out.println("get address2 : "+marketVO.getAddress());
+		
 		// 마켓 정보들 가져오기(~구 검색)
 		List<MarketVO> marketList = marketDAO.marketGuList(marketVO); //getMarketList();
 		List<MapVO> mapList = new ArrayList<MapVO>();
 		for (MarketVO vo : marketList) {
+			// 이미지가 없다면 ""로 교체 (null이면 프론트에서 에러)
 			if(vo.getThumbImg() == null)
 				vo.setThumbImg("");
+			
+			// time 값을 교체
+			vo.setOpenTime(convertTimeForm(vo.getOpenTime()));
+			vo.setCloseTime(convertTimeForm(vo.getCloseTime()));
 			
 			MapVO mapVO = new MapVO();
 			
@@ -115,6 +124,9 @@ public class HomeController {
 			mapVO.setLongitude(memberVO.getLongitude());
 			
 			mapList.add(mapVO);
+		
+			System.out.println("\n========================");
+			System.out.println(mapVO);
 		}
 		
 		// 내 위치 보내기
@@ -131,6 +143,19 @@ public class HomeController {
 		return mv;
 	}
 
+	//============================
+	// 시간 포맷 변경해주기 (0900 -> 09:00)
+	//============================
+	public String convertTimeForm(String time) {
+		
+		String hour = time.substring(0,2);
+		String min = time.substring(2,4);
+		
+		time = hour + ":" + min;
+		
+		return time;
+	}
+	
 	//============================
 	// 유저 주소 가져오기
 	//============================

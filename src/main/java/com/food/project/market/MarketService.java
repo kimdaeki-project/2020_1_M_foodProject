@@ -68,7 +68,7 @@ public class MarketService {
 	public int marketInsert(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
-		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 //		path="C:\\Users\\SIST\\Documents\\workspace-sts-3.9.12.RELEASE\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		System.out.println("path : "+path);
 		
@@ -126,7 +126,7 @@ public class MarketService {
 	//삭제
 	public int marketDelete(MarketVO marketVO,FileInfoVO fileInfoVO,HttpSession session) throws Exception{
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
-		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 //		path="C:\\Users\\SIST\\Documents\\workspace-sts-3.9.12.RELEASE\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		//파일(이미지) 삭제
 		
@@ -139,13 +139,16 @@ public class MarketService {
 			String fileName = fileVO.getFileName();
 			result = fileSaver.deleteFile(fileName, path);
 		}
+		
 		//DB에서 삭제
 		result = fileInfoDAO.fileInfoDelete(fileInfoVO);
 		
 		MemberVO memberVO = new MemberVO();
+		
 		memberVO.setNum(marketVO.getUserNum());
 		memberVO.setIsFoodTruck(0);
 		result = memberDAO.isFoodTruck(memberVO);
+		
 		result = marketDAO.marketDelete(marketVO);
 		
 		return result;
@@ -160,7 +163,7 @@ public class MarketService {
 	public int marketUpdate(MarketVO marketVO,MultipartFile file,HttpSession session) throws Exception{
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/market");
-		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
+		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 //		path="C:\\Users\\SIST\\Documents\\workspace-sts-3.9.12.RELEASE\\foodProject\\src\\main\\webapp\\resources\\upload\\market";
 		System.out.println("path :"+path);
 		int result = 0;

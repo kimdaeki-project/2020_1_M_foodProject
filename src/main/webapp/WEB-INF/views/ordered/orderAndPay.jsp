@@ -285,7 +285,7 @@ font-family: 'Noto Sans KR', sans-serif;
 		$('.storego').each(function() {
 			$(this).click(function() {
 				var marketNum = $(this).data("num");
-				location.href = '../market/marketSelect?num='+marketNum;
+				location.href = '../market/marketSelect?type=marketNum&num='+marketNum;
 			});
 		});
 	
