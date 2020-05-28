@@ -350,7 +350,13 @@ input[type="file" i] {
 	$("#ma_fileDel2").click(function() {
 		$(".thumbImg2").val("");
 	});
-
+	
+	//사진 유효성 검사
+	$("#btn-sub").click(function() {
+		if ($("#thumbImg").val() === null) {
+			preventDefault();
+		}
+	});
 	
 
 	//유효성 검사

@@ -176,9 +176,10 @@ input[type="file" i] {
 	margin-bottom: 0;
 }
 
-.ma_fileDel{
+#ma_fileDel_X{
     line-height: 46px;
     padding: 0 15px;
+    cursor: pointer;
 }
 </style>
 
@@ -211,13 +212,14 @@ input[type="file" i] {
 
 
 		<div class="mp_infoMod_box">
+			<p>트럭 사진</p>
 			<div style="display: flex;">
 				<c:if test="${empty marketVO.thumbImg}">
 					<input type="file" id="thumbImg" name="files" class="mp_infoMod_input mp_filep"> 
 				</c:if>
 				<c:if test="${not empty marketVO.thumbImg}">
 					<input type="text" id="thumbImg" name="thumbImg" class="mp_infoMod_input mp_filep" value="${marketVO.thumbImg}" readonly="readonly"> 
-					<span id="ma_fileDel">✖</span>
+					<span id="ma_fileDel_X">✖</span>
 				</c:if>
 			</div>
 		</div>
@@ -239,7 +241,7 @@ input[type="file" i] {
 <script type="text/javascript">
 	
 	//파일 삭제
-	$("#ma_fileDel").click(function() {
+	$("#ma_fileDel_X").click(function() {
 		var marketNum = $("#marketNum").val();
 		
 		$.get("../fileInfo/fileDelete?kind=1&refNum="+marketNum,function(result){
@@ -256,7 +258,7 @@ input[type="file" i] {
 
 	//기존이미지 삭제하면 새로운 이미 선택 가능(toggle)
 	//name을 바꾸기...
-	$('.mp_delPic').click(function() {
+	$('#mp_delPic_X').click(function() {
 		$("#oldfile").toggle();
 		$("#newfile").toggle();
 
@@ -296,7 +298,10 @@ input[type="file" i] {
 			marketIntro : {
 				required : true
 			},
-			THUMBIMG : {
+			thumbImg : {
+				required : true
+			},
+			files : {
 				required : true
 			}
 		},
@@ -316,7 +321,10 @@ input[type="file" i] {
 			marketIntro : {
 				required : "필수 입력 사항입니다."
 			},
-			THUMBIMG : {
+			thumbImg : {
+				required : "필수 입력 사항입니다."
+			},
+			files : {
 				required : "필수 입력 사항입니다."
 			}
 		}
