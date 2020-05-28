@@ -272,7 +272,7 @@ public class MenuController {
 	}
 	
 	@GetMapping("menuUpdate")
-	public ModelAndView menuUpdate(long marketNum,MenuVO menuVO,HttpSession session) throws Exception {
+	public ModelAndView menuUpdate(MarketVO marketVO,MenuVO menuVO,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 //		System.out.println("menuVO.num : "+menuVO.getNum());
 		
@@ -284,8 +284,6 @@ public class MenuController {
 		
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
 
-		MarketVO marketVO = new MarketVO();
-		marketVO.setNum(marketNum);
 		marketVO = marketService.marketSelect(marketVO);
 		System.out.println("num : "+marketVO.getNum());
 		

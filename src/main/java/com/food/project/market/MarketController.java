@@ -100,7 +100,6 @@ public class MarketController {
 	@GetMapping("marketSelect")
 	public ModelAndView marketSelect(MarketVO marketVO,Pager pager) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
 		//해당 마켓에 대한 정보 조회
 		marketVO = marketService.marketSelect(marketVO);
 	

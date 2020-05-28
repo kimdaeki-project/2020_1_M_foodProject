@@ -44,11 +44,11 @@
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
 		select * from market where 
 		<choose>
-			<when test="type == 'userNum'">
-				userNum = #{userNum}
+			<when test="type == 'marketNum'">
+				num = #{num} 
 			</when>
 			<otherwise>
-				num = #{num} 
+				userNum = #{userNum}
 			</otherwise>
 		</choose>
 		and deleteAt is null
