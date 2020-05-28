@@ -176,8 +176,6 @@ div.toggleWrap>span {
 /* } */
 
 
-
-
 @media screen and (max-width: 1000px) {
    body {
       margin: 0 30px;
@@ -186,20 +184,8 @@ div.toggleWrap>span {
       display: none;
    }
    
-   .mp_myInfoNav{
-   		display: grid;
-   }
-   
-   .mp_myInfoNav_ul{
-   	display: flex;
-   }
-   
-   .mp_myInfoNav_aside{
-   	width: 100%;
-   	margin-bottom: 15px;
-   }
-   
    .divBody{
-   	padding: 103px 5%;
+   	padding: 103px 3%;
    }
 }
+

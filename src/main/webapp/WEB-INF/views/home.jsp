@@ -88,36 +88,36 @@
 		<!-- 배달 -->
 		<div class="main_deliver">
 			<div class="rec1">
-				<h2>건강편의식 공유배송, <b style="color: #27b06e; font-size: 24px;">프레시코드!</b></h2>
+				<h2>내 근처에, <b style="color: #27b06e; font-size: 24px;">푸드마켓!</b></h2>
 				<p>나에게 맞는 스마트한 방법을 선택하세요</p>
 			</div>
 			<div class="md_way">
 				<section class="md_section">
 					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-spot-delivery.png');">
-						<em>프코스팟</em>
-						<h2><b>점심시간에 배송비 무료료</b><br>직장에서 받는 방법</h2>
-						<p>한 개만 주문해도 무료배송</p>
+						<em>푸마스팟</em>
+						<h2><b>점심시간에</b><br>바로 우리회사<br>근처에서!</h2>
+						<p>멀리나갈 필요없는 푸드마켓</p>
 					</a>
 				</section>
 				<section class="md_section" style="margin-left: 20px;">
 					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-gs25-delivery.png');">
 						<em>편의점</em>
-						<h2><b>아무떄나 배송비 무료료</b><br>편의점에서 받는 방법</h2>
-						<p>한 개만 주문해도 무료배송</p>
+						<h2><b>편의점 만큼</b><br>수많은 마켓</h2>
+						<p>어디에나 위치한 푸드마켓</p>
 					</a>
 				</section>
 				<section class="md_section" style="margin-left: 20px;">
 					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-midnight-delivery.png');">
-						<em>새벽배송</em>
-						<h2><b>새벽에 배송비 무료료</b><br>집에서 받는 방법</h2>
-						<p>한 개만 주문해도 무료배송</p>
+						<em>심야운영</em>
+						<h2><b>야식 땡기는</b><br>한밤 중 에도</h2>
+						<p>저녁까지 운영하는 푸드마켓</p>
 					</a>
 				</section>
 				<section class="md_section" style="margin-left: 20px;">
 					<a class="md_sa" href="#" style="background-image: url('${pageContext.request.contextPath}/resources/img/home/deliver/img-quick-delivery.png');">
-						<em>바로배송</em>
-						<h2><b>어디서든 배송비 무료료</b><br>직장에서 받는 방법</h2>
-						<p>한 개만 주문해도 무료배송</p>
+						<em>바로받기</em>
+						<h2><b>쉴새없이 바쁘다면</b><br>빠르게 픽업</h2>
+						<p>주문 즉시 준비되는 푸드마켓</p>
 					</a>
 				</section>
 			</div>
@@ -126,14 +126,14 @@
 		<!-- 단체/케이터링 -->
 		<div class="home_question">
 			<div class="home_question_wrap">
-				<pre class="home_q_pre">프레시코드는<br>"샐러드는 배고픈 다이어트 음식" 이라는 편견을 깨고<br>대한민국 직장인의 건강한 식사 문화를 만들고자 합니다.</pre>
+				<pre class="home_q_pre">푸드마켓은<br>"푸드트럭은 행사장에서나" 라는 편견을 깨고<br>다양한 먹거리를 우리주변에 두고자합니다.</pre>
 				<ul class="home_q_ul">
-					<li class="home_q_li">이메일 : help@freshcode.me</li>
-					<li class="home_q_li">카카오ID : @프레시코드-freshcode</li>
-					<li class="home_q_li">단체주문 문의 : order@freshcode.me</li>
+					<li class="home_q_li">이메일 : help@foodmarket.me</li>
+					<li class="home_q_li">카카오ID : @프레시코드-foodmarket</li>
+					<li class="home_q_li">단체주문 문의 : order@foodmarket.me</li>
 				</ul>
 				<nav class="home_q_nav">
-					<button class="home_q_btn">단체/케이터링 문의</button>
+					<button class="home_q_btn">단체/행사 문의</button>
 				</nav>
 			</div>
 		</div>
@@ -143,8 +143,8 @@
 			<div class="mi_div1">
 				<header class="mi_header">
 					<em>Instagram</em>
-					<h2>@freshcode_salad</h2>
-					<p>프레시코드 인스타그램에서<br>최신 소식과 이벤트를 확인해보세요</p>
+					<h2>@food_market</h2>
+					<p>푸드마켓 인스타그램에서<br>최신 소식과 이벤트를 확인해보세요</p>
 				</header>
 				<div class="mi_div2">
 					<ul class="mi_ul">
