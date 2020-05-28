@@ -35,7 +35,7 @@ public class MenuService {
 		// 저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
-		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
+//		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
 		
 		System.out.println("path : " + path);
 		
@@ -97,7 +97,7 @@ public class MenuService {
 		//저장될 실제 경로 설정
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
-		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
+//		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
 		
 		int result = 0;
 		
@@ -141,7 +141,7 @@ public class MenuService {
 		// 경로 읽어오기
 		String path = session.getServletContext().getRealPath("/resources/upload/menu");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu";
-		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
+//		path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\menu"; //집
 		
 		// 기존 계정에 관련된 파일들을 읽어옴
 		FileInfoVO fileInfoVO = new FileInfoVO();

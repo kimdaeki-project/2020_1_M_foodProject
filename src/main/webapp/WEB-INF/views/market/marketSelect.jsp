@@ -275,7 +275,7 @@
 			console.log($(this).text());
 										
 			var curPage = $(this).text();
-			$.get("../review/reviewList?curPage="+curPage+"&userNum=${marketVO.userNum}",function(result){
+			$.get("../review/reviewList?curPage="+curPage+"&marketNum=${marketVO.num}",function(result){
 				$("#review_table").html(result);
 			});
 		});

@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.food.project.board.BoardVO;
-import com.food.project.fileInfo.FileInfoDAO;
 import com.food.project.fileInfo.FileInfoVO;
 import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
@@ -104,11 +103,7 @@ public class MarketController {
 		
 		//해당 마켓에 대한 정보 조회
 		marketVO = marketService.marketSelect(marketVO);
-		
-//		System.out.println("marketController");
-//		System.out.println("userNum : "+marketVO.getUserNum());
-//		System.out.println("curPage : "+pager.getCurPage());
-//		System.out.println();
+	
 		
 		//Market의  usernum으로 해당 트럭의 주소값 조회
 		MemberVO memberVO = new MemberVO();

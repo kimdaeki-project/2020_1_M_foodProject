@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
 	<div class="rl_body">
 		<section class="rl_section">
 			<form action="./reviewUpdate" method="post" enctype="multipart/form-data" id="reviewUpdate">
-				<input type="hidden" name="boardNum" value="${reviewVO.boardNum}">
+				<input type="hidden" id="reviewNum" name="boardNum" value="${reviewVO.boardNum}">
 				<div class="rl_item">
 					<div class="rl_item_pic">
 						<img class="rl_item_img" alt="food" src="${pageContext.request.contextPath}/resources/upload/menu/${orderedVO.menuThumbImg}">
@@ -41,9 +42,16 @@
 					<!-- 기존 리뷰가 써있어야함 -->
 					<textarea id="reviewText" class="rl_ta" name="contents">${reviewVO.contents}</textarea>
 					<div class="rl_div">
-						파일명 :
-						<input class="rl_file" id="rl_file2" type="text" name="fileName" value="${reviewVO.fileName}" readonly="readonly" style="width: 275px;"> 
-						<span class="rl_fileDel" id="rl_fileDel2">❌</span>
+<%-- 					<input class="rl_file" id="rl_file2" type="text" name="fileName" value="${reviewVO.fileName}" readonly="readonly" style="width: 275px;">  --%>
+<!-- 					<span class="rl_fileDel" id="rl_fileDel2">❌</span> -->
+						
+						<c:if test="${empty reviewVO.fileName}">
+							<input type="file" id="rl_file2" name="files" class="rl_file"> 
+						</c:if>
+						<c:if test="${not empty reviewVO.fileName}">
+							<input type="text" id="rl_file2" name="thumbImg" class="rl_file" value="${menuVO.thumbImg}" readonly="readonly"> 
+							<span id="ma_fileDel">✖</span>
+						</c:if>
 					</div>
 				</div>
 				<div class="rl_send">
@@ -72,10 +80,21 @@
 			
 		});
 		
+	
+		
 		$("#rl_fileDel2").click(function() {
-			$("#rl_file2").prop("type","file");
-			$("#rl_file2").attr("name","files");
+			//ajax FILE DELETE
+			var reviewNum = $("#reviewNum").val();
 			
+			$.get("../fileInfo/fileDelete?kind=2&refNum="+reviewNum,function(result){
+				if(result > 0){
+					$(".rl_file2").val("");
+					$(".rl_file2").prop("type","file");
+					$(".rl_file2").prop("name","files");
+				}else{
+					alert("파일 삭제에 실패했습니다.");
+				}
+			});
 		});
 	
 	

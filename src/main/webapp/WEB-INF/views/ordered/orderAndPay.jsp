@@ -235,8 +235,8 @@ font-family: 'Noto Sans KR', sans-serif;
 					<!-- 상점 정보 div -->
 					<div class="oap_storeInfo">
 						<div class="oap_siDiv">
-							<span class="storename">${orderedVO.marketName}</span> <span
-								class="storego" data-num="${orderedVO.memberNum}">바로가기</span>
+							<span class="storename">${orderedVO.marketName}</span>
+							<span class="storego" data-num="${orderedVO.marketNum}">바로가기</span>
 						</div>
 					</div>
 
@@ -284,8 +284,8 @@ font-family: 'Noto Sans KR', sans-serif;
 		// 상점 바로가기
 		$('.storego').each(function() {
 			$(this).click(function() {
-				var userNum = $(this).data("num");
-				location.href = '../market/marketSelect?userNum='+userNum;
+				var marketNum = $(this).data("num");
+				location.href = '../market/marketSelect?num='+marketNum;
 			});
 		});
 	

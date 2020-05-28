@@ -35,7 +35,7 @@ public class ReviewController {
 	private MemberService memberService;
 	
 	
-	//마켓 리뷰 리스트 조회
+	//판매자 마켓에 존재하는 리뷰 리스트 조회
 	@GetMapping("reviewMarket")
 	public ModelAndView marketReview(Pager pager,MarketVO marketVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -50,7 +50,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	//덧글(reply)달기(GET/POST)
+	//판매자 덧글작성(GET/POST)
 	@GetMapping("reviewReply")
 	public ModelAndView reviewReply(ReviewVO reviewVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -77,6 +77,8 @@ public class ReviewController {
 		
 		return mv;
 	}
+	
+	//판매자 덧글작성
 	@PostMapping("reviewReply")
 	public ModelAndView reviewReply2(ReviewVO reviewVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -94,7 +96,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	
+	//판매자 답글 업데이트
 	@GetMapping("reviewReplyUpdate")
 	public ModelAndView reviewReplyUpdate(ReviewVO reviewVO) throws Exception{
 		System.out.println("reviewReplyUpdate Controller IN");
@@ -119,9 +121,6 @@ public class ReviewController {
 		reviewVO2.setBoardNum(reviewVO.getIsReply());
 		reviewVO2 = reviewService.reviewSelect(reviewVO2);
 		
-		
-		
-		
 		mv.addObject("reviewVO", reviewVO); //구매자
 		mv.addObject("reviewVO2", reviewVO2); //판매자
 		mv.addObject("memberVO", memberVO);
@@ -133,10 +132,10 @@ public class ReviewController {
 		
 	}
 	
+	//판매자 답글 업데이트
 	@PostMapping("reviewReplyUpdate")
 	public ModelAndView reviewReplyUpdate2(ReviewVO reviewVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
 		System.out.println("re2 : "+reviewVO.getBoardNum());
 		System.out.println("re2 : "+reviewVO.getContents());
 		
@@ -199,7 +198,7 @@ public class ReviewController {
 		
 	}
 	
-	
+	//구매자 리뷰 작성
 	@GetMapping("reviewInsert")
 	public ModelAndView reviewInsert(OrderedVO orderedVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -213,9 +212,7 @@ public class ReviewController {
 		
 		return mv;
 	}
-	
-	
-	//리뷰등록(POST)
+	//구매자 리뷰 등록
 	@PostMapping("reviewInsert")
 	public ModelAndView reviewInsert(OrderedVO orderedVO,ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -240,7 +237,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	//리뷰삭제(GET)
+	//구매자 리뷰 삭제
 	@GetMapping("reviewDelete")
 	public ModelAndView reviewDelete(ReviewVO reviewVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -266,7 +263,7 @@ public class ReviewController {
 		return mv;
 	}
 	
-	//리뷰수정(GET/POST)
+	//구매자 리뷰 수정
 	@GetMapping("reviewUpdate")
 	public ModelAndView getReviewUpdate(ReviewVO reviewVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
@@ -286,10 +283,10 @@ public class ReviewController {
 		
 		return mv;
 	}
+	//구매자 리뷰 수정
 	@PostMapping("reviewUpdate")
 	public ModelAndView reviewUpdate(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
-		
 		int result = reviewService.boardUpdate(reviewVO,files,session);
 		
 		if(result > 0) {

@@ -156,12 +156,10 @@ public class ReviewService implements BoardService{
 	public int boardUpdate(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception {
 		String path = session.getServletContext().getRealPath("/resources/upload/review");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
-		//path="C:\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";  //집
 		
 		int result = 0;
 		
 		if(files.length != 0) {
-			System.out.println("fileIN");
 			for (MultipartFile file : files) {
 				//1.HDD등록
 				String fileName = fileSaver.saveByUtils(file, path);

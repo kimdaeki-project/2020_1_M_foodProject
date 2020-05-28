@@ -236,7 +236,7 @@ public class MenuController {
 	@GetMapping("menuSelect")
 	public ModelAndView menuSelect(MenuVO menuVO,long marketNum) throws Exception {
 		
-		
+		System.out.println("marketNum : "+marketNum);
 		ModelAndView mv = new ModelAndView();
 		
 		//해당 메뉴의 대한  정보가져오기(MenuVO)
@@ -251,6 +251,7 @@ public class MenuController {
 		MarketVO marketVO = new MarketVO();
 		marketVO.setNum(marketNum);
 		marketVO = marketService.marketSelect(marketVO);
+		
 				
 		mv.addObject("menuVO", menuVO);
 		mv.addObject("cateList", cateList);

@@ -13,6 +13,7 @@
 	<div class="container">
 		<div class="ms_menu">
 			<input type="hidden" id="marekt_num" name="marketNum" value="${marketVO.num}">
+			<input type="hidden" id="marekt_name" name="marketName" value="${marketVO.marketName}">
 			<input type="hidden" id="menu_num" name="menuNum" value="${menuVO.num}">
 			<input type="hidden" id="member_num" name="memberNum" value="${memberVO.num}">
 			

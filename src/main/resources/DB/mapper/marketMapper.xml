@@ -42,7 +42,7 @@
 	</select>
 	
 	<select id="marketSelect" parameterType="MarketVO" resultType="MarketVO">
-		select * from market where userNum = #{userNum} and deleteAt is null
+		select * from market where num = #{num} and deleteAt is null
 	</select>
 	
 	<select id="marketSearch" parameterType="MarketVO" resultMap="ReviewResult">
