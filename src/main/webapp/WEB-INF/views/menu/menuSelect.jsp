@@ -156,7 +156,6 @@
 			console.log(`${marketVO.marketName}`);
 			console.log(`${menuVO.thumbImg}`);
 			console.log(quan);
-			console.log(isCart);
 			
 			var data = {
 					memberNum : memberNum,
