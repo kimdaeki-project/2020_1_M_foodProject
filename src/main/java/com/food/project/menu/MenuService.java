@@ -103,9 +103,10 @@ public class MenuService {
 		
 		int result = 0;
 		
-		System.out.println("length : "+file.isEmpty());
+
+		
 		//파일(이미지) 수정
-		if(!file.isEmpty()) {
+		if(file != null) {
 				//1.HDD등록(기본 HDD에 저장된 파일은 변경시 ajax로 삭제실행(fileInfoService))
 				String fileName = fileSaver.saveByUtils(file, path);
 				menuVO.setThumbImg(fileName);

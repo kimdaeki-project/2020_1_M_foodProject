@@ -217,7 +217,7 @@
 
         //마켓 정보수정  페이지
 		$('#marketPage').click(function() {
-			$.get("../market/marketPage?num=${sessionScope.marketVO.num}", function(result) {
+			$.get("../market/marketPage?userNum=${sessionScope.marketVO.userNum}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});

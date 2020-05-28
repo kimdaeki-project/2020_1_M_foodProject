@@ -249,8 +249,7 @@ public class MemberController {
 //			session.setAttribute("memberVO", memberVO);
 		}
 		
-		System.out.println("result: "+result);
-		mv.addObject("msg",result);
+		mv.addObject("msg","변경 되었습니다.");
 		mv.addObject("path","./memberPage");
 		
 		mv.setViewName("common/result");

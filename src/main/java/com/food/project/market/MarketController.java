@@ -41,7 +41,6 @@ public class MarketController {
 	@Autowired
 	private OrderedService orderedService;
 
-	
 	//마켓종료
 	@GetMapping("marketIsOpen")
 	@ResponseBody
@@ -190,7 +189,19 @@ public class MarketController {
 	public ModelAndView marketDelete(MarketVO marketVO,FileInfoVO fileInfoVO,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
+		//마켓탈퇴
 		int result = marketService.marketDelete(marketVO,fileInfoVO,session);
+		
+		//메뉴 삭제
+		//1.메뉴 리스트 조회
+		//2.결과 메뉴들 삭제
+		MenuVO menuVO = new MenuVO();
+		menuVO.setMarketNum(marketVO.getNum());
+		List<MenuVO> menuList = menuService.menuList(menuVO);
+		for (MenuVO vo : menuList) {
+			result = menuService.menuDelete(vo,session);
+		}
+		
 		if(result > 0) {
 			//memberSession변경
 			session.removeAttribute("marketVO");
@@ -228,7 +239,7 @@ public class MarketController {
 			mv.setViewName("market/marketPage");
 		}else {
 			System.out.println("조회 실패");
-			mv.setViewName("member/memberPage");
+			mv.setViewName("redirect:./memberPage");
 		}
 		
 		return mv;

@@ -15,6 +15,7 @@ import com.food.project.fileInfo.FileInfoDAO;
 import com.food.project.fileInfo.FileInfoVO;
 import com.food.project.member.MemberDAO;
 import com.food.project.member.MemberVO;
+import com.food.project.menu.MenuDAO;
 import com.food.project.menu.MenuVO;
 import com.food.project.util.FileSaver;
 
@@ -30,6 +31,8 @@ public class MarketService {
 	private FileInfoDAO fileInfoDAO;
 	@Autowired
 	private MemberDAO memberDAO;
+	@Autowired
+	private MenuDAO menuDAO;
 	
 	
 	//marketName을 이용해 userName(MarketVO) 도출
@@ -140,15 +143,17 @@ public class MarketService {
 			result = fileSaver.deleteFile(fileName, path);
 		}
 		
-		//DB에서 삭제
+		//DB에서 파일 삭제
 		result = fileInfoDAO.fileInfoDelete(fileInfoVO);
 		
-		MemberVO memberVO = new MemberVO();
 		
+		//멤버 isFoodTruck값 변경
+		MemberVO memberVO = new MemberVO();
 		memberVO.setNum(marketVO.getUserNum());
 		memberVO.setIsFoodTruck(0);
 		result = memberDAO.isFoodTruck(memberVO);
 		
+		//DeleteAt값 변경
 		result = marketDAO.marketDelete(marketVO);
 		
 		return result;
