@@ -40,16 +40,16 @@
 				<div class="rl_review">
 					<strong class="rl_review_strong">리뷰를 작성해 주세요!</strong>
 					<!-- 기존 리뷰가 써있어야함 -->
-					<textarea id="reviewText" class="rl_ta" name="contents">${reviewVO.contents}</textarea>
+					<textarea id="reviewText" class="rl_ta" name="contents" style="resize: none;">${reviewVO.contents}</textarea>
 					<div class="rl_div">
 <%-- 					<input class="rl_file" id="rl_file2" type="text" name="fileName" value="${reviewVO.fileName}" readonly="readonly" style="width: 275px;">  --%>
 <!-- 					<span class="rl_fileDel" id="rl_fileDel2">❌</span> -->
 						
 						<c:if test="${empty reviewVO.fileName}">
-							<input type="file" id="rl_file2" name="files" class="rl_file"> 
+							<input type="file" id="rl_file2" name="files" class="rl_file" style="width: 275px;"> 
 						</c:if>
 						<c:if test="${not empty reviewVO.fileName}">
-							<input type="text" id="rl_file2" name="thumbImg" class="rl_file" value="${menuVO.thumbImg}" readonly="readonly"> 
+							<input type="text" id="rl_file2" name="fileName" class="rl_file" value="${reviewVO.fileName}" readonly="readonly" style="width: 275px;"> 
 							<span id="ma_fileDel">✖</span>
 						</c:if>
 					</div>
@@ -82,15 +82,17 @@
 		
 	
 		
-		$("#rl_fileDel2").click(function() {
+		$("#ma_fileDel").click(function() {
+			
+			alert("click");
 			//ajax FILE DELETE
 			var reviewNum = $("#reviewNum").val();
 			
 			$.get("../fileInfo/fileDelete?kind=2&refNum="+reviewNum,function(result){
 				if(result > 0){
-					$(".rl_file2").val("");
-					$(".rl_file2").prop("type","file");
-					$(".rl_file2").prop("name","files");
+					$("#rl_file2").val("");
+					$("#rl_file2").prop("type","file");
+					$("#rl_file2").prop("name","files");
 				}else{
 					alert("파일 삭제에 실패했습니다.");
 				}

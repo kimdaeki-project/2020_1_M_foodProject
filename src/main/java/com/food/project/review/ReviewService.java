@@ -120,29 +120,32 @@ public class ReviewService implements BoardService{
 		//DB파일 등록
 		//파일의 num을 리뷰VO의 파일num에 저장해줘야 함
 		//DB리뷰 등록
-		for (MultipartFile file : files) {
-			//1.HDD등록
-			String fileName = fileSaver.saveByUtils(file, path);
-			//2.DB등록
-			
-			//파일 시퀀스 값 증가
-			long fileNum = fileInfoDAO.fileCount();
-			reviewVO.setFileName(fileName);
-			
+		if(files.length > 1) {
+			for (MultipartFile file : files) {
+				//1.HDD등록
+				String fileName = fileSaver.saveByUtils(file, path);
+				//2.DB등록
+				
+				//파일 시퀀스 값 증가
+				long fileNum = fileInfoDAO.fileCount();
+				reviewVO.setFileName(fileName);
+				
 
-			FileInfoVO fileInfoVO = new FileInfoVO();
-			fileInfoVO.setNum(fileNum);
-			fileInfoVO.setFileName(fileName);
-			fileInfoVO.setOriName(file.getOriginalFilename());
-			fileInfoVO.setKind(2); //review
-			fileInfoVO.setRefNum(num);
-			
-			result = fileInfoDAO.fileInfoInsert(fileInfoVO);
-			
-			if(result<1) {
-				throw new Exception();
+				FileInfoVO fileInfoVO = new FileInfoVO();
+				fileInfoVO.setNum(fileNum);
+				fileInfoVO.setFileName(fileName);
+				fileInfoVO.setOriName(file.getOriginalFilename());
+				fileInfoVO.setKind(2); //review
+				fileInfoVO.setRefNum(num);
+				
+				result = fileInfoDAO.fileInfoInsert(fileInfoVO);
+				
+				if(result<1) {
+					throw new Exception();
+				}
 			}
 		}
+		
 		
 		reviewVO.setBoardNum(num);
 		reviewVO.setRef(num);
@@ -158,6 +161,8 @@ public class ReviewService implements BoardService{
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
 		
 		int result = 0;
+		
+		System.out.println("file len : "+files.length);
 		
 		if(files.length != 0) {
 			for (MultipartFile file : files) {
