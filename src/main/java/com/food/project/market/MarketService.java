@@ -42,7 +42,6 @@ public class MarketService {
 		return marketDAO.marketSearch(marketVO);
 	}
 	
-	
 	//isOpen
 	public int isOpen(MarketVO marketVO,MemberVO memberVO) throws Exception{
 		int result = marketDAO.isOpen(marketVO);
@@ -52,6 +51,7 @@ public class MarketService {
 		
 		return result;
 	}
+	
 	//isClose
 	public int isOpen2(MarketVO marketVO) throws Exception{
 		int result = marketDAO.isOpen(marketVO);
@@ -88,6 +88,11 @@ public class MarketService {
 		return marketDAO.marketSelect(marketVO);
 	}
 	
+	// 조회 - 마켓 총 갯수 확인
+	public Long marketQuantity() throws Exception {
+		return marketDAO.marketQuantity();
+	}
+		
 	//등록
 	public int marketInsert(MarketVO marketVO,MultipartFile[] files,HttpSession session) throws Exception{
 		//저장될 실제 경로 설정
