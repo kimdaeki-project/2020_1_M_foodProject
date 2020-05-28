@@ -24,8 +24,9 @@ body {
 }
 
 .ml_truck img {
-	width: 400px;
-	height: 400px;
+	margin-left:6px;
+	width: 300px;
+	height: 300px;
 }
 
 .ml_truckInfo {

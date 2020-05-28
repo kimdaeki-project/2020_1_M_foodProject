@@ -18,7 +18,7 @@
 	<%@ include file="../templates/header.jsp"%>
 	<div class="container">
 		<div class="ml_truck">
-			<img src="${pageContext.request.contextPath}/resources/img/food.jpg">
+			<img src="${pageContext.request.contextPath}/resources/upload/market/${marketVO.thumbImg}">
 			<div class="ml_truckInfo">
 				<h2>${marketVO.marketName}</h2>
 				<p>${marketVO.marketIntro}</p>
