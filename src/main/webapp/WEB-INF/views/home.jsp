@@ -129,7 +129,7 @@
 				<pre class="home_q_pre">푸드마켓은<br>"푸드트럭은 행사장에서나" 라는 편견을 깨고<br>다양한 먹거리를 우리주변에 두고자합니다.</pre>
 				<ul class="home_q_ul">
 					<li class="home_q_li">이메일 : help@foodmarket.me</li>
-					<li class="home_q_li">카카오ID : @프레시코드-foodmarket</li>
+					<li class="home_q_li">카카오ID : @푸드마켓-foodmarket</li>
 					<li class="home_q_li">단체주문 문의 : order@foodmarket.me</li>
 				</ul>
 				<nav class="home_q_nav">
@@ -178,6 +178,8 @@
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/js/swiper.min.js"></script>
 	<script type="text/javascript">
+	
+	//all 자동클릭
 	
 	/* 클릭시 변경 */
 	$(".category").click(function() {

@@ -139,8 +139,13 @@
 	cursor:pointer;
 }
 
-hr{
-	
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 40% 0;
+    font-size: 14px;
+    color: #9b9b9b;
 }
 </style>
 <title>판매자 주문내역 페이지</title>
@@ -149,6 +154,11 @@ hr{
 	<div>
 		<div style="margin-left: 50px;">
 			<h2>마켓 주문 리스트</h2>
+			
+			<c:if test="${empty orderedList}">
+				<div class="empty">주문 요청이 없습니다.</div>
+			</c:if>
+			
 			<!-- 하단의 div가 반복 -->
 			<c:forEach var="orderedVO" items="${orderedList}">
 				<div class="oap_item" data-num="${orderedVO.num}">

@@ -147,6 +147,15 @@
     background-color: #fff;
     cursor: pointer;
 }
+
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 40% 0;
+    font-size: 14px;
+    color: #9b9b9b;
+}
 </style>
 
 <title>마켓 메뉴 리스트</title>
@@ -159,6 +168,11 @@
 				<h2 style="border: none;">마켓 메뉴 리스트</h2>
 				<input type="button" value="+" class="addMenu" id="menuAdd">
 			</div>
+			
+			
+				<c:if test="${empty menuList}">
+					<div class="empty">등록된 메뉴가 없습니다.</div>
+				</c:if>
 			
 			<!-- 하단의 div가 반복 -->
 			<c:forEach var="menuVO" items="${menuList}">

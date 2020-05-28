@@ -129,15 +129,27 @@ a {
 	text-align: center;
 	cursor: pointer;
 }
+
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 40% 0;
+    font-size: 14px;
+    color: #9b9b9b;
+}
 </style>
 <title>나의 리뷰</title>
 
 <body style="width: 100%">
 	<div style="margin-left: 50px;">
 		<h2 class="rev_name">나의 후기</h2>
+		
+		<c:if test="${empty myReviewList}">
+			<div class="empty">작성가능한 후기가 없습니다.</div>
+		</c:if>
+		
 		<ul class="rev_ul">
-
-
 
 			<c:forEach items="${myReviewList}" var="reviewVO">
 				<li class="rev_li">
@@ -171,7 +183,8 @@ a {
 								</div>
 							</div>
 						</div>
-				</li>
+					</li>
+					
 			</c:forEach>
 		</ul>
 	</div>

@@ -197,6 +197,15 @@ font-family: 'Noto Sans KR', sans-serif;
     border: 1px solid #dedede;
 }
 
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 40% 0;
+    font-size: 14px;
+    color: #9b9b9b;
+}
+
 </style>
 <title>사용자 주문내역 페이지</title>
 </head>
@@ -204,6 +213,11 @@ font-family: 'Noto Sans KR', sans-serif;
 	<div>
 		<div style="margin-left: 50px;">
 			<h2>주문/결제 내역</h2>
+				
+				<c:if test="${empty orderedList}">
+					<div class="empty">주문/결제 내역이 없습니다.</div>
+				</c:if>
+			
 				<!-- 하단의 div가 반복 -->
 				<c:forEach items="${orderedList}" var="orderedVO">
 				<div class="oap_item" data-num="${orderedVO.num}">
