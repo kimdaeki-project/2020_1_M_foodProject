@@ -178,15 +178,16 @@ input[type="file" i]{
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 	<script type="text/javascript">	
 	
     //validate 유효성 검사
     $("#memberUpdate").validate({
         rules:{
-            name:{required: true, maxlength: 6},
-            nickName:{required: true, maxlength: 6},
+            name:{required: true, maxlength: 15},
+            nickName:{required: true, maxlength: 15},
             email:{required: true, email:true},
             password:{required: true, rangelength:[5, 10], eng_number:true},
             password_check:{required: true, equalTo:"#password"},
@@ -195,11 +196,11 @@ input[type="file" i]{
         messages:{
             name:{
                 required:"필수 입력 사항입니다.",
-                maxlength:"6글자까지만 입력 가능합니다."
+                maxlength:"15글자까지만 입력 가능합니다."
                 },
             nickName:{
                 required:"필수 입력 사항입니다.",
-                maxlength:"6글자까지만 입력 가능합니다."
+                maxlength:"15글자까지만 입력 가능합니다."
             },
             email:{
                 required:"필수 입력 사항입니다.", 
@@ -221,14 +222,6 @@ input[type="file" i]{
             }
         }
     });
-    
-    
-    $('#mu-submit').click(function() {
-        if ($('.mp_infoMod_input').val() == '') {
-        	console.log('없음');
-        	preventDefault();
-    	}
-	});
     
 	</script>
 
