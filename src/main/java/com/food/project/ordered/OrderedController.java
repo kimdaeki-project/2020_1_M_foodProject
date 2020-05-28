@@ -246,9 +246,7 @@ public class OrderedController {
 	@ResponseBody
 	public int orderCancle(OrderedVO orderedVO) throws Exception{
 		
-		int result = orderedService.orderedCancle(orderedVO);
-		
-		return result;
+		return orderedService.orderedCancle(orderedVO);
 	}
 	
 	// 주문/결제 내역
@@ -275,7 +273,25 @@ public class OrderedController {
 	@PostMapping("orderFinish")
 	@ResponseBody
 	public int orderedFinish(OrderedVO orderedVO) throws Exception {
+		
 		return orderedService.orderedFinish(orderedVO);
+	}
+	
+	@PostMapping("orderPolling")
+	@ResponseBody
+	public ModelAndView orderedPolling(OrderedVO orderedVO) throws Exception {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		// 데이터를 받아오기 위한 사전 작업(마켓 넘버만 인자로 받으면 됨)
+		System.out.println("marketOrder : "+orderedVO.getMarketNum());
+		
+		// 데이터 가져옴
+		List<OrderedVO> list = orderedService.marketOrder(orderedVO);
+		
+		mv.addObject("orderedList", list);
+		mv.setViewName("market/marketAjax/marketOrder");
+		return mv;
 	}
 }
 

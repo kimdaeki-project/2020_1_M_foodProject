@@ -235,6 +235,8 @@
 		//========================================
 		function getUserGeo() {
 
+			console.log(`${address}`);
+			
 			var geocoder = new kakao.maps.services.Geocoder();
 
 			var callback = function(result, status) {
@@ -242,9 +244,13 @@
 					longitude = Math.floor((result[0].x) * 1000000) / 1000000;
 					latitude = Math.floor((result[0].y) * 1000000) / 1000000;
 					
+					console.log(longitude);
+					console.log(latitude);
+				} else {
+					console.log("err");
 				}
 			};
-
+			
 			geocoder.addressSearch(`${address}`, callback);
 		}
 
