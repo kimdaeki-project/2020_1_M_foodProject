@@ -146,31 +146,31 @@ input[type="file" i]{
     margin-top: 0;
 }
 </style>
-
+<body>
 	<div class="mp_box mp_box_all" style="margin-left: 50px">
 		<form action="./memberUpdate" method="post" id="memberUpdate">
 			<input type="hidden" name="id" value="${memberVO.id}">
 			<h2>회원정보 수정</h2>
 			<div class="mp_infoMod_box" style="margin-top: 12px">
 				<p>닉네임</p>
-				<input type="text" name="nickName" class="mp_infoMod_input" value="${memberVO.nickName}">
+				<input type="text" name="nickName" class="mp_infoMod_input" value="${memberVO.nickName}" required="required">
 			</div>
 			<div class="mp_infoMod_box">
 				<p>이름</p>
-				<input type="text" name="name" class="mp_infoMod_input" value="${memberVO.name}" >
+				<input type="text" name="name" class="mp_infoMod_input" value="${memberVO.name}" required="required">
 			</div>
 			<div class="mp_infoMod_box">
 				<p>이메일</p>
-				<input type="email" name="email" class="mp_infoMod_input" value="${memberVO.email}">
+				<input type="email" name="email" class="mp_infoMod_input" value="${memberVO.email}" required="required">
 			</div>
 			<div class="mp_infoMod_box">
 				<p>비밀번호</p>
-				<input type="password" id="password" name="password" class="mp_infoMod_input" value="${memberVO.password}">
-				<input type="password" id="password_check" name="password_check" class="mp_infoMod_input" placeholder="비밀번호 재확인!">
+				<input type="password" id="password" name="password" class="mp_infoMod_input" value="${memberVO.password}" required="required">
+				<input type="password" id="password_check" name="password_check" class="mp_infoMod_input" placeholder="비밀번호 재확인!" required="required">
 			</div>
 			<div class="mp_infoMod_box">
 				<p>휴대폰 번호</p>
-				<input type="text" name="phone" class="mp_infoMod_input" value="${memberVO.phone}">
+				<input type="text" name="phone" class="mp_infoMod_input" value="${memberVO.phone}" required="required">
 			</div>
 			<div class="mp_infoMod_box">
 				<button type="submit" id="mu-submit">저장하기</button>
@@ -178,50 +178,30 @@ input[type="file" i]{
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
-	<script type="text/javascript">	
 	
-    //validate 유효성 검사
-    $("#memberUpdate").validate({
-        rules:{
-            name:{required: true, maxlength: 15},
-            nickName:{required: true, maxlength: 15},
-            email:{required: true, email:true},
-            password:{required: true, rangelength:[5, 10], eng_number:true},
-            password_check:{required: true, equalTo:"#password"},
-            phone:{required: true, maxlength:11, digits: true}
-        },
-        messages:{
-            name:{
-                required:"필수 입력 사항입니다.",
-                maxlength:"15글자까지만 입력 가능합니다."
-                },
-            nickName:{
-                required:"필수 입력 사항입니다.",
-                maxlength:"15글자까지만 입력 가능합니다."
-            },
-            email:{
-                required:"필수 입력 사항입니다.", 
-                email:"이메일 형식으로 입력해주세요."
-            },
-            password:{
-                required:"필수 입력 사항입니다.",
-                rangelength:"최소 5글자, 10글자 사이여야 합니다.",
-                eng_number:"영어와 숫자만 입력가능합니다."
-            },
-            password_check:{
-                required:"필수 입력 사항입니다.",
-                equalTo:"입력하신 비밀번호와 일치하지 않습니다."
-            },
-            phone:{
-                required:"필수 입력 사항입니다.",
-                maxlength:"최대 11자리까지 입력 가능합니다.",
-                digits:"숫자만 입력해 주세요."
-            }
-        }
-    });
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
+<script type="text/javascript">
+
+		$("#mu-submit").click(function(e) {
+			//전체값
+			var input = $(".mp_infoMod_input").val();
+			var password = $("#password").val();
+			var password_check = $("#password_check").val();
+
+			if (input === '') {
+				alert('모든 값을 채워주세요!');
+				e.preventDefault();
+			} 
+			
+			if ( password != password_check ){
+				alert('비밀번호가 일치하지 않습니다!');
+				e.preventDefault();
+			}
+		});
     
 	</script>
+	
+</body>	
 

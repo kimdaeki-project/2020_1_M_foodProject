@@ -237,7 +237,7 @@ input[type="file" i] {
 </head>
 <body style="margin-top: 61px;">
 
-	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="fileUpload" class="file_upload" style="margin-left: 50px;">
+	<form action="../menu/menuAdd" method="post" enctype="multipart/form-data" name="menuAdd" id="fileUpload" class="fileUpload" style="margin-left: 50px;">
 		<h2>트럭메뉴 추가</h2>
 
 		<div class="menuAdd_box" style="margin-top: 12px;">
@@ -275,12 +275,9 @@ input[type="file" i] {
 	</form>
 </body>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>
 <script type="text/javascript">
 	var i = 0;
 
