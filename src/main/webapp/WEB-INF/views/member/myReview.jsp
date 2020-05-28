@@ -142,10 +142,11 @@ a {
 			<c:forEach items="${myReviewList}" var="reviewVO">
 				<li class="rev_li">
 						<div class="rev_item">
-							<img class="rev_item_img" alt="" src="${pageContext.request.contextPath}/resources/img/food2.png">
+							<img class="rev_item_img" alt="" src="${pageContext.request.contextPath}/resources/upload/menu/${reviewVO.menuVO.thumbImg}">
 							<div class="rev_item_div">
-								<strong class="rev_item_strong">${reviewVO.boardNum}</strong> 
-								<span class="rev_item_span">상품정보</span>
+								<strong class="rev_item_strong">NO. ${reviewVO.boardNum} ${reviewVO.orderedVO.marketName}</strong>
+								<span class="rev_item_span">${reviewVO.orderedVO.menuName}</span>
+								<span class="rev_item_span">${reviewVO.orderedVO.cateMenuOptions}</span>
 							</div>
 						</div>
 						<div class="rev_review">

@@ -221,10 +221,9 @@ public class MarketController {
 	
 	//수정(GET/POST)
 	@GetMapping("marketPage")
-	public ModelAndView marketUpdate(MemberVO memberVO,MarketVO marketVO,HttpSession session) throws Exception{
+	public ModelAndView marketUpdate(MarketVO marketVO,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		marketVO.setUserNum(memberVO.getNum());
 		marketVO = marketService.marketSelect(marketVO);
 		
 		if(marketVO != null) {

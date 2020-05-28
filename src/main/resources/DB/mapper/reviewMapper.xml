@@ -71,8 +71,44 @@
 		select * from review where boardNum = #{boardNum}
 	</select>
 	
-	<select id="myReviewList" parameterType="Long" resultType="ReviewVO">
-		select * from review where memberNum=#{memberNum} and step=0 ORDER BY boardNum DESC
+	
+	<resultMap type="ReviewVO" id="myReviewList">
+		<id column="boardNum" property="boardNum"/> 
+		<result column="memberNum" property="memberNum"/>
+		<result column="marketNum" property="marketNum"/>
+		<result column="fileName" property="fileName"/>
+		<result column="rating" property="rating"/>
+		<result column="contents" property="contents"/>
+		<result column="regDate" property="regDate"/>
+		<result column="ref" property="ref"/>
+		<result column="step" property="step"/>
+		<result column="depth" property="depth"/>
+		<result column="orderNum" property="orderNum"/>
+		<result column="isReply" property="isReply"/>
+		
+		
+		<association property="orderedVO" javaType="OrderedVO">
+			<result column="menuName" property="menuName"/>
+			<result column="marketName" property="marketName"/>
+			<result column="cateMenuOptions" property="cateMenuOptions"/>
+			<result column="menuNum" property="menuNum"/>
+		</association>
+		
+		<association property="menuVO" javaType="MenuVO">
+			<result column="thumbImg" property="thumbImg"/>
+		</association>
+	</resultMap>
+	
+	<select id="myReviewList" parameterType="Long" resultMap="myReviewList">
+		select A.*,B.thumbImg from 
+		(select R.*,O.marketName,O.menuName,O.cateMenuOptions,O.menuNum from 
+		(select * from review where memberNum=#{memberNum} and step=0 ORDER BY boardNum DESC) R
+		join
+		(select * from ordered where memberNum=#{memberNum} and deleteAt is null)O
+		on(R.ordernum = O.num))A
+		join
+		(select * from menu)B
+		on(A.menuNum = B.num)
 	</select>
 
 	<select id="marketAvg" parameterType="Long" resultType="Double">

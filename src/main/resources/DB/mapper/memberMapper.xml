@@ -37,8 +37,6 @@
 		select * from member where num=#{num}
 	</select>
 	
-	
-	
 	<update id="memberDelete" parameterType="MemberVO">
 		update member set deleteAt=sysdate where num=#{num}	
 	</update>

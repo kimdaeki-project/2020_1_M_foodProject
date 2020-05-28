@@ -121,12 +121,8 @@ public class MemberController {
 		Cookie cookie = new Cookie("cId", "");
 		if (remember == true) {
 			cookie.setValue(memberVO.getId());
-			System.out.println("rememberTure");
-			System.out.println(cookie.getValue());
 		}else {
-			System.out.println("rememberFalse");
 			cookie.setValue("");
-			System.out.println(cookie.getValue());
 		}
 		response.addCookie(cookie);
 
@@ -139,10 +135,10 @@ public class MemberController {
 		
 		int result = 0;
 		if (memberVO != null) {
-			
 			if(memberVO.getIsFoodTruck() == 1) {
 				MarketVO marketVO = new MarketVO();
 				marketVO.setUserNum(memberVO.getNum());
+				marketVO.setType("login");
 				marketVO= marketService.marketSelect(marketVO);
 				
 				session.setAttribute("marketVO", marketVO);

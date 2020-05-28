@@ -23,9 +23,19 @@ public class MarketVO {
 	private Date createAt;
 	private Date updateAt;
 	private Date deleteAt;
-	
+
+	private String type;
+
 	private ReviewVO reviewVO;
 	
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	public long getNum() {
 		return num;
 	}

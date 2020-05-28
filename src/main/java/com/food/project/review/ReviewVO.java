@@ -2,6 +2,7 @@ package com.food.project.review;
 
 import com.food.project.board.BoardVO;
 import com.food.project.member.MemberVO;
+import com.food.project.menu.MenuVO;
 import com.food.project.ordered.OrderedVO;
 
 public class ReviewVO extends BoardVO{
@@ -18,8 +19,15 @@ public class ReviewVO extends BoardVO{
 
 	private MemberVO memberVO;
 	private OrderedVO orderedVO;
+	private MenuVO menuVO;
  	
 	
+	public MenuVO getMenuVO() {
+		return menuVO;
+	}
+	public void setMenuVO(MenuVO menuVO) {
+		this.menuVO = menuVO;
+	}
 	public MemberVO getMemberVO() {
 		return memberVO;
 	}

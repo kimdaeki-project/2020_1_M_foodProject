@@ -185,8 +185,9 @@
 		
 		//나의 리뷰 목록
 		$('#myReview').click(function() {
+			
+// 			location.href="../review/myReviewList?num=${memberVO.num}";
 			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
-				
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
@@ -216,7 +217,7 @@
 
         //마켓 정보수정  페이지
 		$('#marketPage').click(function() {
-			$.get("../market/marketPage?num=${memberVO.num}", function(result) {
+			$.get("../market/marketPage?num=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
