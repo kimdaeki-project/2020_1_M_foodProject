@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰 수정</title>
+<title>푸드마켓 - 리뷰 수정</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/review/reviewUpdate.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.validate.js"></script>

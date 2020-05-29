@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>결제완료</title>
+<title>푸드마켓 - 주문 완료!</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <style type="text/css">
 	.done-body{ 
     	margin: 30% 0;

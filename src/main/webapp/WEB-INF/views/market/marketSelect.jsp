@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마켓 상세보기</title>
+<title>푸드마켓 - ${marketVO.marketName}</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <link rel="stylesheet" href="../resources/css/market/marketSelect.css">
 <link rel="stylesheet" href="../resources/css/swiper.min.css">
 <script type="text/javascript"

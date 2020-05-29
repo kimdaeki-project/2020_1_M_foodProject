@@ -7,7 +7,8 @@
 <script
    src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-<title>카카오 가입 완료하기</title>
+<title>푸드마켓 - 카카오 가입</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <link rel="stylesheet"
    href="../resources/css/member/memberKakaoJoin.css">
 </head>

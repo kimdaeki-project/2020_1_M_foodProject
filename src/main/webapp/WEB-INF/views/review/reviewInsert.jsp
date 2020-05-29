@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>리뷰작성</title>
+<title>푸드마켓 - 리뷰 작성</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" href="../resources/css/review/reviewInsert.css">
 </head>
