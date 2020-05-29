@@ -44,6 +44,11 @@ public class OrderedDAO {
 		return sqlSession.selectOne(NAMESPACE+"orderedSelect", orderedVO);
 	}
 	
+	// 주문 조회 - 몇번 주문했는지
+	public Long orderedQuantity(OrderedVO orderedVO) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"orderedQuantity", orderedVO);
+	}
+	
 	//주문 등록 - 유저ID
 	public int orderedInsert(OrderedVO orderedVO) throws Exception{
 		return sqlSession.insert(NAMESPACE+"orderedInsert", orderedVO);

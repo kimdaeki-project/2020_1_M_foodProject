@@ -19,6 +19,8 @@ import com.food.project.mail.MailService;
 import com.food.project.mail.MailVO;
 import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
+import com.food.project.ordered.OrderedService;
+import com.food.project.ordered.OrderedVO;
 
 @Controller
 @RequestMapping("/member/**")
@@ -28,7 +30,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private MarketService marketService;
-	
+	@Autowired
+	private OrderedService orderedService;
 	@Autowired
 	private MailService mailService;
 	
@@ -246,7 +249,8 @@ public class MemberController {
 		int result = memberService.memberUpdate(memberVO);
 		
 		if (result > 0) {
-//			session.setAttribute("memberVO", memberVO);
+			memberVO = memberService.memberSelect(memberVO);
+			session.setAttribute("memberVO", memberVO);
 		}
 		
 		mv.addObject("msg","변경 되었습니다.");
@@ -258,8 +262,26 @@ public class MemberController {
 	}
 
 	//마이페이지
-	@GetMapping("memberPage") public void memberPage() throws Exception{
+	@GetMapping("memberPage") 
+	public ModelAndView memberPage(HttpSession session) throws Exception{
+		
+		ModelAndView mv = new ModelAndView();
+		
+		MemberVO memberVO = (MemberVO)session.getAttribute("memberVO");
+		if(memberVO == null) { 
+			mv.setViewName("redirect: ../"); return mv; 
+		}
+		
+		OrderedVO orderedVO = new OrderedVO();
+		orderedVO.setMemberNum(memberVO.getNum());
+		
+		long orderQuantity = orderedService.orderedQuantity(orderedVO);
+		
+		mv.addObject("orderQuantity", orderQuantity);
+		mv.setViewName("member/memberPage");
+		return mv;
 	}
+	
 	//회원 리뷰관리 페이지
 	@GetMapping("myReview") public void myReview() throws Exception{
 	}	

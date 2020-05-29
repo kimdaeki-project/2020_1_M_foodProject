@@ -21,13 +21,13 @@
             <strong class="mp_me_strong">${memberVO.name}</strong> 
             <span class="mp_me_span">${memberVO.email}</span>
          </div>
-         <div class="mp_num">
+         <!-- <div class="mp_num">
             <span class="mp_num_span">수령예정</span> 
             <em class="mp_num_em">0</em>
-         </div>
+         </div> -->
          <div class="mp_num">
-            <span class="mp_num_span">총 주문회수</span> 
-            <em class="mp_num_em">0</em>
+            <span class="mp_num_span">푸드마켓에서 주문한 회수</span> 
+            <em class="mp_num_em">${orderQuantity}</em>
          </div>
       </div>
 

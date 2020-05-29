@@ -1,5 +1,8 @@
 package com.food.project.util;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Pager {
 
 	private Long curPage;
@@ -29,6 +32,10 @@ public class Pager {
 	}
 
 	public void setAddress(String address) {
+//		if(address.equals("") || address == null) {
+//			this.address = "";
+//		}
+		
 		this.address = address;
 	}
 
@@ -148,6 +155,9 @@ public class Pager {
 	}
 
 	public String getKind() {
+		if(this.kind == null)
+			this.kind = "";
+		
 		return kind;
 	}
 

@@ -42,7 +42,7 @@
 	</update>
 	
 	<update id="memberUpdate" parameterType="MemberVO">
-		update member set password=#{password},name=#{name},phone=#{phone},nickname=#{nickName},updateAt=sysdate where id=#{id}
+		update member set password=#{password},name=#{name},email=#{email},phone=#{phone},nickname=#{nickName},updateAt=sysdate where id=#{id}
 	</update>
 	
 	<update id="isFoodTruck" parameterType="MemberVO">

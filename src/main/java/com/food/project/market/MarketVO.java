@@ -1,10 +1,7 @@
 package com.food.project.market;
 
 import java.sql.Date;
-import java.util.List;
 
-import com.food.project.category.CategoryVO;
-import com.food.project.member.MemberVO;
 import com.food.project.review.ReviewVO;
 
 public class MarketVO {

@@ -42,7 +42,7 @@
 				<p>간편하게 주문하고, 바로 먹자</p>
 			</div>
 			<div class="rec1">
-				<h2 style="font-size: 35px; margin-top: 25px;">936개</h2>
+				<h2 style="font-size: 35px; margin-top: 25px;">${marketQuantity}</h2>
 				<p>현재 오픈한 푸드마켓</p>
 			</div>
 			<div id="map_wrapper">
@@ -366,6 +366,9 @@
 		//===============================
 		function getMarketMaps(resultVOs) {
 			
+			console.log("marketMaps");
+			console.log(resultVOs);
+			
 			var marketMaps = [];
 			
 			if(typeof resultVOs == "undefined" || resultVOs == null) {
@@ -394,7 +397,7 @@
 					
 				</c:forEach>
 			} else {
-			
+				console.log("값없음");
 				for(var i=0; i<resultVOs.length; i++) {
 					
 					var marketMap = {
@@ -485,7 +488,7 @@
 	            '        <div class="title click" id="'+ markets[i].userNum +'"'+'>' + markets[i].marketName + 
 	            '            <div class="close click" id="'+ markets[i].userNum +'"'+' onclick="overlayCloseHandler(this.id)" title="닫기"></div>' + 
 	            '        <div class="body">' + 
-	            '            <div class="img" id="'+ markets[i].num +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
+	            '            <div class="img" id="'+ markets[i].userNum +'"'+' onclick="marketSelectHandler(this.id)" title="마켓 이동">' +
 	            '                <img src="${pageContext.request.contextPath}/resources/upload/market/'+ markets[i].thumbImg +'" width="73" height="70">' +
 	            '           </div>' + 
 	            '            <div class="desc">' + 
@@ -517,6 +520,9 @@
 		// 마켓Infos 생성
 		//======================
 		function getMarketInfos(resultVOs) {
+			
+			console.log("getMarketInfos");
+			console.log(resultVOs);
 			
 			// 지역변수
 			var markets = [];
@@ -762,6 +768,8 @@
          	if(searchingNon(g_marketInfos))
          		return;
 			
+			console.log("save");
+			
 			// 마커 표시
 			showMarkers();
 			
@@ -809,14 +817,14 @@
 
 			    	var str = $("#text-search").val();
 			    	
-			    	if(str == "" || str == null || str.isEmpty()) {
+			    	if(str == "" || str == null) {
 			    		alert("검색어를 입력해주세요!");
 			    		return;
 			    	}
-			        	
+			    		
 			    	$.get("./search?str="+str,function(result){
-			        
-						getMarketMarker(result,CATEGORY_DEFAULT);
+			        	
+						getMarketMarker(result, CATEGORY_DEFAULT);
 			         });
 
 					$(".category").css('background-color','white');
@@ -827,7 +835,6 @@
 				$("#text-search").keyup(function(key) {
 
 					if (key.keyCode != 13) {
-						
 						return;
 					}
 					

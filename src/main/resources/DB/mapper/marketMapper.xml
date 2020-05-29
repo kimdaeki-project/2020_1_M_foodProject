@@ -61,8 +61,6 @@
 			</otherwise>
 		</choose>
 		and deleteAt is null
-		
-		
 	</select>
 	
 	<select id="marketSearch" parameterType="MarketVO" resultMap="ReviewResult">
@@ -75,6 +73,10 @@
 	
 	<select id="marketCount" resultType="Long">
 		select market_seq.nextval from dual
+	</select>
+
+	<select id="marketQuantity" resultType="Long">
+		SELECT COUNT(num) FROM market WHERE deleteAt IS NULL
 	</select>
 	
 	<insert id="marketInsert" parameterType="MarketVO">

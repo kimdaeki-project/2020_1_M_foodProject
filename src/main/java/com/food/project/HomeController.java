@@ -21,6 +21,7 @@ import com.food.project.market.MarketService;
 import com.food.project.market.MarketVO;
 import com.food.project.member.MemberService;
 import com.food.project.member.MemberVO;
+import com.food.project.review.ReviewVO;
 
 @Controller
 public class HomeController {
@@ -43,12 +44,17 @@ public class HomeController {
 		ArrayList<MapVO> mapList = new ArrayList<MapVO>();
 		MarketVO marketVO = new MarketVO();
 		
-		
 		marketVO.setMarketName(str);
 		System.out.println("marketList search");
 		
 		List<MarketVO> marketList = marketService.marketSearch(marketVO);
 		for (MarketVO vo : marketList) {
+			
+			if(vo.getReviewVO() == null) {
+				ReviewVO reviewVO = new ReviewVO();
+				reviewVO.setRating(0);
+				vo.setReviewVO(reviewVO);
+			}
 			
 			MapVO mapVO = new MapVO();
 			
@@ -97,6 +103,11 @@ public class HomeController {
 			}
 		}
 		
+		// 미 로그인시, 모든 트럭 검색
+		if(userVO == null) {
+			marketVO.setAddress("");
+		}
+				
 		// 마켓 정보들 가져오기(~구 검색)
 		List<MarketVO> marketList = marketDAO.marketGuList(marketVO); //getMarketList();
 		List<MapVO> mapList = new ArrayList<MapVO>();
@@ -125,11 +136,17 @@ public class HomeController {
 			System.out.println(mapVO);
 		}
 		
+		// 마켓 총 갯수 가져오기
+		long marketQuantity = marketService.marketQuantity();
+		
 		// 내 위치 보내기
 		mv.addObject("address", address);
 		
 		// 마켓 정보 list 보내기
 		mv.addObject("mapList", mapList);
+		
+		// 마켓 총 갯수 보내기
+		mv.addObject("marketQuantity",marketQuantity);
 		
 		// 맵 api key 보내기
 		mv.addObject("kakaoAppKey", kakaoAppKey);

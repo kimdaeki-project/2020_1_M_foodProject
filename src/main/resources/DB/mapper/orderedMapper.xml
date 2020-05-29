@@ -84,6 +84,10 @@
 		SELECT * FROM ordered WHERE num=#{num}
 	</select>
 	
+	<select id="orderedQuantity" parameterType="OrderedVO" resultType="Long">
+		SELECT COUNT(num) FROM ordered WHERE memberNum = #{memberNum}
+	</select>
+	
 	<!-- 테이블에 값 입력 -->
 	<insert id="orderedInsert" parameterType="OrderedVO">
 		INSERT INTO ordered VALUES(
