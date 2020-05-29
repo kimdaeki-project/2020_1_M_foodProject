@@ -63,21 +63,30 @@ public class MarketService {
 	public List<MarketVO> marketList(Pager pager,MemberVO memberVO) throws Exception{
 		
 		//멤버주소값에서 구 찾기
-		String address = memberVO.getAddress();
-		String[] addressInfo = address.split(" ");
-	    for (int i = 0; i < addressInfo.length; i++) {     
-	        //검색된 구값 넣어주기
-	        if(addressInfo[i].length()-1 == addressInfo[i].lastIndexOf("구")) {
-	        	pager.setAddress(addressInfo[i]);
-	            break;
-	        }
-	    }
+		if(pager.getKind().equals("local")) {
+			String address = memberVO.getAddress();
+			String[] addressInfo = address.split(" ");
+		    for (int i = 0; i < addressInfo.length; i++) {     
+		        //검색된 구값 넣어주기
+		        if(addressInfo[i].length()-1 == addressInfo[i].lastIndexOf("구")) {
+		        	pager.setAddress(addressInfo[i]);
+		            break;
+		        }
+		    }
+		}else {
+			pager.setAddress("");
+		}
+			
+		
 		
 		//makeRow 10에서 16으로 변경
 		pager.setPerPage(16);
 		pager.makeRow();
-
+		
+		System.out.println("address : "+pager.getAddress());
+		
 		int totalNum = marketDAO.marketTotalNum(pager);
+		System.out.println("totalCount : "+totalNum);
 		pager.makePage(totalNum);
 		
 		return marketDAO.marketList(pager);
