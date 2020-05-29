@@ -53,18 +53,16 @@
 	
 	
 	<select id="reviewMarketList" parameterType="Pager" resultMap="reviewMarketResult">
-		select E.*,O.menuName,O.amount,O.createAt,O.cateMenuOptions from
-		(select * from ordered where isorderchecked = 2) O  join
-		(select A.*,B.nickName,B.email from 
-		(select * from
-		(select Q.*,rownum R from
-		(select * from review
-		where marketNum=#{marketNum} and step=0
-		order by ref desc, step asc) Q)
-		where R between #{startRow} and #{lastRow})A
-		join (select num,nickname,email from member)B
+		select * from
+		(select * from ordered where isorderchecked = 3)D
+		join
+		(select A.*,B.nickName,B.email 
+		from 
+		(select * from review where marketNum=#{marketNum} and step=0 order by ref desc, step asc) A
+		join 
+		(select num,nickname,email from member)B
 		on(a.membernum = B.num))E
-		on(O.num = E.orderNum)
+		on(D.num = E.orderNum)
 	</select>
 		
 	<select id="reviewSelect" parameterType="ReviewVO" resultType="ReviewVO">

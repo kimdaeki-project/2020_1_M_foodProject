@@ -123,13 +123,14 @@ public class ReviewInterceptor extends HandlerInterceptorAdapter{
 			List<ReviewVO> reviewList = (List<ReviewVO>)mv.getModel().get("reviewList");
 			
 			if(reviewList.size() > 0) {
-				long num = reviewList.get(0).getMemberNum();
+				long num = reviewList.get(0).getMarketNum();
+				long marketNum = marketVO.getNum();
 				
-				System.out.println("session Num: "+memberNum);
+				System.out.println("session Num: "+marketNum);
 				System.out.println("mv Num : "+num);
 				
 				
-				if(num != memberNum) {
+				if(num != marketNum) {
 					mv.addObject("msg", "접근권한이 없습니다.");
 					mv.addObject("path", "../");
 					mv.setViewName("common/result");
