@@ -54,7 +54,7 @@
 	
 	<select id="reviewMarketList" parameterType="Pager" resultMap="reviewMarketResult">
 		select * from
-		(select * from ordered where isorderchecked = 3)D
+		(select * from ordered where isorderchecked in(3,4))D
 		join
 		(select A.*,B.nickName,B.email 
 		from 
