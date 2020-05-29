@@ -270,7 +270,8 @@
 			marketOrderFlag = true;
 			
 			// 1분마다 갱신
-			var pollingInterval = 1000 * 60 * 1;
+			var sec = 15;
+			var pollingInterval = 1000 * sec * 1;
 			setInterval(function() {
 				$.get("../market/marketOrder?num=${sessionScope.marketVO.num}", function(result) {
 					$('.mp_box').empty();
@@ -279,10 +280,12 @@
 			}, pollingInterval);
 			
 			// 갱신 체크용 console clock;
-			/* var i=0;
+			var i=0;
 			setInterval(function() {
 				console.log(++i);
-			}, 1000); */
+				if(i == sec)
+					i = 0;
+			}, 1000);
 		});
 		
 		//관리자 ===================================
