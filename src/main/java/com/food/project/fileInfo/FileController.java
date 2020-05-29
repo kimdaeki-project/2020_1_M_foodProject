@@ -17,15 +17,10 @@ public class FileController {
 	@Autowired
 	private FileSaver fileSaver;
 	
-	
 	@GetMapping("fileDelete")
 	@ResponseBody
 	public int fileDelete(FileInfoVO fileInfoVO) throws Exception{
-		
-//		System.out.println("FileInfo C IN");
-//		System.out.println("kind : "+fileInfoVO.getKind());
-//		System.out.println("refNum : "+fileInfoVO.getRefNum());
-		
+
 		int result = fileInfoService.fileInfoDelete(fileInfoVO);
 		
 		if(result > 0) {

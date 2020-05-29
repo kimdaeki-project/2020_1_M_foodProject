@@ -47,16 +47,6 @@ public class Pager {
 		this.marketNum = marketNum;
 	}
 
-	public void makeRow() {
-		this.startRow = (this.getCurPage() - 1) * this.getPerPage() + 1;
-		this.lastRow = this.getCurPage() * this.getPerPage();
-		
-		
-//		System.out.println("maketRow");
-//		System.out.println("startRow : " + this.startRow);
-//		System.out.println("lastRow : "+this.lastRow);
-	}
-	
 	public void setStartRow(long startRow) {
 		this.startRow = startRow;
 	}
@@ -64,45 +54,33 @@ public class Pager {
 	public void setLastRow(long lastRow) {
 		this.lastRow = lastRow;
 	}
+	
+	public void makeRow() {
+		this.startRow = (this.getCurPage() - 1) * this.getPerPage() + 1;
+		this.lastRow = this.getCurPage() * this.getPerPage();
+	}
 
 	public void makePage(long totalCount) {
-		
-		// totalCount : 전체 글의 갯수
-		
 		// totalCount로 totalPage 계산
 		totalPage = totalCount/this.perPage;
 		if(totalCount%this.perPage != 0) {
 			totalPage++;
 		}
-		
 		// totalPage로 totalBlock 계산
 		this.totalBlock = totalPage/perBlock;
 		if(totalPage%perBlock != 0) {
 			this.totalBlock++;
 		}
-		
 		// 현재 블록 구하기
 		this.curBlock = this.curPage/this.perBlock;
 		if(this.curPage%this.perBlock != 0) {
 			this.curBlock++;
 		}
-		
 		this.startNum = this.perBlock*(this.curBlock-1) + 1;
 		this.lastNum = this.perBlock*this.curBlock;
-		
 		if(curBlock == this.totalBlock) {
 			this.lastNum = this.totalPage;
 		}
-		
-		
-	
-		
-		System.out.println("totalPage : "+totalCount);
-		System.out.println("totalCount : "+totalCount);
-		
-		System.out.println("startNum : "+this.startNum);
-		System.out.println("lastNum : "+this.lastNum);
-		
 	}
 	
 	public long getStartRow() {

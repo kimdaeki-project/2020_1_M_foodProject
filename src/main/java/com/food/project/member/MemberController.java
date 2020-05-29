@@ -62,30 +62,23 @@ public class MemberController {
 		MemberVO memberVO = new MemberVO();
 		int result = 0;
 		memberVO.setEmail(email);
-		
-		
 		mailVO.setSenderMail("foodProject200501@gmail.com");
 		mailVO.setSenderName("Fusulian");
 		mailVO.setReceiveMail(email);
 		
-
-		
-		if(id == null) { //아이디 찾기
+		if(id == null) { 
 			memberVO.setName(name);
 			memberVO.setType("id");
 			memberVO = memberService.emailSearch(memberVO);
 			if(memberVO != null) {
 				result = 1;
-				id = memberVO.getId();
 				mailVO.setSubject("Fusulian 아이디 찾기 메일입니다!");
-				mailVO.setMessage("사용자의 아이디는 '"+ id +"' 입니다.");
-				
+				mailVO.setMessage("사용자의 아이디는 '"+ memberVO.getId() +"' 입니다.");
 				mailService.sendMail(mailVO);
 			}else {
 				return 0;
 			}
-			
-		}else { //비밀번호 찾기
+		}else { 
 			System.out.println("비번 찾기");
 			memberVO.setId(id);
 			memberVO.setType("pwd");
@@ -94,11 +87,8 @@ public class MemberController {
 				int pwd = emailRnd();
 				mailVO.setSubject("Fusulian 비밀번호 찾기 메일입니다!");
 				mailVO.setMessage("사용자의 임시 비밀번호는 '"+ pwd +"' 입니다.");
-				
 				memberVO.setPassword(pwd+"");
-				
 				result = memberService.temporaryPW(memberVO);
-				
 				mailService.sendMail(mailVO);
 			}else {
 				return 0;
@@ -117,10 +107,8 @@ public class MemberController {
 
 	@PostMapping("memberLogin")
 	@ResponseBody
-	public int memberLogin(MemberVO memberVO, HttpSession session, Boolean remember,HttpServletResponse response) throws Exception {
-
-		System.out.println("remember : "+remember);
-		
+	public int memberLogin(MemberVO memberVO, HttpSession session, Boolean remember,
+			HttpServletResponse response) throws Exception {
 		Cookie cookie = new Cookie("cId", "");
 		if (remember == true) {
 			cookie.setValue(memberVO.getId());
@@ -128,14 +116,7 @@ public class MemberController {
 			cookie.setValue("");
 		}
 		response.addCookie(cookie);
-
-		if(memberVO.getAddress() == null) {
-			System.out.println("address null");
-		}
-		
-		
 		memberVO = memberService.memberLogin(memberVO);
-		
 		int result = 0;
 		if (memberVO != null) {
 			if(memberVO.getIsFoodTruck() == 1) {

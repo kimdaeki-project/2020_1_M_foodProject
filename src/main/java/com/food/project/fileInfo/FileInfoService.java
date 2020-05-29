@@ -32,14 +32,12 @@ public class FileInfoService {
 			break;
 		}
 		
-		
 		List<FileInfoVO> fileList = fileInfoDAO.fileInfoList(fileInfoVO);
 		
 		for (FileInfoVO fileVo : fileList) {
 			String fileName = fileVo.getFileName();
 			fileSaver.deleteFile(fileName, path);
 		}
-		
 		
 		return fileInfoDAO.fileInfoDelete(fileInfoVO);
 	}

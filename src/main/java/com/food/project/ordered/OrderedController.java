@@ -31,7 +31,8 @@ public class OrderedController {
 	@PostMapping("cartAdd")
 	@ResponseBody
 	@Transactional
-	public int cartAdd(OrderedVO orderedVO, String menuPrice, @RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
+	public int cartAdd(OrderedVO orderedVO, String menuPrice, 
+			@RequestParam(value = "optionNum[]")List<String> optionNum) throws Exception{
 		
 		// 주문하기로 들어온 요청일 경우, 이미 주문이 있다면,주문 DB를 삭제하고 insert
 		if(orderedVO.getIsCart() == 0) {

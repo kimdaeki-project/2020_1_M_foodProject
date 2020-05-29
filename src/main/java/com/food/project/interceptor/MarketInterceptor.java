@@ -14,7 +14,8 @@ import com.food.project.market.MarketVO;
 public class MarketInterceptor extends HandlerInterceptorAdapter{
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) 
+			throws Exception {
 		boolean check = false;
 		
 		Object marketVO = request.getSession().getAttribute("marketVO");
@@ -32,7 +33,8 @@ public class MarketInterceptor extends HandlerInterceptorAdapter{
 				request.setAttribute("path", "../member/memberLogin");
 			}
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
+			RequestDispatcher dispatcher 
+					= request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 			dispatcher.forward(request, response);
 		}
 		

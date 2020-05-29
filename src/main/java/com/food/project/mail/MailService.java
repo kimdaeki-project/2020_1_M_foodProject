@@ -13,25 +13,30 @@ import org.springframework.stereotype.Service;
 @Service
 @EnableAsync
 public class MailService {
-
 	@Autowired
 	private JavaMailSender mailSender;
 	
 	@Async
 	public void sendMail(MailVO mailVO) throws Exception {
 		MimeMessage msg = mailSender.createMimeMessage();
-		
 		// 받는사람 설정
 		msg.addRecipient(RecipientType.TO, new InternetAddress(mailVO.getReceiveMail()));
 		// 보낸사람 설정
-		msg.addFrom(new InternetAddress[] {new InternetAddress(mailVO.getSenderMail(), mailVO.getSenderName())});
+		msg.addFrom(new InternetAddress[] {
+				new InternetAddress(mailVO.getSenderMail(), mailVO.getSenderName())});
 		// 이메일 제목 및 인코딩 설정
 		msg.setSubject(mailVO.getSubject(), "utf-8");
 		// 이메일 내용 및 인코딩 설정
 		msg.setText(mailVO.getMessage(), "utf-8");
-		
 		mailSender.send(msg);
 		
 	}
 
 }
+
+
+
+
+
+
+

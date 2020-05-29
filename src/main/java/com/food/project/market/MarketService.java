@@ -61,7 +61,6 @@ public class MarketService {
 	
 	//조회 - selectList
 	public List<MarketVO> marketList(Pager pager,MemberVO memberVO) throws Exception{
-		
 		//멤버주소값에서 구 찾기
 		if(pager.getKind().equals("local")) {
 			String address = memberVO.getAddress();
@@ -77,16 +76,10 @@ public class MarketService {
 			pager.setAddress("");
 		}
 			
-		
-		
-		//makeRow 10에서 16으로 변경
 		pager.setPerPage(16);
 		pager.makeRow();
 		
-		System.out.println("address : "+pager.getAddress());
-		
 		int totalNum = marketDAO.marketTotalNum(pager);
-		System.out.println("totalCount : "+totalNum);
 		pager.makePage(totalNum);
 		
 		return marketDAO.marketList(pager);

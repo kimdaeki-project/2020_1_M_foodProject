@@ -13,29 +13,16 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileSaver {
 
 	public String saveByUtils(MultipartFile file, String path) throws Exception{
-		
-		System.out.println("fileSaver: oriName:"+file.getOriginalFilename());
-		
-		if(file.getSize() > 0) {
-			System.out.println("파일이 존재");
-			System.out.println(file.getSize());
-		}
-		
 		// 폴더가 없다면 생성
 		File f = new File(path);
 		if(!f.exists()) {
-			// 하나의 깊이를 가진 폴더 생성
-			//f.mkdir();
 			// 하나 이상의 깊이를 가진 폴더일 경우 전부 생성
 			f.mkdirs();
 		}
-		
 		// 파일 이름 교체
 		String fileName = null;
 		fileName = this.makeNameByUUID(file.getOriginalFilename());
 	
-		System.out.println("fileSaver: fileName: "+fileName);
-		
 		// 파일 HDD에 저장 (FileCopyUtils 사용)
 		f = new File(f, fileName);
 		FileCopyUtils.copy(file.getBytes(), f);
