@@ -103,6 +103,11 @@ public class HomeController {
 			}
 		}
 		
+		// 미 로그인시, 모든 트럭 검색
+		if(userVO == null) {
+			marketVO.setAddress("");
+		}
+				
 		// 마켓 정보들 가져오기(~구 검색)
 		List<MarketVO> marketList = marketDAO.marketGuList(marketVO); //getMarketList();
 		List<MapVO> mapList = new ArrayList<MapVO>();
