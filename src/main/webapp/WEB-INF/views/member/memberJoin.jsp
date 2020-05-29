@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>푸드마켓 - 회원가입</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5330df6f4ac31d266d5cced5bfc44a1e&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <link rel="stylesheet" href="../resources/css/member/memberJoin.css">

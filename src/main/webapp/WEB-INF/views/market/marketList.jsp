@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상세보기</title>
+<title>푸드마켓 - 마켓 리스트</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/market/marketList.css">
 </head>
 <%@ include file="../templates/header.jsp"%>

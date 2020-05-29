@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home</title>
+<title>푸드마켓 - 메인 홈</title>
 
 <!-- kakao Map API -->
 <script type="text/javascript"
@@ -16,6 +16,7 @@
 	href="${pageContext.request.contextPath}/resources/css/swiper.min.css">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 </head>
 
 <body>

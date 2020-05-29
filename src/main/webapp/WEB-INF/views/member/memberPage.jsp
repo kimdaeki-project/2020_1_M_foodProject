@@ -3,7 +3,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>마이페이지</title>
+<title>푸드마켓 - 마이페이지</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <link rel="stylesheet" href="../resources/css/member/memberPage.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>

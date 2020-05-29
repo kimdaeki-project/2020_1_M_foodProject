@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>푸드마켓 - 리뷰 답글</title>
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/img/home/favicon.ico" />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/review/reviewReply.css">
 </head>
 <body>
