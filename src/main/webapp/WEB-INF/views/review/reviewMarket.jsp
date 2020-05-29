@@ -135,7 +135,7 @@
 	text-align: center;
     width: 100%;
     height: 100%;
-    margin: 40% 0;
+    margin: 30% 0;
     font-size: 14px;
     color: #9b9b9b;
 }

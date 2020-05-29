@@ -132,12 +132,26 @@ a {
 	text-align: center;
 	cursor: pointer;
 }
+
+.empty{
+	text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 30% 0;
+    font-size: 14px;
+    color: #9b9b9b;
+}
 </style>
 <title>[관리자]전체 리뷰 관리</title>
 </head>
 <body>
 	<div style="margin-left: 50px;">
 		<h2>전체 리뷰 목록</h2>
+		
+		<c:if test="${empty reviewVO}">
+			<div class="empty">작성된 리뷰가 없습니다!</div>
+		</c:if>
+			
 		<ul class="rev_ul">
 			<!-- li태그 foreach -->
 			<li class="rev_li">

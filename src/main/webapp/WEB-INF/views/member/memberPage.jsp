@@ -104,10 +104,24 @@
    <%@ include file="../templates/footer.jsp"%>
 
    <script type="text/javascript">
-
-      if('${marketVO.isOpen}' == 1){
-         $(".toggleWrap").addClass("on");
-      }
+		
+  
+   
+	 //눌림
+	$(".mp_myInfoNav_a").click(function() {
+		
+		var li = $('.mp_myInfoNav_a');
+		
+		$(this).css('font-weight','600');
+		li.not($(this)).css('font-weight','100');
+		
+	});
+	
+   	
+   //마켓 오픈
+	if('${marketVO.isOpen}' == 1){
+		$(".toggleWrap").addClass("on");
+	}
    
       //menu-tab누를시 적용 클래스 변경
       $("#toggle_alarm").click(function() {

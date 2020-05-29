@@ -66,6 +66,30 @@
 
 <%@ include file="../templates/footer.jsp"%>
 <script type="text/javascript">
+
+	var numone = $(".btn_page").find('a').text('1');
+
+	$(this).ready(function() {
+		$(numone).trigger("click");
+		$('a:contains("1")').trigger("click");
+	});
+
+	//눌림
+	$(".btn_page").click(function() {
+		
+		var li = $('.btn_page');
+		
+		$(this).css('color','#3d3d3d');
+		$(this).css('font-weight','600');
+		$(this).css('font-size','17px');
+		li.not($(this)).css('color','#6f7174');
+		li.not($(this)).css('font-weight','100');
+		li.not($(this)).css('font-size','16px');
+		
+	});
+	
+
+	//페이저
 	$(".btn_page").each(function() {
 		$(this).click(function() {
 			console.log($(this).text());
@@ -75,9 +99,9 @@
 				$(".ml_container2_ul").html(result);
 			});
 		});
-	});
-								
+	});	
 	
+	//이전 버튼
 	$("#btn-pre").click(function() {
 		alert($(this).attr("title"));
 		var url = $(this).attr("title");
@@ -87,6 +111,7 @@
 		});
 	})
 	
+	//다음 버튼
 	$("#btn-next").click(function() {
 		alert($(this).attr("title"));
 		var url = $(this).attr("title");

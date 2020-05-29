@@ -217,6 +217,10 @@ font-family: 'Noto Sans KR', sans-serif;
 				<h2 style="border: none;">마켓 신청 리스트</h2>
 			</div>
 			
+			<c:if test="${empty menuVO}">
+					<div class="empty">들어온 신청이 없습니다.</div>
+			</c:if>
+			
 			<!-- 하단의 div가 반복 -->
 				<div class="oap_item">
 					<div class="oap_itemInfo">
