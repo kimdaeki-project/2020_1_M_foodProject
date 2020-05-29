@@ -213,7 +213,7 @@ public class ReviewController {
 	}
 	//구매자 리뷰 등록
 	@PostMapping("reviewInsert")
-	public ModelAndView reviewInsert(OrderedVO orderedVO,ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
+	public ModelAndView reviewInsert(OrderedVO orderedVO,ReviewVO reviewVO,MultipartFile files,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		int result = reviewService.boardInsert(reviewVO,files,session);

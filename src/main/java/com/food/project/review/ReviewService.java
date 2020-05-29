@@ -106,7 +106,7 @@ public class ReviewService implements BoardService{
 
 	//리뷰 등록
 	//@Override
-	public int boardInsert(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception {
+	public int boardInsert(ReviewVO reviewVO,MultipartFile file,HttpSession session) throws Exception {
 		String path = session.getServletContext().getRealPath("/resources/upload/review");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
 //		path="C:\\Users\\SIST\\Documents\\workspace-sts-3.9.12.RELEASE\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
@@ -120,8 +120,7 @@ public class ReviewService implements BoardService{
 		//DB파일 등록
 		//파일의 num을 리뷰VO의 파일num에 저장해줘야 함
 		//DB리뷰 등록
-		if(files.length > 1) {
-			for (MultipartFile file : files) {
+		if(file != null) {
 				//1.HDD등록
 				String fileName = fileSaver.saveByUtils(file, path);
 				//2.DB등록
@@ -143,7 +142,6 @@ public class ReviewService implements BoardService{
 				if(result<1) {
 					throw new Exception();
 				}
-			}
 		}
 		
 		
