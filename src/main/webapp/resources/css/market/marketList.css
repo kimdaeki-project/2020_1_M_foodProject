@@ -122,6 +122,22 @@ body{
     font-size: 16px;
 }
 
+
+
+.on{
+	color: #27b06e;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
 @media screen and (max-width: 1030px){
 .ml_container {
 	padding-top: 86px;
@@ -180,9 +196,6 @@ input[id="cb1"]:checked {
 #cb1{
 	padding-right: 5px;	
 }
-
-
-
 
 
 

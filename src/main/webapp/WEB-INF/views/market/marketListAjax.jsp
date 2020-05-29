@@ -50,8 +50,25 @@
 			</div>
 
 <script>
-var kind;
 	
+
+	$(".btn_page").each(function() {
+		if($(this).text() == ${pager.curPage}){
+			$(this).addClass("on");
+		}
+	});
+	
+	
+	$(".btn_page").click(function() {
+		$(".btn_page").each(function() {
+			$(this).removeClass("on");
+		})
+		$(this).addClass("on");
+	});
+
+	
+	var kind;
+
 	$(".kind").click(function() {
 		$(this).each(function() {
 			if($(this).prop("checked")){

@@ -72,26 +72,46 @@
 <%@ include file="../templates/footer.jsp"%>
 <script type="text/javascript">
 
-	var numone = $(".btn_page").find('a').text('1');
+// 	var numone = $(".btn_page").find('a').text('1');
 
-	$(this).ready(function() {
-		$(numone).trigger("click");
-		$('a:contains("1")').trigger("click");
+// 	$(this).ready(function() {
+// 		$(numone).trigger("click");
+// 		$('a:contains("1")').trigger("click");
+// 	});
+
+// 	//눌림
+// 	$(".btn_page").click(function() {
+		
+// 		var li = $('.btn_page');
+		
+// 		$(this).css('color','#3d3d3d');
+// 		$(this).css('font-weight','600');
+// 		$(this).css('font-size','17px');
+// 		li.not($(this)).css('color','#6f7174');
+// 		li.not($(this)).css('font-weight','100');
+// 		li.not($(this)).css('font-size','16px');
+		
+// 	});
+
+	
+	$(".btn_page").each(function() {
+		if($(this).text() == ${pager.startNum}){
+			$(this).addClass("on");
+		}
 	});
+	
 
-	//눌림
 	$(".btn_page").click(function() {
-		
-		var li = $('.btn_page');
-		
-		$(this).css('color','#3d3d3d');
-		$(this).css('font-weight','600');
-		$(this).css('font-size','17px');
-		li.not($(this)).css('color','#6f7174');
-		li.not($(this)).css('font-weight','100');
-		li.not($(this)).css('font-size','16px');
-		
+		console.log("clickIN"+$(this).text());
+		$(".btn_page").each(function() {
+			console.log("remove"+$(this).text());
+			$(this).removeClass("on");
+		})
+		console.log("add"+$(this).text());
+		$(this).addClass("on");
 	});
+	
+	
 	
 
 	//페이저
