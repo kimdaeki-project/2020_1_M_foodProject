@@ -147,11 +147,39 @@ body{
 	
 }	
 
+input[id="cb1"] {
+	-webkit-appearance: none;
+    display: inline-block;
+    width: 21px;
+    height: 20px;
+    background-color: #e7e7e7;
+    cursor: pointer;
+    border-radius: 50%;
+}
 
+input[id="cb1"]:checked {
+	-webkit-appearance: none;
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    border: 6px solid #e7e7e7;
+    background-color: #27b06e;
+    cursor: pointer;
+    border-radius: 50%;
+}
 
+.ml_con_input{
+	display: flex;
+    margin: 0px auto;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    max-width: 1160px;
+    color: #3d3d3d;
+}
 
-
-
+#cb1{
+	padding-right: 5px;	
+}
 
 
 

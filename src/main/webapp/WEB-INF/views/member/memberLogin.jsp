@@ -16,10 +16,8 @@
       <article class="memberLogin_article">
          <header class="memberLogin_header">
             <img alt="logo"
-               src="${pageContext.request.contextPath}/img/logo.png"
-               class="memberLogin_img">
-
-            <p>프리미엄 샐러드 배송</p>
+               src="${pageContext.request.contextPath}/resources/img/main-logo.png"
+               class="memberLogin_img" style="width: 258px;">
          </header>
          <form action="./memberLogin" method="post">
             <input id="latitude" type="hidden" name="latitude" value="">

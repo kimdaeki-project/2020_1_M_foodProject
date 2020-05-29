@@ -8,12 +8,13 @@ body {
    display: flex;
    align-items: center;
    border: 3px solid #f4f5f6;
-   padding: 16px;
+   padding: 16px 20px;
    height: 72px;
+   justify-content: space-between;
 }
 
 .mp_pic {
-   width: 53px;
+   width: 51px;
    height: 50px;
    border-radius: 28px;
    display: flex;
@@ -23,6 +24,7 @@ body {
 
 .mp_me {
    width: 70%;
+   padding-top: 3px;
    padding-left: 16px;
 }
 
@@ -38,9 +40,10 @@ body {
 }
 
 .mp_num {
-   text-align: center;
-   width: 15%;
-   border-left: 1px solid #cccccc;
+	display: grid;
+   	text-align: center;
+   	width: 15%;
+   	border-left: 1px solid #cccccc;
 }
 
 .mp_num_span {

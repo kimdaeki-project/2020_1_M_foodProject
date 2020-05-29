@@ -12,8 +12,10 @@
 	<div class="ml_container">
 		<section class="ml_container2">
 			<h3 class="ml_container2_h3">등록된 푸드마켓</h3>
-			<input type="radio" class="kind" name="kind" checked="checked" value="all">전체
-			<input type="radio" class="kind" name="kind" value="local">지역구
+			<div class="ml_con_input">
+				<input id="cb1" type="radio" class="kind" name="kind" checked="checked" value="all">전체 &nbsp;
+				<input id="cb1" type="radio" class="kind" name="kind" value="local">지역구 &nbsp;
+			</div>
 			<div id="pagerAjax">
 			<ul class="ml_container2_ul">
 				<c:forEach items="${marketList}" var="vo">
