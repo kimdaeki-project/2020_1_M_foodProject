@@ -108,7 +108,7 @@
    
 	 //눌림
 	$(".mp_myInfoNav_a").click(function() {
-		
+		setBreakFlag();
 		var li = $('.mp_myInfoNav_a');
 		
 		$(this).css('font-weight','600');
@@ -124,6 +124,7 @@
    
       //menu-tab누를시 적용 클래스 변경
       $("#toggle_alarm").click(function() {
+    	  setBreakFlag();
          var latitude,longitude;
          
          var check = $("#toggle_alarm").val();
@@ -178,15 +179,10 @@
          }
       });
  
- 
- 
-		
-	
-		
-		
 		//사용자 ===================================
 		// 주문/결제 내역
 		$('#orderAndPay').click(function() {
+			setBreakFlag();
 			var num = $(this).prop("title");
 			var url = "../ordered/orderAndPay?num="+num;
 			$.get(url, function(result) {
@@ -198,7 +194,7 @@
 		
 		//나의 리뷰 목록
 		$('#myReview').click(function() {
-			
+			setBreakFlag();
 // 			location.href="../review/myReviewList?num=${memberVO.num}";
 			$.get("../review/myReviewList?num=${memberVO.num}", function(result) {
 				$('.mp_box').empty();
@@ -208,6 +204,7 @@
 		
 		//회원정보 수정
 		$('#memberUpdate').click(function() {
+			setBreakFlag();
 			$.get("./memberUpdate", function(result) {
 				
 				$('.mp_box').empty();
@@ -222,6 +219,7 @@
 		//마켓 ===================================
 		//마켓 등록
 		$('#marketJoin').click(function() {
+			setBreakFlag();
 			$.get("../market/marketJoin", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
@@ -230,6 +228,7 @@
 
         //마켓 정보수정  페이지
 		$('#marketPage').click(function() {
+			setBreakFlag();
 			$.get("../market/marketPage?userNum=${sessionScope.marketVO.userNum}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
@@ -239,6 +238,7 @@
 		//마켓 메뉴 리스트 조회
 		$('#marketMenu').click(function() {
 // 			location.href="../menu/marketMenu?marketNum=${sessionScope.marketVO.num}";
+			setBreakFlag();
 			$.get("../menu/marketMenu?marketNum=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
@@ -248,16 +248,25 @@
 		//마켓 리뷰 리스트 조회
 		$('#reviewMarket').click(function() {
 // 			location.href="../review/reviewMarket?num=${sessionScope.marketVO.num}";
+			setBreakFlag();
 			$.get("../review/reviewMarket?num=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
 			});
 		});
 		
+		// setBreakFlag
+		var breakFlag = false;
+		function setBreakFlag() {
+			breakFlag = true;
+		}
+		
 		// 마켓 주문 리스트 조회
 		var marketOrderFlag = false;
 		$('#marketOrder').click(function() {
 
+			breakFlag = false;
+			
 			// 버튼 누를 시 갱신
 			$.get("../market/marketOrder?num=${sessionScope.marketVO.num}", function(result) {
 				$('.mp_box').empty();
@@ -274,10 +283,15 @@
 			var sec = 15;
 			var pollingInterval = 1000 * sec * 1;
 			setInterval(function() {
+				
+				if(breakFlag)
+					return;
+				
 				$.get("../market/marketOrder?num=${sessionScope.marketVO.num}", function(result) {
 					$('.mp_box').empty();
 					$('.mp_box').append(result);
 				});
+				
 			}, pollingInterval);
 			
 			// 갱신 체크용 console clock;
@@ -292,6 +306,7 @@
 		//관리자 ===================================
 		//마켓 등록
 		$('#marketManage').click(function() {
+			setBreakFlag();
 			$.get("../market/marketManage", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
@@ -299,6 +314,7 @@
 		});
 		
 		$('#reviewManage').click(function() {
+			setBreakFlag();
 			$.get("../review/reviewManage", function(result) {
 				$('.mp_box').empty();
 				$('.mp_box').append(result);
@@ -308,6 +324,7 @@
 		//공통 ===================================
 		//탈퇴하기
 		$("#member_delete").click(function() {
+			setBreakFlag();
 			var check = confirm("탈퇴하시겠습니까?");
 			if (check) {
 				location.href = "./memberDelete?num=${sessionScope.memberVO.num}";
