@@ -132,8 +132,8 @@ public class HomeController {
 			
 			mapList.add(mapVO);
 		
-			System.out.println("\n========================");
-			System.out.println(mapVO);
+			//System.out.println("\n========================");
+			//System.out.println(mapVO);
 		}
 		
 		// 마켓 총 갯수 가져오기

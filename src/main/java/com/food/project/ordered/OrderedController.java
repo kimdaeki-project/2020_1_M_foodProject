@@ -35,7 +35,6 @@ public class OrderedController {
 		
 		// 주문하기로 들어온 요청일 경우, 이미 주문이 있다면,주문 DB를 삭제하고 insert
 		if(orderedVO.getIsCart() == 0) {
-			System.out.println("in here");
 			int result = orderedService.cartDeleteAll(orderedVO);
 			if(result > 0) {
 				System.out.println("deleteDone");

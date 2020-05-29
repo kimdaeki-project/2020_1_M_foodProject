@@ -72,6 +72,15 @@
 			<beans:ref bean="reviewInterceptor"/>		
 		</interceptor>
 		
+		<interceptor>
+			<mapping path="/ordered/*"/>
+			<exclude-mapping path="/ordered/orderedList"/>
+			<exclude-mapping path="/ordered/cartAdd"/>
+			<exclude-mapping path="/ordered/orderPage"/>
+			<exclude-mapping path="/ordered/orderDone"/>
+			
+			<beans:ref bean="orderedInterceptor"/>		
+		</interceptor>
 	</interceptors>
 	
 	<context:component-scan base-package="com.food.project" />
