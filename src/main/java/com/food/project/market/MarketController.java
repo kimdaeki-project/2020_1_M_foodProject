@@ -40,7 +40,8 @@ public class MarketController {
 	private ReviewService reviewService;
 	@Autowired
 	private OrderedService orderedService;
-
+	@Autowired
+	private Pager pager;	
 	//마켓종료
 	@GetMapping("marketIsOpen")
 	@ResponseBody
@@ -85,6 +86,8 @@ public class MarketController {
 	//조회 - select List(GET)
 	@GetMapping("marketList")
 	public ModelAndView marketList(Pager pager,MemberVO memberVO) throws Exception{
+		
+		System.out.println("kind : "+pager.getKind());
 		
 		ModelAndView mv = new ModelAndView();
 		List<MarketVO> list = marketService.marketList(pager,memberVO);

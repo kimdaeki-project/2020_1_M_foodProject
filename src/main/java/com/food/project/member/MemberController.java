@@ -249,7 +249,8 @@ public class MemberController {
 		int result = memberService.memberUpdate(memberVO);
 		
 		if (result > 0) {
-//			session.setAttribute("memberVO", memberVO);
+			memberVO = memberService.memberSelect(memberVO);
+			session.setAttribute("memberVO", memberVO);
 		}
 		
 		mv.addObject("msg","변경 되었습니다.");

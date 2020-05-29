@@ -12,6 +12,9 @@
 	<div class="ml_container">
 		<section class="ml_container2">
 			<h3 class="ml_container2_h3">등록된 푸드마켓</h3>
+			<input type="radio" class="kind" name="kind" checked="checked" value="all">전체
+			<input type="radio" class="kind" name="kind" value="local">지역구
+			<div id="pagerAjax">
 			<ul class="ml_container2_ul">
 				<c:forEach items="${marketList}" var="vo">
 					<li class="ml_container2_li">
@@ -44,14 +47,14 @@
 			<div class="nav-paginate-wrap__desktop" style="margin: 0 auto;">
 				<nav class="nav-paginate">
 					<c:if test="${pager.curBlock gt 1}">
-						<a id="btn-pre" title="./marketListAjax?curPage=${pager.startNum-1}&address=${sessionScope.memberVO.address}" class="nav-paginate__dir nav-paginate-dir-prev" style="cursor: pointer;"></a>
+						<a id="btn-pre" title="./marketListAjax?curPage=${pager.startNum-1}&address=${sessionScope.memberVO.address}&kind=" class="nav-paginate__dir nav-paginate-dir-prev" style="cursor: pointer;"></a>
 					</c:if>
 					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<a class="nav_pagerA btn_page" style="cursor: pointer;">${i}</a>
 					</c:forEach>
 							
 					<c:if test="${pager.curBlock lt pager.totalBlock}">
-						<a  style="cursor: pointer;" id="btn-next" title="./marketListAjax?curPage=${pager.lastNum+1}&address=${sessionScope.memberVO.address}" class="nav-paginate__dir nav-paginate-dir-next">
+						<a id="btn-next" title="./marketListAjax?curPage=${pager.lastNum+1}&address=${sessionScope.memberVO.address}&kind=" class="nav-paginate__dir nav-paginate-dir-next" style="cursor: pointer;">
 							<i></i>
 						</a>
 					</c:if>
@@ -59,20 +62,36 @@
 				</nav>
 			</div>
 
-			
+			</div>
 		</section>
 	</div>
 </body>
 
 <%@ include file="../templates/footer.jsp"%>
 <script type="text/javascript">
+	
+	var kind;
+	
+	$(".kind").click(function() {
+		$(this).each(function() {
+			if($(this).prop("checked")){
+				kind = $(this).val();
+				
+				$.get("./marketListAjax?address=${sessionScope.memberVO.address}&kind="+kind,function(result){
+					$("#pagerAjax").html(result);
+				});
+				
+			}
+		});
+	});
+	
+	
 	$(".btn_page").each(function() {
 		$(this).click(function() {
-			console.log($(this).text());
-										
 			var curPage = $(this).text();
-			$.get("./marketListAjax?curPage="+curPage+"&address=${sessionScope.memberVO.address}",function(result){
-				$(".ml_container2_ul").html(result);
+			
+			$.get("./marketListAjax?curPage="+curPage+"&address=${sessionScope.memberVO.address}&kind="+kind,function(result){
+				$("#pagerAjax").html(result);
 			});
 		});
 	});
@@ -82,17 +101,17 @@
 		alert($(this).attr("title"));
 		var url = $(this).attr("title");
 	
-		$.get(url, function(result) {
-			$(".ml_container2_ul").html(result);
+		$.get(url+kind, function(result) {
+			$("#pagerAjax").html(result);
 		});
 	})
 	
 	$("#btn-next").click(function() {
 		alert($(this).attr("title"));
 		var url = $(this).attr("title");
-	
-		$.get(url, function(result) {
-			$(".ml_container2_ul").html(result);
+		
+		$.get(url+kind, function(result) {
+			$("#pagerAjax").html(result);
 		});
 	})
 
