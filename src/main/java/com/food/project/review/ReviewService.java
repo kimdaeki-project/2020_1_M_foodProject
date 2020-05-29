@@ -120,8 +120,11 @@ public class ReviewService implements BoardService{
 		//HDD파일 등록
 		//DB파일 등록
 		//파일의 num을 리뷰VO의 파일num에 저장해줘야 함
+		
+		System.out.println(file);
+		
 		//DB리뷰 등록
-		if(file != null) {
+		if(!file.isEmpty()) {
 				//1.HDD등록
 				String fileName = fileSaver.saveByUtils(file, path);
 				//2.DB등록
@@ -155,7 +158,7 @@ public class ReviewService implements BoardService{
 	}
 	
 	//리뷰 수정
-	public int boardUpdate(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception {
+	public int boardUpdate(ReviewVO reviewVO,MultipartFile files,HttpSession session) throws Exception {
 		String path = session.getServletContext().getRealPath("/resources/upload/review");
 		path="C:\\tm\\workspaceSTS\\foodProject\\src\\main\\webapp\\resources\\upload\\review";
 
@@ -164,12 +167,12 @@ public class ReviewService implements BoardService{
 	
 		int result = 0;
 		
-		System.out.println("file len : "+files.length);
 		
-		if(files.length != 0) {
-			for (MultipartFile file : files) {
+		System.out.println("ffffffff" + files.getOriginalFilename());
+		
+		if(!files.isEmpty()) {
 				//1.HDD등록
-				String fileName = fileSaver.saveByUtils(file, path);
+				String fileName = fileSaver.saveByUtils(files, path);
 				reviewVO.setFileName(fileName);
 				
 				//2.DB등록
@@ -179,7 +182,7 @@ public class ReviewService implements BoardService{
 				FileInfoVO fileInfoVO = new FileInfoVO();
 				fileInfoVO.setNum(fileNum);
 				fileInfoVO.setFileName(fileName);
-				fileInfoVO.setOriName(file.getOriginalFilename());
+				fileInfoVO.setOriName(files.getOriginalFilename());
 				fileInfoVO.setKind(2); //review
 				fileInfoVO.setRefNum(reviewVO.getBoardNum());
 				
@@ -189,7 +192,6 @@ public class ReviewService implements BoardService{
 				if(result<1) {
 					throw new Exception();
 				}
-			}
 		}
 		
 		result = reviewDAO.boardUpdate(reviewVO);

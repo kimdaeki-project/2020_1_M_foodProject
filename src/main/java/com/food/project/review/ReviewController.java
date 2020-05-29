@@ -284,9 +284,12 @@ public class ReviewController {
 	}
 	//구매자 리뷰 수정
 	@PostMapping("reviewUpdate")
-	public ModelAndView reviewUpdate(ReviewVO reviewVO,MultipartFile[] files,HttpSession session) throws Exception{
+	public ModelAndView reviewUpdate(ReviewVO reviewVO,MultipartFile files,HttpSession session) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = reviewService.boardUpdate(reviewVO,files,session);
+		
+		System.out.println(files.getSize());
+		System.out.println(files.isEmpty());
 		
 		if(result > 0) {
 			System.out.println("삭제 성공");

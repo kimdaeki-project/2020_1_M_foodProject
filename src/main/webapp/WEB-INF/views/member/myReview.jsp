@@ -175,7 +175,10 @@ a {
 								<p style="color: #5f5f5f;">${reviewVO.contents}</p>
 							</div>
 							<div class="rev_review4">
-									<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
+									<c:if test="${not empty reviewVO.fileName}">
+										<img class="rev_review_img" alt="review_img" src="${pageContext.request.contextPath}/resources/upload/review/${reviewVO.fileName}">
+									</c:if>
+									
 								</div>
 								<div class="rev_review5">
 									<input type="button" class="rev_mod" data-title="${reviewVO.boardNum}" value="수정하기">
