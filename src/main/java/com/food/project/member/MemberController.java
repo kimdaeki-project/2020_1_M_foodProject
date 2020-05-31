@@ -225,18 +225,16 @@ public class MemberController {
 	@PostMapping("memberUpdate")
 	public ModelAndView memberUpdate(MemberVO memberVO, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
-		System.out.println("memberUpdate");
 		int result = memberService.memberUpdate(memberVO);
 		
 		if (result > 0) {
 			memberVO = memberService.memberSelect(memberVO);
 			session.setAttribute("memberVO", memberVO);
+			mv.addObject("msg","업데이트 되었습니다.");
+		}else {
+			mv.addObject("msg","업데이트에 실패했습니다.");
 		}
-		
-		mv.addObject("msg","변경 되었습니다.");
 		mv.addObject("path","./memberPage");
-		
 		mv.setViewName("common/result");
 
 		return mv;

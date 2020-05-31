@@ -43,8 +43,6 @@ public class MenuController {
 	public ModelAndView marketMenu(MenuVO menuVO) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("marketNum : "+menuVO.getMarketNum());
-		
 		//메뉴 리스트 조회 (카테고리  collection값으로 추가되어있음)
 		List<MenuVO> menuList = menuService.marketMenuList(menuVO);
 		
@@ -272,7 +270,6 @@ public class MenuController {
 	@GetMapping("menuUpdate")
 	public ModelAndView menuUpdate(MarketVO marketVO,MenuVO menuVO,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-//		System.out.println("menuVO.num : "+menuVO.getNum());
 		
 		menuVO = menuService.menuSelect(menuVO);
 		
@@ -281,10 +278,7 @@ public class MenuController {
 		categoryVO.setMenuNum(menuVO.getNum());
 		
 		List<CategoryVO> cateList = categoryService.categoryList(categoryVO);
-
 		marketVO = marketService.marketSelect(marketVO);
-		System.out.println("num : "+marketVO.getNum());
-		
 		
 		mv.addObject("menuVO", menuVO);
 		mv.addObject("marketVO", marketVO);

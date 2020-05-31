@@ -6,7 +6,6 @@
 <mapper namespace="com.food.project.category.CategoryDAO">
 
 	<resultMap type="CategoryVO" id="ResultList">
-		
 		<id column="num" property="num"/>
 		<result column="menuNum" property="menuNum"/>
 		<result column="name" property="name"/>
@@ -16,7 +15,6 @@
 			<result column="optionName" property="name"/>
 			<result column="price" property="price"/>
 		</collection>
-	
 	</resultMap>
 	
 
